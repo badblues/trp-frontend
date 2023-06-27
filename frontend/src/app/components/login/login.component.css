@@ -1,0 +1,42 @@
+
+.login-container label {
+  display: block;
+}
+
+.login-container {
+  width: 20%;
+  height: 500px;
+  max-width: 400px;
+  min-width: 300px;
+  max-height: 500px;
+  display: block;
+  border-radius: 43px;
+  background: #D7D7D7;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.50);
+  overflow: auto;
+  padding: 30px;
+}
+
+.login-input {
+  width: 80%;
+  height: 7%;
+  flex-shrink: 0;
+  border-radius: 7px;
+  border: 1px solid #000;
+  background: #FFF;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.login-button {
+  width: 80%;
+  height: 7%;
+  flex-shrink: 0;
+  border-radius: 7px;
+  border: 1px solid #000;
+  background: #393939;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+

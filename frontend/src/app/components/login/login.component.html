@@ -1,0 +1,8 @@
+<form (ngSubmit)="onSubmit()">
+  <div class="login-container">
+    <label for="">АВТОРИЗАЦИЯ</label>
+    <input class="login-input" [(ngModel)]="login" type="email" name="lgoin" required placeholder="login...">
+    <input class="login-input" [(ngModel)]="password" type="password" name="password" required placeholder="password...">
+    <input class="login-button" type="submit" value="ВОЙТИ">
+  </div>
+</form>
