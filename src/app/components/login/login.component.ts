@@ -11,6 +11,7 @@ export class LoginComponent {
 
   login: string = "";
   password: string = "";
+  response: any;
 
   constructor(
     private userService: UserService,
@@ -22,7 +23,9 @@ export class LoginComponent {
       login: this.login,
       password: this.password
     };
-    if (this.userService.login(user))
+    this.userService.login(user).subscribe((response) => response = this.response);
+    console.log(this.response);
+    if (this.response.status == "Succesfull")
       this.router.navigate([""]);
   }
 
