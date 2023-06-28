@@ -23,7 +23,7 @@ export class LoginComponent {
       password: this.password
     };
     if (this.userService.login(user))
-      this.router.navigate(["/main"]);
+      this.router.navigate([""]);
   }
 
 }
