@@ -1,3 +1,3 @@
-[submodule "TRPBackend"]
-	path = TRPBackend
-	url = git@github.com:0ldStar/TRPBackend.git
+[submodule "TRPServerSide"]
+	path = TRPServerSide
+	url = git@github.com:0ldStar/TRPServerSide.git
