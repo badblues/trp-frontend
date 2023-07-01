@@ -14,8 +14,7 @@ export class UserService {
 
   login(user: User): Observable<any> {
     let url: string = this.apiUrl + `login?username=${user.login}&password=${user.password}`;
-    let status: string = "boba";
     return this.http.get<any>(url);
   }
-
+  
 }
