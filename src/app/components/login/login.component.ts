@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,7 +14,6 @@ export class LoginComponent {
 
   constructor(
     private userService: UserService,
-    private router: Router
   ) {}
 
   onSubmit() {
@@ -23,10 +21,7 @@ export class LoginComponent {
       login: this.login,
       password: this.password
     };
-    this.userService.login(user).subscribe((response) => response = this.response);
-    console.log(this.response);
-    if (this.response.status == "Succesfull")
-      this.router.navigate([""]);
+    this.userService.login(user);
   }
 
 }
