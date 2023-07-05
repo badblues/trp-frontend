@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,13 +6,20 @@ import { Router } from '@angular/router';
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnInit {
 
   constructor(private router: Router) {}
 
   onClick() {
     console.log("huy");
     this.router.navigate(['/login']);
+  }
+
+  ngOnInit() {
+    if (!localStorage.getItem("userToken")) {
+      this.router.navigate(["/login"]);
+      return;
+    }
   }
 
 }

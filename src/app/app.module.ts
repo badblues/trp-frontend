@@ -12,10 +12,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ButtonComponent } from './components/button/button.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const appRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
   {path: '', component: MainPageComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent},
 ]
 
 @NgModule({
@@ -24,7 +26,8 @@ const appRoutes: Routes = [
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    ButtonComponent
+    ButtonComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
