@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegisterComponent implements OnInit {
   username!: string;
   password!: string;
+  fullName!: string;
   confirmationPassword!: string;
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -23,17 +24,18 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.password.length < 8) {
-      alert('Password too short!');
-      return;
-    }
-    if (this.password !== this.confirmationPassword) {
-      alert("Passwords don't match!");
+    if (
+      this.password.length == 0 ||
+      this.username.length == 0 ||
+      this.fullName.length == 0
+    ) {
+      alert("Заполните все поля");
       return;
     }
     var newUser: User = {
       username: this.username,
       password: this.password,
+      fullName: this.fullName,
     };
     this.register(newUser);
   }

@@ -1,14 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, TestabilityRegistry } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../models/User';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
+import { AuthData } from '../models/AuthData';
+import jwtDecode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  
   private apiUrl: string = 'http://212.20.47.147:8080/auth';
   private httpOptions = {
     headers: new HttpHeaders({
@@ -27,21 +28,34 @@ export class AuthService {
     );
   }
 
-  login(user: User) {
-    this.http
-      .post(this.apiUrl + '/login', user, this.httpOptions)
-      .subscribe((response: any) => {
-        if (!response['message']) {
-          localStorage.setItem('userToken', response['jwt-token'].toString());
+  login(data: AuthData) {
+    this.http.post(this.apiUrl + '/login', data, this.httpOptions).subscribe({
+      next: (response: any) => {
+        //TODO possibly unnecessary check
+        if (response['status'] == 200) {
+          localStorage.setItem('userToken', response['jwtToken']);
+          this.decodeToken(response['jwtToken']);
           this.router.navigate(['']);
-        } else {
-          alert('Wrond email or password');
         }
-      });
+      },
+      error: (httpErrorResponse) => {
+        alert(httpErrorResponse.error['authenticationError']);
+      },
+    });
+  }
+
+  decodeToken(token: string) {
+    try {
+      let decodedToken: any = jwtDecode(token);
+      localStorage.setItem('user', JSON.stringify(decodedToken));
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   logout() {
     localStorage.removeItem('userToken');
+    localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
 }
