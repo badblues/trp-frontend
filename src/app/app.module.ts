@@ -13,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ButtonComponent } from './components/button/button.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CreateUserPageComponent } from './components/create-user-page/create-user-page.component';
 
 const appRoutes: Routes = [
   {path: '', component: MainPageComponent},
@@ -27,7 +28,9 @@ const appRoutes: Routes = [
     HeaderComponent,
     FooterComponent,
     ButtonComponent,
-    RegisterComponent
+    RegisterComponent,
+    MainPageComponent,
+    CreateUserPageComponent
   ],
   imports: [
     BrowserModule,

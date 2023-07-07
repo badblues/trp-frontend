@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .button {
@@ -29,9 +31,16 @@
   height: fit-content;
 }
 
-.form-container label {
+.form-name {
   font-size:x-large;
 }
+
+.form-text {
+  color: rgb(206, 8, 8);
+  margin-top: -8px;
+  margin-bottom: -3px;
+}
+
 
 .form-input {
   width: 80%;
@@ -42,7 +51,6 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
 
 .form-button {
   width: 80%;

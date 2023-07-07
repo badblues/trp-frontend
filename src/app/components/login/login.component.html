@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit()">
   <div class="form-container">
-    <label for="">АВТОРИЗАЦИЯ</label>
+    <p class="form-name">АВТОРИЗАЦИЯ</p>
     <input
       class="form-input"
       [(ngModel)]="username"
@@ -9,6 +9,9 @@
       required
       placeholder="username..."
     />
+    <p class="form-text" *ngIf="this.emptyUsername">
+      Поле должно быть заполнено
+    </p>
     <input
       class="form-input"
       [(ngModel)]="password"
@@ -17,13 +20,10 @@
       required
       placeholder="password..."
     />
+    <p class="form-text" *ngIf="this.emptyPassword">
+      Поле должно быть заполнено
+    </p>
     <input class="button form-button" type="submit" value="ВОЙТИ" />
-    <div>
-      Нет аккаунта?
-      <button class="button" (click)="navigateToRegister()">
-        ЗАРЕГИСТРИРОВАТЬСЯ
-      </button>
-    </div>
     <img src="assets/images/logo.png" alt="terpi zaloopa" width="100px" />
   </div>
 </form>
