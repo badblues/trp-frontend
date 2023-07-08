@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { AuthData } from 'src/app/models/AuthData';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,11 @@ export class LoginComponent implements OnInit {
   emptyUsername: boolean = false;
   emptyPassword: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private userDataService: UserDataService
+  ) {}
 
   ngOnInit() {
     if (localStorage.getItem('userToken')) {
@@ -38,7 +43,7 @@ export class LoginComponent implements OnInit {
     if (this.emptyUsername || this.emptyPassword) return;
     var data: AuthData = {
       username: this.username,
-      password: this.password
+      password: this.password,
     };
     this.login(data);
   }

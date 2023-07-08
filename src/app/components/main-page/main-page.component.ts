@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-main-page',
@@ -7,11 +8,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-page.component.css'],
 })
 export class MainPageComponent implements OnInit {
-  constructor(private router: Router) {}
+  public username: string = "";
+  public userFullName: string = "";
+  public userRole: string = "";
 
-  onClick() {
-    console.log('huy');
-    this.router.navigate(['/login']);
+  constructor(
+    private router: Router,
+    private userDataService: UserDataService
+  ) {
+    this.userDataService
+      .onUsernameChange()
+      .subscribe((username) => (this.username = username));
+    this.userDataService
+      .onFullNameChange()
+      .subscribe((fullName) => (this.userFullName = fullName));
+    this.userDataService
+      .onRoleChange()
+      .subscribe((role) => (this.userRole = role));
   }
 
   ngOnInit() {
@@ -19,16 +32,5 @@ export class MainPageComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-  }
-
-  getInfo(): string {
-    let data = localStorage.getItem('user');
-    if (data == null) return '';
-    let userInfo = JSON.parse(data);
-    return (
-      userInfo['username'] + " " +
-      userInfo['fullName'] + " " +
-      userInfo['role']
-    );
   }
 }

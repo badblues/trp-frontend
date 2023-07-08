@@ -7,14 +7,21 @@
   align-items: center;
 }
 
+.clickable:hover {
+  cursor: pointer;
+}
+
 .logo {
   margin-left: 40px;
   font-size: x-large;
 }
 
-.logo:hover {
-  color: cyan;
-  cursor: pointer;
+.menu {
+  display: flex;
+}
+
+.menu-option {
+  
 }
 
 .logout {
@@ -23,5 +30,5 @@
 
 .logout:hover {
   color: red;
-  cursor: pointer;
 }
+

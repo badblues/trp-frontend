@@ -1,4 +1,11 @@
 <div class="header">
-  <p class="logo" (click)="navigateToMainPage()">TERPI</p>
-  <p class="logout" (click)="logout()">Logout</p>
+  <p class="logo clickable" (click)="navigateToMainPage()">TERPI</p>
+  <div class="menu">
+    <!-- TODO hardcode is baad -->
+    <p *ngIf="userRole === 'ROLE_ADMIN'" class="menu-option clickable" (click)="navigateToCreateUserPage()">Создать пользователя</p>
+  </div>
+  <div>
+    <p *ngIf="userFullName !== ''">{{this.userFullName}}</p>
+    <p *ngIf="userRole !== ''" class="logout clickable" (click)="logout()">Logout</p>
+  </div>
 </div>
