@@ -2,14 +2,15 @@ import "./App.css";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
-import RequireAuth from "./Guards/RequireAuth";
 import CreateUser from "./components/CreateUser";
-import { UserContextProvider } from "./Contexts/UserContext";
+import RequireAuth from "./guards/RequireAuth";
+import { UserContextProvider } from "./contexts/UserContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AuthService from "./services/AuthService";
+import AuthApiService from "./services/AuthApiService";
+import { Roles } from "./models/Roles";
 
 function App() {
-  const authService = new AuthService();
+  const authService = new AuthApiService();
 
   return (
     <>
@@ -20,13 +21,13 @@ function App() {
             <Route
               element={
                 <RequireAuth
-                  allowedRoles={["ROLE_ADMIN", "ROLE_TEACHER", "ROLE_STUDENT"]}
+                  allowedRoles={[Roles.Admin, Roles.Professor, Roles.Student]}
                 />
               }
             >
               <Route path="/" element={<Main />} exact />
             </Route>
-            <Route element={<RequireAuth allowedRoles={["ROLE_ADMIN"]} />}>
+            <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
               <Route
                 path="/create-user"
                 element={<CreateUser authService={authService} />}

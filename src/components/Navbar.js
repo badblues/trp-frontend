@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import { UserContext } from "../Contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import { Roles } from "../models/Roles";
 
 const Navbar = () => {
   const { user, logout } = useContext(UserContext);
@@ -25,7 +26,7 @@ const Navbar = () => {
             TERPI
           </Link>
           <div className="menu">
-            {user.role === "ROLE_ADMIN" ? <div>
+            {user.role === Roles.Admin ? <div>
               <p onClick={onCreateUser}>Создать пользователя</p>
             </div> : null}
           </div>

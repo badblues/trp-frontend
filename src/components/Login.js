@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useForm } from "react-hook-form";
-import { UserContext } from "../Contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 
 const Login = () => {
   const form = useForm();
@@ -12,10 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    login(data).then((response) => {
-      console.log(response);
-      navigate("/");
-    });
+    login(data).then(() => navigate("/"));
   };
 
   return (

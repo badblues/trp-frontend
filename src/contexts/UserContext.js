@@ -3,7 +3,7 @@ import jwtDecode from "jwt-decode";
 
 export const UserContext = createContext({});
 
-export class UserContextProvider extends Component {
+export class UserContextProvider extends Component { 
 
   constructor(props) {
     super(props);
@@ -16,10 +16,8 @@ export class UserContextProvider extends Component {
   }
 
   login(authData) {
-    //TODO would be great if only token was accesible here
-    return this.authService.login(authData).then((response) => {
-      if (response?.data?.data) {
-        const token = response.data.data.jwtToken;
+    return this.authService.login(authData).then((token) => {
+      if (token) {
         localStorage.setItem("userToken", token);
         this.setUserData(token);
         this.updateUser();
