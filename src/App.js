@@ -9,10 +9,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthApiService from "./services/AuthApiService";
 import AdminApiService from "./services/AdminApiService";
 import { Roles } from "./models/Roles";
+import axios from "axios";
+import requestInterceptor from "./interceptors/RequestInterceptor";
 
 function App() {
   const authService = new AuthApiService();
   const adminApiService = new AdminApiService;
+  axios.interceptors.request.use(requestInterceptor);
 
   return (
     <>

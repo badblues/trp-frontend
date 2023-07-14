@@ -4,6 +4,11 @@ import { Roles } from "../models/Roles";
 export class AdminApiService {
   apiUrl = "http://212.20.47.147:8080/admin";
 
+  constructor() {
+    http.interceptors.request.use();
+  }
+
+
   httpOptions = {
     Headers: {
       "Content-Type": "application/json",
@@ -12,7 +17,7 @@ export class AdminApiService {
 
   register(user, role) {
     const url = this.getRegistrationUrl(role);
-    return http.post(url, user);
+    return http.post(url, user, this.httpOptions);
   }
 
   getRegistrationUrl(role) {
