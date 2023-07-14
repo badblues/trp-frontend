@@ -29,20 +29,30 @@
   width: 25%;
   min-width: 400px;
   height: fit-content;
+  margin-top: 75px;
 }
 
 .form-name {
-  font-size:x-large;
+  font-size: x-large;
 }
 
 .form-text {
   color: rgb(206, 8, 8);
-
 }
 
+.form-label {
+  font-size: large;
+}
+
+.form-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
 
 .form-input {
-  width: 80%;
+  width: 100%;
   min-height: 40px;
   border-radius: 7px;
   border: 1px solid #000;

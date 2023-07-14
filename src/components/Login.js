@@ -5,8 +5,7 @@ import { useForm } from "react-hook-form";
 import { UserContext } from "../contexts/UserContext";
 
 const Login = () => {
-  const form = useForm();
-  const { register, handleSubmit, formState } = form;
+  const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const { login } = useContext(UserContext);
   const navigate = useNavigate();
@@ -20,22 +19,30 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="form-container">
           <p className="form-name">АВТОРИЗАЦИЯ</p>
-          <input
-            className="form-input"
-            type="text"
-            placeholder="  username..."
-            {...register("username", {
-              required: "Необходимо ввести имя пользователя",
-            })}
-          />
-          <p className="form-text">{errors.username?.message}</p>
-          <input
-            className="form-input"
-            type="password"
-            placeholder="  password..."
-            {...register("password", { required: "Необходимо ввести пароль" })}
-          />
-          <p className="form-text">{errors.password?.message}</p>
+          <div className="form-input-container">
+            <label htmlFor="username">Имя пользователя:</label>
+            <input
+              className="form-input"
+              type="text"
+              placeholder="  username..."
+              {...register("username", {
+                required: "Необходимо ввести имя пользователя",
+              })}
+            />
+            <p className="form-text">{errors.username?.message}</p>
+          </div>
+          <div className="form-input-container">
+            <label htmlFor="password">Пароль:</label>
+            <input
+              className="form-input"
+              type="password"
+              placeholder="  password..."
+              {...register("password", {
+                required: "Необходимо ввести пароль",
+              })}
+            />
+            <p className="form-text">{errors.password?.message}</p>
+          </div>
           <img src="/images/logo.png" alt="logo" width="100px"></img>
           <button className="button form-button">ВОЙТИ</button>
         </div>

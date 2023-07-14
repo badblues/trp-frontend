@@ -1,51 +1,93 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Roles } from "../models/Roles";
 
 const CreateUser = (props) => {
-
-  const { register, handleSubmit, watch } = useForm();
-  const selectedChoice = watch('choice');
+  const { register, handleSubmit, formState, watch } = useForm();
+  const { errors } = formState;
+  const selectedRole = watch("role");
+  const adminApiService = props.adminApiService;
 
   const onSubmit = (data) => {
     console.log(data);
+    let user = {
+      username: data.username,
+      fullName: data.fullName,
+      password: data.password,
+    };
+    if (data.role === Roles.Student) {
+      user.studyGroup = data.group;
+    }
+    adminApiService.register(user, data.role);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label htmlFor="choice">Select a choice:</label>
-        <select {...register('choice')}>
-          <option value="choice1">Choice 1</option>
-          <option value="choice2">Choice 2</option>
-          <option value="choice3">Choice 3</option>
-        </select>
+      <div className="form-container">
+        <p className="form-name">СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ</p>
+        <div className="form-input-container">
+          <label htmlFor="role">Тип пользователя:</label>
+          <select className="form-input" {...register("role")}>
+            <option value={Roles.Admin}>Админ</option>
+            <option value={Roles.Professor}>Преподаватель</option>
+            <option value={Roles.Student}>Студент</option>
+          </select>
+        </div>
+
+        <div className="form-input-container">
+          <label htmlFor="username">Имя пользователя:</label>
+          <input
+            className="form-input"
+            type="text"
+            placeholder="  Имя пользователя..."
+            {...register("username", {
+              required: "Необходимо ввести имя пользователя",
+            })}
+          />
+          <p className="form-text">{errors.username?.message}</p>
+        </div>
+        <div className="form-input-container">
+          <label htmlFor="password">Пароль:</label>
+          <input
+            className="form-input"
+            type="text"
+            placeholder="  Пароль..."
+            {...register("password", {
+              required: "Необходимо ввести пароль",
+            })}
+          />
+          <p className="form-text">{errors.password?.message}</p>
+        </div>
+        <div className="form-input-container">
+          <label htmlFor="fullName">ФИО:</label>
+          <input
+            className="form-input"
+            type="text"
+            placeholder="  ФИО..."
+            {...register("fullName", { required: "Необходимо ввести ФИО" })}
+          />
+          <p className="form-text">{errors.fullName?.message}</p>
+        </div>
+
+        {selectedRole === Roles.Student && (
+          <div className="form-input-container">
+            <label htmlFor="group">Группа:</label>
+            <input
+              className="form-input"
+              type="text"
+              placeholder="  Группа..."
+              {...register("group", {
+                required: "Необходимо ввести группу",
+              })}
+            />
+            <p className="form-text">{errors.group?.message}</p>
+          </div>
+        )}
+
+        <button className="button form-button" type="submit">
+          Создать пользователя
+        </button>
       </div>
-
-      {selectedChoice === 'choice1' && (
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input type="text" {...register('username')} />
-          <br />
-          <label htmlFor="password">Password:</label>
-          <input type="password" {...register('password')} />
-        </div>
-      )}
-
-      {selectedChoice === 'choice2' && (
-        <div>
-          <label htmlFor="fullName">Full Name:</label>
-          <input type="text" {...register('fullName')} />
-        </div>
-      )}
-
-      {selectedChoice === 'choice3' && (
-        <div>
-          <label htmlFor="number">Number:</label>
-          <input type="number" {...register('number')} />
-        </div>
-      )}
-
-      <button type="submit">Submit</button>
     </form>
   );
 

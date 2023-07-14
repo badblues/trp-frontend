@@ -7,10 +7,12 @@ import RequireAuth from "./guards/RequireAuth";
 import { UserContextProvider } from "./contexts/UserContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthApiService from "./services/AuthApiService";
+import AdminApiService from "./services/AdminApiService";
 import { Roles } from "./models/Roles";
 
 function App() {
   const authService = new AuthApiService();
+  const adminApiService = new AdminApiService;
 
   return (
     <>
@@ -30,7 +32,7 @@ function App() {
             <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
               <Route
                 path="/create-user"
-                element={<CreateUser authService={authService} />}
+                element={<CreateUser adminApiService={adminApiService} />}
                 exact
               />
             </Route>

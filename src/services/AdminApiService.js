@@ -1,7 +1,7 @@
 import http from "axios";
 import { Roles } from "../models/Roles";
 
-export class AuthApiService {
+export class AdminApiService {
   apiUrl = "http://212.20.47.147:8080/admin";
 
   httpOptions = {
@@ -16,9 +16,10 @@ export class AuthApiService {
   }
 
   getRegistrationUrl(role) {
+    let url = this.apiUrl;
     switch (role) {
       case Roles.Admin:
-        apiUrl += "/registration/admin";
+        url += "/registration/admin";
         break;
       case Roles.Professor:
         url += "/registration/teacher";
@@ -31,4 +32,4 @@ export class AuthApiService {
   }
 }
 
-export default AuthApiService;
+export default AdminApiService;
