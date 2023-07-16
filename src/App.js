@@ -11,40 +11,43 @@ import AdminApiService from "./services/AdminApiService";
 import { Roles } from "./models/Roles";
 import axios from "axios";
 import requestInterceptor from "./interceptors/RequestInterceptor";
+import { UiContextProvider } from "./contexts/UiContext";
 
 function App() {
   const authService = new AuthApiService();
-  const adminApiService = new AdminApiService;
+  const adminApiService = new AdminApiService();
   axios.interceptors.request.use(requestInterceptor);
 
   return (
     <>
-      <UserContextProvider authService={authService}>
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route
-              element={
-                <RequireAuth
-                  allowedRoles={[Roles.Admin, Roles.Professor, Roles.Student]}
-                />
-              }
-            >
-              <Route path="/" element={<Main />} exact />
-            </Route>
-            <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
+      <UiContextProvider>
+        <UserContextProvider authService={authService}>
+          <BrowserRouter>
+            <Navbar />
+            <Routes>
               <Route
-                path="/create-user"
-                element={<CreateUser adminApiService={adminApiService} />}
-                exact
-              />
-            </Route>
-            <Route element={<RequireAuth allowedRoles={[""]} />}>
-              <Route path="/login" element={<Login />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </UserContextProvider>
+                element={
+                  <RequireAuth
+                    allowedRoles={[Roles.Admin, Roles.Professor, Roles.Student]}
+                  />
+                }
+              >
+                <Route path="/" element={<Main />} exact />
+              </Route>
+              <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
+                <Route
+                  path="/create-user"
+                  element={<CreateUser adminApiService={adminApiService} />}
+                  exact
+                />
+              </Route>
+              <Route element={<RequireAuth allowedRoles={[""]} />}>
+                <Route path="/login" element={<Login />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </UserContextProvider>
+      </UiContextProvider>
     </>
   );
 }
