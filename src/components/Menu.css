@@ -1,0 +1,13 @@
+.menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-option {
+  
+}
+
+
+.menu-option:hover {
+  cursor: pointer;
+}

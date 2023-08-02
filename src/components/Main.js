@@ -1,18 +1,20 @@
 import React, { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { UiContext } from "../contexts/UiContext";
+import "./Main.css";
 
 const Main = () => {
+  const { user } = useContext(UserContext);
 
-  const {username, fullName, role } = useContext(UserContext);
+  const { darkMode } = useContext(UiContext);
 
   return (
     <>
-      <p>{username}</p>
-      <p>{fullName}</p>
-      <p>{role}</p>
-      <img src="images/hapi.gif" alt="hapi"></img>
-      <img src="images/sunboy.gif" alt="реакт гавно"></img>
-      <img src="images/jumping_cat.gif" alt="dancin"></img>
+      <div className={`main-container ${darkMode ? 'dark-mode' : ''}`}>
+        <p>{user.username}</p>
+        <p>{user.fullName}</p>
+        <p>{user.role}</p>
+      </div>
     </>
   );
 };

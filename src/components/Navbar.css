@@ -1,10 +1,17 @@
 .navbar-container {
-  width: 100%;
-  height: 70px;
+  min-width: 100%;
+  width: fit-content;
+  height: fit-content;
+  min-height: 70px;
   background-color: darkgray;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.navbar-container.dark-mode {
+  background-color: #555;
+  color: #f8f8f8;
 }
 
 .clickable:hover {
@@ -13,19 +20,27 @@
 
 .logo {
   margin-left: 40px;
+}
+
+.logo-text {
   font-size: x-large;
+  text-decoration: none;
+  color: black;
 }
 
-.menu {
+.profile {
   display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-right: 40px;
 }
 
-.menu-option {
+.username {
+  font-size: large;
 }
 
 .logout {
-  margin-right: 40px;
-  font-size: x-large;
+  font-size: large;
 }
 
 .logout:hover {

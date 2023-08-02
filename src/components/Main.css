@@ -1,0 +1,9 @@
+.main-container {
+  background-color: rgb(255, 255, 255);
+}
+
+
+.main-container.dark-mode {
+  background-color: rgb(150, 150, 150);
+  color: #f8f8f8;
+}

@@ -5,10 +5,14 @@ import { UserContext } from "../contexts/UserContext";
 import { UiContext } from "../contexts/UiContext";
 import { useNavigate } from "react-router-dom";
 import { Roles } from "../models/Roles";
+import DarkModeToggle from "./DarkModeToggle";
+import AdminMenu from "./AdminMenu";
+import ProfessorMenu from "./ProfessorMenu";
+import StudentMenu from "./StudentMenu";
 
 const Navbar = () => {
   const { user, logout } = useContext(UserContext);
-  const { darkMode, setDarkMode } = useContext(UiContext);
+  const { darkMode } = useContext(UiContext);
   const navigate = useNavigate();
 
   const onLogout = () => {
@@ -16,37 +20,32 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  const onCreateUser = () => {
-    navigate("/create-user");
-  }
-
-  const onSetDarkMode = (event) => {
-    setDarkMode(event.target.checked);
-  }
-
   return (
     <>
       <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="logo clickable">
-            TERPI
-          </Link>
+        <div className={`navbar-container ${darkMode ? "dark-mode" : ""}`}>
+          <div className="logo">
+            <img src="images/logo.png" alt="hapi" width="17"></img>
+            <Link to="/" className="logo-text clickable">
+              TERPI
+            </Link>
+            <DarkModeToggle />
+          </div>
           <div className="menu">
-            {user.role === Roles.Admin ? <div>
-              <p onClick={onCreateUser}>Создать пользователя</p>
-            </div> : null}
+            {user.role === Roles.Admin ? <AdminMenu /> : null}
+            {user.role === Roles.Professor ? <ProfessorMenu /> : null}
+            {user.role === Roles.Student ? <StudentMenu /> : null}
           </div>
-          <div>
-            <input type="checkbox" checked={darkMode} onChange={onSetDarkMode}></input>
-          </div>
-          {user.loggedIn ? (
-            <div>
-              <p>{user.fullName}</p>
+          <div className="profile">
+            {user.loggedIn ? (
+              <p className="username clickable">{user.fullName}</p>
+            ) : null}
+            {user.loggedIn ? (
               <p className="logout clickable" onClick={onLogout}>
                 logout
               </p>
-            </div>
-          ) : null}
+            ) : null}
+          </div>
         </div>
       </nav>
     </>
