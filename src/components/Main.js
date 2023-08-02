@@ -7,6 +7,7 @@ import { Roles } from "../models/Roles";
 import { UiContext } from "../contexts/UiContext";
 import AdminApiService from "../services/AdminApiService";
 import "./Main.css";
+import MainPage from "./MainPage";
 
 const Main = () => {
   const adminApiService = new AdminApiService();
@@ -20,7 +21,7 @@ const Main = () => {
             <RequireAuth
               allowedRoles={[Roles.Admin, Roles.Professor, Roles.Student]}
             />}>
-          {/* <Route path="/" element={<Main />} exact /> */}
+          <Route path="/" element={<MainPage />} exact />
         </Route>
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route

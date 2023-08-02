@@ -15,6 +15,14 @@ const Navbar = () => {
   const { darkMode } = useContext(UiContext);
   const navigate = useNavigate();
 
+  const menus = {
+    [Roles.Admin]: AdminMenu,
+    [Roles.Professor]: ProfessorMenu,
+    [Roles.Student]: StudentMenu,
+  };
+
+  const Menu = menus[user.role] || null;
+
   const onLogout = () => {
     logout();
     navigate("/login");
@@ -31,11 +39,7 @@ const Navbar = () => {
             </Link>
             <DarkModeToggle />
           </div>
-          <div className="menu">
-            {user.role === Roles.Admin ? <AdminMenu /> : null}
-            {user.role === Roles.Professor ? <ProfessorMenu /> : null}
-            {user.role === Roles.Student ? <StudentMenu /> : null}
-          </div>
+          <div className="menu">{Menu && <Menu />}</div>
           <div className="profile">
             {user.loggedIn ? (
               <p className="username clickable">{user.fullName}</p>

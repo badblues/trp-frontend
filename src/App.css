@@ -30,7 +30,7 @@
 .form-container {
   border-radius: 43px;
   background: #d7d7d7;
-  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 50%);
   overflow: auto;
   padding: 30px;
   display: flex;

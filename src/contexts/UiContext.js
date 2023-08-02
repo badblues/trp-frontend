@@ -25,7 +25,6 @@ export class UiContextProvider extends Component {
     const data = localStorage.getItem("darkMode");
     if (data != null) {
       const darkMode = data === "true" ? true : false;
-      console.log(darkMode);
       return darkMode;
     } else {
       localStorage.setItem("darkMode", false);

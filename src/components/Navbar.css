@@ -18,9 +18,6 @@
   cursor: pointer;
 }
 
-.logo {
-}
-
 .logo-text {
   font-size: x-large;
   text-decoration: none;
@@ -30,7 +27,7 @@
 .profile {
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .username {
