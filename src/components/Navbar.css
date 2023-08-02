@@ -1,12 +1,12 @@
 .navbar-container {
   min-width: 100%;
-  width: fit-content;
   height: fit-content;
   min-height: 70px;
   background-color: darkgray;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 20px;
 }
 
 .navbar-container.dark-mode {
@@ -19,7 +19,6 @@
 }
 
 .logo {
-  margin-left: 40px;
 }
 
 .logo-text {
@@ -32,7 +31,6 @@
   display: flex;
   flex-direction: column;
   align-items: end;
-  margin-right: 40px;
 }
 
 .username {

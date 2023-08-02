@@ -3,7 +3,6 @@ import "./Menu.css";
 import { useNavigate } from "react-router-dom";
 
 const AdminMenu = () => {
-
   const navigate = useNavigate();
   const onCreateUser = () => {
     navigate("/create-user");

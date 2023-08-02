@@ -27,7 +27,7 @@ const CreateUser = (props) => {
         <p className="form-name">СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ</p>
         <div className="form-input-container">
           <label htmlFor="role">Тип пользователя:</label>
-          <select className="form-input" {...register("role")}>
+          <select id="role" className="form-input" {...register("role")}>
             <option value={Roles.Admin}>Админ</option>
             <option value={Roles.Professor}>Преподаватель</option>
             <option value={Roles.Student}>Студент</option>
@@ -37,6 +37,7 @@ const CreateUser = (props) => {
         <div className="form-input-container">
           <label htmlFor="username">Имя пользователя:</label>
           <input
+            id="username"
             className="form-input"
             type="text"
             placeholder="  Имя пользователя..."
@@ -49,6 +50,7 @@ const CreateUser = (props) => {
         <div className="form-input-container">
           <label htmlFor="password">Пароль:</label>
           <input
+            id="password"
             className="form-input"
             type="text"
             placeholder="  Пароль..."
@@ -61,6 +63,7 @@ const CreateUser = (props) => {
         <div className="form-input-container">
           <label htmlFor="fullName">ФИО:</label>
           <input
+            id="fullName"
             className="form-input"
             type="text"
             placeholder="  ФИО..."
@@ -73,6 +76,7 @@ const CreateUser = (props) => {
           <div className="form-input-container">
             <label htmlFor="group">Группа:</label>
             <input
+              id="group"
               className="form-input"
               type="text"
               placeholder="  Группа..."
