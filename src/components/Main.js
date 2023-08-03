@@ -5,12 +5,10 @@ import { Routes, Route } from "react-router-dom";
 import RequireAuth from "../guards/RequireAuth";
 import { Roles } from "../models/Roles";
 import { UiContext } from "../contexts/UiContext";
-import AdminApiService from "../services/AdminApiService";
 import "./Main.css";
 import MainPage from "./MainPage";
 
 const Main = () => {
-  const adminApiService = new AdminApiService();
   const { darkMode } = useContext(UiContext);
 
   return (
@@ -20,13 +18,16 @@ const Main = () => {
           element={
             <RequireAuth
               allowedRoles={[Roles.Admin, Roles.Professor, Roles.Student]}
-            />}>
+            />
+          }
+        >
           <Route path="/" element={<MainPage />} exact />
         </Route>
+        
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route
             path="/create-user"
-            element={<CreateUser adminApiService={adminApiService} />}
+            element={<CreateUser/>}
             exact
           />
         </Route>

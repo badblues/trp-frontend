@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Roles } from "../models/Roles";
+import { ApiContext } from "../contexts/ApiContext";
 
-const CreateUser = (props) => {
+const CreateUser = () => {
   const { register, handleSubmit, formState, watch } = useForm();
   const { errors } = formState;
   const selectedRole = watch("role");
-  const adminApiService = props.adminApiService;
+  const { adminApiService } = useContext(ApiContext);
 
   const onSubmit = (data) => {
-    console.log(data);
     let user = {
       username: data.username,
       fullName: data.fullName,
@@ -18,7 +18,7 @@ const CreateUser = (props) => {
     if (data.role === Roles.Student) {
       user.studyGroup = data.group;
     }
-    adminApiService.register(user, data.role);
+    adminApiService.register(user, data.role).then((response) => alert("Success"));
   };
 
   return (
@@ -94,54 +94,6 @@ const CreateUser = (props) => {
       </div>
     </form>
   );
-
-  // const form = useForm();
-  // const { register, handleSubmit, formState } = form;
-  // const { errors } = formState;
-  // const authService = props;
-
-  // const onSubmit = (data) => {
-  //   authService.createUser(data);
-  // };
-
-  // return (
-  //   <>
-  //     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-  //       <div className="form-container">
-  //         <p>НОВЫЙ ПОЛЬЗОВАТЕЛЬ</p>
-  //         <input
-  //           className="form-input"
-  //           type="text"
-  //           placeholder="Username..."
-  //           {...register("username", {
-  //             required: "Необходимо ввести имя пользователя",
-  //           })}
-  //         />
-  //         <p className="form-text">{errors.username?.message}</p>
-  //         <input
-  //           className="form-input"
-  //           type="text"
-  //           placeholder="Full name..."
-  //           {...register("fullName", {
-  //             required: "Необходимо ввести ФИО пользователя",
-  //           })}
-  //         />
-  //         <p className="form-text">{errors.fullName?.message}</p>
-  //         <input
-  //           className="form-input"
-  //           type="text"
-  //           {...register("password", {
-  //             required: "Необходимо ввести пароль",
-  //           })}
-  //           placeholder="Password..."
-  //         />
-  //         <p className="form-text">{errors.password?.message}</p>
-  //         <button className="button form-button">СОЗДАТЬ ПОЛЬЗОВАТЕЛЯ</button>
-  //         <img src="images/logo.png" alt="logo" width="100px" />
-  //       </div>
-  //     </form>
-  //   </>
-  // );
 };
 
 export default CreateUser;

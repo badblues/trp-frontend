@@ -2,8 +2,6 @@ import React, { createContext, Component } from "react";
 
 export const UiContext = createContext({});
 
- //TODO bad class bad bad code
-
 export class UiContextProvider extends Component {
   constructor(props) {
     super(props);
@@ -21,16 +19,7 @@ export class UiContextProvider extends Component {
     localStorage.setItem("darkMode", darkMode)
   }
 
-  loadData = () => {
-    const data = localStorage.getItem("darkMode");
-    if (data != null) {
-      const darkMode = data === "true" ? true : false;
-      return darkMode;
-    } else {
-      localStorage.setItem("darkMode", false);
-      return false;
-    }
-  };
+  loadData = () => localStorage.getItem("darkMode") === "true";
 
   render() {
     return (

@@ -8,7 +8,6 @@ export class AdminApiService {
     http.interceptors.request.use();
   }
 
-
   httpOptions = {
     Headers: {
       "Content-Type": "application/json",
@@ -18,6 +17,12 @@ export class AdminApiService {
   register(user, role) {
     const url = this.getRegistrationUrl(role);
     return http.post(url, user, this.httpOptions);
+  }
+
+  async getDisciplines() {
+    const url = this.apiUrl + "/disciplines";
+    const response = await http.get(url, this.httpOptions);
+    return response.data.data;
   }
 
   getRegistrationUrl(role) {
@@ -31,6 +36,8 @@ export class AdminApiService {
         break;
       case Roles.Student:
         url += "/registration/student";
+        break;
+      default:
         break;
     }
     return url;

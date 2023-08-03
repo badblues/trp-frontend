@@ -1,4 +1,5 @@
 import React, { createContext, Component } from "react";
+import AuthApiService from "../services/AuthApiService";
 import jwtDecode from "jwt-decode";
 
 export const UserContext = createContext({});
@@ -7,7 +8,7 @@ export class UserContextProvider extends Component {
 
   constructor(props) {
     super(props);
-    this.authService = props.authService;
+    this.authService = new AuthApiService();;
     this.state = {
       user: this.loadUser(),
       login: this.login.bind(this),
