@@ -7,7 +7,7 @@ const CreateUser = () => {
   const { register, handleSubmit, formState, watch } = useForm();
   const { errors } = formState;
   const selectedRole = watch("role");
-  const { adminApiService } = useContext(ApiContext);
+  const { userApiService } = useContext(ApiContext);
 
   const onSubmit = (data) => {
     let user = {
@@ -18,7 +18,7 @@ const CreateUser = () => {
     if (data.role === Roles.Student) {
       user.studyGroup = data.group;
     }
-    adminApiService.register(user, data.role).then((response) => alert("Success"));
+    userApiService.register(user, data.role).then((response) => alert("Success"));
   };
 
   return (

@@ -1,7 +1,7 @@
 import http from "axios";
 import { Roles } from "../models/Roles";
 
-export class AdminApiService {
+export class UserApiService {
   apiUrl = "http://212.20.47.147:8080/admin";
 
   constructor() {
@@ -17,12 +17,6 @@ export class AdminApiService {
   register(user, role) {
     const url = this.getRegistrationUrl(role);
     return http.post(url, user, this.httpOptions);
-  }
-
-  async getDisciplines() {
-    const url = this.apiUrl + "/disciplines";
-    const response = await http.get(url, this.httpOptions);
-    return response.data.data;
   }
 
   getRegistrationUrl(role) {
@@ -44,4 +38,4 @@ export class AdminApiService {
   }
 }
 
-export default AdminApiService;
+export default UserApiService;

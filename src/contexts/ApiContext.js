@@ -1,21 +1,17 @@
 import React, { createContext, Component } from "react";
-import AdminApiService from "../services/AdminApiService";
-import StudentApiService from "../services/StudentApiService";
-import ProfessorApiService from "../services/ProfessorApiService";
+import UserApiService from "../services/UserApiService";
+import DisciplinesApiService from "../services/DisciplinesApiService";
 
 export const ApiContext = createContext({});
 
-export class ApiContextProvider extends Component { 
-
+export class ApiContextProvider extends Component {
   constructor(props) {
     super(props);
-    this.adminApiService = new AdminApiService();
-    this.studentApiService = new StudentApiService();
-    this.professorApiService = new ProfessorApiService();
+    this.userApiService = new UserApiService();
+    this.disciplinesApiService = new DisciplinesApiService();
     this.state = {
-      adminApiService: this.adminApiService,
-      studentApiService: this.studentApiService,
-      professorApiService: this.professorApiService
+      userApiService: this.userApiService,
+      disciplinesApiService: this.disciplinesApiService
     };
   }
 
