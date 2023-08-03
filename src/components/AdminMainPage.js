@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import "./MainPage.css";
 import Disciplines from "./Disciplines";
 import { ApiContext } from "../contexts/ApiContext";
 import { useState } from "react";
@@ -23,9 +24,9 @@ const AdminMainPage = () => {
   }
 
   return (
-    <>
-      <Disciplines disciplines={disciplines} />
-    </>
+    <div className="main-page-container">
+      <Disciplines className="disciplines" disciplines={disciplines} />
+    </div>
   );
 };
 
