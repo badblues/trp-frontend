@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../contexts/UserContext";
+import { UiContext } from "../contexts/UiContext";
 
 const Login = () => {
   const { register, handleSubmit, formState } = useForm();
+  const { darkMode } = useContext(UiContext);
   const { errors } = formState;
   const { login } = useContext(UserContext);
   const navigate = useNavigate();
@@ -17,31 +19,39 @@ const Login = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div className="form-container">
-          <p className="form-name">АВТОРИЗАЦИЯ</p>
+        <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
+          <label className="form-name">АВТОРИЗАЦИЯ</label>
           <div className="form-input-container">
-            <label htmlFor="username">Имя пользователя:</label>
+            <label className="form-label" htmlFor="username">
+              Имя пользователя:
+            </label>
             <input
-              className="form-input"
+              className={`form-input ${darkMode ? "dark-mode" : ""}`}
               type="text"
-              placeholder="  username..."
+              placeholder="username..."
               {...register("username", {
                 required: "Необходимо ввести имя пользователя",
               })}
             />
-            <p className="form-text">{errors.username?.message}</p>
+            <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
+              {errors.username?.message}
+            </label>
           </div>
           <div className="form-input-container">
-            <label htmlFor="password">Пароль:</label>
+            <label className="form-label" htmlFor="password">
+              Пароль:
+            </label>
             <input
-              className="form-input"
+              className={`form-input ${darkMode ? "dark-mode" : ""}`}
               type="password"
-              placeholder="  password..."
+              placeholder="password..."
               {...register("password", {
                 required: "Необходимо ввести пароль",
               })}
             />
-            <p className="form-text">{errors.password?.message}</p>
+            <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
+              {errors.password?.message}
+            </label>
           </div>
           <img src="/images/logo.png" alt="logo" width="100px"></img>
           <button className="button form-button">ВОЙТИ</button>

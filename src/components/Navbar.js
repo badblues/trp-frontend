@@ -9,6 +9,7 @@ import DarkModeToggle from "./DarkModeToggle";
 import AdminMenu from "./AdminMenu";
 import ProfessorMenu from "./ProfessorMenu";
 import StudentMenu from "./StudentMenu";
+import axios from "axios";
 
 const Navbar = () => {
   const { user, logout } = useContext(UserContext);
@@ -28,26 +29,39 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  //TODO: remove
+  const makeRequest = () => {
+    try {
+      axios.get("http://212.20.47.147:8080/admin/disciplines");
+    } catch (error) {
+      console.log("navbar error + " + error);
+    }
+  };
+
   return (
     <>
       <nav className="navbar">
         <div className={`navbar-container ${darkMode ? "dark-mode" : ""}`}>
           <div className="logo">
             <img src="images/logo.png" alt="hapi" width="17"></img>
-            <Link to="/" className="logo-text clickable">
+            <Link
+              to="/"
+              className={`clickable logo-text ${darkMode ? "dark-mode" : ""}`}
+            >
               TERPI
             </Link>
             <DarkModeToggle />
           </div>
+          <label onClick={makeRequest}> GET 403 </label>
           <div className="menu">{Menu && <Menu />}</div>
           <div className="profile">
             {user.loggedIn ? (
-              <p className="username clickable">{user.fullName}</p>
+              <label className="username clickable">{user.fullName}</label>
             ) : null}
             {user.loggedIn ? (
-              <p className="logout clickable" onClick={onLogout}>
+              <label className="logout clickable" onClick={onLogout}>
                 logout
-              </p>
+              </label>
             ) : null}
           </div>
         </div>

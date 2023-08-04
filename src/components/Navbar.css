@@ -2,16 +2,18 @@
   min-width: 100%;
   height: fit-content;
   min-height: 70px;
-  background-color: darkgray;
+  background-color: var(--background-secondary-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: var(--text-color);
 }
 
 .navbar-container.dark-mode {
-  background-color: #555;
-  color: #f8f8f8;
+  background-color: var(--dark-mode-background-secondary-color);
+  color: var(--dark-mode-text-color);
 }
 
 .clickable:hover {
@@ -21,8 +23,13 @@
 .logo-text {
   font-size: x-large;
   text-decoration: none;
-  color: black;
+  color: var(--text-color);
 }
+
+.logo-text.dark-mode {
+  color: var(--dark-mode-text-color)
+}
+
 
 .profile {
   display: flex;

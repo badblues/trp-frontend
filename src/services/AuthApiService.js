@@ -15,7 +15,7 @@ export class AuthApiService {
       const response = await http.post(url, authData);
       return response.data.data;
     } catch (error) {
-      alert(error.response.data.error);
+      alert(error);
     }
   }
 }

@@ -1,13 +1,13 @@
 .footer {
   min-width: 100%;
   height: fit-content;
-  background-color: darkgray;
+  background-color: var(--background-secondary-color);
   padding: 20px;
   display: flex;
   justify-content: center;
 }
 
 .footer.dark-mode {
-  background-color: #555;
-  color: #fff;
+  background-color: var(--dark-mode-background-secondary-color);
+  color: var(--dark-mode-text-color);
 }

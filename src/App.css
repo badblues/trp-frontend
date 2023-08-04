@@ -4,6 +4,20 @@
   padding: 0;
 }
 
+:root {
+  --background-color: #fbfbfb;
+  --dark-mode-background-color: #212121;
+  --background-secondary-color: #b4b4b4;
+  --dark-mode-background-secondary-color: #2e2e2e;
+  --primary-color: #ff3c3c;
+  --secondary-color: #3cff53;
+  --text-color: #0e0e0e;
+  --dark-mode-text-color: #f1f1f1;
+
+  --main-font: 'Raleway', sans-serif;
+  --heading-font: 'Montserrat', sans-serif;
+}
+
 .page {
   min-height: 100vh;
   width: 100%;
@@ -16,20 +30,21 @@
 
 .button {
   border-radius: 7px;
-  background: #393939;
+  background: #1e1e1e;
   margin-top: 10px;
   margin-bottom: 10px;
+  font-family: var(--main-font);
   color: white;
 }
 
 .button:hover {
   cursor: pointer;
-  background: #bb0d0d;
+  background: var(--primary-color);
 }
 
 .form-container {
   border-radius: 43px;
-  background: #d7d7d7;
+  background: var(--background-secondary-color);
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 50%);
   overflow: auto;
   padding: 30px;
@@ -40,18 +55,36 @@
   min-width: 400px;
   height: fit-content;
   margin-top: 75px;
+  margin-bottom: 75px;
+}
+
+.form-container.dark-mode {
+  background: var(--dark-mode-background-secondary-color);
+  color: var(--dark-mode-text-color);
 }
 
 .form-name {
+  font-family: var(--main-font);
+  font: 500;
   font-size: x-large;
+  margin-bottom: 10px;
 }
 
 .form-text {
-  color: rgb(206, 8, 8);
+  font-family: var(--main-font);
+  color: #b70000;
+  align-self: flex-start;
 }
 
+.form-text.dark-mode {
+  color: #ffafaf;
+}
+
+
 .form-label {
-  font-size: large;
+  font-family: var(--main-font);
+  font-size: medium;
+  align-self:flex-start;
 }
 
 .form-input-container {
@@ -59,6 +92,7 @@
   flex-direction: column;
   align-items: center;
   width: 90%;
+  margin-bottom: 20px;
 }
 
 .form-input {
@@ -66,12 +100,21 @@
   min-height: 40px;
   border-radius: 7px;
   border: 1px solid #000;
-  background: #fff;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding: 10px;
+  margin-bottom: 4px;
+  font-family: var(--main-font);
+}
+
+.form-input.dark-mode {
+  background-color: var(--dark-mode-background-color);
+  color: var(--dark-mode-text-color);
+}
+
+.form-input.dark-mode::placeholder {
+  color: var(--dark-mode-text-color);
 }
 
 .form-button {
   width: 80%;
-  min-height: 40px;
+  height: 40px;
 }

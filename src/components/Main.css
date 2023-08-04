@@ -3,10 +3,10 @@
   min-height: 100%;
   min-width:100%;
   flex-grow: 1;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--background-color);
 }
 
 
 .main-container.dark-mode {
-  background-color: rgb(150, 150, 150);
+  background-color: var(--dark-mode-background-color);
 }

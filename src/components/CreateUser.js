@@ -2,12 +2,14 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Roles } from "../models/Roles";
 import { ApiContext } from "../contexts/ApiContext";
+import { UiContext } from "../contexts/UiContext";
 
 const CreateUser = () => {
   const { register, handleSubmit, formState, watch } = useForm();
   const { errors } = formState;
   const selectedRole = watch("role");
   const { userApiService } = useContext(ApiContext);
+  const { darkMode } = useContext(UiContext);
 
   const onSubmit = (data) => {
     let user = {
@@ -18,16 +20,24 @@ const CreateUser = () => {
     if (data.role === Roles.Student) {
       user.studyGroup = data.group;
     }
-    userApiService.register(user, data.role).then((response) => alert("Success"));
+    userApiService
+      .register(user, data.role)
+      .then((response) => alert("Success"));
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="form-container">
+      <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
         <p className="form-name">СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ</p>
         <div className="form-input-container">
-          <label htmlFor="role">Тип пользователя:</label>
-          <select id="role" className="form-input" {...register("role")}>
+          <label className="form-label" htmlFor="role">
+            Тип пользователя:
+          </label>
+          <select
+            id="role"
+            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            {...register("role")}
+          >
             <option value={Roles.Admin}>Админ</option>
             <option value={Roles.Professor}>Преподаватель</option>
             <option value={Roles.Student}>Студент</option>
@@ -35,56 +45,64 @@ const CreateUser = () => {
         </div>
 
         <div className="form-input-container">
-          <label htmlFor="username">Имя пользователя:</label>
+          <label className="form-label" htmlFor="username">
+            Имя пользователя:
+          </label>
           <input
             id="username"
-            className="form-input"
+            className={`form-input ${darkMode ? "dark-mode" : ""}`}
             type="text"
-            placeholder="  Имя пользователя..."
+            placeholder="Имя пользователя..."
             {...register("username", {
               required: "Необходимо ввести имя пользователя",
             })}
           />
-          <p className="form-text">{errors.username?.message}</p>
+          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>{errors.username?.message}</label>
         </div>
         <div className="form-input-container">
-          <label htmlFor="password">Пароль:</label>
+          <label className="form-label" htmlFor="password">
+            Пароль:
+          </label>
           <input
             id="password"
-            className="form-input"
+            className={`form-input ${darkMode ? "dark-mode" : ""}`}
             type="text"
-            placeholder="  Пароль..."
+            placeholder="Пароль..."
             {...register("password", {
               required: "Необходимо ввести пароль",
             })}
           />
-          <p className="form-text">{errors.password?.message}</p>
+          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>{errors.password?.message}</label>
         </div>
         <div className="form-input-container">
-          <label htmlFor="fullName">ФИО:</label>
+          <label className="form-label" htmlFor="fullName">
+            ФИО:
+          </label>
           <input
             id="fullName"
-            className="form-input"
+            className={`form-input ${darkMode ? "dark-mode" : ""}`}
             type="text"
-            placeholder="  ФИО..."
+            placeholder="ФИО..."
             {...register("fullName", { required: "Необходимо ввести ФИО" })}
           />
-          <p className="form-text">{errors.fullName?.message}</p>
+          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>{errors.fullName?.message}</label>
         </div>
 
         {selectedRole === Roles.Student && (
           <div className="form-input-container">
-            <label htmlFor="group">Группа:</label>
+            <label className="form-label" htmlFor="group">
+              Группа:
+            </label>
             <input
               id="group"
-              className="form-input"
+              className={`form-input ${darkMode ? "dark-mode" : ""}`}
               type="text"
-              placeholder="  Группа..."
+              placeholder="Группа..."
               {...register("group", {
                 required: "Необходимо ввести группу",
               })}
             />
-            <p className="form-text">{errors.group?.message}</p>
+            <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>{errors.group?.message}</label>
           </div>
         )}
 
