@@ -10,8 +10,8 @@ export class AuthApiService {
   };
 
   async login(authData) {
+    const url = this.apiUrl + "/login";
     try {
-      const url = this.apiUrl + "/login";
       const response = await http.post(url, authData);
       return response.data.data;
     } catch (error) {

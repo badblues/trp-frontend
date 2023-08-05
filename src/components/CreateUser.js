@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Roles } from "../models/Roles";
 import { ApiContext } from "../contexts/ApiContext";
@@ -10,8 +10,9 @@ const CreateUser = () => {
   const selectedRole = watch("role");
   const { userApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
+  const [loading, setLoading] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     let user = {
       username: data.username,
       fullName: data.fullName,
@@ -20,9 +21,16 @@ const CreateUser = () => {
     if (data.role === Roles.Student) {
       user.studyGroup = data.group;
     }
-    userApiService
-      .register(user, data.role)
-      .then((response) => alert("Success"));
+    setLoading(true);
+    try {
+      await userApiService
+        .register(user, data.role)
+        .then((response) => alert(`Success, ${response.username} created`));
+    } catch (error) {
+      alert(error.error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -57,7 +65,9 @@ const CreateUser = () => {
               required: "Необходимо ввести имя пользователя",
             })}
           />
-          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>{errors.username?.message}</label>
+          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
+            {errors.username?.message}
+          </label>
         </div>
         <div className="form-input-container">
           <label className="form-label" htmlFor="password">
@@ -72,7 +82,9 @@ const CreateUser = () => {
               required: "Необходимо ввести пароль",
             })}
           />
-          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>{errors.password?.message}</label>
+          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
+            {errors.password?.message}
+          </label>
         </div>
         <div className="form-input-container">
           <label className="form-label" htmlFor="fullName">
@@ -85,7 +97,9 @@ const CreateUser = () => {
             placeholder="ФИО..."
             {...register("fullName", { required: "Необходимо ввести ФИО" })}
           />
-          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>{errors.fullName?.message}</label>
+          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
+            {errors.fullName?.message}
+          </label>
         </div>
 
         {selectedRole === Roles.Student && (
@@ -102,11 +116,13 @@ const CreateUser = () => {
                 required: "Необходимо ввести группу",
               })}
             />
-            <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>{errors.group?.message}</label>
+            <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
+              {errors.group?.message}
+            </label>
           </div>
         )}
 
-        <button className="button form-button" type="submit">
+        <button disabled={loading} className="button form-button" type="submit">
           Создать пользователя
         </button>
       </div>

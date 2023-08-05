@@ -14,9 +14,14 @@ export class UserApiService {
     },
   };
 
-  register(user, role) {
+  async register(user, role) {
     const url = this.getRegistrationUrl(role);
-    return http.post(url, user, this.httpOptions);
+    try {
+      const response = await http.post(url, user, this.httpOptions);
+      return response.data.data;
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   getRegistrationUrl(role) {

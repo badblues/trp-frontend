@@ -15,7 +15,6 @@ function App() {
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
-      console.log(error);
       if (error.response.status === 403) {
         logout();
         return;
