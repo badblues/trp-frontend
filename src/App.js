@@ -4,9 +4,11 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import axios from "axios";
 import requestInterceptor from "./interceptors/RequestInterceptor";
-import responseInterceptor from "./interceptors/ResponseInterceptor";
 import { useContext } from "react";
 import { UserContext } from "./contexts/UserContext";
+import ReactModal from "react-modal";
+
+ReactModal.setAppElement('#root');
 
 function App() {
   const { logout } = useContext(UserContext);
@@ -15,11 +17,12 @@ function App() {
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
+      console.log(error);
       if (error.response.status === 403) {
         logout();
         return;
       }
-      throw new Error(error.response.data.error);
+      throw error;
     }
   );
 

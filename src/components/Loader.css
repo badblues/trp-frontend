@@ -1,0 +1,17 @@
+.loader {
+  max-height: 100px;
+  min-height: 15px;
+  height: 70%;
+  aspect-ratio: 1/1;
+  border: 2px solid var(--background-color);
+  border-radius: 50%;
+  background-color: transparent;
+  border-right-color: var(--primary-color);
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,24 +1,34 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../contexts/UserContext";
 import { UiContext } from "../contexts/UiContext";
+import Loader from "./Loader";
 
 const Login = () => {
-  const { register, handleSubmit, formState } = useForm();
   const { darkMode } = useContext(UiContext);
-  const { errors } = formState;
   const { login } = useContext(UserContext);
   const navigate = useNavigate();
+  const { register, handleSubmit, formState } = useForm();
+  const { errors } = formState;
+  const [ loading, setLoading ] = useState(false);
 
-  const onSubmit = (data) => {
-    login(data).then(() => navigate("/"));
+  const onLogin = async (data) => {
+    setLoading(true);
+    try {
+      await login(data).then(() => navigate("/"));
+    } catch (error) {
+      console.log(error);
+      alert(error.error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form onSubmit={handleSubmit(onLogin)} noValidate>
         <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
           <label className="form-name">АВТОРИЗАЦИЯ</label>
           <div className="form-input-container">
@@ -54,7 +64,7 @@ const Login = () => {
             </label>
           </div>
           <img src="/images/logo.png" alt="logo" width="100px"></img>
-          <button className="button form-button">ВОЙТИ</button>
+          <button disabled={loading} className="button form-button">{loading ? (<Loader/>) : "ВОЙТИ"}</button>
         </div>
       </form>
     </>

@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
+import Loader from "./Loader";
 import { UiContext } from "../contexts/UiContext";
 import { UserContext } from "../contexts/UserContext";
 import { ApiContext } from "../contexts/ApiContext";
 import "./Disciplines.css";
-
 
 const Disciplines = () => {
   const [disciplines, setDisciplines] = useState([]);
@@ -23,7 +23,11 @@ const Disciplines = () => {
   }, []);
 
   if (loading) {
-    return <>Loading...</>;
+    return (
+      <div className="disciplines-container">
+        <Loader />
+      </div>
+    );
   }
 
   return (

@@ -6,9 +6,9 @@ import { UiContext } from "../contexts/UiContext";
 import { useNavigate } from "react-router-dom";
 import { Roles } from "../models/Roles";
 import DarkModeToggle from "./DarkModeToggle";
-import AdminMenu from "./AdminMenu";
-import ProfessorMenu from "./ProfessorMenu";
-import StudentMenu from "./StudentMenu";
+import AdminMenu from "./menus/AdminMenu";
+import ProfessorMenu from "./menus/ProfessorMenu";
+import StudentMenu from "./menus/StudentMenu";
 import axios from "axios";
 
 const Navbar = () => {
@@ -60,7 +60,7 @@ const Navbar = () => {
             ) : null}
             {user.loggedIn ? (
               <label className="logout clickable" onClick={onLogout}>
-                logout
+                Выйти
               </label>
             ) : null}
           </div>

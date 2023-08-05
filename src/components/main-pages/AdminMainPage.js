@@ -1,6 +1,6 @@
 import React from "react";
 import "./MainPage.css";
-import Disciplines from "./Disciplines";
+import Disciplines from "../Disciplines";
 
 const AdminMainPage = () => {
   return (

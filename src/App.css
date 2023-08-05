@@ -35,11 +35,13 @@
   margin-bottom: 10px;
   font-family: var(--main-font);
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button:hover {
   cursor: pointer;
-  background: var(--primary-color);
 }
 
 .form-container {

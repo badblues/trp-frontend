@@ -6,7 +6,7 @@ import RequireAuth from "../guards/RequireAuth";
 import { Roles } from "../models/Roles";
 import { UiContext } from "../contexts/UiContext";
 import "./Main.css";
-import MainPage from "./MainPage";
+import MainPage from "./main-pages/MainPage";
 
 const Main = () => {
   const { darkMode } = useContext(UiContext);
