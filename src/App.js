@@ -6,9 +6,7 @@ import axios from "axios";
 import requestInterceptor from "./interceptors/RequestInterceptor";
 import { useContext } from "react";
 import { UserContext } from "./contexts/UserContext";
-import ReactModal from "react-modal";
 
-ReactModal.setAppElement('#root');
 
 function App() {
   const { logout } = useContext(UserContext);
