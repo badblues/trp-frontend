@@ -29,15 +29,6 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  //TODO: remove
-  const makeRequest = () => {
-    try {
-      axios.get("http://212.20.47.147:8080/admin/disciplines");
-    } catch (error) {
-      console.log("navbar error + " + error);
-    }
-  };
-
   return (
     <>
       <nav className="navbar">
@@ -52,7 +43,6 @@ const Navbar = () => {
             </Link>
             <DarkModeToggle />
           </div>
-          <label onClick={makeRequest}> GET 403 </label>
           <div className="menu">{Menu && <Menu />}</div>
           <div className="profile">
             {user.loggedIn ? (

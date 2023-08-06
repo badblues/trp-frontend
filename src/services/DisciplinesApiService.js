@@ -1,7 +1,6 @@
 import http from "axios";
 import { Roles } from "../models/Roles";
 
-
 export class DisciplinesApiService {
   apiUrl = "http://212.20.47.147:8080";
 
@@ -31,8 +30,10 @@ export class DisciplinesApiService {
         break;
     }
     url += "/disciplines";
-    const response = await http.get(url, this.httpOptions);
-    return response.data.data;
+    try {
+      const response = await http.get(url, this.httpOptions);
+      return response.data.data;
+    } catch (error) {}
   }
 }
 

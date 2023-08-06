@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Roles } from "../models/Roles";
 import { ApiContext } from "../contexts/ApiContext";
 import { UiContext } from "../contexts/UiContext";
+import Loader from "./Loader";
 
 const CreateUser = () => {
   const { register, handleSubmit, formState, watch } = useForm();
@@ -123,7 +124,7 @@ const CreateUser = () => {
         )}
 
         <button disabled={loading} className="button form-button" type="submit">
-          Создать пользователя
+          {loading ? <Loader/> : "Создать пользователя"}
         </button>
       </div>
     </form>

@@ -6,7 +6,7 @@ import { UiContext } from "../contexts/UiContext";
 const Footer = () => {
   const { darkMode } = useContext(UiContext);
 
-  return <div className={`footer ${darkMode ? "dark-mode" : ""}`}>Footer</div>;
+  return <div className={`footer ${darkMode ? "dark-mode" : ""}`}></div>;
 };
 
 export default Footer;
