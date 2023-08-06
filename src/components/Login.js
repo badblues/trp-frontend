@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
-  const [ loading, setLoading ] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onLogin = async (data) => {
     setLoading(true);
@@ -64,7 +64,9 @@ const Login = () => {
             </label>
           </div>
           <img src="/images/logo.png" alt="logo" width="100px"></img>
-          <button disabled={loading} className="button form-button">{loading ? (<Loader/>) : "ВОЙТИ"}</button>
+          <button disabled={loading} className="button form-button">
+            {loading ? <Loader /> : "ВОЙТИ"}
+          </button>
         </div>
       </form>
     </>

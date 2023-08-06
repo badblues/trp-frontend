@@ -41,7 +41,7 @@ const Navbar = () => {
             >
               TERPI
             </Link>
-            <DarkModeToggle />
+            <DarkModeToggle className="dark-mode-toggle" />
           </div>
           <div className="menu">{Menu && <Menu />}</div>
           <div className="profile">
