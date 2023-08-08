@@ -8,16 +8,10 @@ export class UserApiService {
     http.interceptors.request.use();
   }
 
-  httpOptions = {
-    Headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
   async register(user, role) {
     const url = this.getRegistrationUrl(role);
     try {
-      const response = await http.post(url, user, this.httpOptions);
+      const response = await http.post(url, user);
       return response.data.data;
     } catch (error) {
       throw error.response.data;

@@ -48,22 +48,22 @@
   position: absolute;
 }
 
-.toggle svg.sun {
+.toggle .sun {
   left: 1px;
-  fill: white;
+  fill: #fff;
   transition: 0.3s;
 }
 
-.toggle svg.moon {
+.toggle .moon {
   left: 31px;
   fill: grey;
   transition: 0.3s;
 }
 
-.checkbox:checked + .toggle svg.sun {
+.checkbox:checked + .toggle .sun {
   fill: #7e7e7e;
 }
 
-.checkbox:checked + .toggle svg.moon {
+.checkbox:checked + .toggle .moon {
   fill: #fff;
 }

@@ -14,8 +14,8 @@
   --text-color: #0e0e0e;
   --dark-mode-text-color: #f1f1f1;
 
-  --main-font: 'Raleway', sans-serif;
-  --heading-font: 'Montserrat', sans-serif;
+  --main-font: "Raleway", sans-serif;
+  --heading-font: "Montserrat", sans-serif;
 }
 
 .page {
@@ -26,7 +26,6 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
 
 .button {
   border-radius: 7px;
@@ -82,16 +81,23 @@
   color: #ffafaf;
 }
 
-
 .form-label {
   font-family: var(--main-font);
   font-size: medium;
-  align-self:flex-start;
+  align-self: flex-start;
 }
 
 .form-input-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin-bottom: 20px;
+}
+
+.form-checkbox-container {
+  display: flex;
+  flex-direction: row;
   align-items: center;
   width: 90%;
   margin-bottom: 20px;
@@ -114,6 +120,10 @@
 
 .form-input.dark-mode::placeholder {
   color: var(--dark-mode-text-color);
+}
+
+.form-checkbox {
+  margin-left: 5px;
 }
 
 .form-button {

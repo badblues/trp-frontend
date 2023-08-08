@@ -1,8 +1,19 @@
 .menu {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  width: fit-content;
 }
 
+.menu-option {
+  text-decoration: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: var(--text-color);
+}
+
+.menu-option.dark-mode {
+  color: var(--dark-mode-text-color);
+}
 
 .menu-option:hover {
   cursor: pointer;

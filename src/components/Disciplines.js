@@ -10,17 +10,21 @@ const Disciplines = () => {
   const [loading, setLoading] = useState(true);
 
   const { darkMode } = useContext(UiContext);
-  const { user } = useContext(UserContext);
-  const { disciplinesApiService } = useContext(ApiContext);
+  const { disciplineApiService } = useContext(ApiContext);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await disciplinesApiService.getDisciplines(user.role);
+      const response = await disciplineApiService.getDisciplines();
       setDisciplines(response);
       setLoading(false);
     };
     fetchData();
   }, []);
+
+  const printDiscipline = async(id) => {
+    const discipline = await disciplineApiService.getDiscipline(id);
+    console.log(discipline);
+  }
 
   if (loading) {
     return (
@@ -37,6 +41,7 @@ const Disciplines = () => {
           <div
             className={`discipline-item ${darkMode ? "dark-mode" : ""}`}
             key={discipline.id}
+            onClick={() => printDiscipline(discipline.id)}
           >
             <p>
               {discipline.name} {discipline.year} {discipline.halfYear}

@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Menu.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { UiContext } from "../../contexts/UiContext";
 
 const AdminMenu = () => {
-  const navigate = useNavigate();
-  const onCreateUser = () => {
-    navigate("/create-user");
-  };
+  const { darkMode } = useContext(UiContext);
 
   return (
     <div className="menu">
-      <p className="menu-option" onClick={onCreateUser}>
+      <Link
+        to="/create-user"
+        className={`menu-option ${darkMode ? "dark-mode" : ""}`}
+      >
         Создать пользователя
-      </p>
+      </Link>
+      <Link
+        to="/create-discipline"
+        className={`menu-option ${darkMode ? "dark-mode" : ""}`}
+      >
+        Создать дисциплину
+      </Link>
     </div>
   );
 };

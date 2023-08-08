@@ -9,7 +9,6 @@ import DarkModeToggle from "./DarkModeToggle";
 import AdminMenu from "./menus/AdminMenu";
 import ProfessorMenu from "./menus/ProfessorMenu";
 import StudentMenu from "./menus/StudentMenu";
-import axios from "axios";
 
 const Navbar = () => {
   const { user, logout } = useContext(UserContext);

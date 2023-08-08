@@ -1,6 +1,6 @@
 import React, { createContext, Component } from "react";
 import UserApiService from "../services/UserApiService";
-import DisciplinesApiService from "../services/DisciplinesApiService";
+import DisciplineApiService from "../services/DisciplineApiService";
 
 export const ApiContext = createContext({});
 
@@ -8,10 +8,10 @@ export class ApiContextProvider extends Component {
   constructor(props) {
     super(props);
     this.userApiService = new UserApiService();
-    this.disciplinesApiService = new DisciplinesApiService();
+    this.disciplineApiService = new DisciplineApiService();
     this.state = {
       userApiService: this.userApiService,
-      disciplinesApiService: this.disciplinesApiService
+      disciplineApiService: this.disciplineApiService
     };
   }
 

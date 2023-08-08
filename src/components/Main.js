@@ -7,6 +7,7 @@ import { Roles } from "../models/Roles";
 import { UiContext } from "../contexts/UiContext";
 import "./Main.css";
 import MainPage from "./main-pages/MainPage";
+import CreateDiscipline from "./CreateDiscipline";
 
 const Main = () => {
   const { darkMode } = useContext(UiContext);
@@ -23,11 +24,14 @@ const Main = () => {
         >
           <Route path="/" element={<MainPage />} exact />
         </Route>
-        
+
+        <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
+          <Route path="/create-user" element={<CreateUser />} exact />
+        </Route>
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route
-            path="/create-user"
-            element={<CreateUser/>}
+            path="/create-discipline"
+            element={<CreateDiscipline />}
             exact
           />
         </Route>

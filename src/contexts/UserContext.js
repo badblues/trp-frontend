@@ -28,8 +28,15 @@ export class UserContextProvider extends Component {
 
   setUserData(token) {
     try {
-      const decodedToken = JSON.stringify(jwtDecode(token));
-      localStorage.setItem("user", decodedToken);
+      const decodedToken = jwtDecode(token);
+      const userInfo = {
+       id: decodedToken.id, 
+       fullName: decodedToken.fullName,
+       role: decodedToken.role,
+       username: decodedToken.username,
+      }
+      const userInfoStr = JSON.stringify(userInfo);
+      localStorage.setItem("user", userInfoStr);
     } catch (error) {
       console.error(error);
     }
