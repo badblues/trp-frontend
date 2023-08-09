@@ -1,6 +1,7 @@
 import React from "react";
 import "./MainPage.css";
 import Disciplines from "../Disciplines";
+import Groups from "../Groups";
 
 const AdminMainPage = () => {
   return (

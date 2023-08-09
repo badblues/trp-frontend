@@ -2,32 +2,27 @@ import React, { useContext, useState, useEffect } from "react";
 import Loader from "./Loader";
 import { UiContext } from "../contexts/UiContext";
 import { ApiContext } from "../contexts/ApiContext";
-import "./Disciplines.css";
 
-const Disciplines = () => {
-  const [disciplines, setDisciplines] = useState([]);
+const Groups = () => {
+  const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const { darkMode } = useContext(UiContext);
-  const { disciplineApiService } = useContext(ApiContext);
+  const { groupApiService } = useContext(ApiContext);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await disciplineApiService.getDisciplines();
-      setDisciplines(response);
+      const response = await groupApiService.getGroups();
+      setGroups(response);
       setLoading(false);
     };
     fetchData();
   }, []);
 
-  const printDiscipline = async(id) => {
-    const discipline = await disciplineApiService.getDiscipline(id);
-    console.log(discipline);
-  }
 
   if (loading) {
     return (
-      <div className="disciplines-container">
+      <div className="groups-container">
         <Loader />
       </div>
     );
@@ -35,12 +30,11 @@ const Disciplines = () => {
 
   return (
     <>
-      <div className="disciplines-container">
-        {disciplines.map((discipline) => (
+      <div className="groups-container">
+        {groups.map((discipline) => (
           <div
-            className={`discipline-item ${darkMode ? "dark-mode" : ""}`}
+            className={`group-item ${darkMode ? "dark-mode" : ""}`}
             key={discipline.id}
-            onClick={() => printDiscipline(discipline.id)}
           >
             <p>
               {discipline.name} {discipline.year} {discipline.halfYear}
@@ -52,4 +46,4 @@ const Disciplines = () => {
   );
 };
 
-export default Disciplines;
+export default Groups;

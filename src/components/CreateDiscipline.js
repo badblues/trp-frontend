@@ -106,7 +106,7 @@ const CreateDiscipline = () => {
         </div>
 
         <button disabled={loading} className="button form-button" type="submit">
-          {loading ? <Loader /> : "Создать пользователя"}
+          {loading ? <Loader /> : "Создать дисциплину"}
         </button>
       </div>
     </form>

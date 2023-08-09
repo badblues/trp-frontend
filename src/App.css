@@ -43,6 +43,12 @@
   cursor: pointer;
 }
 
+form {
+  display: flex;
+  justify-content: center;
+}
+
+
 .form-container {
   border-radius: 43px;
   background: var(--background-secondary-color);

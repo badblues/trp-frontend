@@ -20,6 +20,12 @@ const AdminMenu = () => {
       >
         Создать дисциплину
       </Link>
+      <Link
+        to="/create-group"
+        className={`menu-option ${darkMode ? "dark-mode" : ""}`}
+      >
+        Создать группу
+      </Link>
     </div>
   );
 };
