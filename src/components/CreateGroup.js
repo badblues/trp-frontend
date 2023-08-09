@@ -43,6 +43,7 @@ const CreateGroup = () => {
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
             type="text"
             placeholder="Название..."
+            autoComplete="off"
             {...register("name", {
               required: "Необходимо ввести название группы",
             })}

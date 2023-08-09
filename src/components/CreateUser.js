@@ -62,6 +62,7 @@ const CreateUser = () => {
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
             type="text"
             placeholder="Имя пользователя..."
+            autoComplete="off"
             {...register("username", {
               required: "Необходимо ввести имя пользователя",
             })}
@@ -79,6 +80,7 @@ const CreateUser = () => {
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
             type="text"
             placeholder="Пароль..."
+            autoComplete="off"
             {...register("password", {
               required: "Необходимо ввести пароль",
             })}
@@ -96,6 +98,7 @@ const CreateUser = () => {
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
             type="text"
             placeholder="ФИО..."
+            autoComplete="off"
             {...register("fullName", { required: "Необходимо ввести ФИО" })}
           />
           <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
@@ -113,6 +116,7 @@ const CreateUser = () => {
               className={`form-input ${darkMode ? "dark-mode" : ""}`}
               type="text"
               placeholder="Группа..."
+              autoComplete="off"
               {...register("group", {
                 required: "Необходимо ввести группу",
               })}

@@ -46,6 +46,7 @@ const CreateDiscipline = () => {
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
             type="text"
             placeholder="Название..."
+            autoComplete="off"
             {...register("name", {
               required: "Необходимо ввести название дисциплины",
             })}
