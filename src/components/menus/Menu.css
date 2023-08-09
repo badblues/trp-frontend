@@ -6,8 +6,8 @@
 
 .menu-option {
   text-decoration: none;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   color: var(--text-color);
 }
 
@@ -18,3 +18,39 @@
 .menu-option:hover {
   cursor: pointer;
 }
+
+.sub-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-13px, 25px);
+  background-color: var(--background-secondary-color);
+  border: solid;
+  border-width: 1px;
+}
+
+.sub-menu.dark-mode {
+  background-color: var(--dark-mode-background-secondary-color);
+}
+.sub-menu-btn:hover {
+  cursor: pointer;
+}
+
+.sub-menu-option {
+  padding: 10px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.sub-menu-option.dark-mode {
+  color: var(--dark-mode-text-color);
+}
+
+.sub-menu-option:hover {
+  background-color: azure;
+}
+
+.sub-menu-option.dark-mode:hover {
+  background-color:darkslategrey;
+}
+
