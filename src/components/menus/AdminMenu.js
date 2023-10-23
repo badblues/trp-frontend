@@ -7,6 +7,7 @@ const AdminMenu = () => {
   const { darkMode } = useContext(UiContext);
 
   const [createOpen, setCreateOpen] = useState(false);
+  const [appointOpen, setAppointOpen] = useState(false);
 
   return (
     <div className="menu">
@@ -41,9 +42,25 @@ const AdminMenu = () => {
           </Link>
         </div>
       ) : null}
-      <label className={`menu-option ${darkMode ? "dark-mode" : ""}`}>
-        Опция 1
+      <label 
+        onClick={() => setAppointOpen(!appointOpen)}
+        className={`menu-option ${darkMode ? "dark-mode" : ""}`}
+      >
+        Назначить
       </label>
+      {appointOpen ? (
+        <div
+          onClick={() => setAppointOpen(!appointOpen)}
+          className={`sub-menu ${darkMode ? "dark-mode" : ""}`}
+        >
+          <Link
+            to="/assign-teacher"
+            className={`sub-menu-option ${darkMode ? "dark-mode" : ""}`}
+          >
+            Преподавателя
+          </Link>
+        </div>
+      ) : null}
       <label2 className={`menu-option ${darkMode ? "dark-mode" : ""}`}>
         Опция 2
       </label2>
