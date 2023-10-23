@@ -19,7 +19,7 @@ const Main = () => {
         <Route
           element={
             <RequireAuth
-              allowedRoles={[Roles.Admin, Roles.Professor, Roles.Student]}
+              allowedRoles={[Roles.Admin, Roles.Teacher, Roles.Student]}
             />
           }
         >

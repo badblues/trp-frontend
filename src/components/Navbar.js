@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Roles } from "../models/Roles";
 import DarkModeToggle from "./DarkModeToggle";
 import AdminMenu from "./menus/AdminMenu";
-import ProfessorMenu from "./menus/ProfessorMenu";
+import TeacherMenu from "./menus/TeacherMenu";
 import StudentMenu from "./menus/StudentMenu";
 
 const Navbar = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const menus = {
     [Roles.Admin]: AdminMenu,
-    [Roles.Professor]: ProfessorMenu,
+    [Roles.Teacher]: TeacherMenu,
     [Roles.Student]: StudentMenu,
   };
 

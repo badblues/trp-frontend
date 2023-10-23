@@ -2,8 +2,9 @@ import React from "react";
 import "./MainPage.css";
 import Disciplines from "../Disciplines";
 import Groups from "../Groups";
+import Tasks from "../Tasks";
 
-const ProfessorMainPage = () => {
+const TeacherMainPage = () => {
   return (
     <div className="main-page-container">
       <Disciplines className="disciplines" />
@@ -12,4 +13,4 @@ const ProfessorMainPage = () => {
   );
 };
 
-export default ProfessorMainPage;
+export default TeacherMainPage;

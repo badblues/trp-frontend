@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import AdminMainPage from "./AdminMainPage";
-import ProfessorMainPage from "./ProfessorMainPage";
+import TeacherMainPage from "./TeacherMainPage";
 import StudentMainPage from "./StudentMainPage";
 import { UserContext } from "../../contexts/UserContext";
 import { Roles } from "../../models/Roles";
@@ -10,7 +10,7 @@ const MainPage = () => {
 
   const pages = {
     [Roles.Admin]: AdminMainPage,
-    [Roles.Professor]: ProfessorMainPage,
+    [Roles.Teacher]: TeacherMainPage,
     [Roles.Student]: StudentMainPage,
   };
 

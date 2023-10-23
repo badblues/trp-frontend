@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Menu.css";
 import { UiContext } from "../../contexts/UiContext";
 
-const ProfessorMenu = () => {
+const TeacherMenu = () => {
   const { darkMode } = useContext(UiContext);
 
   return (
@@ -12,4 +12,4 @@ const ProfessorMenu = () => {
   );
 };
 
-export default ProfessorMenu;
+export default TeacherMenu;

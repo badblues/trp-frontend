@@ -48,7 +48,7 @@ const CreateUser = () => {
             {...register("role")}
           >
             <option value={Roles.Admin}>Админ</option>
-            <option value={Roles.Professor}>Преподаватель</option>
+            <option value={Roles.Teacher}>Преподаватель</option>
             <option value={Roles.Student}>Студент</option>
           </select>
         </div>
