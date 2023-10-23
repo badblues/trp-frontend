@@ -1,12 +1,10 @@
 import http from "axios";
 
-//TODO fix endpoints
-
 export class GroupApiService {
-  apiUrl = "http://212.20.47.147:8080";
+  apiUrl = "http://212.20.47.147:8080/api/v2/groups";
 
   async getGroups() {
-    let url = this.apiUrl + "/teacher/groups";
+    let url = this.apiUrl;
     try {
       const response = await http.get(url);
       return response.data.data;
@@ -14,7 +12,7 @@ export class GroupApiService {
   }
 
   async getGroup(id) {
-    let url = this.apiUrl + `/teacher/groups/${id}`;
+    let url = this.apiUrl + `/${id}`;
     try {
       const response = await http.get(url);
       return response.data.data;
@@ -22,7 +20,7 @@ export class GroupApiService {
   }
 
   async createGroup(group) {
-    let url = this.apiUrl + "/admin/groups";
+    let url = this.apiUrl;
     try {
       const response = await http.post(url, group);
       return response.data.data;
