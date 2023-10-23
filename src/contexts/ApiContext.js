@@ -4,6 +4,8 @@ import DisciplineApiService from "../services/DisciplineApiService";
 import GroupApiService from "../services/GroupApiService";
 import AppointmentApiService from "../services/AppointmentApiService";
 import TaskApiService from "../services/TaskApiService";
+import TeacherApiService from "../services/TeacherApiService";
+import StudentApiService from "../services/StudentApiService";
 
 export const ApiContext = createContext({});
 
@@ -16,6 +18,8 @@ export class ApiContextProvider extends Component {
       groupApiService: new GroupApiService(),
       appointmentApiService: new AppointmentApiService(),
       taskApiService: new TaskApiService(),
+      teacherApiService: new TeacherApiService(),
+      studentApiService: new StudentApiService(),
     };
   }
 
