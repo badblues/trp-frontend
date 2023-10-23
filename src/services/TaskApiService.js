@@ -1,6 +1,6 @@
 import http from "axios";
 
-export default class TasksApiService {
+export default class TaskApiService {
   apiUrl = "http://212.20.47.147:8080/api/v2/tasks";
 
   async getTasks() {

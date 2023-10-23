@@ -3,7 +3,7 @@ import UserApiService from "../services/UserApiService";
 import DisciplineApiService from "../services/DisciplineApiService";
 import GroupApiService from "../services/GroupApiService";
 import AppointmentApiService from "../services/AppointmentApiService";
-import TasksApiService from "../services/TasksApiService";
+import TaskApiService from "../services/TaskApiService";
 
 export const ApiContext = createContext({});
 
@@ -15,7 +15,7 @@ export class ApiContextProvider extends Component {
       disciplineApiService: new DisciplineApiService(),
       groupApiService: new GroupApiService(),
       appointmentApiService: new AppointmentApiService(),
-      tasksApiService: new TasksApiService(),
+      taskApiService: new TaskApiService(),
     };
   }
 

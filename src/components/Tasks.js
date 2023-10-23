@@ -10,11 +10,11 @@ const Tasks = () => {
   const [loading, setLoading] = useState(true);
 
   const { darkMode } = useContext(UiContext);
-  const { tasksApiService } = useContext(ApiContext);
+  const { taskApiService } = useContext(ApiContext);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await tasksApiService.getTasks();
+      const response = await taskApiService.getTasks();
       setTasks(response);
       setLoading(false);
     }
