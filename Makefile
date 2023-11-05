@@ -1,4 +1,4 @@
-all:run 
+all:build run 
 
 run:
 	docker compose up -d
