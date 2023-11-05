@@ -14,6 +14,10 @@ h2.dark-mode {
   color: var(--dark-mode-text-color)
 }
 
+.appointments-item {
+  margin: 5px 0px 5px 0px;
+}
+
 .appointments-list.dark-mode {
   color: var(--dark-mode-text-color)
 }

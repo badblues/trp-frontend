@@ -52,9 +52,11 @@ const TeacherPage = () => {
           className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
           key={appointment.id}
         >
-          <p>
-            {appointment.group.name} {appointment.discipline.name}
-          </p>
+          <div className="appointments-item">
+            <p>
+              {appointment.group.name} {appointment.discipline.name}
+            </p>
+          </div>
         </div>
       ))}
     </div>
