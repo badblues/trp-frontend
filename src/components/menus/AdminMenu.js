@@ -13,7 +13,10 @@ const AdminMenu = () => {
     <div className="menu">
       <label
         className={`sub-menu-btn menu-option ${darkMode ? "dark-mode" : ""}`}
-        onClick={() => setCreateOpen(!createOpen)}
+        onClick={() => {
+          setCreateOpen(!createOpen);
+          setAppointOpen(false);
+        }}
       >
         Создать
       </label>
@@ -43,7 +46,10 @@ const AdminMenu = () => {
         </div>
       ) : null}
       <label 
-        onClick={() => setAppointOpen(!appointOpen)}
+        onClick={() => {
+          setAppointOpen(!appointOpen);
+          setCreateOpen(false);
+        }}
         className={`menu-option ${darkMode ? "dark-mode" : ""}`}
       >
         Назначить
@@ -61,9 +67,9 @@ const AdminMenu = () => {
           </Link>
         </div>
       ) : null}
-      <label2 className={`menu-option ${darkMode ? "dark-mode" : ""}`}>
+      <label className={`menu-option ${darkMode ? "dark-mode" : ""}`}>
         Опция 2
-      </label2>
+      </label>
     </div>
   );
 };
