@@ -11,6 +11,7 @@ import CreateDiscipline from "./CreateDiscipline";
 import CreateGroup from "./CreateGroup";
 import AppointTeacher from "./AppointTeacher";
 import TeacherPage from "./pages/TeacherPage";
+import GroupPage from "./pages/GroupPage";
 
 const Main = () => {
   const { darkMode } = useContext(UiContext);
@@ -38,6 +39,16 @@ const Main = () => {
           <Route path="/teachers/:id" element={<TeacherPage />} exact />
         </Route>
 
+        <Route
+          element={
+            <RequireAuth
+              allowedRoles={[Roles.Admin, Roles.Teacher, Roles.Student]}
+            />
+          }
+        >
+          <Route path="/groups/:id" element={<GroupPage />} exact />
+        </Route>
+
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route path="/create-user" element={<CreateUser />} exact />
         </Route>
@@ -49,18 +60,10 @@ const Main = () => {
           />
         </Route>
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
-          <Route
-            path="/create-group"
-            element={<CreateGroup />}
-            exact
-          />
+          <Route path="/create-group" element={<CreateGroup />} exact />
         </Route>
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
-          <Route
-            path="/assign-teacher"
-            element={<AppointTeacher />}
-            exact
-          />
+          <Route path="/assign-teacher" element={<AppointTeacher />} exact />
         </Route>
         <Route element={<RequireAuth allowedRoles={[""]} />}>
           <Route path="/login" element={<Login />} />

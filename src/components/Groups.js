@@ -3,13 +3,14 @@ import Loader from "./Loader";
 import { UiContext } from "../contexts/UiContext";
 import { ApiContext } from "../contexts/ApiContext";
 import "./Groups.css";
+import { useNavigate } from "react-router-dom";
 
 const Groups = () => {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const { darkMode } = useContext(UiContext);
   const { groupApiService } = useContext(ApiContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,13 +36,14 @@ const Groups = () => {
         <label className={`groups-caption ${darkMode ? "dark-mode" : ""}`}>
           Группы:
         </label>
-        {groups.map((discipline) => (
+        {groups.map((group) => (
           <div
             className={`group-item ${darkMode ? "dark-mode" : ""}`}
-            key={discipline.id}
+            onClick={() => navigate(`/groups/${group.id}`)}
+            key={group.id}
           >
             <p>
-              {discipline.name} {discipline.year} {discipline.halfYear}
+              {group.name}
             </p>
           </div>
         ))}
