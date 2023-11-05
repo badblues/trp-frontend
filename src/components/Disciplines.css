@@ -14,6 +14,14 @@
   border-width: 1px;
 }
 
+.disciplines-caption {
+  margin: 0px 0px 10px 5px;
+}
+
+.disciplines-caption.dark-mode {
+  color: var(--dark-mode-text-color);
+}
+
 .discipline-item:hover {
   cursor: pointer;
   background-color: var(--primary-color);

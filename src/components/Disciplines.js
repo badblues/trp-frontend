@@ -20,11 +20,6 @@ const Disciplines = () => {
     fetchData();
   }, []);
 
-  const printDiscipline = async(id) => {
-    const discipline = await disciplineApiService.getDiscipline(id);
-    console.log(discipline);
-  }
-
   if (loading) {
     return (
       <div className="disciplines-container">
@@ -36,11 +31,13 @@ const Disciplines = () => {
   return (
     <>
       <div className="disciplines-container">
+        <label className={`disciplines-caption ${darkMode ? "dark-mode" : ""}`}>
+          Дисциплины:
+        </label>
         {disciplines.map((discipline) => (
           <div
             className={`discipline-item ${darkMode ? "dark-mode" : ""}`}
             key={discipline.id}
-            onClick={() => printDiscipline(discipline.id)}
           >
             <p>
               {discipline.name} {discipline.year} {discipline.halfYear}
