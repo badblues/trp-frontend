@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import AdminMainPage from "./AdminMainPage";
 import TeacherMainPage from "./TeacherMainPage";
 import StudentMainPage from "./StudentMainPage";
-import { UserContext } from "../../contexts/UserContext";
-import { Roles } from "../../models/Roles";
+import { UserContext } from "../../../contexts/UserContext";
+import { Roles } from "../../../models/Roles";
 
 const MainPage = () => {
   const { user } = useContext(UserContext);
