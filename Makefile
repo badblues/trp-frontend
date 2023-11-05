@@ -1,12 +1,14 @@
-#TODO: remove build if possible
-all:clean run 
+all:run 
 
 run:
-	docker-compose up --build -d
+	docker compose up -d
+
+build:
+	docker compose up --build -d
  
 clean:
 	rm -rf build/*
-	docker-compose down --volumes
+	docker compose down --volumes --remove-orphans
 
 down:
-	docker-compose down
+	docker compose down  
