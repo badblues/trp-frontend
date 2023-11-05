@@ -64,7 +64,7 @@ const AppointTeacher = () => {
           <select
             id="discipline"
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
-            {...register("discipline")}
+            {...register("disciplineId")}
           >
             {disciplines.map((discipline) => (
               <option
@@ -83,7 +83,7 @@ const AppointTeacher = () => {
           <select
             id="group"
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
-            {...register("group")}
+            {...register("groupId")}
           >
             {groups.map((group) => (
               <option
@@ -102,13 +102,13 @@ const AppointTeacher = () => {
           <select
             id="teacher"
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
-            {...register("teacher")}
+            {...register("teacherId")}
           >
             {teachers.map((teacher) => (
               <option
                 value={teacher.id}
               >
-                {teacher.username}
+                {teacher.fullName}
               </option>
             ))}
           </select>
