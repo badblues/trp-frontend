@@ -1,6 +1,8 @@
 .loader {
   max-height: 100px;
   min-height: 15px;
+  min-width: 15px;
+  max-width: 100px;
   height: 70%;
   aspect-ratio: 1/1;
   border: 2px solid var(--background-color);
