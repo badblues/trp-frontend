@@ -55,7 +55,7 @@ const GroupPage = () => {
         >
           <div className="appointments-item">
             <p>
-              {appointment.discipline.name} {appointment.teacher.fullName}
+              {appointment.discipline.name} {appointment.discipline.year} {appointment.discipline.halfYear} --- {appointment.teacher.fullName}
             </p>
           </div>
         </div>

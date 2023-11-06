@@ -7,8 +7,12 @@ import Tasks from "../../Tasks";
 const TeacherMainPage = () => {
   return (
     <div className="main-page-container">
-      <Disciplines className="disciplines" />
-      <Groups />
+      <div className="main-page-item">
+        <Disciplines/>
+      </div>
+      <div className="main-page-item">
+        <Groups/>
+      </div>
     </div>
   );
 };

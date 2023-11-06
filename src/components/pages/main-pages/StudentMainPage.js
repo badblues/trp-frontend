@@ -5,7 +5,9 @@ import "./MainPage.css";
 const StudentMainPage = () => {
   return (
     <div className="main-page-container">
-      <Disciplines className="disciplines"/>
+      <div className="main-page-item">
+        <Disciplines/>
+      </div>
     </div>
   );
 };

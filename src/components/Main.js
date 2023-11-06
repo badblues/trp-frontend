@@ -12,7 +12,7 @@ import CreateGroup from "./CreateGroup";
 import AppointTeacher from "./AppointTeacher";
 import TeacherPage from "./pages/TeacherPage";
 import GroupPage from "./pages/GroupPage";
-import DisciplinePage from "./pages/Disciplinepage";
+import DisciplinePage from "./pages/DisciplinePage";
 
 const Main = () => {
   const { darkMode } = useContext(UiContext);
