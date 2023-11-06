@@ -12,6 +12,7 @@ import CreateGroup from "./CreateGroup";
 import AppointTeacher from "./AppointTeacher";
 import TeacherPage from "./pages/TeacherPage";
 import GroupPage from "./pages/GroupPage";
+import DisciplinePage from "./pages/Disciplinepage";
 
 const Main = () => {
   const { darkMode } = useContext(UiContext);
@@ -37,6 +38,16 @@ const Main = () => {
           }
         >
           <Route path="/teachers/:id" element={<TeacherPage />} exact />
+        </Route>
+
+        <Route
+          element={
+            <RequireAuth
+              allowedRoles={[Roles.Admin, Roles.Teacher, Roles.Student]}
+            />
+          }
+        >
+          <Route path="/disciplines/:id" element={<DisciplinePage />} exact />
         </Route>
 
         <Route
