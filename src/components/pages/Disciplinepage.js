@@ -46,7 +46,7 @@ const DisciplinePage = () => {
 
   return (
     <div>
-      <h1 className={`${darkMode ? "dark-mode" : ""}`}> id = {id} {discipline.name} {discipline.year} {discipline.halfYear}</h1>
+      <h1 className={`${darkMode ? "dark-mode" : ""}`}>{discipline.name} {discipline.year} {discipline.halfYear}</h1>
       <h2 className={`${darkMode ? "dark-mode" : ""}`}>Группы:</h2>
       {appointments.map((appointment) => (
         <div
