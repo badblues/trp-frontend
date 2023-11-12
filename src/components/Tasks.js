@@ -4,18 +4,20 @@ import { UiContext } from '../contexts/UiContext';
 import { ApiContext } from "../contexts/ApiContext";
 import "./Tasks.css";
 
-const Tasks = () => {
+const Tasks = (params) => {
 
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const { darkMode } = useContext(UiContext);
   const { taskApiService } = useContext(ApiContext);
+  const { disciplineId } = params;
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await taskApiService.getTasks();
-      console.log(response);
-      setTasks(response);
+      const allTasks = await taskApiService.getTasks();
+      const filteredTasks = allTasks.filter(t => t.disciplineId == disciplineId);
+      console.log(filteredTasks);
+      setTasks(filteredTasks);
       setLoading(false);
     }
     fetchData();
@@ -37,7 +39,7 @@ const Tasks = () => {
           key={task.id}
         >
           <p>
-            {task.title} {task.description}
+            {task.title} - {task.description}
           </p>
         </div>
       ))}
