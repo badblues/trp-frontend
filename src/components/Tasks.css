@@ -1,0 +1,15 @@
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.task-item {
+  padding: 5px;
+}
+
+.task-item.dark-mode {
+  color: var(--dark-mode-text-color);
+}

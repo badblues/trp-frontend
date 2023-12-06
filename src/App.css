@@ -40,6 +40,10 @@
   align-items: center;
 }
 
+.button-usual {
+  padding: 10px 7px 10px 7px;
+}
+
 .button:hover {
   cursor: pointer;
 }
