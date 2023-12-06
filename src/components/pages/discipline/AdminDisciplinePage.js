@@ -1,31 +1,24 @@
 import React, { useContext, useState, useEffect } from "react";
-import Loader from "../Loader";
-import { useParams } from 'react-router-dom';
-import { UiContext } from "../../contexts/UiContext";
-import { ApiContext } from "../../contexts/ApiContext";
+import Loader from "../../Loader";
+import { UiContext } from "../../../contexts/UiContext";
+import { ApiContext } from "../../../contexts/ApiContext";
 import "./DisciplinePage.css";
-import Tasks from "../Tasks"
 
 
-const DisciplinePage = () => {
-  const { id } = useParams();
-  const [discipline, setDiscipline] = useState(null);
+const AdminDisciplinePage = ({ discipline }) => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const { teacherApiService,
           appointmentApiService,
-          groupApiService,
-          disciplineApiService } = useContext(ApiContext);
+          groupApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
 
   useEffect(() => {
     const fetchData = async () => {
-      const disciplienResponse = await disciplineApiService.getDiscipline(id);
       const appointmentsResponse = await appointmentApiService.getAppointments();
       const allTeachers = await teacherApiService.getTeachers();
       const allGroups = await groupApiService.getGroups();
-      setDiscipline(disciplienResponse);
-      const filteredAppointments = appointmentsResponse.filter(a => a.disciplineId == id);
+      const filteredAppointments = appointmentsResponse.filter(a => a.disciplineId == discipline.id);
       setAppointments(filteredAppointments);
       filteredAppointments.forEach(a => {
         a.teacher = allTeachers.find(t => t.id === a.teacherId);
@@ -60,10 +53,8 @@ const DisciplinePage = () => {
           </div>
         </div>
       ))}
-      <h2 className={`${darkMode ? "dark-mode" : ""}`}>Лабораторные работы:</h2>
-      <Tasks disciplineId={id}/>
     </div>
   );
 }
 
-export default DisciplinePage;
+export default AdminDisciplinePage;
