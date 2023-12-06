@@ -12,7 +12,7 @@ const CreateTask = () => {
   const { errors } = formState;
   const { taskApiService, disciplineApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +42,15 @@ const CreateTask = () => {
       setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div>
+        <Loader/>
+      </div>
+    );
+  }
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
