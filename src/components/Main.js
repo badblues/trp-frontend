@@ -6,13 +6,14 @@ import RequireAuth from "../guards/RequireAuth";
 import { Roles } from "../models/Roles";
 import { UiContext } from "../contexts/UiContext";
 import "./Main.css";
-import MainPage from "./pages/main-pages/MainPage";
+import MainPage from "./pages/main/MainPage";
 import CreateDiscipline from "./CreateDiscipline";
 import CreateGroup from "./CreateGroup";
+import CreateTask from "./CreateTask";
 import AppointTeacher from "./AppointTeacher";
 import TeacherPage from "./pages/TeacherPage";
 import GroupPage from "./pages/GroupPage";
-import DisciplinePage from "./pages/DisciplinePage";
+import DisciplinePage from "./pages/discipline/DisciplinePage";
 
 const Main = () => {
   const { darkMode } = useContext(UiContext);
@@ -60,6 +61,8 @@ const Main = () => {
           <Route path="/groups/:id" element={<GroupPage />} exact />
         </Route>
 
+
+
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route path="/create-user" element={<CreateUser />} exact />
         </Route>
@@ -75,6 +78,9 @@ const Main = () => {
         </Route>
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route path="/assign-teacher" element={<AppointTeacher />} exact />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={[Roles.Teacher]} />}>
+          <Route path="/disciplines/:disciplineId/create-task" element={<CreateTask />} exact />
         </Route>
         <Route element={<RequireAuth allowedRoles={[""]} />}>
           <Route path="/login" element={<Login />} />
