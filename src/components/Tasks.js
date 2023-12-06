@@ -4,13 +4,12 @@ import { UiContext } from '../contexts/UiContext';
 import { ApiContext } from "../contexts/ApiContext";
 import "./Tasks.css";
 
-const Tasks = (params) => {
+const Tasks = ({ disciplineId }) => {
 
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const { darkMode } = useContext(UiContext);
   const { taskApiService } = useContext(ApiContext);
-  const { disciplineId } = params;
 
   useEffect(() => {
     const fetchData = async () => {
