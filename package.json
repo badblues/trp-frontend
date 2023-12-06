@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "-": "^0.0.1",
+    "@codemirror/lang-java": "^6.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@uiw/codemirror-theme-dracula": "^4.21.21",
+    "@uiw/react-codemirror": "^4.21.21",
     "axios": "^1.4.0",
     "core-js": "^3.31.1",
     "g": "^2.0.1",

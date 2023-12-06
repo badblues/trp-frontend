@@ -29,6 +29,11 @@ const TeacherDisciplinePage = ({ discipline }) => {
     fetchData();
   }, []);
 
+  const navigateToTask = (task) => {
+    navigate(`/tasks/${task.id}`)
+  }
+
+
   if (loading) {
     return (
       <div className="disciplines-container">
@@ -54,7 +59,7 @@ const TeacherDisciplinePage = ({ discipline }) => {
         </div>
       ))}
       <h2 className={`${darkMode ? "dark-mode" : ""}`}>Лабораторные работы:</h2>
-      <Tasks disciplineId={discipline.id}/>
+      <Tasks disciplineId={discipline.id} onSelect={navigateToTask}/>
       <button className={`button button-usual ${darkMode ? "dark-mode" : ""}`} onClick={() => {navigate(`/disciplines/${discipline.id}/create-task`)}}>Добавить работу</button>
     </div>
   );

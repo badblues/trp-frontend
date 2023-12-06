@@ -43,4 +43,20 @@ export default class TaskApiService {
     } catch (error) {}
   }
 
+  async postSolution(taskId, solution) {
+    let url = this.apiUrl + `/${taskId}/solution`;
+    try {
+      const response = await http.post(url, solution);
+      return response.data.data;
+    } catch (error) {}
+  }
+
+  async getSolution(taskId) {
+    let url = this.apiUrl + `/${taskId}/solution`;
+    try {
+      const response = await http.get(url);
+      return response.data.data;
+    } catch (error) {}
+  }
+
 }

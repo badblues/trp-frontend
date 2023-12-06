@@ -4,7 +4,7 @@ import { UiContext } from '../contexts/UiContext';
 import { ApiContext } from "../contexts/ApiContext";
 import "./Tasks.css";
 
-const Tasks = ({ disciplineId }) => {
+const Tasks = ({ disciplineId, onSelect }) => {
 
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,6 @@ const Tasks = ({ disciplineId }) => {
     const fetchData = async () => {
       const allTasks = await taskApiService.getTasks();
       const filteredTasks = allTasks.filter(t => t.disciplineId == disciplineId);
-      console.log(filteredTasks);
       setTasks(filteredTasks);
       setLoading(false);
     }
@@ -34,6 +33,7 @@ const Tasks = ({ disciplineId }) => {
     <div className="tasks-container">
       {tasks.map((task) => (
         <div
+          onClick={() => {onSelect(task)}}
           className={`task-item ${darkMode ? "dark-mode" : ""}`}
           key={task.id}
         >
