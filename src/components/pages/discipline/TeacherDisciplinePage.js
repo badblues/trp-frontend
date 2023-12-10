@@ -29,10 +29,6 @@ const TeacherDisciplinePage = ({ discipline }) => {
     fetchData();
   }, []);
 
-  const navigateToTask = (task) => {
-    navigate(`/tasks/${task.id}`)
-  }
-
 
   if (loading) {
     return (
@@ -48,7 +44,7 @@ const TeacherDisciplinePage = ({ discipline }) => {
         <h1 className={` ${darkMode ? "dark-mode" : ""}`}>{discipline.name} {discipline.year} {discipline.halfYear}</h1>
         <h2 className={` ${darkMode ? "dark-mode" : ""}`}>{`Полугодие: ${discipline.halfYear == 'FIRST' ? "Первое" : "Второе"}`}</h2>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Лабораторные работы:</h2>
-        <Tasks disciplineId={discipline.id} onSelect={navigateToTask}/>
+        <Tasks disciplineId={discipline.id} onSelect={(task) => {navigate(`/tasks/${task.id}`)}}/>
         <button className={`button button-usual ${darkMode ? "dark-mode" : ""}`} onClick={() => {navigate(`/disciplines/${discipline.id}/create-task`)}}>Добавить работу</button>
       </div>
       <div>
@@ -58,9 +54,11 @@ const TeacherDisciplinePage = ({ discipline }) => {
             className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
             key={appointment.id}
           >
-            <div className="appointments-item">
+            <h4
+              onClick={() => {navigate(`/groups/${appointment.group.id}`)}}
+              className="appointments-item clickable">
               {appointment.group.name}
-            </div>
+            </h4>
           </div>
         ))}
       </div>
