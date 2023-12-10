@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Roles } from "../models/Roles";
 import { ApiContext } from "../contexts/ApiContext";
@@ -9,9 +9,20 @@ const CreateUser = () => {
   const { register, handleSubmit, formState, watch } = useForm();
   const { errors } = formState;
   const selectedRole = watch("role");
-  const { userApiService } = useContext(ApiContext);
+  const { groupApiService, userApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
+  const [groups, setGroups] = useState([]);
+  const [groupsLoading, setGroupsLoading] = useState(true);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const groups = await groupApiService.getGroups();
+      setGroups(groups);
+      setGroupsLoading(false);
+    };
+    fetchData();
+  }, []);
 
   const onSubmit = async (data) => {
     let user = {
@@ -20,7 +31,7 @@ const CreateUser = () => {
       password: data.password,
     };
     if (data.role === Roles.Student) {
-      user.studyGroup = data.group;
+      user.groupId = data.groupId;
     }
     setLoading(true);
     try {
@@ -33,6 +44,14 @@ const CreateUser = () => {
       setLoading(false);
     }
   };
+
+  if (groupsLoading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -71,6 +90,7 @@ const CreateUser = () => {
             {errors.username?.message}
           </label>
         </div>
+
         <div className="form-input-container">
           <label className="form-label" htmlFor="password">
             Пароль:
@@ -89,6 +109,7 @@ const CreateUser = () => {
             {errors.password?.message}
           </label>
         </div>
+
         <div className="form-input-container">
           <label className="form-label" htmlFor="fullName">
             ФИО:
@@ -111,21 +132,23 @@ const CreateUser = () => {
             <label className="form-label" htmlFor="group">
               Группа:
             </label>
-            <input
+            <select
               id="group"
               className={`form-input ${darkMode ? "dark-mode" : ""}`}
-              type="text"
-              placeholder="Группа..."
-              autoComplete="off"
-              {...register("group", {
-                required: "Необходимо ввести группу",
-              })}
-            />
-            <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
-              {errors.group?.message}
-            </label>
+              {...register("groupId")}
+            >
+              {groups.map((group) => (
+                <option
+                  key={group.id}
+                  value={group.id}>
+                  {group.name}
+                </option>
+              ))}
+            </select>
           </div>
         )}
+
+
 
         <button disabled={loading} className="button form-button" type="submit">
           {loading ? <Loader/> : "Создать пользователя"}
