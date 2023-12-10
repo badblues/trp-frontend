@@ -68,6 +68,7 @@ const AppointTeacher = () => {
           >
             {disciplines.map((discipline) => (
               <option
+                key={discipline.id}
                 value={discipline.id}
               >
                 {discipline.name} {discipline.year} {discipline.halfYear}
@@ -87,6 +88,7 @@ const AppointTeacher = () => {
           >
             {groups.map((group) => (
               <option
+                key={group.id}
                 value={group.id}
               >
                 {group.name}
@@ -106,6 +108,7 @@ const AppointTeacher = () => {
           >
             {teachers.map((teacher) => (
               <option
+                key={teacher.id}
                 value={teacher.id}
               >
                 {teacher.fullName}
