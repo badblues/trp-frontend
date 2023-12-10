@@ -51,6 +51,12 @@
   padding-right: 10px;
 }
 
+.mini-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .username {
   font-size: large;
 }
