@@ -2,7 +2,6 @@ import React from "react";
 import Disciplines from "../../Disciplines";
 import Groups from "../../Groups";
 import Teachers from "../../Teachers";
-import Students from "../../Students";
 import "./MainPage.css";
 
 const AdminMainPage = () => {
@@ -16,9 +15,6 @@ const AdminMainPage = () => {
       </div>
       <div className="main-page-item">
         <Teachers/>
-      </div>
-      <div className="main-page-item">
-        <Students/>
       </div>
     </div>
   );
