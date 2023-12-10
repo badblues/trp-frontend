@@ -12,7 +12,7 @@ import CreateGroup from "./CreateGroup";
 import CreateTask from "./CreateTask";
 import AppointTeacher from "./AppointTeacher";
 import TeacherPage from "./pages/TeacherPage";
-import GroupPage from "./pages/GroupPage";
+import GroupPage from "./pages/group/GroupPage";
 import DisciplinePage from "./pages/discipline/DisciplinePage";
 import TaskPage from "./pages/task/TaskPage";
 
@@ -35,7 +35,7 @@ const Main = () => {
         <Route
           element={
             <RequireAuth
-              allowedRoles={[Roles.Admin, Roles.Teacher, Roles.Student]}
+              allowedRoles={[Roles.Admin]}
             />
           }
         >
@@ -45,7 +45,7 @@ const Main = () => {
         <Route
           element={
             <RequireAuth
-              allowedRoles={[Roles.Admin, Roles.Teacher, Roles.Student]}
+              allowedRoles={[Roles.Admin, Roles.Teacher]}
             />
           }
         >
@@ -75,6 +75,7 @@ const Main = () => {
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route path="/create-user" element={<CreateUser />} exact />
         </Route>
+        
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route
             path="/create-discipline"
@@ -82,15 +83,19 @@ const Main = () => {
             exact
           />
         </Route>
+
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route path="/create-group" element={<CreateGroup />} exact />
         </Route>
+
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route path="/assign-teacher" element={<AppointTeacher />} exact />
         </Route>
+
         <Route element={<RequireAuth allowedRoles={[Roles.Teacher]} />}>
           <Route path="/disciplines/:disciplineId/create-task" element={<CreateTask />} exact />
         </Route>
+
         <Route element={<RequireAuth allowedRoles={[""]} />}>
           <Route path="/login" element={<Login />} />
         </Route>
