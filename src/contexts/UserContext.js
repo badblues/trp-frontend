@@ -59,6 +59,7 @@ export class UserContextProvider extends Component {
   loadUser = () => {
     const user = {
       loggedIn: false,
+      id: 0,
       username: "",
       fullName: "",
       role: "",
@@ -67,6 +68,7 @@ export class UserContextProvider extends Component {
     if (data != null) {
       const userInfo = JSON.parse(data);
       user.loggedIn = true;
+      user.id = userInfo.id;
       user.username = userInfo.username;
       user.fullName = userInfo.fullName;
       user.role = userInfo.role;
