@@ -13,9 +13,11 @@ const StudentDisciplinePage = ({ discipline }) => {
   }
 
   return (
-    <div>
-      <h2 className={`${darkMode ? "dark-mode" : ""}`}>Лабораторные работы:</h2>
-      <Tasks disciplineId={discipline.id} onSelect={navigateToTask}/>
+    <div className="page-container">
+      <div>
+        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Лабораторные работы:</h2>
+        <Tasks disciplineId={discipline.id} onSelect={navigateToTask}/>
+      </div>
     </div>
   );
 }

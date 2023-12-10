@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import Loader from "../Loader";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { UiContext } from "../../contexts/UiContext";
 import { ApiContext } from "../../contexts/ApiContext";
 import "./GroupPage.css";
@@ -10,6 +10,7 @@ const GroupPage = () => {
   const { id } = useParams();
   const [group, setGroup] = useState(null);
   const [appointments, setAppointments] = useState([]);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { teacherApiService,
           appointmentApiService,
@@ -45,22 +46,23 @@ const GroupPage = () => {
   }
 
   return (
-    <div>
+    <div className="page-container">
+      <div>
       <h1 className={`${darkMode ? "dark-mode" : ""}`}>{group.name}</h1>
-      <h2 className={`${darkMode ? "dark-mode" : ""}`}>Текущие дисциплины:</h2>
-      {appointments.map((appointment) => (
-        <div
-          className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
-          key={appointment.id}
-        >
-          <div className="appointments-item">
-            <p>
-              {appointment.discipline.name} {appointment.discipline.year} {appointment.discipline.halfYear} --- {appointment.teacher.fullName}
-            </p>
+        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Текущие дисциплины:</h2>
+        {appointments.map((appointment) => (
+          <div
+            className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
+            key={appointment.id}
+          >
+            <div className="appointments-item">
+              <h4 className="clickable" onClick={() => {navigate(`/disciplines/${appointment.discipline.id}`)}}>{`${appointment.discipline.name} ${appointment.discipline.year}`}</h4>
+              <label className="clickable" onClick={() => {navigate(`/teachers/${appointment.teacher.id}`)}}>{`${appointment.teacher.fullName}`}</label>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+      </div>
   );
 }
 

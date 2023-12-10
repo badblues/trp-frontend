@@ -43,24 +43,27 @@ const TeacherDisciplinePage = ({ discipline }) => {
   }
 
   return (
-    <div>
-      <h1 className={`${darkMode ? "dark-mode" : ""}`}>{discipline.name} {discipline.year} {discipline.halfYear}</h1>
-      <h2 className={`${darkMode ? "dark-mode" : ""}`}>Группы с этим предметом:</h2>
-      {appointments.map((appointment) => (
-        <div
-          className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
-          key={appointment.id}
-        >
-          <div className="appointments-item">
-            <p>
+    <div className="page-container">
+      <div>
+        <h1 className={` ${darkMode ? "dark-mode" : ""}`}>{discipline.name} {discipline.year} {discipline.halfYear}</h1>
+        <h2 className={` ${darkMode ? "dark-mode" : ""}`}>{`Полугодие: ${discipline.halfYear == 'FIRST' ? "Первое" : "Второе"}`}</h2>
+        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Лабораторные работы:</h2>
+        <Tasks disciplineId={discipline.id} onSelect={navigateToTask}/>
+        <button className={`button button-usual ${darkMode ? "dark-mode" : ""}`} onClick={() => {navigate(`/disciplines/${discipline.id}/create-task`)}}>Добавить работу</button>
+      </div>
+      <div>
+      <h2 className={` ${darkMode ? "dark-mode" : ""}`}>Группы с этим предметом:</h2>
+        {appointments.map((appointment) => (
+          <div
+            className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
+            key={appointment.id}
+          >
+            <div className="appointments-item">
               {appointment.group.name}
-            </p>
+            </div>
           </div>
-        </div>
-      ))}
-      <h2 className={`${darkMode ? "dark-mode" : ""}`}>Лабораторные работы:</h2>
-      <Tasks disciplineId={discipline.id} onSelect={navigateToTask}/>
-      <button className={`button button-usual ${darkMode ? "dark-mode" : ""}`} onClick={() => {navigate(`/disciplines/${discipline.id}/create-task`)}}>Добавить работу</button>
+        ))}
+      </div>
     </div>
   );
 }

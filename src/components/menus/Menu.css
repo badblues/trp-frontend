@@ -23,11 +23,19 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  transform: translate(-13px, 25px);
   background-color: var(--background-secondary-color);
   border: solid;
   border-width: 1px;
 }
+
+.sub-menu.move5 {
+  transform: translate(5px, 25px);
+}
+
+.sub-menu.move90 {
+  transform: translate(90px, 25px);
+}
+
 
 .sub-menu.dark-mode {
   background-color: var(--dark-mode-background-secondary-color);
@@ -47,10 +55,10 @@
 }
 
 .sub-menu-option:hover {
-  background-color: azure;
+  background-color: red;
 }
 
 .sub-menu-option.dark-mode:hover {
-  background-color:darkslategrey;
+  background-color:red;
 }
 

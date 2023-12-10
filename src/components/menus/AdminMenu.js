@@ -23,7 +23,7 @@ const AdminMenu = () => {
       {createOpen ? (
         <div
           onClick={() => setCreateOpen(!createOpen)}
-          className={`sub-menu ${darkMode ? "dark-mode" : ""}`}
+          className={`sub-menu move5 ${darkMode ? "dark-mode" : ""}`}
         >
           <Link
             to="/create-user"
@@ -57,7 +57,7 @@ const AdminMenu = () => {
       {appointOpen ? (
         <div
           onClick={() => setAppointOpen(!appointOpen)}
-          className={`sub-menu ${darkMode ? "dark-mode" : ""}`}
+          className={`sub-menu move90 ${darkMode ? "dark-mode" : ""}`}
         >
           <Link
             to="/assign-teacher"
@@ -67,9 +67,6 @@ const AdminMenu = () => {
           </Link>
         </div>
       ) : null}
-      <label className={`menu-option ${darkMode ? "dark-mode" : ""}`}>
-        Опция 2
-      </label>
     </div>
   );
 };

@@ -42,7 +42,7 @@ const Disciplines = () => {
             key={discipline.id}
           >
             <p>
-              {discipline.name} {discipline.year} {discipline.halfYear}
+              {discipline.name} {discipline.year}
             </p>
           </div>
         ))}

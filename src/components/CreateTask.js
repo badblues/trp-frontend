@@ -56,8 +56,8 @@ const CreateTask = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
         <p className="form-name">СОЗДАНИЕ ЗАДАНИЯ</p>
-        <p className="form-name">{discipline.name} {discipline.year} {discipline.halfYear}</p>
-        
+        <p className="form-name">{discipline.name} {discipline.year}</p>
+      
         <div className="form-input-container">
           <label className="form-label" htmlFor="title">
             Название:
