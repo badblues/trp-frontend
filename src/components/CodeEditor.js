@@ -4,8 +4,8 @@ import { java } from "@codemirror/lang-java";
 
 import { dracula } from '@uiw/codemirror-theme-dracula';
 
-const CodeEditor = ({ onSave }) => {
-  const [code, setCode] = useState('');
+const CodeEditor = ({ solutionCode, onSave }) => {
+  const [code, setCode] = useState(solutionCode);
 
   const handleChange = useCallback((val, viewUpdate) => {
     setCode(val);

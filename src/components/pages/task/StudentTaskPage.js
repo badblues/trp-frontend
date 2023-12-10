@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { UiContext } from '../../../contexts/UiContext';
 import { ApiContext } from "../../../contexts/ApiContext";
 import CodeEditor from '../../CodeEditor';
+import Loader from '../../Loader';
 import "./Task.css";
 
 const StudentTaskPage = ({ task }) => {
@@ -13,9 +14,9 @@ const StudentTaskPage = ({ task }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const loadedCode = taskApiService.getSolution(task.id);
-      console.log(loadedCode);
-      setCode(loadedCode);
+      const loadedCode = await taskApiService.getSolution(task.id);
+      console.log(loadedCode.code);
+      setCode(loadedCode.code);
       setLoading(false);
     }
     fetchData();
@@ -25,7 +26,15 @@ const StudentTaskPage = ({ task }) => {
     const code = {
       code: solutionCode
     }
-    console.log(code);
+    taskApiService.postSolution(task.id, code);
+  }
+
+  if (loading) {
+    return (
+      <div className="groups-container">
+        <Loader />
+      </div>
+    );
   }
 
   return (
