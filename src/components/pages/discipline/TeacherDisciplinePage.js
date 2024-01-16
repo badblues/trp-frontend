@@ -10,20 +10,15 @@ import { useNavigate } from "react-router-dom";
 const TeacherDisciplinePage = ({ discipline }) => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { appointmentApiService,
-          groupApiService } = useContext(ApiContext);
+  const { appointmentApiService } = useContext(ApiContext);
   const navigate = useNavigate();
   const { darkMode } = useContext(UiContext);
 
   useEffect(() => {
     const fetchData = async () => {
       const appointmentsResponse = await appointmentApiService.getAppointments();
-      const allGroups = await groupApiService.getGroups();
-      const filteredAppointments = appointmentsResponse.filter(a => a.disciplineId == discipline.id);
+      const filteredAppointments = appointmentsResponse.filter(a => a.discipline.id == discipline.id);
       setAppointments(filteredAppointments);
-      filteredAppointments.forEach(a => {
-        a.group = allGroups.find(g => g.id === a.groupId);
-      });
       setLoading(false);
     };
     fetchData();

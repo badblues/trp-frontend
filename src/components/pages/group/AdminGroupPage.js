@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import Loader from "../../Loader";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import "./GroupPage.css";
@@ -12,23 +12,15 @@ const AdminGroupPage = ({ group }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { studentApiService,
-          teacherApiService,
-          appointmentApiService,
-          disciplineApiService } = useContext(ApiContext);
+          appointmentApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
 
   useEffect(() => {
     const fetchData = async () => {
       const appointmentsResponse = await appointmentApiService.getAppointments();
       const allStudents = await studentApiService.getStudents();
-      const allDisciplines = await disciplineApiService.getDisciplines();
-      const allTeachers = await teacherApiService.getTeachers();
-      const filteredAppointments = appointmentsResponse.filter(a => a.groupId === group.id);
+      const filteredAppointments = appointmentsResponse.filter(a => a.group.id === group.id);
       setAppointments(filteredAppointments);
-      filteredAppointments.forEach(a => {
-        a.discipline = allDisciplines.find(d => d.id === a.disciplineId);
-        a.teacher = allTeachers.find(g => g.id === a.teacherId);
-      });
       const filteredStudents = allStudents.filter(s => s.group.id === group.id);
       setStudents(filteredStudents);
       setLoading(false);

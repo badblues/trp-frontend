@@ -10,22 +10,14 @@ const AdminDisciplinePage = ({ discipline }) => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
-  const { teacherApiService,
-          appointmentApiService,
-          groupApiService } = useContext(ApiContext);
+  const { appointmentApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
 
   useEffect(() => {
     const fetchData = async () => {
       const appointmentsResponse = await appointmentApiService.getAppointments();
-      const allTeachers = await teacherApiService.getTeachers();
-      const allGroups = await groupApiService.getGroups();
-      const filteredAppointments = appointmentsResponse.filter(a => a.disciplineId == discipline.id);
+      const filteredAppointments = appointmentsResponse.filter(a => a.discipline.id == discipline.id);
       setAppointments(filteredAppointments);
-      filteredAppointments.forEach(a => {
-        a.teacher = allTeachers.find(t => t.id === a.teacherId);
-        a.group = allGroups.find(g => g.id === a.groupId);
-      });
       setLoading(false);
     };
     fetchData();

@@ -13,24 +13,16 @@ const TeacherPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { teacherApiService,
-          appointmentApiService,
-          groupApiService,
-          disciplineApiService } = useContext(ApiContext);
+          appointmentApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
 
   useEffect(() => {
     const fetchData = async () => {
       const teacherResponse = await teacherApiService.getTeacher(id);
       const appointmentsResponse = await appointmentApiService.getAppointments();
-      const allDisciplines = await disciplineApiService.getDisciplines();
-      const allGroups = await groupApiService.getGroups();
       setTeacher(teacherResponse);
-      const filteredAppointments = appointmentsResponse.filter(a => a.teacherId == id);
+      const filteredAppointments = appointmentsResponse.filter(a => a.teacher.id == id);
       setAppointments(filteredAppointments);
-      filteredAppointments.forEach(a => {
-        a.discipline = allDisciplines.find(d => d.id === a.disciplineId);
-        a.group = allGroups.find(g => g.id === a.groupId);
-      });
       setLoading(false);
     };
     fetchData();

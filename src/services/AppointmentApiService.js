@@ -4,7 +4,7 @@ export class AppointmentApiService {
   apiUrl = "http://212.20.47.147:8080/api/v2/teacher-appointments";
 
   async getAppointments() {
-    let url = this.apiUrl;
+    let url = this.apiUrl + `/all`;
     try {
       const response = await http.get(url);
       return response.data.data;
