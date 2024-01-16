@@ -17,7 +17,6 @@ const CreateGroup = () => {
     };
     setLoading(true);
     try {
-      console.log(group);
       await groupApiService
         .createGroup(group)
         .then((response) => alert(`Success, ${response.name} created`));

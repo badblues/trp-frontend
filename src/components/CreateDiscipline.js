@@ -20,7 +20,6 @@ const CreateDiscipline = () => {
     };
     setLoading(true);
     try {
-      console.log(discipline);
       await disciplineApiService
         .createDiscipline(discipline)
         .then((response) => alert(`Success, ${response.name} created`));
