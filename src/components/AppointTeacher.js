@@ -5,8 +5,8 @@ import { UiContext } from "../contexts/UiContext";
 import Loader from "./Loader";
 
 const AppointTeacher = () => {
-  const { register, handleSubmit, formState } = useForm();
-  const { appointmentApiService, disciplineApiService, groupApiService, teacherApiService  } = useContext(ApiContext);
+  const { register, handleSubmit } = useForm();
+  const { teacherAppointmentApiService, disciplineApiService, groupApiService, teacherApiService  } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
 
   const [disciplines, setDisciplines] = useState([]);
@@ -36,7 +36,7 @@ const AppointTeacher = () => {
     setLoading(true);
     try {
       console.log(appointment);
-      await appointmentApiService
+      await teacherAppointmentApiService
         .createAppointment(appointment)
         .then(() => alert(`Success, appointment created`));
     } catch (error) {

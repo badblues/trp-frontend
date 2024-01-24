@@ -13,15 +13,15 @@ const TeacherPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { teacherApiService,
-          appointmentApiService } = useContext(ApiContext);
+          teacherAppointmentApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
 
   useEffect(() => {
     const fetchData = async () => {
       const teacherResponse = await teacherApiService.getTeacher(id);
-      const appointmentsResponse = await appointmentApiService.getAppointments();
+      const teacherAppointmentsResponse = await teacherAppointmentApiService.getAppointments();
       setTeacher(teacherResponse);
-      const filteredAppointments = appointmentsResponse.filter(a => a.teacher.id == id);
+      const filteredAppointments = teacherAppointmentsResponse.filter(a => a.teacher.id == id);
       setAppointments(filteredAppointments);
       setLoading(false);
     };
@@ -52,7 +52,7 @@ const TeacherPage = () => {
               <h4 className="clickable" onClick={() => {navigate(`/groups/${appointment.group.id}`)}}>
                 {appointment.group.name}
               </h4>
-              <label className="clickable" onClick={() => {navigate(`/groups/${appointment.discipline.id}`)}}>
+              <label className="clickable" onClick={() => {navigate(`/disciplines/${appointment.discipline.id}`)}}>
                 {appointment.discipline.name} {appointment.discipline.year}
               </label>
             </div>
