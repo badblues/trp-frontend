@@ -12,6 +12,15 @@
   --dark-mode-background-secondary-color: #2e2e2e;
   --primary-color: #ff3c3c;
   --secondary-color: #3cff53;
+  --status-color-not-appointed: grey;
+  --status-color-appointed: white;
+  --dark-mode-status-color-not-appointed: grey;
+  --dark-mode-status-color-appointed: white;
+  --status-color-not-appointed: grey;
+  --status-color-appointed: black;
+  --status-color-in-progress: red;
+  --status-color-finished: orange;
+  --status-color-done: green;
   --text-color: #0e0e0e;
   --dark-mode-text-color: #f1f1f1;
 
@@ -140,4 +149,33 @@ form {
 .form-button {
   width: 80%;
   height: 40px;
+}
+
+
+.status-not-appointed {
+  color: var(--status-color-not-appointed)
+}
+
+.status-not-appointed.dark-mode {
+  color: var(--dark-mode-status-color-not-appointed)
+}
+
+.status-appointed {
+  color: var(--status-color-appointed)
+}
+
+.status-appointed.dark-mode {
+  color: var(--dark-mode-status-color-appointed)
+}
+
+.status-in-progress {
+  color: var(--status-color-in-progress)
+}
+
+.status-finished {
+  color: var(--status-color-finished)
+}
+
+.status-done {
+  color: var(--status-color-done)
 }
