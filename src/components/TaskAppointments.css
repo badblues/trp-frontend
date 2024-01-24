@@ -1,0 +1,10 @@
+.task-appointments-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.task-appointements-item {
+  margin: 5px;
+  cursor: pointer;
+}
+
