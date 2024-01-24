@@ -1,6 +1,6 @@
 import http from "axios";
 
-export class AppointmentApiService {
+export class TeacherAppointmentApiService {
   apiUrl = "http://212.20.47.147:8080/api/v2/teacher-appointments";
 
   async getAppointments() {
@@ -44,4 +44,4 @@ export class AppointmentApiService {
   }
 }
 
-export default AppointmentApiService;
+export default TeacherAppointmentApiService;
