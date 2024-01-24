@@ -13,9 +13,8 @@ const Tasks = ({ disciplineId, onSelect }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const allTasks = await taskApiService.getTasks();
-      const filteredTasks = allTasks.filter(t => t.disciplineId == disciplineId);
-      setTasks(filteredTasks);
+      const tasksResponse = await taskApiService.getTasksByDiscipline(disciplineId);
+      setTasks(tasksResponse);
       setLoading(false);
     }
     fetchData();
