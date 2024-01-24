@@ -2,6 +2,7 @@ import http from "axios";
 
 export default class TaskApiService {
   apiUrl = "http://212.20.47.147:8080/api/v2/tasks";
+  disciplineApiUrl = "http://212.20.47.147:8080/api/v2/disciplines";
 
   async getTasks() {
     let url = this.apiUrl;
@@ -13,6 +14,14 @@ export default class TaskApiService {
 
   async getTask(id) {
     let url = this.apiUrl + `/${id}`;
+    try {
+      const response = await http.get(url);
+      return response.data.data;
+    } catch (error) {}
+  }
+
+  async getTasksByDiscipline(id){
+    let url = this.disciplineApiUrl + `/${id}/tasks`;
     try {
       const response = await http.get(url);
       return response.data.data;
