@@ -66,7 +66,7 @@ const Login = () => {
             <button
               type="button"
               onClick={() => {setShowPassword(!showPassword)}}
-              className="button" 
+              className="button show-password-button" 
             >
               {`${showPassword ? "Скрыть пароль" : "Показать пароль"}`}
             </button>

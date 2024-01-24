@@ -3,3 +3,7 @@ form {
   justify-content: center;
 }
 
+.show-password-button {
+  padding: 2px;
+  align-self: flex-start;
+}
