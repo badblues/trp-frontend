@@ -15,7 +15,8 @@ const StudentTaskPage = ({ task }) => {
   useEffect(() => {
     const fetchData = async () => {
       const loadedCode = await taskApiService.getSolution(task.id);
-      setCode(loadedCode.code);
+      if (loadedCode != null)
+        setCode(loadedCode.code);
       setLoading(false);
     }
     fetchData();

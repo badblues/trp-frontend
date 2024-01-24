@@ -10,9 +10,7 @@ const TeacherMainPage = () => {
       <div className="main-page-item">
         <Disciplines/>
       </div>
-      <div className="main-page-item">
-        <Groups/>
-      </div>
+
     </div>
   );
 };
