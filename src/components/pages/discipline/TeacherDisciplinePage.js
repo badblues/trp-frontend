@@ -10,14 +10,14 @@ import { useNavigate } from "react-router-dom";
 const TeacherDisciplinePage = ({ discipline }) => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { appointmentApiService } = useContext(ApiContext);
+  const { teacherAppointmentApiService } = useContext(ApiContext);
   const navigate = useNavigate();
   const { darkMode } = useContext(UiContext);
 
   useEffect(() => {
     const fetchData = async () => {
-      const appointmentsResponse = await appointmentApiService.getAppointments();
-      const filteredAppointments = appointmentsResponse.filter(a => a.discipline.id == discipline.id);
+      const teacherAppointmentsResponse = await teacherAppointmentApiService.getAppointments();
+      const filteredAppointments = teacherAppointmentsResponse.filter(a => a.discipline.id == discipline.id);
       setAppointments(filteredAppointments);
       setLoading(false);
     };
@@ -36,7 +36,7 @@ const TeacherDisciplinePage = ({ discipline }) => {
   return (
     <div className="page-container">
       <div>
-        <h1 className={` ${darkMode ? "dark-mode" : ""}`}>{discipline.name} {discipline.year} {discipline.halfYear}</h1>
+        <h1 className={` ${darkMode ? "dark-mode" : ""}`}>{discipline.name} {discipline.year}</h1>
         <h2 className={` ${darkMode ? "dark-mode" : ""}`}>{`Полугодие: ${discipline.halfYear == 'FIRST' ? "Первое" : "Второе"}`}</h2>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Лабораторные работы:</h2>
         <Tasks disciplineId={discipline.id} onSelect={(task) => {navigate(`/tasks/${task.id}`)}}/>
@@ -50,7 +50,7 @@ const TeacherDisciplinePage = ({ discipline }) => {
             key={appointment.id}
           >
             <h4
-              onClick={() => {navigate(`/groups/${appointment.group.id}`)}}
+              onClick={() => {navigate(`/disciplines/${discipline.id}/groups/${appointment.group.id}`)}}
               className="appointments-item clickable">
               {appointment.group.name}
             </h4>

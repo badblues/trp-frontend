@@ -10,13 +10,13 @@ const AdminDisciplinePage = ({ discipline }) => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
-  const { appointmentApiService } = useContext(ApiContext);
+  const { teacherAppointmentApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
 
   useEffect(() => {
     const fetchData = async () => {
-      const appointmentsResponse = await appointmentApiService.getAppointments();
-      const filteredAppointments = appointmentsResponse.filter(a => a.discipline.id == discipline.id);
+      const teacherAppointmentsResponse = await teacherAppointmentApiService.getAppointments();
+      const filteredAppointments = teacherAppointmentsResponse.filter(a => a.discipline.id == discipline.id);
       setAppointments(filteredAppointments);
       setLoading(false);
     };
