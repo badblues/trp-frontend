@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
-import Loader from "./Loader";
-import { UiContext } from '../contexts/UiContext';
-import { ApiContext } from "../contexts/ApiContext";
+import Loader from "../Loader";
+import { UiContext } from '../../contexts/UiContext';
+import { ApiContext } from "../../contexts/ApiContext";
 import "./Tasks.css";
 
 const Tasks = ({ disciplineId, onSelect }) => {

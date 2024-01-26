@@ -1,5 +1,5 @@
 import React from "react";
-import Disciplines from "../../Disciplines";
+import Disciplines from "../../item-containers/Disciplines";
 import "./MainPage.css";
 
 const StudentMainPage = () => {

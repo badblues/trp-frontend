@@ -3,7 +3,7 @@ import Loader from "../../Loader";
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import "./DisciplinePage.css";
-import Tasks from "../../Tasks";
+import Tasks from "../../item-containers/Tasks";
 import { useNavigate } from "react-router-dom";
 
 

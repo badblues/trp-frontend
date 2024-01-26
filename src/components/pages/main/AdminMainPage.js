@@ -1,7 +1,7 @@
 import React from "react";
-import Disciplines from "../../Disciplines";
-import Groups from "../../Groups";
-import Teachers from "../../Teachers";
+import Disciplines from "../../item-containers/Disciplines";
+import Groups from "../../item-containers/Groups";
+import Teachers from "../../item-containers/Teachers";
 import "./MainPage.css";
 
 const AdminMainPage = () => {

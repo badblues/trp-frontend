@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import "./DisciplinePage.css";
-import Tasks from "../../Tasks";
+import Tasks from "../../item-containers/Tasks";
 import Loader from "../../Loader";
 import { useNavigate } from "react-router-dom";
 

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import "./DisciplineGroupPage.css";
-import TaskAppointments from "../../TaskAppointments";
+import TaskAppointments from "../../item-containers/TaskAppointments";
 
 
 const TeacherDisciplineGroupPage = () => {

@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { ApiContext } from "../contexts/ApiContext";
-import { UiContext } from "../contexts/UiContext";
-import Loader from "./Loader";
+import { ApiContext } from "../../contexts/ApiContext";
+import { UiContext } from "../../contexts/UiContext";
+import Loader from "../Loader";
 
 const CreateTask = () => {
   const { disciplineId } = useParams();

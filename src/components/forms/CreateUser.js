@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Roles } from "../models/Roles";
-import { ApiContext } from "../contexts/ApiContext";
-import { UiContext } from "../contexts/UiContext";
-import Loader from "./Loader";
+import { Roles } from "../../models/Roles";
+import { ApiContext } from "../../contexts/ApiContext";
+import { UiContext } from "../../contexts/UiContext";
+import Loader from "../Loader";
 
 const CreateUser = () => {
   const { register, handleSubmit, formState, watch } = useForm();

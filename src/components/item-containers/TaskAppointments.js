@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './TaskAppointments.css';
-import { UiContext } from '../contexts/UiContext';
+import { UiContext } from '../../contexts/UiContext';
 
 const TaskAppointments = ({tasks, onTaskClick}) => {
   const [taskList, setTaskList] = useState(tasks);

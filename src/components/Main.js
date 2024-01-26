@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
-import Login from "./Login";
-import CreateUser from "./CreateUser";
+import LoginPage from "./LoginPage";
+import CreateUser from "./forms/CreateUser";
 import { Routes, Route } from "react-router-dom";
 import RequireAuth from "../guards/RequireAuth";
 import { Roles } from "../models/Roles";
 import { UiContext } from "../contexts/UiContext";
 import "./Main.css";
 import MainPage from "./pages/main/MainPage";
-import CreateDiscipline from "./CreateDiscipline";
-import CreateGroup from "./CreateGroup";
-import CreateTask from "./CreateTask";
-import AppointTeacher from "./AppointTeacher";
-import TeacherPage from "./pages/TeacherPage";
+import CreateDiscipline from "./forms/CreateDiscipline";
+import CreateGroup from "./forms/CreateGroup";
+import CreateTask from "./forms/CreateTask";
+import AppointTeacher from "./forms/AppointTeacher";
+import TeacherPage from "./pages/teacher/TeacherPage";
 import DisciplinePage from "./pages/discipline/DisciplinePage";
 import TaskPage from "./pages/task/TaskPage";
 import AdminGroupPage from "./pages/group/AdminGroupPage";
@@ -108,7 +108,7 @@ const Main = () => {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[""]} />}>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<LoginPage />} />
         </Route>
       </Routes>
     </div>

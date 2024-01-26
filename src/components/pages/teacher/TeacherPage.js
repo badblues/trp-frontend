@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
-import Loader from "../Loader";
+import Loader from "../../Loader";
 import { useNavigate, useParams } from 'react-router-dom';
-import { UiContext } from "../../contexts/UiContext";
-import { ApiContext } from "../../contexts/ApiContext";
+import { UiContext } from "../../../contexts/UiContext";
+import { ApiContext } from "../../../contexts/ApiContext";
 import "./TeacherPage.css";
 
 

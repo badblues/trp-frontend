@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ApiContext } from "../contexts/ApiContext";
-import { UiContext } from "../contexts/UiContext";
-import Loader from "./Loader";
+import { ApiContext } from "../../contexts/ApiContext";
+import { UiContext } from "../../contexts/UiContext";
+import Loader from "../Loader";
 
 const CreateDiscipline = () => {
   const { register, handleSubmit, formState } = useForm();
