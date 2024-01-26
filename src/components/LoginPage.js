@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../contexts/UserContext";
 import { UiContext } from "../contexts/UiContext";
 import Loader from "./Loader";
+import "./LoginPage.css";
 
-const Login = () => {
+const LoginPage = () => {
   const { darkMode } = useContext(UiContext);
   const { login } = useContext(UserContext);
   const navigate = useNavigate();
@@ -81,4 +81,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
