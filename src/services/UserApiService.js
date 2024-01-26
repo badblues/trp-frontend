@@ -2,7 +2,6 @@ import http from "axios";
 import { Roles } from "../models/Roles";
 
 
-//TODO possibly rename
 export class UserApiService {
   apiUrl = "http://212.20.47.147:8080/admin";
 
@@ -26,7 +25,7 @@ export class UserApiService {
       case Roles.Admin:
         url += "/registration/admin";
         break;
-      case Roles.Professor:
+      case Roles.Teacher:
         url += "/registration/teacher";
         break;
       case Roles.Student:
