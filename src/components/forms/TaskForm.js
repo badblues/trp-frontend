@@ -1,62 +1,30 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ApiContext } from "../../contexts/ApiContext";
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
+import "./Form.css";
 
-const CreateTask = () => {
-  const { disciplineId } = useParams();
-  const [ discipline, setDiscipline ] = useState(null);
+const TaskForm = ({ task, onFormSubmit, discipline }) => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
-  const { taskApiService, disciplineApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await disciplineApiService.getDiscipline(disciplineId);
-      setDiscipline(response);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-
-  const onSubmit = async (data) => {
-    let task = {
-      disciplineId: disciplineId,
-      title: data.title,
-      description: data.description,
-      functionName: data.functionName,
-      language: data.language,
-    };
-    setLoading(true);
-    try {
-      await taskApiService
-        .createTask(task)
-        .then((response) => alert(`Success, ${response.title} created`));
-    } catch (error) {
-      alert(error.error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div>
-        <Loader/>
-      </div>
-    );
+  const onDone = () => {
+    setLoading(false);
   }
 
+  const onSubmit = (data) => {
+    setLoading(true);
+    data.disciplineId = discipline.id;
+    onFormSubmit(data, onDone);
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <p className="form-name">СОЗДАНИЕ ЗАДАНИЯ</p>
-        <p className="form-name">{discipline.name} {discipline.year}</p>
+        <h1 className="form-name">СОЗДАНИЕ ЗАДАНИЯ</h1>
+        <h2 className="form-name">{discipline.name} {discipline.year}</h2>
       
         <div className="form-input-container">
           <label className="form-label" htmlFor="title">
@@ -68,6 +36,7 @@ const CreateTask = () => {
             type="text"
             placeholder="Название..."
             autoComplete="off"
+            defaultValue={task ? task.title : ""}
             {...register("title", {
               required: "Необходимо ввести название",
             })}
@@ -87,6 +56,7 @@ const CreateTask = () => {
             type="text"
             placeholder="Описание..."
             autoComplete="off"
+            defaultValue={task ? task.description : ""}
             {...register("description", {
               required: "Необходимо ввести описание",
             })}
@@ -106,6 +76,7 @@ const CreateTask = () => {
             type="text"
             placeholder="Название функции..."
             autoComplete="off"
+            defaultValue={task ? task.functionName : ""}
             {...register("functionName", {
               required: "Необходимо ввести название функции",
             })}
@@ -125,6 +96,7 @@ const CreateTask = () => {
             type="text"
             placeholder="Язык программирования..."
             autoComplete="off"
+            defaultValue={task ? task.language : ""}
             {...register("language", {
               required: "Необходимо ввести язык программирования",
             })}
@@ -142,4 +114,4 @@ const CreateTask = () => {
   );
 }
 
-export default CreateTask
+export default TaskForm

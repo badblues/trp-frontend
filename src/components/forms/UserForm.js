@@ -4,12 +4,13 @@ import { Roles } from "../../models/Roles";
 import { ApiContext } from "../../contexts/ApiContext";
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
+import "./Form.css";
 
-const CreateUser = () => {
+const UserForm = ({ user, onFormSubmit }) => {
   const { register, handleSubmit, formState, watch } = useForm();
   const { errors } = formState;
   const selectedRole = watch("role");
-  const { groupApiService, userApiService } = useContext(ApiContext);
+  const { groupApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
   const [groups, setGroups] = useState([]);
   const [groupsLoading, setGroupsLoading] = useState(true);
@@ -22,28 +23,27 @@ const CreateUser = () => {
       setGroupsLoading(false);
     };
     fetchData();
-  }, []);
+  }, [groupApiService]);
 
-  const onSubmit = async (data) => {
-    let user = {
-      username: data.username,
+  const onDone = () => {
+    setLoading(false);
+  }
+
+  const onSubmit = (data) => {
+    const newUser = {
       fullName: data.fullName,
       password: data.password,
-    };
+      username: data.username,
+    }
     if (data.role === Roles.Student) {
-      user.groupId = data.groupId;
-    }
+      newUser.groupId = data.groupId;
+    } else if (user && user.role === Roles.Student) {
+      newUser.groupId = data.groupId;
+    } 
+    const role = user ? user.role : selectedRole;
     setLoading(true);
-    try {
-      await userApiService
-        .register(user, data.role)
-        .then((response) => alert(`Success, ${response.username} created`));
-    } catch (error) {
-      alert(error.error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    onFormSubmit(newUser, role, onDone);
+  }
 
   if (groupsLoading) {
     return (
@@ -56,7 +56,8 @@ const CreateUser = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <p className="form-name">СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ</p>
+        <h1 className="form-name">СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ</h1>
+        
         <div className="form-input-container">
           <label className="form-label" htmlFor="role">
             Тип пользователя:
@@ -64,6 +65,8 @@ const CreateUser = () => {
           <select
             id="role"
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            defaultValue={user ? user.role : Roles.Admin}
+            disabled={user}
             {...register("role")}
           >
             <option value={Roles.Admin}>Админ</option>
@@ -71,7 +74,7 @@ const CreateUser = () => {
             <option value={Roles.Student}>Студент</option>
           </select>
         </div>
-
+        
         <div className="form-input-container">
           <label className="form-label" htmlFor="username">
             Имя пользователя:
@@ -82,6 +85,7 @@ const CreateUser = () => {
             type="text"
             placeholder="Имя пользователя..."
             autoComplete="off"
+            defaultValue={user ? user.username : ""}
             {...register("username", {
               required: "Необходимо ввести имя пользователя",
             })}
@@ -101,6 +105,7 @@ const CreateUser = () => {
             type="text"
             placeholder="Пароль..."
             autoComplete="off"
+            defaultValue={user ? user.password : ""}
             {...register("password", {
               required: "Необходимо ввести пароль",
             })}
@@ -120,6 +125,7 @@ const CreateUser = () => {
             type="text"
             placeholder="ФИО..."
             autoComplete="off"
+            defaultValue={user ? user.fullName : ""}
             {...register("fullName", { required: "Необходимо ввести ФИО" })}
           />
           <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
@@ -127,7 +133,7 @@ const CreateUser = () => {
           </label>
         </div>
 
-        {selectedRole === Roles.Student && (
+        {(selectedRole === Roles.Student || (user && user.role === Roles.Student)) && (
           <div className="form-input-container">
             <label className="form-label" htmlFor="group">
               Группа:
@@ -135,6 +141,7 @@ const CreateUser = () => {
             <select
               id="group"
               className={`form-input ${darkMode ? "dark-mode" : ""}`}
+              defaultValue={user ? user.group.id : ""}
               {...register("groupId")}
             >
               {groups.map((group) => (
@@ -158,4 +165,4 @@ const CreateUser = () => {
   );
 };
 
-export default CreateUser;
+export default UserForm;

@@ -1,39 +1,29 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ApiContext } from "../../contexts/ApiContext";
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
+import "./Form.css";
 
-const CreateDiscipline = () => {
+const DisciplineForm = ({ discipline, onFormSubmit }) => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
-  const { disciplineApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
   const [loading, setLoading] = useState(false);
+  const currentYear = new Date().getFullYear();
 
-  const onSubmit = async (data) => {
-    let discipline = {
-      name: data.name,
-      year: data.year,
-      halfYear: data.halfYear,
-      deprecated: data.deprecated,
-    };
+  const onDone = () => {
+    setLoading(false);
+  }
+
+  const onSubmit = (data) => {
     setLoading(true);
-    try {
-      await disciplineApiService
-        .createDiscipline(discipline)
-        .then((response) => alert(`Success, ${response.name} created`));
-    } catch (error) {
-      alert(error.error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    onFormSubmit(data, onDone);
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <p className="form-name">СОЗДАНИЕ ДИСЦИПЛИНЫ</p>
+        <h1 className="form-name">СОЗДАНИЕ ДИСЦИПЛИНЫ</h1>
 
         <div className="form-input-container">
           <label className="form-label" htmlFor="name">
@@ -45,6 +35,7 @@ const CreateDiscipline = () => {
             type="text"
             placeholder="Название..."
             autoComplete="off"
+            defaultValue={discipline ? discipline.name : ""}
             {...register("name", {
               required: "Необходимо ввести название дисциплины",
             })}
@@ -62,6 +53,7 @@ const CreateDiscipline = () => {
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
             type="number"
             placeholder="Год..."
+            defaultValue={discipline ? discipline.year : currentYear}
             {...register("year", {
               required: "Необходимо ввести год",
             })}
@@ -79,6 +71,7 @@ const CreateDiscipline = () => {
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
             type="text"
             placeholder="Полугодие..."
+            defaultValue={discipline ? discipline.halfYear : "FIRST"}
             {...register("halfYear", {
               required: "Необходимо ввести полугодие",
             })}
@@ -100,6 +93,7 @@ const CreateDiscipline = () => {
             className={`form-checkbox ${darkMode ? "dark-mode" : ""}`}
             type="checkbox"
             placeholder="Устаревшая..."
+            defaultChecked={discipline ? discipline.deprecated : false}
             {...register("deprecated")}
           />
         </div>
@@ -112,4 +106,4 @@ const CreateDiscipline = () => {
   );
 };
 
-export default CreateDiscipline;
+export default DisciplineForm;

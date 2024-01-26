@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { ApiContext } from "../../contexts/ApiContext";
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
+import "./Form.css";
 
-const AppointTeacher = () => {
+const TeacherAppointmentForm = ({ onFormSubmit }) => {
   const { register, handleSubmit } = useForm();
-  const { teacherAppointmentApiService, disciplineApiService, groupApiService, teacherApiService  } = useContext(ApiContext);
+  const { disciplineApiService, groupApiService, teacherApiService  } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
 
   const [disciplines, setDisciplines] = useState([]);
@@ -16,35 +17,30 @@ const AppointTeacher = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const disciplines = await disciplineApiService.getDisciplines();
-      setDisciplines(disciplines);
-      const groups = await groupApiService.getGroups();
-      setGroups(groups);
-      const teachers = await teacherApiService.getTeachers();
-      setTeachers(teachers);
+      const disciplinesResponse = await disciplineApiService.getDisciplines();
+      setDisciplines(disciplinesResponse);
+      const groupsResponse = await groupApiService.getGroups();
+      setGroups(groupsResponse);
+      const teachersResponse = await teacherApiService.getTeachers();
+      setTeachers(teachersResponse);
       setLoading(false);
     };
     fetchData();
   }, []);
 
-  const onSubmit = async (data) => {
+  const onDone = () => {
+    setLoading(false);
+  }
+
+  const onSubmit = (data) => {
     let appointment = {
       teacherId: data.teacherId,
       groupId: data.groupId,
       disciplineId: data.disciplineId
     };
     setLoading(true);
-    try {
-      console.log(appointment);
-      await teacherAppointmentApiService
-        .createAppointment(appointment)
-        .then(() => alert(`Success, appointment created`));
-    } catch (error) {
-      alert(error.error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    onFormSubmit(appointment, onDone);
+  }
 
   if (loading) {
     return (
@@ -55,7 +51,7 @@ const AppointTeacher = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <p className="form-name">НАЗНАЧЕНИЕ ПРЕПОДАВАТЕЛЯ</p>
+        <h1 className="form-name">НАЗНАЧЕНИЕ ПРЕПОДАВАТЕЛЯ</h1>
 
         <div className="form-input-container">
           <label className="form-label" htmlFor="discipline">
@@ -71,7 +67,7 @@ const AppointTeacher = () => {
                 key={discipline.id}
                 value={discipline.id}
               >
-                {discipline.name} {discipline.year} {discipline.halfYear}
+                {discipline.name} {discipline.year} {discipline.halfYear === "SECOND" ? "1/2" : "2/2"}
               </option>
             ))}
           </select>
@@ -125,4 +121,4 @@ const AppointTeacher = () => {
   );
 };
 
-export default AppointTeacher;
+export default TeacherAppointmentForm;

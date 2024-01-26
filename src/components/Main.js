@@ -1,21 +1,21 @@
 import React, { useContext } from "react";
 import LoginPage from "./LoginPage";
-import CreateUser from "./forms/CreateUser";
 import { Routes, Route } from "react-router-dom";
 import RequireAuth from "../guards/RequireAuth";
 import { Roles } from "../models/Roles";
 import { UiContext } from "../contexts/UiContext";
 import "./Main.css";
 import MainPage from "./pages/main/MainPage";
-import CreateDiscipline from "./forms/CreateDiscipline";
-import CreateGroup from "./forms/CreateGroup";
-import CreateTask from "./forms/CreateTask";
-import AppointTeacher from "./forms/AppointTeacher";
 import TeacherPage from "./pages/teacher/TeacherPage";
 import DisciplinePage from "./pages/discipline/DisciplinePage";
 import TaskPage from "./pages/task/TaskPage";
 import AdminGroupPage from "./pages/group/AdminGroupPage";
 import TeacherDisciplineGroupPage from "./pages/discipline-group/TeacherDisciplineGroupPage";
+import CreateGroupPage from "./pages/create/CreateGroupPage";
+import CreateDisciplinePage from "./pages/create/CreateDisciplinePage";
+import CreateUserPage from "./pages/create/CreateUserPage";
+import CreateTeacherAppointment from "./pages/create/CreateTeacherAppointment";
+import CreateTaskPage from "./pages/create/CreateTaskPage";
 
 const Main = () => {
   const { darkMode } = useContext(UiContext);
@@ -84,27 +84,27 @@ const Main = () => {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
-          <Route path="/create-user" element={<CreateUser />} exact />
+          <Route path="/create-user" element={<CreateUserPage />} exact />
         </Route>
         
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route
             path="/create-discipline"
-            element={<CreateDiscipline />}
+            element={<CreateDisciplinePage />}
             exact
           />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
-          <Route path="/create-group" element={<CreateGroup />} exact />
+          <Route path="/create-group" element={<CreateGroupPage />} exact />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
-          <Route path="/assign-teacher" element={<AppointTeacher />} exact />
+          <Route path="/assign-teacher" element={<CreateTeacherAppointment />} exact />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[Roles.Teacher]} />}>
-          <Route path="/disciplines/:disciplineId/create-task" element={<CreateTask />} exact />
+          <Route path="/disciplines/:disciplineId/create-task" element={<CreateTaskPage />} exact />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[""]} />}>
