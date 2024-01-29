@@ -6,10 +6,12 @@ import Tasks from "../../item-containers/Tasks";
 import Loader from "../../Loader";
 import { useNavigate } from "react-router-dom";
 
-const StudentDisciplinePage = ({ discipline }) => {
+const StudentDisciplinePage = ({ defaultDiscipline }) => {
   const { darkMode } = useContext(UiContext);
   const [teachers, setTeachers] = useState([]);
   const { teacherAppointmentApiService } = useContext(ApiContext);
+  //TODO below
+  const discipline = defaultDiscipline;
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 

@@ -41,7 +41,7 @@ const TaskPage = () => {
   }
 
   return (
-    <>{Page && <Page task={ task } />} </>
+    <>{Page && <Page defaultTask={ task } />} </>
   );
 }
 

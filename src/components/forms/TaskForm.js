@@ -23,7 +23,7 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <h1 className="form-name">СОЗДАНИЕ ЗАДАНИЯ</h1>
+        <h1 className="form-name">{task ? "ИЗМЕНЕНИЕ ЗАДАНИЯ" : "СОЗДАНИЕ ЗАДАНИЯ"}</h1>
         <h2 className="form-name">{discipline.name} {discipline.year}</h2>
       
         <div className="form-input-container">
@@ -107,7 +107,7 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
         </div>
 
         <button disabled={loading} className="button form-button" type="submit">
-          {loading ? <Loader/> : "Создать задание"}
+          {loading ? <Loader/> : task ? "ИЗМЕНЕНИЕ ЗАДАНИЯ" : "СОЗДАНИЕ ЗАДАНИЯ"}
         </button>
       </div>
     </form>

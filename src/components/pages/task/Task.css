@@ -4,6 +4,10 @@
   margin: 10px 20px 10px 20px;
 }
 
+.task-update-form {
+  flex-grow: 1;
+}
+
 .task-description {
   min-width: 400px;
   width: fit-content;
@@ -13,6 +17,6 @@
 
 }
 
-label.dark-mode {
+p.dark-mode {
   color: var(--dark-mode-text-color);
 }

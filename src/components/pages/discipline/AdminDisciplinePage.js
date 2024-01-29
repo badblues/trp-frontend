@@ -1,17 +1,21 @@
 import React, { useContext, useState, useEffect } from "react";
-import Loader from "../../Loader";
+import { useNavigate } from "react-router-dom";
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
+import DisciplineForm from "../../forms/DisciplineForm";
+import Loader from "../../Loader";
 import "./DisciplinePage.css";
-import { useNavigate } from "react-router-dom";
 
 
-const AdminDisciplinePage = ({ discipline }) => {
+const AdminDisciplinePage = ({ defaultDiscipline }) => {
+  const navigate = useNavigate()
+  const { teacherAppointmentApiService,
+          disciplineApiService } = useContext(ApiContext);
+  const { darkMode } = useContext(UiContext);
+  const [discipline, setDiscipline] = useState(defaultDiscipline);
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate()
-  const { teacherAppointmentApiService } = useContext(ApiContext);
-  const { darkMode } = useContext(UiContext);
+  const [updating, setUpdating] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,6 +26,31 @@ const AdminDisciplinePage = ({ discipline }) => {
     };
     fetchData();
   }, []);
+  
+  const updateDiscipline = async (updatedDiscipline, onUpdate) => {
+    try {
+      await disciplineApiService
+        .updateDiscipline(discipline.id, updatedDiscipline)
+        .then((updatedDiscipline) => {
+          alert(`Success, ${updatedDiscipline.name} updated`);
+          setDiscipline(updatedDiscipline);
+        });
+    } catch(errorData) {
+      alert(errorData.error);
+    } finally {
+      onUpdate();
+      setUpdating(false);
+    }
+  }
+  
+  const deleteDiscipline = async () => {
+    try {
+      await disciplineApiService.deleteDiscipline(discipline.id);
+      navigate("/");
+    } catch (errorData) {
+      alert(errorData.error);
+    }
+  }
 
   if (loading) {
     return (
@@ -29,6 +58,23 @@ const AdminDisciplinePage = ({ discipline }) => {
         <Loader />
       </div>
     );
+  }
+
+  if (updating) {
+    return (
+      <div className="page-container">
+        <div className="discipline-form-container">
+          <DisciplineForm
+            discipline={discipline}
+            onFormSubmit={updateDiscipline}/>
+        </div>
+        <button
+          className="button"
+          onClick={() => setUpdating(false)}>
+          ЗАКРЫТЬ
+        </button>
+      </div>
+    )
   }
 
   return (
@@ -50,6 +96,16 @@ const AdminDisciplinePage = ({ discipline }) => {
             </div>
           </div>
         ))}
+        <button
+          className="button"
+          onClick={() => setUpdating(true)}>
+          ИЗМЕНИТЬ ДИСЦИПЛИНУ
+        </button>
+        <button
+          className="button"
+          onClick={deleteDiscipline}>
+          УДАЛИТЬ ДИСЦИПЛИНУ
+        </button>
       </div>
     </div>
   );

@@ -43,7 +43,7 @@ const DisciplinePage = () => {
   }
 
   return (
-    <>{Page && <Page discipline={ discipline } />} </>
+    <>{Page && <Page defaultDiscipline={ discipline } />} </>
   );
 }
 

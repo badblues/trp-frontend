@@ -22,8 +22,7 @@ const GroupForm = ({ group, onFormSubmit }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <h1 className="form-name">СОЗДАНИЕ ГРУППЫ</h1>
-        
+        <h1 className="form-name">{group ? "ИЗМЕНЕНИЕ ГРУППЫ" : "СОЗДАНИЕ ГРУППЫ"}</h1>
         <div className="form-input-container">
           <label className="form-label" htmlFor="name">
             Название группы
@@ -45,7 +44,7 @@ const GroupForm = ({ group, onFormSubmit }) => {
         </div>
 
         <button disabled={loading} className="button form-button" type="submit">
-          {loading ? <Loader /> : "Создать группу"}
+          {loading ? <Loader /> : group ? "ИЗМЕНИТЬ ГРУППУ" : "СОЗДАТЬ ГРУППУ"}
         </button>
       </div>
     </form>

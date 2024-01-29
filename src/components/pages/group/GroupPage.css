@@ -5,6 +5,10 @@
   margin: 20px 70px 0px 50px;
 }
 
+.group-form-container {
+  flex-grow: 1;
+}
+
 h1 {
   font-style: normal;
 }

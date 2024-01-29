@@ -23,7 +23,7 @@ const DisciplineForm = ({ discipline, onFormSubmit }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <h1 className="form-name">СОЗДАНИЕ ДИСЦИПЛИНЫ</h1>
+        <h1 className="form-name">{discipline ? "ИЗМЕНЕНИЕ ДИСЦИПЛИНЫ" : "СОЗДАНИЕ ДИСЦИПЛИНЫ"}</h1>
 
         <div className="form-input-container">
           <label className="form-label" htmlFor="name">
@@ -99,7 +99,7 @@ const DisciplineForm = ({ discipline, onFormSubmit }) => {
         </div>
 
         <button disabled={loading} className="button form-button" type="submit">
-          {loading ? <Loader /> : "Создать дисциплину"}
+          {loading ? <Loader /> : discipline ? "ИЗМЕНИТЬ ДИСЦИПЛИНУ" : "СОЗДАТЬ ДИСЦИПЛИНУ"}
         </button>
       </div>
     </form>

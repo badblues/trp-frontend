@@ -1,19 +1,114 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 import { UiContext } from '../../../contexts/UiContext';
+import { ApiContext } from '../../../contexts/ApiContext';
+import TaskForm from '../../forms/TaskForm';
 import "./Task.css";
+import Loader from '../../Loader';
 
-const TeacherTaskPage = ({ task }) => {
+const TeacherTaskPage = ({ defaultTask }) => {
 
   const { darkMode } = useContext(UiContext);
+  const { taskApiService,
+          disciplineApiService } = useContext(ApiContext);
+  const navigate = useNavigate();
+  const [task, setTask] = useState(defaultTask);
+  const [discipline, setDiscipline] = useState(null);
+  const [updating, setUpdating] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const disciplineRespoinse = await disciplineApiService.getDiscipline(task.disciplineId);
+      setDiscipline(disciplineRespoinse);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  const updateTask = async (updatedTask, onUpdate) => {
+    try {
+      await taskApiService
+        .updateTask(task.id, updatedTask)
+        .then((updatedTask) => {
+          alert(`Success, ${updatedTask.title} updated`);
+          setTask(updatedTask);
+        });
+    } catch(errorData) {
+      alert(errorData.error);
+    } finally {
+      onUpdate();
+      setUpdating(false);
+    }
+  }
+
+  const deleteTask = async () => {
+    try {
+      await taskApiService.deleteTask(task.id);
+      navigate("/");
+    } catch (errorData) {
+      alert(errorData.error);
+    }
+  }
+
+  if (loading) { 
+    return (
+      <Loader/>
+    )
+  }
+
+  if (updating) {
+    return (
+      <div className='task-container'>
+        <div className='task-update-form'>
+          <TaskForm
+            discipline={discipline}
+            onFormSubmit={updateTask}
+            task={task}/>
+        </div>
+        <button
+          className='button'
+          onClick={() => setUpdating(false)}>
+          ЗАКРЫТЬ
+        </button>
+      </div>
+    )
+  }
 
   return (
     <div className='task-container'>
       <div className='task-desctiption'>
-      <h1 className={`${darkMode ? "dark-mode" : ""}`}>{task.title}</h1>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Название функции: {task.functionName}</h2>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Язык: {task.language}</h2>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Задание:</h2>
-        <label className={`${darkMode ? "dark-mode" : ""}`}>{task.description}</label>
+        <h1 className={`${darkMode ? "dark-mode" : ""}`}>
+          {task.title}
+        </h1>
+        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
+          Название функции: {task.functionName}
+        </h2>
+        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
+          Язык: {task.language}
+        </h2>
+        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
+          Задание:
+        </h2>
+        <p className={`${darkMode ? "dark-mode" : ""}`}>
+          {task.description}
+        </p>
+      </div>
+      <div className='task-controll'>
+        <button
+          className='button'
+          onClick={() => setUpdating(true)}>
+          ИЗМЕНИТЬ ЗАДАНИЕ
+        </button>
+        <button
+          className='button'>
+          ИЗМЕНИТЬ ТЕСТЫ
+        </button>
+        <button
+          className='button'
+          onClick={deleteTask}>
+          УДАЛИТЬ ЗАДАНИЕ
+        </button>
       </div>
     </div>
   )

@@ -4,20 +4,22 @@ import Loader from "../../Loader";
 import { useNavigate } from 'react-router-dom';
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
+import GroupForm from "../../forms/GroupForm";
 import "./GroupPage.css";
 
 
 const AdminGroupPage = () => {
   const { groupId } = useParams();
-  const [appointments, setAppointments] = useState([]);
-  const [students, setStudents] = useState([]);
-  const [group, setGroup] = useState(null);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
   const { studentApiService,
           teacherAppointmentApiService,
           groupApiService } = useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
+  const [appointments, setAppointments] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [group, setGroup] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +36,31 @@ const AdminGroupPage = () => {
     fetchData();
   }, []);
 
+  const deleteGroup = async () => {
+    try {
+      await groupApiService.deleteGroup(group.id);
+      navigate("/");
+    } catch (errorData) {
+      alert(errorData.error);
+    }
+  }
+
+  const updateGroup = async (updatedGroup, onUpdate) => {
+    try {
+      await groupApiService
+        .updateGroup(group.id, updatedGroup)
+        .then((updatedGroup) => {
+          alert(`Success, ${updatedGroup.name} updated`);
+          setGroup(updatedGroup);
+        });
+    } catch(errorData) {
+      alert(errorData.error);
+    } finally {
+      onUpdate();
+      setUpdating(false);
+    }
+  }
+
   if (loading) {
     return (
       <div className="disciplines-container">
@@ -42,10 +69,30 @@ const AdminGroupPage = () => {
     );
   }
 
+  if (updating) {
+    return (
+      <div className="page-container">
+        <div className="group-form-container">
+          <GroupForm
+            onFormSubmit={updateGroup}
+            group={group}/>
+        </div>
+        <button 
+          className="button"
+          onClick={() => setUpdating(false)}
+          >
+          ЗАКРЫТЬ
+        </button>
+      </div>
+    )
+  }
+
   return (
     <div className="page-container">
       <div>
-        <h1 className={`${darkMode ? "dark-mode" : ""}`}>{group.name}</h1>
+        <div>
+          <h1 className={`${darkMode ? "dark-mode" : ""}`}>{group.name}</h1>
+        </div>
         {students.map((student) => (
           <div
             className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
@@ -54,6 +101,16 @@ const AdminGroupPage = () => {
             <h4 className="appointments-item">{student.fullName}</h4>
           </div>
         ))}
+        <button
+          className="button"
+          onClick={() => setUpdating(true)}>
+          ИЗМЕНИТЬ ГРУППУ
+        </button>
+        <button
+          className="button"
+          onClick={deleteGroup}>
+          УДАЛИТЬ ГРУППУ
+        </button>
       </div>
       <div>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Текущие дисциплины:</h2>
@@ -63,8 +120,16 @@ const AdminGroupPage = () => {
             key={appointment.id}
           >
             <div className="appointments-item">
-              <h4 className="clickable" onClick={() => {navigate(`/disciplines/${appointment.discipline.id}`)}}>{`${appointment.discipline.name} ${appointment.discipline.year}`}</h4>
-              <label className="clickable" onClick={() => {navigate(`/teachers/${appointment.teacher.id}`)}}>{`${appointment.teacher.fullName}`}</label>
+              <h4
+                className="clickable"
+                onClick={() => {navigate(`/disciplines/${appointment.discipline.id}`)}}>
+                {`${appointment.discipline.name} ${appointment.discipline.year}`}
+              </h4>
+              <label
+                className="clickable"
+                onClick={() => {navigate(`/teachers/${appointment.teacher.id}`)}}>
+                {`${appointment.teacher.fullName}`}
+              </label>
             </div>
           </div>
         ))}
