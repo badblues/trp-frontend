@@ -8,7 +8,9 @@ export class StudentAppointmentApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async getAppointment(id) {
@@ -16,7 +18,9 @@ export class StudentAppointmentApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async createAppointment(appointment) {
@@ -24,7 +28,9 @@ export class StudentAppointmentApiService {
     try {
       const response = await http.post(url, appointment);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async updateAppointment(id, appointment) {
@@ -32,7 +38,9 @@ export class StudentAppointmentApiService {
     try {
       const response = await http.put(url, appointment);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async deleteAppointment(id) {
@@ -40,7 +48,9 @@ export class StudentAppointmentApiService {
     try {
       const response = await http.delete(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 }
 

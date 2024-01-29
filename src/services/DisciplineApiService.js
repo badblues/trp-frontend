@@ -8,7 +8,9 @@ export class DisciplineApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async getDiscipline(id) {
@@ -16,7 +18,9 @@ export class DisciplineApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async createDiscipline(discipline) {
@@ -24,7 +28,9 @@ export class DisciplineApiService {
     try {
       const response = await http.post(url, discipline);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async updateDiscipline(id, discipline) {
@@ -32,7 +38,9 @@ export class DisciplineApiService {
     try {
       const response = await http.put(url, discipline);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async deleteDiscipline(id) {
@@ -40,7 +48,9 @@ export class DisciplineApiService {
     try {
       const response = await http.delete(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 }
 

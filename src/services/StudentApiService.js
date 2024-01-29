@@ -8,7 +8,9 @@ export default class StudentApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async getStudent(id) {
@@ -16,7 +18,9 @@ export default class StudentApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
 }

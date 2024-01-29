@@ -9,7 +9,9 @@ export default class TaskApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async getTask(id) {
@@ -17,7 +19,9 @@ export default class TaskApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async getTasksByDiscipline(id){
@@ -25,7 +29,9 @@ export default class TaskApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async createTask(task) {
@@ -33,7 +39,9 @@ export default class TaskApiService {
     try {
       const response = await http.post(url, task);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async updateTask(id, task) {
@@ -41,7 +49,9 @@ export default class TaskApiService {
     try {
       const response = await http.put(url, task);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async deleteTask(id) {
@@ -49,7 +59,9 @@ export default class TaskApiService {
     try {
       const response = await http.delete(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async postSolution(taskId, solution) {
@@ -57,7 +69,9 @@ export default class TaskApiService {
     try {
       const response = await http.post(url, solution);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async getSolution(taskId) {
@@ -65,7 +79,9 @@ export default class TaskApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
 }

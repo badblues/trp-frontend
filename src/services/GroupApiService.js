@@ -8,7 +8,9 @@ export class GroupApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async getGroup(id) {
@@ -16,7 +18,9 @@ export class GroupApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async createGroup(group) {
@@ -24,7 +28,9 @@ export class GroupApiService {
     try {
       const response = await http.post(url, group);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async updateGroup(id, group) {
@@ -32,7 +38,9 @@ export class GroupApiService {
     try {
       const response = await http.put(url, group);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 
   async deleteGroup(id) {
@@ -40,7 +48,9 @@ export class GroupApiService {
     try {
       const response = await http.delete(url);
       return response.data.data;
-    } catch (error) {}
+    } catch (error) {
+      throw error.response.data;
+    }
   }
 }
 
