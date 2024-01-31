@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../contexts/UserContext";
 import { UiContext } from "../contexts/UiContext";
+import logoImg  from "../images/logo.png";
 import Loader from "./Loader";
 import "./LoginPage.css";
 
@@ -71,7 +72,7 @@ const LoginPage = () => {
               {`${showPassword ? "Скрыть пароль" : "Показать пароль"}`}
             </button>
           </div>
-          <img src="/images/logo.png" alt="logo" width="100px"></img>
+          <img src={logoImg} alt="logo" width="100px"></img>
           <button disabled={loading} className="button form-button">
             {loading ? <Loader /> : "ВОЙТИ"}
           </button>
