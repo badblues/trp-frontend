@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@uiw/codemirror-theme-dracula": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "axios": "^1.4.0",
     "core-js": "^3.31.1",
     "g": "^2.0.1",
