@@ -56,7 +56,7 @@ const UserForm = ({ user, onFormSubmit }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <h1 className="form-name">СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ</h1>
+        <h1 className="form-name">{user ? "ИЗМЕНЕНИЕ ИНФОРМАЦИИ" : "СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ"}</h1>
         
         <div className="form-input-container">
           <label className="form-label" htmlFor="role">
@@ -156,9 +156,8 @@ const UserForm = ({ user, onFormSubmit }) => {
         )}
 
 
-
         <button disabled={loading} className="button form-button" type="submit">
-          {loading ? <Loader/> : "Создать пользователя"}
+          {loading ? <Loader/> : user ? "ИЗМЕНИТЬ ИНФОРМАЦИЮ" : "СОЗДАТЬ ПОЛЬЗОВАТЕЛЯ"}
         </button>
       </div>
     </form>

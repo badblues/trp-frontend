@@ -4,6 +4,7 @@ import Loader from "../../Loader";
 import { useNavigate } from 'react-router-dom';
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
+import crossImg from "../../../images/cross.png";
 import GroupForm from "../../forms/GroupForm";
 import "./GroupPage.css";
 
@@ -58,6 +59,16 @@ const AdminGroupPage = () => {
     } finally {
       onUpdate();
       setUpdating(false);
+    }
+  }
+
+  const deleteAppointment = async (appointment) => {
+    try {
+      await teacherAppointmentApiService.deleteAppointment(appointment.id);
+      setAppointments(appointments.filter(a => a.id !== appointment.id));
+      alert("Success, appointment deleted");
+    } catch (errorData) {
+      alert(errorData.error);
     }
   }
 
@@ -120,16 +131,24 @@ const AdminGroupPage = () => {
             key={appointment.id}
           >
             <div className="appointments-item">
-              <h4
-                className="clickable"
-                onClick={() => {navigate(`/disciplines/${appointment.discipline.id}`)}}>
-                {`${appointment.discipline.name} ${appointment.discipline.year}`}
-              </h4>
-              <label
-                className="clickable"
-                onClick={() => {navigate(`/teachers/${appointment.teacher.id}`)}}>
-                {`${appointment.teacher.fullName}`}
-              </label>
+              <div className="appointments-links">
+                <h4
+                  className="clickable"
+                  onClick={() => {navigate(`/disciplines/${appointment.discipline.id}`)}}>
+                  {`${appointment.discipline.name} ${appointment.discipline.year}`}
+                </h4>
+                <label
+                  className="clickable"
+                  onClick={() => {navigate(`/teachers/${appointment.teacher.id}`)}}>
+                  {`${appointment.teacher.fullName}`}
+                </label>
+              </div>
+              <button
+                className="button-with-image"
+                title="Удалить назначение"
+                onClick={() => deleteAppointment(appointment)}>
+                <img src={crossImg} alt="DELETE" width="17"></img>
+              </button>
             </div>
           </div>
         ))}

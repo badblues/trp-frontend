@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
+import crossImg from "../../../images/cross.png";
 import DisciplineForm from "../../forms/DisciplineForm";
 import Loader from "../../Loader";
 import "./DisciplinePage.css";
@@ -52,6 +53,16 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
     }
   }
 
+  const deleteAppointment = async (appointment) => {
+    try {
+      await teacherAppointmentApiService.deleteAppointment(appointment.id);
+      setAppointments(appointments.filter(a => a.id !== appointment.id));
+      alert("Success, appointment deleted");
+    } catch (errorData) {
+      alert(errorData.error);
+    }
+  }
+
   if (loading) {
     return (
       <div className="disciplines-container">
@@ -91,8 +102,24 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
             key={appointment.id}
           >
             <div className="appointments-item">
-                <h4 className="clickable" onClick={() => {navigate(`/groups/${appointment.group.id}`)}}>{`${appointment.group.name} `}</h4>
-                <label className="clickable" onClick={() => {navigate(`/teachers/${appointment.teacher.id}`)}}>{` ${appointment.teacher.fullName}`}</label>
+              <div className="appointments-links">
+                <h4
+                  className="clickable"
+                  onClick={() => {navigate(`/groups/${appointment.group.id}`)}}>
+                  {`${appointment.group.name} `}
+                </h4>
+                <label
+                  className="clickable"
+                  onClick={() => {navigate(`/teachers/${appointment.teacher.id}`)}}>
+                  {` ${appointment.teacher.fullName}`}
+                </label>
+              </div>
+              <button
+                className="button-with-image"
+                title="Удалить назначение"
+                onClick={() => deleteAppointment(appointment)}>
+                <img src={crossImg} alt="DELETE" width="17"></img>
+              </button>
             </div>
           </div>
         ))}

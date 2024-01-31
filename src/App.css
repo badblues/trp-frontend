@@ -60,6 +60,15 @@
   cursor: pointer;
 }
 
+.button-with-image {
+  background-color: transparent;
+  border: none;
+}
+
+.button-with-image:hover {
+  cursor: pointer;
+}
+
 
 .status-not-appointed {
   color: var(--status-color-not-appointed)
