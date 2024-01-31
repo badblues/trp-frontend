@@ -36,7 +36,7 @@ const CreateTaskPage = () => {
 
   if (loading) {
     return (
-      <div>
+      <div className="loader-container">
         <Loader/>
       </div>
     );

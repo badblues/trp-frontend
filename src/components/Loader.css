@@ -1,9 +1,9 @@
 .loader {
-  max-height: 100px;
+  max-height: 200px;
   min-height: 15px;
   min-width: 15px;
-  max-width: 100px;
-  height: 70%;
+  max-width: 200px;
+  height: 100%;
   aspect-ratio: 1/1;
   border: 2px solid var(--background-color);
   border-radius: 50%;

@@ -31,7 +31,7 @@ const StudentTaskPage = ({ task }) => {
 
   if (loading) {
     return (
-      <div className="groups-container">
+      <div className='loader-container'>
         <Loader />
       </div>
     );

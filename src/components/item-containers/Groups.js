@@ -24,7 +24,7 @@ const Groups = () => {
 
   if (loading) {
     return (
-      <div className="groups-container">
+      <div>
         <Loader />
       </div>
     );

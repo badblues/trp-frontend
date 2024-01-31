@@ -54,7 +54,9 @@ const TeacherTaskPage = ({ defaultTask }) => {
 
   if (loading) { 
     return (
-      <Loader/>
+      <div className='loader-container'> 
+        <Loader/>
+      </div>
     )
   }
 

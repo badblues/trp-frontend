@@ -47,7 +47,7 @@ const UserForm = ({ user, onFormSubmit }) => {
 
   if (groupsLoading) {
     return (
-      <div>
+      <div className="loader-container">
         <Loader />
       </div>
     );

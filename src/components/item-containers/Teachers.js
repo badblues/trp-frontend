@@ -24,7 +24,7 @@ const Teachers = () => {
 
   if (loading) {
     return (
-      <div className="teachers-container">
+      <div>
         <Loader />
       </div>
     );

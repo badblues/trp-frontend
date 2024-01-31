@@ -34,14 +34,14 @@ const TaskPage = () => {
 
   if (loading) {
     return (
-      <div>
+      <div className='loader-container'>
         <Loader/>
       </div>
     );
   }
 
   return (
-    <>{Page && <Page defaultTask={ task } />} </>
+    <>{Page && <Page task={ task } />} </>
   );
 }
 

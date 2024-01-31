@@ -36,7 +36,7 @@ const DisciplinePage = () => {
 
   if (loading) {
     return (
-      <div>
+      <div className="loader-container">
         <Loader />
       </div>
     );

@@ -34,7 +34,7 @@ const Navbar = () => {
 
   if (loading) {
     return (
-      <div className="disciplines-container">
+      <div>
         <Loader />
       </div>
     );

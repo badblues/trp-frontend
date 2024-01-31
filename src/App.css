@@ -97,3 +97,10 @@
 .status-done {
   color: var(--status-color-done)
 }
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+}

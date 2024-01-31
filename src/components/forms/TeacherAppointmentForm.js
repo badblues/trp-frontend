@@ -13,7 +13,7 @@ const TeacherAppointmentForm = ({ onFormSubmit }) => {
   const [disciplines, setDisciplines] = useState([]);
   const [groups, setGroups] = useState([]);
   const [teachers, setTeachers] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +44,9 @@ const TeacherAppointmentForm = ({ onFormSubmit }) => {
 
   if (loading) {
     return (
-      <Loader/>
+      <div className="loader-container">
+        <Loader/>
+      </div>
     );
   }
 

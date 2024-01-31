@@ -22,7 +22,7 @@ const Tasks = ({ disciplineId, onSelect }) => {
 
   if (loading) {
     return (
-      <div className="tasks-container">
+      <div>
         <Loader/>
       </div>
     );

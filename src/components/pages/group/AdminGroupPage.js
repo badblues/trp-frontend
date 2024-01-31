@@ -75,7 +75,7 @@ const AdminGroupPage = () => {
 
   if (loading) {
     return (
-      <div className="disciplines-container">
+      <div className="loader-container">
         <Loader />
       </div>
     );
