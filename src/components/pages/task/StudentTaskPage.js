@@ -14,10 +14,13 @@ const StudentTaskPage = ({ task }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const loadedCode = await taskApiService.getSolution(task.id);
-      if (loadedCode != null)
+      try {
+        const loadedCode = await taskApiService.getSolution(task.id);
         setCode(loadedCode.code);
-      setLoading(false);
+      } catch(errorData) {
+      } finally {
+        setLoading(false);
+      }
     }
     fetchData();
   }, []);
@@ -44,7 +47,7 @@ const StudentTaskPage = ({ task }) => {
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Название функции: {task.functionName}</h2>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Язык: {task.language}</h2>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Задание:</h2>
-        <label className={`${darkMode ? "dark-mode" : ""}`}>{task.description}</label>
+        <p className={`${darkMode ? "dark-mode" : ""}`}>{task.description}</p>
       </div>
       <CodeEditor className='editor-window' solutionCode={code} onSave={handleSave}/>
     </div>
