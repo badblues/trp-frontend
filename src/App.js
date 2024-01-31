@@ -7,11 +7,13 @@ import requestInterceptor from "./interceptors/RequestInterceptor";
 import { responseErrorInterceptor } from "./interceptors/ResponseInterceptor";
 import { useContext } from "react";
 import { UserContext } from "./contexts/UserContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const { logout } = useContext(UserContext);
 
-  //TODO probably may be better
+  //TODO may be better
   axios.interceptors.request.use(requestInterceptor);
   axios.interceptors.response.use(
     (response) => response,
@@ -23,6 +25,7 @@ const App = () => {
       <Navbar />
       <Main />
       <Footer />
+      <ToastContainer />
     </div>
   );
 };

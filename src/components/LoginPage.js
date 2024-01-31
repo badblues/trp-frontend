@@ -8,7 +8,7 @@ import Loader from "./Loader";
 import "./LoginPage.css";
 
 const LoginPage = () => {
-  const { darkMode } = useContext(UiContext);
+  const { darkMode, showErrorAlert } = useContext(UiContext);
   const { login } = useContext(UserContext);
   const navigate = useNavigate();
   const { register, handleSubmit, formState } = useForm();
@@ -21,8 +21,7 @@ const LoginPage = () => {
     try {
       await login(data).then(() => navigate("/"));
     } catch (error) {
-      console.log(error);
-      alert(error.error);
+      showErrorAlert(error.error);
     } finally {
       setLoading(false);
     }

@@ -8,7 +8,7 @@ import Loader from '../../Loader';
 
 const TeacherTaskPage = ({ defaultTask }) => {
 
-  const { darkMode } = useContext(UiContext);
+  const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const { taskApiService,
           disciplineApiService } = useContext(ApiContext);
   const navigate = useNavigate();
@@ -31,11 +31,11 @@ const TeacherTaskPage = ({ defaultTask }) => {
       await taskApiService
         .updateTask(task.id, updatedTask)
         .then((updatedTask) => {
-          alert(`Success, ${updatedTask.title} updated`);
+          showSuccessAlert(`Задание ${updatedTask.title} обновлено`);
           setTask(updatedTask);
         });
     } catch(errorData) {
-      alert(errorData.error);
+      showErrorAlert(errorData.error);
     } finally {
       onUpdate();
       setUpdating(false);
@@ -45,9 +45,10 @@ const TeacherTaskPage = ({ defaultTask }) => {
   const deleteTask = async () => {
     try {
       await taskApiService.deleteTask(task.id);
+      showSuccessAlert("Задание удалено");
       navigate("/");
     } catch (errorData) {
-      alert(errorData.error);
+      showErrorAlert(errorData.error);
     }
   }
 

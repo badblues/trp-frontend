@@ -13,7 +13,7 @@ const TeacherPage = () => {
   const navigate = useNavigate();
   const { teacherApiService,
           teacherAppointmentApiService } = useContext(ApiContext);
-  const { darkMode } = useContext(UiContext);
+  const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const [teacher, setTeacher] = useState(null);
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,9 +43,9 @@ const TeacherPage = () => {
     try {
       await teacherAppointmentApiService.deleteAppointment(appointment.id);
       setAppointments(appointments.filter(a => a.id !== appointment.id));
-      alert("Success, appointment deleted");
+      showSuccessAlert("Назначение удалено");
     } catch (errorData) {
-      alert(errorData.error);
+      showErrorAlert(errorData.error);
     }
   }
 

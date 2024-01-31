@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import { ApiContext } from "../../../contexts/ApiContext";
 import TaskForm from "../../forms/TaskForm";
 import Loader from "../../Loader";
+import { UiContext } from "../../../contexts/UiContext";
 
 
 const CreateTaskPage = () => {
+  const { showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const { disciplineId } = useParams();
   const { taskApiService, disciplineApiService } = useContext(ApiContext);
   const [discipline, setDiscipline] = useState(null);
@@ -24,9 +26,9 @@ const CreateTaskPage = () => {
     try {
       await taskApiService
         .createTask(task)
-        .then((response) => alert(`Success, ${response.title} created`));
+        .then((response) => showSuccessAlert(`Задание ${response.title} создано`));
     } catch (error) {
-      alert(error.error);
+      showErrorAlert(error.error);
     } finally {
       onCreate();
     }

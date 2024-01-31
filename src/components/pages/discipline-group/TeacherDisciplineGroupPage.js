@@ -19,7 +19,7 @@ const TeacherDisciplineGroupPage = () => {
           teacherAppointmentApiService,
           studentAppointmentApiService,
           taskApiService } = useContext(ApiContext);
-  const { darkMode } = useContext(UiContext);
+  const { darkMode, showErrorAlert } = useContext(UiContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +58,7 @@ const TeacherDisciplineGroupPage = () => {
         await studentAppointmentApiService
           .createAppointment(appointment);
       } catch (error) {
-        alert(error.error);
+        showErrorAlert(error.error);
       } finally {
         task.appointed = !task.appointed;
         handleTaskChangeState(task);

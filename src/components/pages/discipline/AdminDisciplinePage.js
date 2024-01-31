@@ -12,7 +12,7 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
   const navigate = useNavigate()
   const { teacherAppointmentApiService,
           disciplineApiService } = useContext(ApiContext);
-  const { darkMode } = useContext(UiContext);
+  const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const [discipline, setDiscipline] = useState(defaultDiscipline);
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,11 +33,11 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
       await disciplineApiService
         .updateDiscipline(discipline.id, updatedDiscipline)
         .then((updatedDiscipline) => {
-          alert(`Success, ${updatedDiscipline.name} updated`);
+          showSuccessAlert(`Дисциплина ${updatedDiscipline.name} обновлена`);
           setDiscipline(updatedDiscipline);
         });
     } catch(errorData) {
-      alert(errorData.error);
+      showErrorAlert(errorData.error);
     } finally {
       onUpdate();
       setUpdating(false);
@@ -47,9 +47,10 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
   const deleteDiscipline = async () => {
     try {
       await disciplineApiService.deleteDiscipline(discipline.id);
+      showSuccessAlert("Дисциплина удалена");
       navigate("/");
     } catch (errorData) {
-      alert(errorData.error);
+      showErrorAlert(errorData.error);
     }
   }
 
@@ -57,9 +58,9 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
     try {
       await teacherAppointmentApiService.deleteAppointment(appointment.id);
       setAppointments(appointments.filter(a => a.id !== appointment.id));
-      alert("Success, appointment deleted");
+      showSuccessAlert("Назначение удалено");
     } catch (errorData) {
-      alert(errorData.error);
+      showErrorAlert(errorData.error);
     }
   }
 

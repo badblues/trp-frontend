@@ -1,8 +1,10 @@
 import React, { useContext} from "react";
 import { ApiContext } from "../../../contexts/ApiContext";
 import TeacherAppointmentForm from "../../forms/TeacherAppointmentForm";
+import { UiContext } from "../../../contexts/UiContext";
 
 const CreateTeacherAppointment = () => {
+  const { showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const { teacherAppointmentApiService  } = useContext(ApiContext);
 
 
@@ -10,9 +12,9 @@ const CreateTeacherAppointment = () => {
     try {
       await teacherAppointmentApiService
         .createAppointment(teacherAppointment)
-        .then(() => alert(`Success, appointment created`));
+        .then(() => showSuccessAlert(`Дисциплина назначена`));
     } catch (error) {
-      alert(error.error);
+      showErrorAlert(error.error);
     } finally {
       onCreate();
     }

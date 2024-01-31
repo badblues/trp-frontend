@@ -15,7 +15,7 @@ const AdminGroupPage = () => {
   const { studentApiService,
           teacherAppointmentApiService,
           groupApiService } = useContext(ApiContext);
-  const { darkMode } = useContext(UiContext);
+  const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const [appointments, setAppointments] = useState([]);
   const [students, setStudents] = useState([]);
   const [group, setGroup] = useState(null);
@@ -40,9 +40,10 @@ const AdminGroupPage = () => {
   const deleteGroup = async () => {
     try {
       await groupApiService.deleteGroup(group.id);
+      showSuccessAlert("Группа удалена");
       navigate("/");
     } catch (errorData) {
-      alert(errorData.error);
+      showErrorAlert(errorData.error);
     }
   }
 
@@ -51,11 +52,11 @@ const AdminGroupPage = () => {
       await groupApiService
         .updateGroup(group.id, updatedGroup)
         .then((updatedGroup) => {
-          alert(`Success, ${updatedGroup.name} updated`);
+          showSuccessAlert(`Группа ${updatedGroup.name} обновлена`);
           setGroup(updatedGroup);
         });
     } catch(errorData) {
-      alert(errorData.error);
+      showErrorAlert(errorData.error);
     } finally {
       onUpdate();
       setUpdating(false);
@@ -66,9 +67,9 @@ const AdminGroupPage = () => {
     try {
       await teacherAppointmentApiService.deleteAppointment(appointment.id);
       setAppointments(appointments.filter(a => a.id !== appointment.id));
-      alert("Success, appointment deleted");
+      showSuccessAlert("Назначение удалено");
     } catch (errorData) {
-      alert(errorData.error);
+      showErrorAlert(errorData.error);
     }
   }
 
