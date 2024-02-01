@@ -5,7 +5,7 @@ import CodeEditor from '../../CodeEditor';
 import Loader from '../../Loader';
 import "./Task.css";
 
-const StudentTaskPage = ({ task }) => {
+const StudentTaskPage = ({ defaultTask }) => {
 
   const [loading, setLoading] = useState(true);
   const { darkMode } = useContext(UiContext);
@@ -15,7 +15,7 @@ const StudentTaskPage = ({ task }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const loadedCode = await taskApiService.getSolution(task.id);
+        const loadedCode = await taskApiService.getSolution(defaultTask.id);
         setCode(loadedCode.code);
       } catch(errorData) {
       } finally {
@@ -29,7 +29,7 @@ const StudentTaskPage = ({ task }) => {
     const code = {
       code: solutionCode
     }
-    taskApiService.postSolution(task.id, code);
+    taskApiService.postSolution(defaultTask.id, code);
   }
 
   if (loading) {
@@ -43,11 +43,11 @@ const StudentTaskPage = ({ task }) => {
   return (
     <div className='task-container'>
       <div className='task-description'>
-        <h1 className={`${darkMode ? "dark-mode" : ""}`}>{task.title}</h1>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Название функции: {task.functionName}</h2>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Язык: {task.language}</h2>
+        <h1 className={`${darkMode ? "dark-mode" : ""}`}>{defaultTask.title}</h1>
+        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Название функции: {defaultTask.functionName}</h2>
+        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Язык: {defaultTask.language}</h2>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Задание:</h2>
-        <p className={`${darkMode ? "dark-mode" : ""}`}>{task.description}</p>
+        <p className={`${darkMode ? "dark-mode" : ""}`}>{defaultTask.description}</p>
       </div>
       <CodeEditor className='editor-window' solutionCode={code} onSave={handleSave}/>
     </div>
