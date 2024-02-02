@@ -6,11 +6,12 @@ import Loader from '../../Loader';
 import "./Task.css";
 
 const StudentTaskPage = ({ defaultTask }) => {
-
-  const [loading, setLoading] = useState(true);
-  const { darkMode } = useContext(UiContext);
+  const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const { taskApiService } = useContext(ApiContext);
   const [code, setCode] = useState('');
+  const [outputText, setOutputText] = useState('');
+  const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,11 +26,31 @@ const StudentTaskPage = ({ defaultTask }) => {
     fetchData();
   }, []);
 
-  const handleSave = (solutionCode) => {
-    const code = {
-      code: solutionCode
+  const handleCodeChange = (code) => {
+    setCode(code);
+    console.log(code);
+  }
+
+  const saveCode = async () => {
+    const data = {
+      code: code
     }
-    taskApiService.postSolution(defaultTask.id, code);
+    try {
+      await taskApiService.postSolution(defaultTask.id, data);
+      showSuccessAlert("Решение сохранено");
+    } catch (error) {
+      showErrorAlert(error.error);
+    }
+  }
+
+  const executeSolution = async () => {
+    try {
+      setOutputText("");
+      const response = await taskApiService.executeSolution(defaultTask.id);
+      setOutputText(response);
+    } catch(error) {
+      showErrorAlert(error.error);
+    }
   }
 
   if (loading) {
@@ -49,7 +70,30 @@ const StudentTaskPage = ({ defaultTask }) => {
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Задание:</h2>
         <p className={`${darkMode ? "dark-mode" : ""}`}>{defaultTask.description}</p>
       </div>
-      <CodeEditor className='editor-window' solutionCode={code} onSave={handleSave}/>
+      <div className='right-side-container'>
+        <div className='editor-and-output'>
+          <CodeEditor
+            solutionCode={code}
+            onCodeChange={handleCodeChange}/>
+          <textarea
+            value={outputText}
+            disabled={true}
+            className={`output ${darkMode ? "dark-mode" : ""}`}>
+          </textarea>
+        </div>
+        <div className='control-panel'>
+          <button
+            className='button save-button'
+            onClick={saveCode}>
+            СОХРАНИТЬ
+          </button>
+          <button
+            className='button execute-button'
+            onClick={executeSolution}>
+            ЗАПУСТИТЬ
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

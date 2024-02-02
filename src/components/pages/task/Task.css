@@ -13,10 +13,39 @@
   width: fit-content;
 }
 
-.editor-window {
-
+.right-side-container {
+  display: flex;
 }
 
-p.dark-mode {
+.editor-and-output {
+  display: flex;
+  flex-direction: column;
+}
+
+.output {
+  margin-top: 10px;
+  padding: 5px;
+  height: 150px;
+  width: 600px;
+  resize: none;
+  color: var(--text-color);
+  background-color: var(--background-secondary-color);
+}
+
+.output.dark-mode {
+  color: var(--dark-mode-text-color);
+  background-color: var(--dark-mode-background-secondary-color);
+}
+
+
+.control-panel {
+  margin-left: 15px;
+  padding: 5px;
+  background-color: var(--dark-mode-background-secondary-color);
+  border-radius: 5px;
+  height: fit-content;
+}
+
+.dark-mode {
   color: var(--dark-mode-text-color);
 }

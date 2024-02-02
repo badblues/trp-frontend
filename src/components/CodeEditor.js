@@ -1,31 +1,27 @@
 import React, { useState, useCallback } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { java } from "@codemirror/lang-java";
-
 import { dracula } from '@uiw/codemirror-theme-dracula';
+import "./CodeEditor.css";
 
-const CodeEditor = ({ solutionCode, onSave }) => {
+const CodeEditor = ({ solutionCode, onCodeChange }) => {
   const [code, setCode] = useState(solutionCode);
 
-  const handleChange = useCallback((val, viewUpdate) => {
+  const handleChange = useCallback((val) => {
     setCode(val);
+    onCodeChange(val);
   }, []);
-
-  const handleSave = () => {
-    onSave(code);
-  };
 
   return (
     <div className='editor-container'>
       <CodeMirror
         value={code}
-        onChange={ handleChange}
-        height='600px'
-        width='800px'
+        onChange={handleChange}
         theme={dracula}
+        height='400px'
+        width='600px'
         extensions={[java()]}
       />
-      <button onClick={handleSave}>Save</button>
     </div>
   );
 };

@@ -7,9 +7,10 @@ import Loader from "../../Loader";
 import StudentTaskPage from "./StudentTaskPage";
 import TeacherTaskPage from "./TeacherTaskPage";
 import "./Task.css";
+import { UiContext } from '../../../contexts/UiContext';
 
 const TaskPage = () => {
-
+  const { showErrorAlert } = useContext(UiContext);
   const { taskId } = useParams();
   const [loading, setLoading] = useState(true);
   const [task, setTask] = useState(null);
@@ -18,9 +19,13 @@ const TaskPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const task = await taskApiService.getTask(taskId);
-      setTask(task);
-      setLoading(false);
+      try {
+        const task = await taskApiService.getTask(taskId);
+        setTask(task);
+        setLoading(false);
+      } catch(error) {
+        showErrorAlert(error.error);
+      }
     }
     fetchData();
   }, []);
