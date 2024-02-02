@@ -17,6 +17,7 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
   const onSubmit = (data) => {
     setLoading(true);
     data.disciplineId = discipline.id;
+    console.log(data);
     onFormSubmit(data, onDone);
   }
 
@@ -50,9 +51,9 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
           <label className="form-label" htmlFor="description">
             Описание:
           </label>
-          <input
+          <textarea
             id="description"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            className={`form-textarea form-input  ${darkMode ? "dark-mode" : ""}`}
             type="text"
             placeholder="Описание..."
             autoComplete="off"
@@ -90,24 +91,23 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
           <label className="form-label" htmlFor="language">
             Язык программирования:
           </label>
-          <input
+          <select
             id="language"
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
-            type="text"
-            placeholder="Язык программирования..."
-            autoComplete="off"
             defaultValue={task ? task.language : ""}
-            {...register("language", {
-              required: "Необходимо ввести язык программирования",
-            })}
-          />
+            {...register("language")}>
+            <option
+              value={"C"}>
+              C
+            </option>
+          </select>
           <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
             {errors.language?.message}
           </label>
         </div>
 
         <button disabled={loading} className="button form-button" type="submit">
-          {loading ? <Loader/> : task ? "ИЗМЕНЕНИЕ ЗАДАНИЯ" : "СОЗДАНИЕ ЗАДАНИЯ"}
+          {loading ? <Loader/> : task ? "ИЗМЕНИТЬ ЗАДАНИЕ" : "СОЗДАТЬ ЗАДАНИЕ"}
         </button>
       </div>
     </form>

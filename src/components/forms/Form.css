@@ -84,6 +84,11 @@ form {
   color: var(--dark-mode-text-color);
 }
 
+.form-textarea {
+  resize: none;
+  height: 300px;
+}
+
 .form-checkbox {
   margin-left: 5px;
 }
