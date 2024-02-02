@@ -4,6 +4,7 @@ import { Roles } from "../../models/Roles";
 import { ApiContext } from "../../contexts/ApiContext";
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
+import dices from "../../images/dices.png";
 import "./Form.css";
 
 const UserForm = ({ user, onFormSubmit }) => {
@@ -11,9 +12,10 @@ const UserForm = ({ user, onFormSubmit }) => {
   const { errors } = formState;
   const selectedRole = watch("role");
   const { groupApiService } = useContext(ApiContext);
-  const { darkMode } = useContext(UiContext);
+  const { darkMode, showErrorAlert } = useContext(UiContext);
   const [groups, setGroups] = useState([]);
   const [groupsLoading, setGroupsLoading] = useState(true);
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -29,10 +31,29 @@ const UserForm = ({ user, onFormSubmit }) => {
     setLoading(false);
   }
 
+  const randomPassword = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let password = '';
+    
+    for (let i = 0; i < 7; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      password += characters.charAt(randomIndex);
+    }
+    setPassword(password);
+  }
+
+  const onPasswordChange = (event) => {
+    setPassword(event.target.value);
+  }
+
   const onSubmit = (data) => {
+    if (password === '') {
+      showErrorAlert("Введите пароль");
+      return;
+    }
     const newUser = {
       fullName: data.fullName,
-      password: data.password,
+      password: password,
       username: data.username,
     }
     if (data.role === Roles.Student) {
@@ -42,6 +63,7 @@ const UserForm = ({ user, onFormSubmit }) => {
     } 
     const role = user ? user.role : selectedRole;
     setLoading(true);
+    console.log(newUser);
     onFormSubmit(newUser, role, onDone);
   }
 
@@ -99,17 +121,25 @@ const UserForm = ({ user, onFormSubmit }) => {
           <label className="form-label" htmlFor="password">
             Пароль:
           </label>
-          <input
-            id="password"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
-            type="text"
-            placeholder="Пароль..."
-            autoComplete="off"
-            defaultValue={user ? user.password : ""}
-            {...register("password", {
-              required: "Необходимо ввести пароль",
-            })}
-          />
+          <div className="input-with-button-container">
+            <input
+              value={password}
+              onInput={onPasswordChange}
+              id="password"
+              className={`form-input ${darkMode ? "dark-mode" : ""}`}
+              type="text"
+              placeholder="Пароль..."
+              autoComplete="off"
+              defaultValue={user ? user.password : ""}
+            />
+            <button
+              className="button button-with-image"
+              title="Сгенерировать случайный пароль"
+              type="button"
+              onClick={randomPassword}>
+              <img src={dices} alt="rnd" width="20" />
+            </button>
+          </div>
           <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
             {errors.password?.message}
           </label>
@@ -156,7 +186,10 @@ const UserForm = ({ user, onFormSubmit }) => {
         )}
 
 
-        <button disabled={loading} className="button form-button" type="submit">
+        <button
+          disabled={loading}
+          className="button form-button"
+          type="submit">
           {loading ? <Loader/> : user ? "ИЗМЕНИТЬ ИНФОРМАЦИЮ" : "СОЗДАТЬ ПОЛЬЗОВАТЕЛЯ"}
         </button>
       </div>
