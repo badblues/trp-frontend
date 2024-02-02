@@ -79,6 +79,14 @@ export default class TaskApiService {
     try {
       const response = await http.get(url);
       return response.data.data;
+    } catch (error) {}
+  }
+
+  async executeSolution(taskId) {
+    let url = this.apiUrl + `/${taskId}/solution/execute/student`;
+    try {
+      const response = await http.post(url);
+      return response.data.data;
     } catch (error) {
       throw error.response.data;
     }
