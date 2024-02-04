@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
-import Loader from "../Loader";
 import { UiContext } from '../../contexts/UiContext';
 import { ApiContext } from "../../contexts/ApiContext";
 import "./Tasks.css";
+import FakeItemsList from '../loaders/FakeItemsList';
 
 const Tasks = ({ disciplineId, onSelect }) => {
 
@@ -23,7 +23,7 @@ const Tasks = ({ disciplineId, onSelect }) => {
   if (loading) {
     return (
       <div>
-        <Loader/>
+        <FakeItemsList/>
       </div>
     );
   }

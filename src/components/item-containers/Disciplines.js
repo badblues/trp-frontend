@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import Loader from "../Loader";
 import { UiContext } from "../../contexts/UiContext";
 import { ApiContext } from "../../contexts/ApiContext";
 import "./Disciplines.css";
 import { useNavigate } from "react-router-dom";
+import FakeItemsList from "../loaders/FakeItemsList";
 
 const Disciplines = () => {
   const [disciplines, setDisciplines] = useState([]);
@@ -24,7 +24,7 @@ const Disciplines = () => {
   if (loading) {
     return (
       <div>
-        <Loader />
+        <FakeItemsList />
       </div>
     );
   }
