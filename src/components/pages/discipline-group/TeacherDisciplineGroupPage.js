@@ -6,6 +6,7 @@ import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import "./DisciplineGroupPage.css";
 import TaskAppointments from "../../item-containers/TaskAppointments";
+import FakeTaskAppointments from "../../loaders/FakeTaskAppointments";
 
 
 const TeacherDisciplineGroupPage = () => {
@@ -73,7 +74,7 @@ const TeacherDisciplineGroupPage = () => {
   if (loading) {
     return (
       <div>
-        <Loader />
+        <FakeTaskAppointments />
       </div>
     );
   }
