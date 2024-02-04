@@ -36,8 +36,10 @@ const TeacherDisciplineGroupPage = () => {
           student.tasks = JSON.parse(JSON.stringify(allTasks))
           for (const task of student.tasks) {
             task.appointed = false;
-            if (studentAppointmentsResponse.filter(a => a.studentId == student.id && a.taskId == task.id).length > 0)
-            task.appointed = true;
+            if (studentAppointmentsResponse.filter(a => a.studentId == student.id && a.taskId == task.id).length > 0) {
+              task.appointed = true;
+              task.appointment = studentAppointmentsResponse.find(a => a.studentId == student.id && a.taskId == task.id);
+            }
           }
         }
         setStudents(filteredStudents);
@@ -48,22 +50,23 @@ const TeacherDisciplineGroupPage = () => {
   }, []);
 
   const handleTaskClick = async (task, handleTaskChangeState, student) => {
-    if (!task.appointed) {
-      setLoading(true);
-      let appointment = {
-        studentId: student.id,
-        taskId: task.id
-      };
-      try {
-        await studentAppointmentApiService
-          .createAppointment(appointment);
-      } catch (error) {
-        showErrorAlert(error.error);
-      } finally {
-        task.appointed = !task.appointed;
-        handleTaskChangeState(task);
-        setLoading(false);
+    setLoading(true);
+    try {
+      if (!task.appointed) {
+        let appointment = {
+          studentId: student.id,
+          taskId: task.id
+        };
+        await studentAppointmentApiService.createAppointment(appointment);
+      } else {
+        await studentAppointmentApiService.deleteAppointment(task.appointment.id);      
       }
+    } catch (error) {
+      showErrorAlert(error.error);
+    } finally {
+      task.appointed = !task.appointed;
+      handleTaskChangeState(task);
+      setLoading(false);
     }
   }
 

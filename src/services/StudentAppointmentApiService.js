@@ -33,16 +33,6 @@ export class StudentAppointmentApiService {
     }
   }
 
-  async updateAppointment(id, appointment) {
-    let url = this.apiUrl + `/${id}`;
-    try {
-      const response = await http.put(url, appointment);
-      return response.data.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
-
   async deleteAppointment(id) {
     let url = this.apiUrl + `/${id}`;
     try {
