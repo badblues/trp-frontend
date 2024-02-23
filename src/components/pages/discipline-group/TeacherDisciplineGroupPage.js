@@ -52,13 +52,14 @@ const TeacherDisciplineGroupPage = () => {
 
   const handleTaskClick = async (task, handleTaskChangeState, student) => {
     setLoading(true);
+    var newAppointment;
     try {
       if (!task.appointed) {
         let appointment = {
           studentId: student.id,
           taskId: task.id
         };
-        await studentAppointmentApiService.createAppointment(appointment);
+        newAppointment = await studentAppointmentApiService.createAppointment(appointment);
       } else {
         await studentAppointmentApiService.deleteAppointment(task.appointment.id);      
       }
@@ -66,6 +67,8 @@ const TeacherDisciplineGroupPage = () => {
       showErrorAlert(error.error);
     } finally {
       task.appointed = !task.appointed;
+      if (task.appointed)
+        task.appointment = newAppointment;
       handleTaskChangeState(task);
       setLoading(false);
     }
