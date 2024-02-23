@@ -29,6 +29,7 @@ const DisciplinePage = () => {
   const pages = {
     [Roles.Admin]: AdminDisciplinePage,
     [Roles.Teacher]: TeacherDisciplinePage,
+    [Roles.SeniorTeacher]: TeacherDisciplinePage,
     [Roles.Student]: StudentDisciplinePage,
   };
 

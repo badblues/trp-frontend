@@ -32,6 +32,7 @@ const TaskPage = () => {
 
   const pages = {
     [Roles.Teacher]: TeacherTaskPage,
+    [Roles.SeniorTeacher]: TeacherTaskPage,
     [Roles.Student]: StudentTaskPage,
   };
 

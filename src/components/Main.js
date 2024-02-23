@@ -26,7 +26,7 @@ const Main = () => {
         <Route
           element={
             <RequireAuth
-              allowedRoles={[Roles.Admin, Roles.Teacher, Roles.Student]}
+              allowedRoles={[Roles.Admin, Roles.Teacher, Roles.SeniorTeacher, Roles.Student]}
             />
           }
         >
@@ -56,7 +56,7 @@ const Main = () => {
         <Route
           element={
             <RequireAuth
-              allowedRoles={[Roles.Admin, Roles.Teacher, Roles.Student]}
+              allowedRoles={[Roles.Admin, Roles.Teacher, Roles.SeniorTeacher, Roles.Student]}
             />
           }
         >
@@ -66,7 +66,7 @@ const Main = () => {
         <Route
           element={
             <RequireAuth
-              allowedRoles={[Roles.Teacher]}
+              allowedRoles={[Roles.Teacher, Roles.SeniorTeacher]}
             />
           }
         >
@@ -76,7 +76,7 @@ const Main = () => {
         <Route
           element={
             <RequireAuth
-              allowedRoles={[Roles.Teacher, Roles.Student]}
+              allowedRoles={[Roles.Teacher, Roles.SeniorTeacher, Roles.Student]}
             />
           }
         >
@@ -103,7 +103,7 @@ const Main = () => {
           <Route path="/assign-teacher" element={<CreateTeacherAppointment />} exact />
         </Route>
 
-        <Route element={<RequireAuth allowedRoles={[Roles.Teacher]} />}>
+        <Route element={<RequireAuth allowedRoles={[Roles.SeniorTeacher]} />}>
           <Route path="/disciplines/:disciplineId/create-task" element={<CreateTaskPage />} exact />
         </Route>
 
