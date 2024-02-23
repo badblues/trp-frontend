@@ -16,6 +16,7 @@ import CreateDisciplinePage from "./pages/create/CreateDisciplinePage";
 import CreateUserPage from "./pages/create/CreateUserPage";
 import CreateTeacherAppointment from "./pages/create/CreateTeacherAppointment";
 import CreateTaskPage from "./pages/create/CreateTaskPage";
+import NotFoundPage from "./pages/errors/NotFoundPage";
 
 const Main = () => {
   const { darkMode } = useContext(UiContext);
@@ -109,6 +110,10 @@ const Main = () => {
 
         <Route element={<RequireAuth allowedRoles={[""]} />}>
           <Route path="/login" element={<LoginPage />} />
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Teacher, Roles.SeniorTeacher, Roles.Student]} />}>
+            <Route path ="/not-found" element={<NotFoundPage />}/>
         </Route>
       </Routes>
     </div>
