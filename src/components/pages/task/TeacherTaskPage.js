@@ -5,10 +5,13 @@ import { ApiContext } from '../../../contexts/ApiContext';
 import TaskForm from '../../forms/TaskForm';
 import "./Task.css";
 import Loader from '../../Loader';
+import { UserContext } from '../../../contexts/UserContext';
+import { Roles } from '../../../models/Roles';
 
 const TeacherTaskPage = ({ defaultTask }) => {
 
   const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
+  const { user } = useContext(UserContext);
   const { taskApiService,
           disciplineApiService } = useContext(ApiContext);
   const navigate = useNavigate();
@@ -97,22 +100,24 @@ const TeacherTaskPage = ({ defaultTask }) => {
           {task.description}
         </p>
       </div>
-      <div className='task-controll'>
-        <button
-          className='button'
-          onClick={() => setUpdating(true)}>
-          ИЗМЕНИТЬ ЗАДАНИЕ
-        </button>
-        <button
-          className='button'>
-          ИЗМЕНИТЬ ТЕСТЫ
-        </button>
-        <button
-          className='button'
-          onClick={deleteTask}>
-          УДАЛИТЬ ЗАДАНИЕ
-        </button>
-      </div>
+      {user.role === Roles.SeniorTeacher ? (
+        <div div className='task-controll'>
+          <button
+            className='button'
+            onClick={() => setUpdating(true)}>
+            ИЗМЕНИТЬ ЗАДАНИЕ
+          </button>
+          <button
+            className='button'>
+            ИЗМЕНИТЬ ТЕСТЫ
+          </button>
+          <button
+            className='button'
+            onClick={deleteTask}>
+            УДАЛИТЬ ЗАДАНИЕ
+          </button>
+        </div>
+      ) : null}
     </div>
   )
 }

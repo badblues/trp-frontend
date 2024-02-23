@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import Loader from "../../Loader";
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
+import { UserContext } from "../../../contexts/UserContext";
+import { Roles } from "../../../models/Roles";
 import "./DisciplinePage.css";
 import Tasks from "../../item-containers/Tasks";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +13,7 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const { teacherAppointmentApiService } = useContext(ApiContext);
-  //TODO:
+  const { user } = useContext(UserContext);
   const discipline = defaultDiscipline;
   const navigate = useNavigate();
   const { darkMode } = useContext(UiContext);
@@ -42,7 +44,13 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
         <h2 className={` ${darkMode ? "dark-mode" : ""}`}>{`Полугодие: ${discipline.halfYear == 'FIRST' ? "Первое" : "Второе"}`}</h2>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Лабораторные работы:</h2>
         <Tasks disciplineId={discipline.id} onSelect={(task) => {navigate(`/tasks/${task.id}`)}}/>
-        <button className={`button button-usual ${darkMode ? "dark-mode" : ""}`} onClick={() => {navigate(`/disciplines/${discipline.id}/create-task`)}}>Добавить работу</button>
+        {user.role === Roles.SeniorTeacher ? (
+          <button
+            className={`button button-usual ${darkMode ? "dark-mode" : ""}`}
+            onClick={() => {navigate(`/disciplines/${discipline.id}/create-task`)}}>
+            Добавить работу
+          </button>)
+          : null}
       </div>
       <div>
       <h2 className={` ${darkMode ? "dark-mode" : ""}`}>Группы с этим предметом:</h2>
