@@ -83,7 +83,7 @@ const TeacherTaskPage = ({ defaultTask }) => {
 
   return (
     <div className='task-container'>
-      <div className='task-desctiption'>
+      <div className='task-information'>
         <h1 className={`${darkMode ? "dark-mode" : ""}`}>
           {task.title}
         </h1>
@@ -96,23 +96,24 @@ const TeacherTaskPage = ({ defaultTask }) => {
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>
           Задание:
         </h2>
-        <p className={`${darkMode ? "dark-mode" : ""}`}>
+        <p className={`task-description ${darkMode ? "dark-mode" : ""}`}>
           {task.description}
         </p>
       </div>
       {user.role === Roles.SeniorTeacher ? (
-        <div div className='task-controll'>
+        <div
+          className='task-controll'>
           <button
-            className='button'
+            className='button control-button'
             onClick={() => setUpdating(true)}>
             ИЗМЕНИТЬ ЗАДАНИЕ
           </button>
           <button
-            className='button'>
+            className='button control-button'>
             ИЗМЕНИТЬ ТЕСТЫ
           </button>
           <button
-            className='button'
+            className='button control-button'
             onClick={deleteTask}>
             УДАЛИТЬ ЗАДАНИЕ
           </button>

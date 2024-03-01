@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UiContext } from "../../contexts/UiContext";
 import { ApiContext } from "../../contexts/ApiContext";
-import "./Disciplines.css";
 import { useNavigate } from "react-router-dom";
 import FakeItemsList from "../loaders/FakeItemsList";
+import "./Disciplines.css";
 
 const Disciplines = () => {
   const [disciplines, setDisciplines] = useState([]);
@@ -32,9 +32,9 @@ const Disciplines = () => {
   return (
     <>
       <div className="disciplines-container">
-        <label className={`disciplines-caption ${darkMode ? "dark-mode" : ""}`}>
+        <h2 className={`disciplines-caption ${darkMode ? "dark-mode" : ""}`}>
           Дисциплины:
-        </label>
+        </h2>
         {disciplines.map((discipline) => (
           <div
             className={`discipline-item ${darkMode ? "dark-mode" : ""}`}
@@ -42,7 +42,13 @@ const Disciplines = () => {
             key={discipline.id}
           >
             <p>
-              {discipline.name} {discipline.year}
+              {discipline.name}
+            </p>
+            <p>
+              {discipline.year}
+            </p>
+            <p>
+              Полугодие: {discipline.halfYear == "FIRST" ? "Первое" : "Второе"}
             </p>
           </div>
         ))}

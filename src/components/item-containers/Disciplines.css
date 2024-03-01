@@ -12,6 +12,8 @@
   border: solid;
   border-color: black;
   border-width: 1px;
+  border-radius: 5px;
+  margin: 0px 0px 5px 0px;
 }
 
 .disciplines-caption {

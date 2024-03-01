@@ -63,12 +63,12 @@ const StudentTaskPage = ({ defaultTask }) => {
 
   return (
     <div className='task-container'>
-      <div className='task-description'>
+      <div className='task-information'>
         <h1 className={`${darkMode ? "dark-mode" : ""}`}>{defaultTask.title}</h1>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Название функции: {defaultTask.functionName}</h2>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Язык: {defaultTask.language}</h2>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Задание:</h2>
-        <p className={`${darkMode ? "dark-mode" : ""}`}>{defaultTask.description}</p>
+        <p className={`task-description ${darkMode ? "dark-mode" : ""}`}>{defaultTask.description}</p>
       </div>
       <div className='right-side-container'>
         <div className='editor-and-output'>
@@ -83,12 +83,12 @@ const StudentTaskPage = ({ defaultTask }) => {
         </div>
         <div className='control-panel'>
           <button
-            className='button save-button'
+            className='button control-button save-button'
             onClick={saveCode}>
             СОХРАНИТЬ
           </button>
           <button
-            className='button execute-button'
+            className='button control-button execute-button'
             onClick={executeSolution}>
             ЗАПУСТИТЬ
           </button>

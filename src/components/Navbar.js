@@ -58,12 +58,16 @@ const Navbar = () => {
       <nav className="navbar">
         <div className={`navbar-container ${darkMode ? "dark-mode" : ""}`}>
           <div className="logo">
-            <img src={logoImg} alt="Logo" width="17"></img>
+            <img
+              className={`logo-image ${darkMode ? "dark-mode" : ""}`}
+              src={logoImg}
+              alt="Logo"
+              width="25"/>
             <Link
               to="/"
               className={`clickable logo-text ${darkMode ? "dark-mode" : ""}`}
             >
-              TERPI
+              TRP
             </Link>
             <DarkModeToggle className="dark-mode-toggle" />
           </div>

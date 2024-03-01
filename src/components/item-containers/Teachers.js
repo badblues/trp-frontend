@@ -33,9 +33,9 @@ const Teachers = () => {
   return (
     <>
       <div className="teachers-container">
-        <label className={`teachers-caption ${darkMode ? "dark-mode" : ""}`}>
+        <h2 className={`teachers-caption ${darkMode ? "dark-mode" : ""}`}>
           Преподаватели:
-        </label>
+        </h2>
         {teachers.map((teacher) => (
           <div
             className={`teacher-item ${darkMode ? "dark-mode" : ""}`}

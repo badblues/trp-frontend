@@ -106,12 +106,12 @@ const TeacherPage = () => {
           </div>
         ))}
         <button
-          className='button'
+          className='button control-button'
           onClick={() => setUpdating(true)}>
           ИЗМЕНИТЬ ИНФОРМАЦИЮ
         </button>
         <button
-          className='button'
+          className='button control-button'
           onClick={deleteTeacher}>
           УДАЛИТЬ ПОЛЬЗОВАТЕЛЯ
         </button>

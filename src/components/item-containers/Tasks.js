@@ -14,6 +14,17 @@ const Tasks = ({ disciplineId, onSelect }) => {
   useEffect(() => {
     const fetchData = async () => {
       const tasksResponse = await taskApiService.getTasksByDiscipline(disciplineId);
+      tasksResponse.sort((a, b) => {
+        const nameA = a.title.toLowerCase();
+        const nameB = b.title.toLowerCase();
+        if (nameA < nameB) {
+            return -1; // a should come before b
+        }
+        if (nameA > nameB) {
+            return 1; // b should come before a
+        }
+        return 0; // names are equal
+      });
       setTasks(tasksResponse);
       setLoading(false);
     }
@@ -37,7 +48,7 @@ const Tasks = ({ disciplineId, onSelect }) => {
           key={task.id}
         >
           <p>
-            {task.title} - {task.description}
+            {task.title}
           </p>
         </div>
       ))}

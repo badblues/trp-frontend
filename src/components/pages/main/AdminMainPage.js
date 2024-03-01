@@ -11,10 +11,10 @@ const AdminMainPage = () => {
         <Disciplines/>
       </div>
       <div className="main-page-item">
-        <Groups/>
+        <Teachers/>
       </div>
       <div className="main-page-item">
-        <Teachers/>
+        <Groups/>
       </div>
     </div>
   );
