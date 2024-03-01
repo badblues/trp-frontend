@@ -114,12 +114,12 @@ const AdminGroupPage = () => {
           </div>
         ))}
         <button
-          className="button"
+          className="button control-button"
           onClick={() => setUpdating(true)}>
           ИЗМЕНИТЬ ГРУППУ
         </button>
         <button
-          className="button"
+          className="button control-button"
           onClick={deleteGroup}>
           УДАЛИТЬ ГРУППУ
         </button>

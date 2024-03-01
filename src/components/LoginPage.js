@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { UserContext } from "../contexts/UserContext";
 import { UiContext } from "../contexts/UiContext";
 import logoImg  from "../images/logo.png";
+import showImg  from "../images/show.png";
+import hideImg  from "../images/hide.png";
 import Loader from "./Loader";
 import "./LoginPage.css";
 
@@ -52,26 +54,33 @@ const LoginPage = () => {
             <label className="form-label" htmlFor="password">
               Пароль:
             </label>
-            <input
-              className={`form-input ${darkMode ? "dark-mode" : ""}`}
-              type={`${showPassword ? "text" : "password"}`}
-              placeholder="password..."
-              {...register("password", {
-                required: "Необходимо ввести пароль",
-              })}
-            />
+            <div className="form-password-container">
+              <input
+                className={`password-input form-input ${darkMode ? "dark-mode" : "" }`}
+                type={`${showPassword ? "text" : "password"}`}
+                placeholder="password..."
+                {...register("password", {
+                  required: "Необходимо ввести пароль",
+                })}
+              />
+              <button
+                type="button"
+                onClick={() => {setShowPassword(!showPassword)}}
+                className="button button-with-image" 
+              >
+              <img
+                className={`show-password-icon ${darkMode ? "dark-mode" : ""}`}
+                src={showPassword ? showImg : hideImg}
+                alt="show"
+                width="25px"
+              />
+              </button>
+            </div>
             <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
               {errors.password?.message}
             </label>
-            <button
-              type="button"
-              onClick={() => {setShowPassword(!showPassword)}}
-              className="button show-password-button" 
-            >
-              {`${showPassword ? "Скрыть пароль" : "Показать пароль"}`}
-            </button>
           </div>
-          <img src={logoImg} alt="logo" width="100px"></img>
+          <img src={logoImg} alt="logo" width="100px"/>
           <button disabled={loading} className="button form-button">
             {loading ? <Loader /> : "ВОЙТИ"}
           </button>

@@ -3,6 +3,17 @@ import './TaskAppointments.css';
 import { UiContext } from '../../contexts/UiContext';
 
 const TaskAppointments = ({tasks, onTaskClick}) => {
+  tasks.sort((a, b) => {
+    const nameA = a.title.toLowerCase();
+    const nameB = b.title.toLowerCase();
+    if (nameA < nameB) {
+        return -1; // a should come before b
+    }
+    if (nameA > nameB) {
+        return 1; // b should come before a
+    }
+    return 0; // names are equal
+  });
   const [taskList, setTaskList] = useState(tasks);
   const { darkMode } = useContext(UiContext);
 

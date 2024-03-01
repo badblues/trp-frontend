@@ -3,7 +3,12 @@ form {
   justify-content: center;
 }
 
-.show-password-button {
-  padding: 5px;
-  align-self: flex-start;
+.show-password-icon.dark-mode {
+  filter: invert(100%);
+}
+
+.form-password-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
 }

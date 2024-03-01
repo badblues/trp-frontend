@@ -17,10 +17,6 @@
   color: var(--dark-mode-text-color);
 }
 
-.clickable:hover {
-  cursor: pointer;
-}
-
 .logo {
   display: flex;
   padding-left: 10px;
@@ -41,6 +37,10 @@
 
 .logo-text.dark-mode {
   color: var(--dark-mode-text-color)
+}
+
+.logo-image.dark-mode {
+  filter: invert(100%);
 }
 
 .profile {

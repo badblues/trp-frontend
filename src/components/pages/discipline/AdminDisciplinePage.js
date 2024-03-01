@@ -124,16 +124,18 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
             </div>
           </div>
         ))}
-        <button
-          className="button"
-          onClick={() => setUpdating(true)}>
-          ИЗМЕНИТЬ ДИСЦИПЛИНУ
-        </button>
-        <button
-          className="button"
-          onClick={deleteDiscipline}>
-          УДАЛИТЬ ДИСЦИПЛИНУ
-        </button>
+        <div>
+          <button
+            className="button control-button"
+            onClick={() => setUpdating(true)}>
+            ИЗМЕНИТЬ ДИСЦИПЛИНУ
+          </button>
+          <button
+            className="button control-button"
+            onClick={deleteDiscipline}>
+            УДАЛИТЬ ДИСЦИПЛИНУ
+          </button>
+        </div>
       </div>
     </div>
   );

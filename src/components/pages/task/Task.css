@@ -8,9 +8,13 @@
   flex-grow: 1;
 }
 
-.task-description {
+.task-information {
   min-width: 400px;
   width: fit-content;
+}
+
+.task-description {
+  max-width: 600px;
 }
 
 .right-side-container {

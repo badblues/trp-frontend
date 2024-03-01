@@ -21,11 +21,11 @@
   --status-color-in-progress: red;
   --status-color-finished: orange;
   --status-color-done: green;
-  --text-color: #0e0e0e;
+  --text-color: #181818;
   --dark-mode-text-color: #f1f1f1;
 
-  --main-font: "Raleway", sans-serif;
-  --heading-font: "Montserrat", sans-serif;
+  --main-font: "Montserrat", sans-serif;
+  --heading-font: "Raleway", sans-serif;
 }
 
 .page {
@@ -42,8 +42,6 @@
   width: fit-content;
   border-radius: 7px;
   background: #1e1e1e;
-  margin-top: 10px;
-  margin-bottom: 10px;
   font-family: var(--main-font);
   color: white;
   display: flex;
@@ -69,6 +67,9 @@
   cursor: pointer;
 }
 
+.control-button {
+  margin: 5px 0px 5px 0px;
+}
 
 .status-not-appointed {
   color: var(--status-color-not-appointed)
@@ -103,4 +104,9 @@
   justify-content: center;
   align-items: center;
   height: 600px;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  color:red;
 }

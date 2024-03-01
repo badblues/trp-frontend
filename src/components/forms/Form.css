@@ -35,18 +35,20 @@ form {
 
 .form-text {
   font-family: var(--main-font);
-  color: #b70000;
+  color: #8f0000;
+  margin: 4px;
   align-self: flex-start;
 }
 
 .form-text.dark-mode {
-  color: #ffafaf;
+  color: #ff3f3f;
 }
 
 .form-label {
   font-family: var(--main-font);
   font-size: medium;
   align-self: flex-start;
+  margin: 4px
 }
 
 .form-input-container {
@@ -71,7 +73,6 @@ form {
   border-radius: 7px;
   border: 1px solid #000;
   padding: 10px;
-  margin-bottom: 4px;
   font-family: var(--main-font);
 }
 
@@ -96,6 +97,7 @@ form {
 .form-button {
   width: 80%;
   height: 40px;
+  margin: 10px 0px 10px 0px;
 }
 
 .input-with-button-container {

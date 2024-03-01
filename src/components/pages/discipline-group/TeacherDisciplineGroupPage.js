@@ -63,13 +63,13 @@ const TeacherDisciplineGroupPage = () => {
       } else {
         await studentAppointmentApiService.deleteAppointment(task.appointment.id);      
       }
-    } catch (error) {
-      showErrorAlert(error.error);
-    } finally {
       task.appointed = !task.appointed;
       if (task.appointed)
         task.appointment = newAppointment;
       handleTaskChangeState(task);
+    } catch (error) {
+      showErrorAlert(error.error);
+    } finally {
       setLoading(false);
     }
   }

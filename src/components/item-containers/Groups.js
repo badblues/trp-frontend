@@ -33,9 +33,9 @@ const Groups = () => {
   return (
     <>
       <div className="groups-container">
-        <label className={`groups-caption ${darkMode ? "dark-mode" : ""}`}>
+        <h2 className={`groups-caption ${darkMode ? "dark-mode" : ""}`}>
           Группы:
-        </label>
+        </h2>
         {groups.map((group) => (
           <div
             className={`group-item ${darkMode ? "dark-mode" : ""}`}
