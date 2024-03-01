@@ -84,19 +84,20 @@ const DisciplineForm = ({ discipline, onFormSubmit }) => {
           </label>
         </div>
 
-        <div className="form-checkbox-container">
-          <label className="form-label" htmlFor="deprecated">
-            Устаревшая:
-          </label>
-          <input
-            id="deprecated"
-            className={`form-checkbox ${darkMode ? "dark-mode" : ""}`}
-            type="checkbox"
-            placeholder="Устаревшая..."
-            defaultChecked={discipline ? discipline.deprecated : false}
-            {...register("deprecated")}
-          />
-        </div>
+        {discipline ? (
+          <div className="form-checkbox-container">
+            <label className="form-label" htmlFor="deprecated">
+              Устаревшая:
+            </label>
+            <input
+              id="deprecated"
+              className={`form-checkbox ${darkMode ? "dark-mode" : ""}`}
+              type="checkbox"
+              placeholder="Устаревшая..."
+              defaultChecked={discipline ? discipline.deprecated : false}
+              {...register("deprecated")}
+            />
+          </div>) : null}
 
         <button disabled={loading} className="button form-button" type="submit">
           {loading ? <Loader /> : discipline ? "ИЗМЕНИТЬ ДИСЦИПЛИНУ" : "СОЗДАТЬ ДИСЦИПЛИНУ"}
