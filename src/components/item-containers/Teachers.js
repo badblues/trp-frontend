@@ -3,7 +3,6 @@ import { UiContext } from "../../contexts/UiContext";
 import "./Teachers.css";
 
 const Teachers = ({ teachers, onTeacherSelect }) => {
-  
   const { darkMode } = useContext(UiContext);
 
   return (

@@ -1,7 +1,6 @@
 import http from "axios";
 import { Roles } from "../models/Roles";
 
-
 export class UserApiService {
   apiUrl = "http://212.20.47.147:8080/admin";
 

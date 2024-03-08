@@ -24,7 +24,7 @@ export default class TaskApiService {
     }
   }
 
-  async getTasksByDiscipline(id){
+  async getTasksByDiscipline(id) {
     let url = this.disciplineApiUrl + `/${id}/tasks`;
     try {
       const response = await http.get(url);
@@ -91,5 +91,4 @@ export default class TaskApiService {
       throw error.response.data;
     }
   }
-
 }

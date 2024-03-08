@@ -22,7 +22,7 @@ h2 {
 }
 
 h2.dark-mode {
-  color: var(--dark-mode-text-color)
+  color: var(--dark-mode-text-color);
 }
 
 .appointments-item {
@@ -35,5 +35,5 @@ h2.dark-mode {
 }
 
 .appointments-list.dark-mode {
-  color: var(--dark-mode-text-color)
+  color: var(--dark-mode-text-color);
 }

@@ -3,7 +3,6 @@ import { UiContext } from "../../contexts/UiContext";
 import "./Groups.css";
 
 const Groups = ({ groups, onGroupSelect }) => {
-  
   const { darkMode } = useContext(UiContext);
 
   return (
@@ -15,12 +14,12 @@ const Groups = ({ groups, onGroupSelect }) => {
         {groups.map((group) => (
           <div
             className={`group-item ${darkMode ? "dark-mode" : ""}`}
-            onClick={() => {onGroupSelect(group.id)}}
+            onClick={() => {
+              onGroupSelect(group.id);
+            }}
             key={group.id}
           >
-            <p>
-              {group.name}
-            </p>
+            <p>{group.name}</p>
           </div>
         ))}
       </div>

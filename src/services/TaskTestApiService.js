@@ -4,8 +4,7 @@ export default class TaskTestApiService {
   apiUrl = "http://212.20.47.147:8080/api/v2/task-tests";
   taskApiUrl = "http://212.20.47.147:8080/api/v2/tasks";
 
-
-  async getTaskTestsByTask(id){
+  async getTaskTestsByTask(id) {
     let url = this.taskApiUrl + `/${id}/tests`;
     try {
       const response = await http.get(url);
@@ -24,5 +23,4 @@ export default class TaskTestApiService {
       throw error.response.data;
     }
   }
-
 }

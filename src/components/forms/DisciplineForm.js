@@ -13,17 +13,19 @@ const DisciplineForm = ({ discipline, onFormSubmit }) => {
 
   const onDone = () => {
     setLoading(false);
-  }
+  };
 
   const onSubmit = (data) => {
     setLoading(true);
     onFormSubmit(data, onDone);
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <h1 className="form-name">{discipline ? "ИЗМЕНЕНИЕ ДИСЦИПЛИНЫ" : "СОЗДАНИЕ ДИСЦИПЛИНЫ"}</h1>
+        <h1 className="form-name">
+          {discipline ? "ИЗМЕНЕНИЕ ДИСЦИПЛИНЫ" : "СОЗДАНИЕ ДИСЦИПЛИНЫ"}
+        </h1>
 
         <div className="form-input-container">
           <label className="form-label" htmlFor="name">
@@ -97,10 +99,17 @@ const DisciplineForm = ({ discipline, onFormSubmit }) => {
               defaultChecked={discipline ? discipline.deprecated : false}
               {...register("deprecated")}
             />
-          </div>) : null}
+          </div>
+        ) : null}
 
         <button disabled={loading} className="button form-button" type="submit">
-          {loading ? <Loader /> : discipline ? "ИЗМЕНИТЬ ДИСЦИПЛИНУ" : "СОЗДАТЬ ДИСЦИПЛИНУ"}
+          {loading ? (
+            <Loader />
+          ) : discipline ? (
+            "ИЗМЕНИТЬ ДИСЦИПЛИНУ"
+          ) : (
+            "СОЗДАТЬ ДИСЦИПЛИНУ"
+          )}
         </button>
       </div>
     </form>

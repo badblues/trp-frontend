@@ -16,15 +16,19 @@ const StudentDisciplinePage = ({ defaultDiscipline }) => {
   const navigate = useNavigate();
 
   const navigateToTask = (task) => {
-    navigate(`/tasks/${task.id}`)
-  }
+    navigate(`/tasks/${task.id}`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       const appointments = await teacherAppointmentApiService.getAppointments();
       console.log(appointments);
-      const filteredAppointments = appointments.filter((a) => a.discipline.id === discipline.id);
-      const teachers = filteredAppointments.map(appointment => appointment.teacher)
+      const filteredAppointments = appointments.filter(
+        (a) => a.discipline.id === discipline.id,
+      );
+      const teachers = filteredAppointments.map(
+        (appointment) => appointment.teacher,
+      );
       setTeachers(teachers);
       setLoading(false);
     };
@@ -42,20 +46,26 @@ const StudentDisciplinePage = ({ defaultDiscipline }) => {
   return (
     <div className="page-container">
       <div>
-        <h1 className={`${darkMode ? "dark-mode" : ""}`}>{discipline.name} {discipline.year}</h1>
+        <h1 className={`${darkMode ? "dark-mode" : ""}`}>
+          {discipline.name} {discipline.year}
+        </h1>
         {teachers.map((teacher) => (
           <div key={teacher.id}>
-            <h2 className={`${darkMode ? "dark-mode" : ""}`}>{teacher.fullName}</h2>
+            <h2 className={`${darkMode ? "dark-mode" : ""}`}>
+              {teacher.fullName}
+            </h2>
           </div>
         ))}
         <h2></h2>
       </div>
       <div>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Доступные лабораторные работы:</h2>
-        <Tasks disciplineId={discipline.id} onSelect={navigateToTask}/>
+        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
+          Доступные лабораторные работы:
+        </h2>
+        <Tasks disciplineId={discipline.id} onSelect={navigateToTask} />
       </div>
     </div>
   );
-}
+};
 
 export default StudentDisciplinePage;

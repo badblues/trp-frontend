@@ -3,7 +3,6 @@ import { UiContext } from "../../contexts/UiContext";
 import "./Disciplines.css";
 
 const Disciplines = ({ disciplines, onDisciplineSelect }) => {
-
   const { darkMode } = useContext(UiContext);
 
   return (
@@ -18,12 +17,8 @@ const Disciplines = ({ disciplines, onDisciplineSelect }) => {
             onClick={() => onDisciplineSelect(discipline.id)}
             key={discipline.id}
           >
-            <p>
-              {discipline.name}
-            </p>
-            <p>
-              {discipline.year}
-            </p>
+            <p>{discipline.name}</p>
+            <p>{discipline.year}</p>
             <p>
               Полугодие: {discipline.halfYear == "FIRST" ? "Первое" : "Второе"}
             </p>

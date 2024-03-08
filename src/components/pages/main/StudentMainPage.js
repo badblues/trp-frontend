@@ -5,9 +5,7 @@ import Disciplines from "../../item-containers/Disciplines";
 import "./MainPage.css";
 import FakeItemsList from "../../loaders/FakeItemsList";
 
-
 const StudentMainPage = () => {
-
   const navigate = useNavigate();
   const [disciplines, setDisciplines] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,16 +22,19 @@ const StudentMainPage = () => {
 
   const selectDiscipline = (disciplineId) => {
     navigate(`/disciplines/${disciplineId}`);
-  }
+  };
 
   return (
     <div className="main-page-container">
       <div className="main-page-item">
-        {loading ?
-          <FakeItemsList/> :
+        {loading ? (
+          <FakeItemsList />
+        ) : (
           <Disciplines
             disciplines={disciplines}
-            onDisciplineSelect={selectDiscipline}/>}
+            onDisciplineSelect={selectDiscipline}
+          />
+        )}
       </div>
     </div>
   );

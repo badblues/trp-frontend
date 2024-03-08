@@ -17,7 +17,7 @@ const App = () => {
   axios.interceptors.request.use(requestInterceptor);
   axios.interceptors.response.use(
     (response) => response,
-    (error) => responseErrorInterceptor(error, logout)
+    (error) => responseErrorInterceptor(error, logout),
   );
 
   return (

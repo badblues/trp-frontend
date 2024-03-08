@@ -22,5 +22,4 @@ export default class TeacherApiService {
       throw error.response.data;
     }
   }
-
 }

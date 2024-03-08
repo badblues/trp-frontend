@@ -11,7 +11,9 @@ const CreateUserPage = () => {
     try {
       await userApiService
         .register(user, role)
-        .then((response) => showSuccessAlert(`Пользователь ${response.fullName} создан`));
+        .then((response) =>
+          showSuccessAlert(`Пользователь ${response.fullName} создан`),
+        );
     } catch (error) {
       showErrorAlert(error.error);
     } finally {
@@ -21,7 +23,7 @@ const CreateUserPage = () => {
 
   return (
     <div>
-      <UserForm onFormSubmit={createUser}/>
+      <UserForm onFormSubmit={createUser} />
     </div>
   );
 };

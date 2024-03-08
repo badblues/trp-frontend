@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useContext, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import { Roles } from "../../../models/Roles";
@@ -7,7 +7,7 @@ import Loader from "../../Loader";
 import StudentTaskPage from "./StudentTaskPage";
 import TeacherTaskPage from "./TeacherTaskPage";
 import "./Task.css";
-import { UiContext } from '../../../contexts/UiContext';
+import { UiContext } from "../../../contexts/UiContext";
 
 const TaskPage = () => {
   const { showErrorAlert } = useContext(UiContext);
@@ -23,10 +23,10 @@ const TaskPage = () => {
         const task = await taskApiService.getTask(taskId);
         setTask(task);
         setLoading(false);
-      } catch(error) {
+      } catch (error) {
         showErrorAlert(error.error);
       }
-    }
+    };
     fetchData();
   }, []);
 
@@ -40,15 +40,13 @@ const TaskPage = () => {
 
   if (loading) {
     return (
-      <div className='loader-container'>
-        <Loader/>
+      <div className="loader-container">
+        <Loader />
       </div>
     );
   }
 
-  return (
-    <>{Page && <Page defaultTask={ task } />} </>
-  );
-}
+  return <>{Page && <Page defaultTask={task} />} </>;
+};
 
-export default TaskPage
+export default TaskPage;

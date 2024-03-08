@@ -36,7 +36,6 @@
   transform: translate(90px, 25px);
 }
 
-
 .sub-menu.dark-mode {
   background-color: var(--dark-mode-background-secondary-color);
 }
@@ -59,6 +58,5 @@
 }
 
 .sub-menu-option.dark-mode:hover {
-  background-color:red;
+  background-color: red;
 }
-

@@ -16,5 +16,5 @@ root.render(
         </BrowserRouter>
       </ApiContextProvider>
     </UserContextProvider>
-  </UiContextProvider>
+  </UiContextProvider>,
 );

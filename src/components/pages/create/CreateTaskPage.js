@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { ApiContext } from "../../../contexts/ApiContext";
 import TaskForm from "../../forms/TaskForm";
 import Loader from "../../Loader";
 import { UiContext } from "../../../contexts/UiContext";
-
 
 const CreateTaskPage = () => {
   const { showSuccessAlert, showErrorAlert } = useContext(UiContext);
@@ -26,7 +25,9 @@ const CreateTaskPage = () => {
     try {
       await taskApiService
         .createTask(task)
-        .then((response) => showSuccessAlert(`Задание ${response.title} создано`));
+        .then((response) =>
+          showSuccessAlert(`Задание ${response.title} создано`),
+        );
     } catch (error) {
       showErrorAlert(error.error);
     } finally {
@@ -37,14 +38,12 @@ const CreateTaskPage = () => {
   if (loading) {
     return (
       <div className="loader-container">
-        <Loader/>
+        <Loader />
       </div>
     );
   }
 
-  return (
-   <TaskForm onFormSubmit={createTask} discipline={discipline}/>
-  );
-}
+  return <TaskForm onFormSubmit={createTask} discipline={discipline} />;
+};
 
-export default CreateTaskPage
+export default CreateTaskPage;

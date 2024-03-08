@@ -1,20 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import Loader from "../../Loader";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import crossImg from "../../../images/cross.png";
 import GroupForm from "../../forms/GroupForm";
 import "./GroupPage.css";
 
-
 const AdminGroupPage = () => {
   const { groupId } = useParams();
   const navigate = useNavigate();
-  const { studentApiService,
-          teacherAppointmentApiService,
-          groupApiService } = useContext(ApiContext);
+  const { studentApiService, teacherAppointmentApiService, groupApiService } =
+    useContext(ApiContext);
   const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const [appointments, setAppointments] = useState([]);
   const [students, setStudents] = useState([]);
@@ -26,11 +24,14 @@ const AdminGroupPage = () => {
     const fetchData = async () => {
       const groupResponse = await groupApiService.getGroup(groupId);
       setGroup(groupResponse);
-      const teacherAppointmentsResponse = await teacherAppointmentApiService.getAppointments();
+      const teacherAppointmentsResponse =
+        await teacherAppointmentApiService.getAppointments();
       const allStudents = await studentApiService.getStudents();
-      const filteredAppointments = teacherAppointmentsResponse.filter(a => a.group.id == groupId);
+      const filteredAppointments = teacherAppointmentsResponse.filter(
+        (a) => a.group.id == groupId,
+      );
       setAppointments(filteredAppointments);
-      const filteredStudents = allStudents.filter(s => s.group.id == groupId);
+      const filteredStudents = allStudents.filter((s) => s.group.id == groupId);
       setStudents(filteredStudents);
       setLoading(false);
     };
@@ -45,7 +46,7 @@ const AdminGroupPage = () => {
     } catch (errorData) {
       showErrorAlert(errorData.error);
     }
-  }
+  };
 
   const updateGroup = async (updatedGroup, onUpdate) => {
     try {
@@ -55,23 +56,23 @@ const AdminGroupPage = () => {
           showSuccessAlert(`Группа ${updatedGroup.name} обновлена`);
           setGroup(updatedGroup);
         });
-    } catch(errorData) {
+    } catch (errorData) {
       showErrorAlert(errorData.error);
     } finally {
       onUpdate();
       setUpdating(false);
     }
-  }
+  };
 
   const deleteAppointment = async (appointment) => {
     try {
       await teacherAppointmentApiService.deleteAppointment(appointment.id);
-      setAppointments(appointments.filter(a => a.id !== appointment.id));
+      setAppointments(appointments.filter((a) => a.id !== appointment.id));
       showSuccessAlert("Назначение удалено");
     } catch (errorData) {
       showErrorAlert(errorData.error);
     }
-  }
+  };
 
   if (loading) {
     return (
@@ -85,18 +86,13 @@ const AdminGroupPage = () => {
     return (
       <div className="page-container">
         <div className="group-form-container">
-          <GroupForm
-            onFormSubmit={updateGroup}
-            group={group}/>
+          <GroupForm onFormSubmit={updateGroup} group={group} />
         </div>
-        <button 
-          className="button"
-          onClick={() => setUpdating(false)}
-          >
+        <button className="button" onClick={() => setUpdating(false)}>
           ЗАКРЫТЬ
         </button>
       </div>
-    )
+    );
   }
 
   return (
@@ -115,17 +111,18 @@ const AdminGroupPage = () => {
         ))}
         <button
           className="button control-button"
-          onClick={() => setUpdating(true)}>
+          onClick={() => setUpdating(true)}
+        >
           ИЗМЕНИТЬ ГРУППУ
         </button>
-        <button
-          className="button control-button"
-          onClick={deleteGroup}>
+        <button className="button control-button" onClick={deleteGroup}>
           УДАЛИТЬ ГРУППУ
         </button>
       </div>
       <div>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Текущие дисциплины:</h2>
+        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
+          Текущие дисциплины:
+        </h2>
         {appointments.map((appointment) => (
           <div
             className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
@@ -135,19 +132,26 @@ const AdminGroupPage = () => {
               <div className="appointments-links">
                 <h4
                   className="clickable"
-                  onClick={() => {navigate(`/disciplines/${appointment.discipline.id}`)}}>
+                  onClick={() => {
+                    navigate(`/disciplines/${appointment.discipline.id}`);
+                  }}
+                >
                   {`${appointment.discipline.name} ${appointment.discipline.year}`}
                 </h4>
                 <label
                   className="clickable"
-                  onClick={() => {navigate(`/teachers/${appointment.teacher.id}`)}}>
+                  onClick={() => {
+                    navigate(`/teachers/${appointment.teacher.id}`);
+                  }}
+                >
                   {`${appointment.teacher.fullName}`}
                 </label>
               </div>
               <button
                 className="button-with-image"
                 title="Удалить назначение"
-                onClick={() => deleteAppointment(appointment)}>
+                onClick={() => deleteAppointment(appointment)}
+              >
                 <img src={crossImg} alt="DELETE" width="17"></img>
               </button>
             </div>
@@ -156,6 +160,6 @@ const AdminGroupPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default AdminGroupPage;

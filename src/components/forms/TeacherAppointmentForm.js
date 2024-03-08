@@ -7,7 +7,8 @@ import "./Form.css";
 
 const TeacherAppointmentForm = ({ onFormSubmit }) => {
   const { register, handleSubmit } = useForm();
-  const { disciplineApiService, groupApiService, teacherApiService  } = useContext(ApiContext);
+  const { disciplineApiService, groupApiService, teacherApiService } =
+    useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
 
   const [disciplines, setDisciplines] = useState([]);
@@ -30,22 +31,22 @@ const TeacherAppointmentForm = ({ onFormSubmit }) => {
 
   const onDone = () => {
     setLoading(false);
-  }
+  };
 
   const onSubmit = (data) => {
     let appointment = {
       teacherId: data.teacherId,
       groupId: data.groupId,
-      disciplineId: data.disciplineId
+      disciplineId: data.disciplineId,
     };
     setLoading(true);
     onFormSubmit(appointment, onDone);
-  }
+  };
 
   if (loading) {
     return (
       <div className="loader-container">
-        <Loader/>
+        <Loader />
       </div>
     );
   }
@@ -65,11 +66,9 @@ const TeacherAppointmentForm = ({ onFormSubmit }) => {
             {...register("disciplineId")}
           >
             {disciplines.map((discipline) => (
-              <option
-                key={discipline.id}
-                value={discipline.id}
-              >
-                {discipline.name} {discipline.year} {discipline.halfYear === "SECOND" ? "1/2" : "2/2"}
+              <option key={discipline.id} value={discipline.id}>
+                {discipline.name} {discipline.year}{" "}
+                {discipline.halfYear === "SECOND" ? "1/2" : "2/2"}
               </option>
             ))}
           </select>
@@ -85,10 +84,7 @@ const TeacherAppointmentForm = ({ onFormSubmit }) => {
             {...register("groupId")}
           >
             {groups.map((group) => (
-              <option
-                key={group.id}
-                value={group.id}
-              >
+              <option key={group.id} value={group.id}>
                 {group.name}
               </option>
             ))}
@@ -105,10 +101,7 @@ const TeacherAppointmentForm = ({ onFormSubmit }) => {
             {...register("teacherId")}
           >
             {teachers.map((teacher) => (
-              <option
-                key={teacher.id}
-                value={teacher.id}
-              >
+              <option key={teacher.id} value={teacher.id}>
                 {teacher.fullName}
               </option>
             ))}

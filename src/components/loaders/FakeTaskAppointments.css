@@ -15,13 +15,13 @@
   height: 40px;
   width: 180px;
   margin: 0px 0px 10px 5px;
-  background-color: var(--background-secondary-color); 
+  background-color: var(--background-secondary-color);
 }
 
 .fake-student-name {
   height: 30px;
   width: 200px;
-  background-color: var(--background-secondary-color); 
+  background-color: var(--background-secondary-color);
   filter: blur(5px);
 }
 
@@ -29,12 +29,12 @@
   margin-left: 10px;
   height: 30px;
   width: 400px;
-  background-color: var(--background-secondary-color); 
+  background-color: var(--background-secondary-color);
   filter: blur(5px);
 }
 
 .fake-student-name.dark-mode,
 .fake-appointment.dark-mode,
 .fake-group-name.dark-mode {
-  background-color: var(--dark-mode-background-secondary-color);;
+  background-color: var(--dark-mode-background-secondary-color);
 }

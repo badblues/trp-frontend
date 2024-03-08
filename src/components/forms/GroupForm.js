@@ -12,17 +12,19 @@ const GroupForm = ({ group, onFormSubmit }) => {
 
   const onDone = () => {
     setLoading(false);
-  }
+  };
 
   const onSubmit = (data) => {
     setLoading(true);
     onFormSubmit(data, onDone);
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <h1 className="form-name">{group ? "ИЗМЕНЕНИЕ ГРУППЫ" : "СОЗДАНИЕ ГРУППЫ"}</h1>
+        <h1 className="form-name">
+          {group ? "ИЗМЕНЕНИЕ ГРУППЫ" : "СОЗДАНИЕ ГРУППЫ"}
+        </h1>
         <div className="form-input-container">
           <label className="form-label" htmlFor="name">
             Название группы
