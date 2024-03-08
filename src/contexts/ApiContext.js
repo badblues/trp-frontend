@@ -5,6 +5,7 @@ import GroupApiService from "../services/GroupApiService";
 import TeacherAppointmentApiService from "../services/TeacherAppointmentApiService";
 import StudentAppointmentApiService from "../services/StudentAppointmentApiService";
 import TaskApiService from "../services/TaskApiService";
+import TaskTestApiService from "../services/TaskTestApiService";
 import TeacherApiService from "../services/TeacherApiService";
 import StudentApiService from "../services/StudentApiService";
 
@@ -20,6 +21,7 @@ export class ApiContextProvider extends Component {
       teacherAppointmentApiService: new TeacherAppointmentApiService(),
       studentAppointmentApiService: new StudentAppointmentApiService(),
       taskApiService: new TaskApiService(),
+      taskTestApiService: new TaskTestApiService(),
       teacherApiService: new TeacherApiService(),
       studentApiService: new StudentApiService(),
     };
