@@ -1,0 +1,16 @@
+.test-form {
+}
+
+.test-form-input {
+  background-color: transparent;
+  border-radius: 3px;
+  border-width: 1px;
+  max-width: 200px;
+  margin: 3px 0px 3px 0px;
+  font-size: medium;
+}
+
+.test-form-input.dark-mode {
+  color: var(--dark-mode-text-color);
+  border-color: white;
+}
