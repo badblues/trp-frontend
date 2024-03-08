@@ -9,8 +9,9 @@ import { useNavigate } from "react-router-dom";
 const StudentDisciplinePage = ({ defaultDiscipline }) => {
   const { darkMode } = useContext(UiContext);
   const [teachers, setTeachers] = useState([]);
-  const { teacherAppointmentApiService } = useContext(ApiContext);
-  //TODO below
+  const [tasks, setTasks] = useState([]);
+  const { teacherAppointmentApiService, taskApiService } =
+    useContext(ApiContext);
   const discipline = defaultDiscipline;
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -22,14 +23,17 @@ const StudentDisciplinePage = ({ defaultDiscipline }) => {
   useEffect(() => {
     const fetchData = async () => {
       const appointments = await teacherAppointmentApiService.getAppointments();
-      console.log(appointments);
       const filteredAppointments = appointments.filter(
-        (a) => a.discipline.id === discipline.id,
+        (a) => a.discipline.id === discipline.id
       );
       const teachers = filteredAppointments.map(
-        (appointment) => appointment.teacher,
+        (appointment) => appointment.teacher
       );
       setTeachers(teachers);
+      const tasksResponse = await taskApiService.getTasksByDiscipline(
+        discipline.id
+      );
+      setTasks(tasksResponse);
       setLoading(false);
     };
     fetchData();
@@ -62,7 +66,7 @@ const StudentDisciplinePage = ({ defaultDiscipline }) => {
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>
           Доступные лабораторные работы:
         </h2>
-        <Tasks disciplineId={discipline.id} onSelect={navigateToTask} />
+        <Tasks tasks={tasks} onSelect={navigateToTask} />
       </div>
     </div>
   );
