@@ -11,7 +11,9 @@ const CreateGroupPage = () => {
     try {
       await groupApiService
         .createGroup(group)
-        .then((response) => showSuccessAlert(`Группа ${response.name} создана`));      
+        .then((response) =>
+          showSuccessAlert(`Группа ${response.name} создана`),
+        );
     } catch (error) {
       showErrorAlert(error.error);
     } finally {
@@ -21,7 +23,7 @@ const CreateGroupPage = () => {
 
   return (
     <div>
-      <GroupForm onFormSubmit={createGroup}/>
+      <GroupForm onFormSubmit={createGroup} />
     </div>
   );
 };

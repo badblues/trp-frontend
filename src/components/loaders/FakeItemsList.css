@@ -12,19 +12,19 @@
   width: 180px;
   filter: blur(5px);
   margin: 0px 0px 10px 5px;
-  background-color: var(--background-secondary-color); 
+  background-color: var(--background-secondary-color);
 }
 
 .fake-item.dark-mode,
 .fake-caption.dark-mode {
-  background-color: var(--dark-mode-background-secondary-color);;
+  background-color: var(--dark-mode-background-secondary-color);
 }
 
 .fake-item {
   height: 40px;
   width: 200px;
   padding: 10px;
-  background-color: var(--background-secondary-color); 
+  background-color: var(--background-secondary-color);
   border: solid;
   border-color: black;
   border-width: 1px;

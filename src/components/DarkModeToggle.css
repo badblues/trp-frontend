@@ -12,7 +12,9 @@
   border-radius: 20px;
   position: relative;
   background: #ebebeb;
-  box-shadow: inset 0px 5px 10px #00000066, inset 0px -5px 10px #ffffff66;
+  box-shadow:
+    inset 0px 5px 10px #00000066,
+    inset 0px -5px 10px #ffffff66;
   transition: 0.3s;
 }
 

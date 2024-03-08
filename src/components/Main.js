@@ -27,37 +27,35 @@ const Main = () => {
         <Route
           element={
             <RequireAuth
-              allowedRoles={[Roles.Admin, Roles.Teacher, Roles.SeniorTeacher, Roles.Student]}
+              allowedRoles={[
+                Roles.Admin,
+                Roles.Teacher,
+                Roles.SeniorTeacher,
+                Roles.Student,
+              ]}
             />
           }
         >
           <Route path="/" element={<MainPage />} exact />
         </Route>
 
-        <Route
-          element={
-            <RequireAuth
-              allowedRoles={[Roles.Admin]}
-            />
-          }
-        >
+        <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route path="/teachers/:id" element={<TeacherPage />} exact />
         </Route>
 
-        <Route
-          element={
-            <RequireAuth
-              allowedRoles={[Roles.Admin]}
-            />
-          }
-        >
+        <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route path="/groups/:groupId" element={<AdminGroupPage />} exact />
         </Route>
 
         <Route
           element={
             <RequireAuth
-              allowedRoles={[Roles.Admin, Roles.Teacher, Roles.SeniorTeacher, Roles.Student]}
+              allowedRoles={[
+                Roles.Admin,
+                Roles.Teacher,
+                Roles.SeniorTeacher,
+                Roles.Student,
+              ]}
             />
           }
         >
@@ -66,12 +64,14 @@ const Main = () => {
 
         <Route
           element={
-            <RequireAuth
-              allowedRoles={[Roles.Teacher, Roles.SeniorTeacher]}
-            />
+            <RequireAuth allowedRoles={[Roles.Teacher, Roles.SeniorTeacher]} />
           }
         >
-          <Route path="/disciplines/:disciplineId/groups/:groupId" element={<TeacherDisciplineGroupPage/>} exact />
+          <Route
+            path="/disciplines/:disciplineId/groups/:groupId"
+            element={<TeacherDisciplineGroupPage />}
+            exact
+          />
         </Route>
 
         <Route
@@ -87,7 +87,7 @@ const Main = () => {
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route path="/create-user" element={<CreateUserPage />} exact />
         </Route>
-        
+
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
           <Route
             path="/create-discipline"
@@ -101,19 +101,38 @@ const Main = () => {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
-          <Route path="/assign-teacher" element={<CreateTeacherAppointment />} exact />
+          <Route
+            path="/assign-teacher"
+            element={<CreateTeacherAppointment />}
+            exact
+          />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[Roles.SeniorTeacher]} />}>
-          <Route path="/disciplines/:disciplineId/create-task" element={<CreateTaskPage />} exact />
+          <Route
+            path="/disciplines/:disciplineId/create-task"
+            element={<CreateTaskPage />}
+            exact
+          />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[""]} />}>
           <Route path="/login" element={<LoginPage />} />
         </Route>
 
-        <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Teacher, Roles.SeniorTeacher, Roles.Student]} />}>
-            <Route path ="/not-found" element={<NotFoundPage />}/>
+        <Route
+          element={
+            <RequireAuth
+              allowedRoles={[
+                Roles.Admin,
+                Roles.Teacher,
+                Roles.SeniorTeacher,
+                Roles.Student,
+              ]}
+            />
+          }
+        >
+          <Route path="/not-found" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </div>

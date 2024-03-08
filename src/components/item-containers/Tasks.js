@@ -1,11 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { UiContext } from '../../contexts/UiContext';
+import React, { useContext, useState, useEffect } from "react";
+import { UiContext } from "../../contexts/UiContext";
 import { ApiContext } from "../../contexts/ApiContext";
 import "./Tasks.css";
-import FakeItemsList from '../loaders/FakeItemsList';
+import FakeItemsList from "../loaders/FakeItemsList";
 
 const Tasks = ({ disciplineId, onSelect }) => {
-
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const { darkMode } = useContext(UiContext);
@@ -13,28 +12,29 @@ const Tasks = ({ disciplineId, onSelect }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const tasksResponse = await taskApiService.getTasksByDiscipline(disciplineId);
+      const tasksResponse =
+        await taskApiService.getTasksByDiscipline(disciplineId);
       tasksResponse.sort((a, b) => {
         const nameA = a.title.toLowerCase();
         const nameB = b.title.toLowerCase();
         if (nameA < nameB) {
-            return -1; // a should come before b
+          return -1; // a should come before b
         }
         if (nameA > nameB) {
-            return 1; // b should come before a
+          return 1; // b should come before a
         }
         return 0; // names are equal
       });
       setTasks(tasksResponse);
       setLoading(false);
-    }
+    };
     fetchData();
   }, []);
 
   if (loading) {
     return (
       <div>
-        <FakeItemsList/>
+        <FakeItemsList />
       </div>
     );
   }
@@ -43,13 +43,13 @@ const Tasks = ({ disciplineId, onSelect }) => {
     <div className="tasks-container">
       {tasks.map((task) => (
         <div
-          onClick={() => {onSelect(task)}}
+          onClick={() => {
+            onSelect(task);
+          }}
           className={`task-item ${darkMode ? "dark-mode" : ""}`}
           key={task.id}
         >
-          <p>
-            {task.title}
-          </p>
+          <p>{task.title}</p>
         </div>
       ))}
     </div>

@@ -11,7 +11,9 @@ const CreateDisciplinePage = () => {
     try {
       await disciplineApiService
         .createDiscipline(discipline)
-        .then((response) => showSuccessAlert(`Дисциплина ${response.title} создана`));
+        .then((response) =>
+          showSuccessAlert(`Дисциплина ${response.title} создана`),
+        );
     } catch (error) {
       showErrorAlert(error.error);
     } finally {

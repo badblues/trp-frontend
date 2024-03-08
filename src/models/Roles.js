@@ -3,4 +3,4 @@ export const Roles = {
   Student: "ROLE_STUDENT",
   Teacher: "ROLE_TEACHER",
   SeniorTeacher: "ROLE_LECTURE_TEACHER",
-}
+};

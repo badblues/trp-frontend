@@ -4,11 +4,10 @@ import jwtDecode from "jwt-decode";
 
 export const UserContext = createContext({});
 
-export class UserContextProvider extends Component { 
-
+export class UserContextProvider extends Component {
   constructor(props) {
     super(props);
-    this.authService = new AuthApiService();;
+    this.authService = new AuthApiService();
     this.state = {
       user: this.loadUser(),
       login: this.login.bind(this),
@@ -30,11 +29,11 @@ export class UserContextProvider extends Component {
     try {
       const decodedToken = jwtDecode(token);
       const userInfo = {
-       id: decodedToken.id, 
-       fullName: decodedToken.fullName,
-       role: decodedToken.role,
-       username: decodedToken.username,
-      }
+        id: decodedToken.id,
+        fullName: decodedToken.fullName,
+        role: decodedToken.role,
+        username: decodedToken.username,
+      };
       const userInfoStr = JSON.stringify(userInfo);
       localStorage.setItem("user", userInfoStr);
     } catch (error) {

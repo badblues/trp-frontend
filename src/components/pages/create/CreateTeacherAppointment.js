@@ -1,12 +1,11 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { ApiContext } from "../../../contexts/ApiContext";
 import TeacherAppointmentForm from "../../forms/TeacherAppointmentForm";
 import { UiContext } from "../../../contexts/UiContext";
 
 const CreateTeacherAppointment = () => {
   const { showSuccessAlert, showErrorAlert } = useContext(UiContext);
-  const { teacherAppointmentApiService  } = useContext(ApiContext);
-
+  const { teacherAppointmentApiService } = useContext(ApiContext);
 
   const createTeacherAppointment = async (teacherAppointment, onCreate) => {
     try {
@@ -22,7 +21,7 @@ const CreateTeacherAppointment = () => {
 
   return (
     <div>
-      <TeacherAppointmentForm onFormSubmit={createTeacherAppointment}/>
+      <TeacherAppointmentForm onFormSubmit={createTeacherAppointment} />
     </div>
   );
 };

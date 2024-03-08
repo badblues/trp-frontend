@@ -72,31 +72,31 @@
 }
 
 .status-not-appointed {
-  color: var(--status-color-not-appointed)
+  color: var(--status-color-not-appointed);
 }
 
 .status-not-appointed.dark-mode {
-  color: var(--dark-mode-status-color-not-appointed)
+  color: var(--dark-mode-status-color-not-appointed);
 }
 
 .status-appointed {
-  color: var(--status-color-appointed)
+  color: var(--status-color-appointed);
 }
 
 .status-appointed.dark-mode {
-  color: var(--dark-mode-status-color-appointed)
+  color: var(--dark-mode-status-color-appointed);
 }
 
 .status-in-progress {
-  color: var(--status-color-in-progress)
+  color: var(--status-color-in-progress);
 }
 
 .status-finished {
-  color: var(--status-color-finished)
+  color: var(--status-color-finished);
 }
 
 .status-done {
-  color: var(--status-color-done)
+  color: var(--status-color-done);
 }
 
 .loader-container {
@@ -108,5 +108,5 @@
 
 .clickable:hover {
   cursor: pointer;
-  color:red;
+  color: red;
 }

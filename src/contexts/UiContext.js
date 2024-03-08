@@ -19,8 +19,8 @@ export class UiContextProvider extends Component {
       setDarkMode: this.setDarkMode.bind(this),
       darkMode: darkMode,
     });
-    localStorage.setItem("darkMode", darkMode)
-  }
+    localStorage.setItem("darkMode", darkMode);
+  };
 
   loadData = () => localStorage.getItem("darkMode") === "true";
 
@@ -35,8 +35,8 @@ export class UiContextProvider extends Component {
       progress: undefined,
       theme: `${this.state.darkMode ? "dark" : "light"}`,
       transition: Flip,
-      });
-  }
+    });
+  };
 
   showErrorAlert = (text) => {
     toast.error(text, {
@@ -49,8 +49,8 @@ export class UiContextProvider extends Component {
       progress: undefined,
       theme: `${this.state.darkMode ? "dark" : "light"}`,
       transition: Flip,
-      });;
-  }
+    });
+  };
 
   render() {
     return (

@@ -3,7 +3,6 @@
   background-color: var(--background-color);
 }
 
-
 .main-container.dark-mode {
   background-color: var(--dark-mode-background-color);
 }

@@ -3,7 +3,6 @@ form {
   justify-content: center;
 }
 
-
 .form-container {
   border-radius: 43px;
   background: var(--background-secondary-color);
@@ -48,7 +47,7 @@ form {
   font-family: var(--main-font);
   font-size: medium;
   align-self: flex-start;
-  margin: 4px
+  margin: 4px;
 }
 
 .form-input-container {

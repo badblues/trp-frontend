@@ -7,4 +7,3 @@ const requestInterceptor = (config) => {
 };
 
 export default requestInterceptor;
-    

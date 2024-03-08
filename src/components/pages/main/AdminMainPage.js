@@ -8,15 +8,13 @@ import "./MainPage.css";
 import FakeItemsList from "../../loaders/FakeItemsList";
 
 const AdminMainPage = () => {
-
   const navigate = useNavigate();
   const [groups, setGroups] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [disciplines, setDisciplines] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { groupApiService,
-          teacherApiService,
-          disciplineApiService } = useContext(ApiContext);
+  const { groupApiService, teacherApiService, disciplineApiService } =
+    useContext(ApiContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,39 +30,42 @@ const AdminMainPage = () => {
   }, []);
 
   const selectGroup = (groupId) => {
-    navigate(`/groups/${groupId}`)
-  }
+    navigate(`/groups/${groupId}`);
+  };
 
   const selectTeacher = (teacherId) => {
-    navigate(`/teachers/${teacherId}`)
-  }
+    navigate(`/teachers/${teacherId}`);
+  };
 
   const selectDiscipline = (disciplineId) => {
     navigate(`/disciplines/${disciplineId}`);
-  }
+  };
 
   return (
     <div className="main-page-container">
       <div className="main-page-item">
-        {loading ?
-          <FakeItemsList/> :
+        {loading ? (
+          <FakeItemsList />
+        ) : (
           <Disciplines
             disciplines={disciplines}
-            onDisciplineSelect={selectDiscipline}/>}
+            onDisciplineSelect={selectDiscipline}
+          />
+        )}
       </div>
       <div className="main-page-item">
-        {loading ?
-          <FakeItemsList/> :
-          <Teachers
-            teachers={teachers}
-            onTeacherSelect={selectTeacher}/>}
+        {loading ? (
+          <FakeItemsList />
+        ) : (
+          <Teachers teachers={teachers} onTeacherSelect={selectTeacher} />
+        )}
       </div>
       <div className="main-page-item">
-        {loading ?
-          <FakeItemsList/> :
-          <Groups
-            groups={groups}
-            onGroupSelect={selectGroup}/>}
+        {loading ? (
+          <FakeItemsList />
+        ) : (
+          <Groups groups={groups} onGroupSelect={selectGroup} />
+        )}
       </div>
     </div>
   );

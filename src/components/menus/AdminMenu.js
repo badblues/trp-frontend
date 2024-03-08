@@ -45,7 +45,7 @@ const AdminMenu = () => {
           </Link>
         </div>
       ) : null}
-      <label 
+      <label
         onClick={() => {
           setAppointOpen(!appointOpen);
           setCreateOpen(false);

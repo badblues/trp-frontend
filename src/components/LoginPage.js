@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../contexts/UserContext";
 import { UiContext } from "../contexts/UiContext";
-import logoImg  from "../images/logo.png";
-import showImg  from "../images/show.png";
-import hideImg  from "../images/hide.png";
+import logoImg from "../images/logo.png";
+import showImg from "../images/show.png";
+import hideImg from "../images/hide.png";
 import Loader from "./Loader";
 import "./LoginPage.css";
 
@@ -56,7 +56,7 @@ const LoginPage = () => {
             </label>
             <div className="form-password-container">
               <input
-                className={`password-input form-input ${darkMode ? "dark-mode" : "" }`}
+                className={`password-input form-input ${darkMode ? "dark-mode" : ""}`}
                 type={`${showPassword ? "text" : "password"}`}
                 placeholder="password..."
                 {...register("password", {
@@ -65,22 +65,24 @@ const LoginPage = () => {
               />
               <button
                 type="button"
-                onClick={() => {setShowPassword(!showPassword)}}
-                className="button button-with-image" 
+                onClick={() => {
+                  setShowPassword(!showPassword);
+                }}
+                className="button button-with-image"
               >
-              <img
-                className={`show-password-icon ${darkMode ? "dark-mode" : ""}`}
-                src={showPassword ? showImg : hideImg}
-                alt="show"
-                width="25px"
-              />
+                <img
+                  className={`show-password-icon ${darkMode ? "dark-mode" : ""}`}
+                  src={showPassword ? showImg : hideImg}
+                  alt="show"
+                  width="25px"
+                />
               </button>
             </div>
             <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
               {errors.password?.message}
             </label>
           </div>
-          <img src={logoImg} alt="logo" width="100px"/>
+          <img src={logoImg} alt="logo" width="100px" />
           <button disabled={loading} className="button form-button">
             {loading ? <Loader /> : "ВОЙТИ"}
           </button>

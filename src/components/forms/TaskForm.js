@@ -12,21 +12,25 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
 
   const onDone = () => {
     setLoading(false);
-  }
+  };
 
   const onSubmit = (data) => {
     setLoading(true);
     data.disciplineId = discipline.id;
     console.log(data);
     onFormSubmit(data, onDone);
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <h1 className="form-name">{task ? "ИЗМЕНЕНИЕ ЗАДАНИЯ" : "СОЗДАНИЕ ЗАДАНИЯ"}</h1>
-        <h2 className="form-name">{discipline.name} {discipline.year}</h2>
-      
+        <h1 className="form-name">
+          {task ? "ИЗМЕНЕНИЕ ЗАДАНИЯ" : "СОЗДАНИЕ ЗАДАНИЯ"}
+        </h1>
+        <h2 className="form-name">
+          {discipline.name} {discipline.year}
+        </h2>
+
         <div className="form-input-container">
           <label className="form-label" htmlFor="title">
             Название:
@@ -95,11 +99,9 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
             id="language"
             className={`form-input ${darkMode ? "dark-mode" : ""}`}
             defaultValue={task ? task.language : ""}
-            {...register("language")}>
-            <option
-              value={"C"}>
-              C
-            </option>
+            {...register("language")}
+          >
+            <option value={"C"}>C</option>
           </select>
           <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
             {errors.language?.message}
@@ -107,11 +109,11 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
         </div>
 
         <button disabled={loading} className="button form-button" type="submit">
-          {loading ? <Loader/> : task ? "ИЗМЕНИТЬ ЗАДАНИЕ" : "СОЗДАТЬ ЗАДАНИЕ"}
+          {loading ? <Loader /> : task ? "ИЗМЕНИТЬ ЗАДАНИЕ" : "СОЗДАТЬ ЗАДАНИЕ"}
         </button>
       </div>
     </form>
   );
-}
+};
 
-export default TaskForm
+export default TaskForm;

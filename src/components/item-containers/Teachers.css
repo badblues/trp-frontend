@@ -8,7 +8,7 @@
 
 .teacher-item {
   padding: 10px;
-  background-color: var(--background-secondary-color); 
+  background-color: var(--background-secondary-color);
   border: solid;
   border-color: black;
   border-width: 1px;
@@ -24,11 +24,10 @@
   color: var(--dark-mode-text-color);
 }
 
-
 .teacher-item:hover {
   cursor: pointer;
   background-color: var(--primary-color);
-  color: var(--dark-mode-text-color)
+  color: var(--dark-mode-text-color);
 }
 
 .teacher-item.dark-mode {

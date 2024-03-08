@@ -11,7 +11,7 @@ const MainPage = () => {
   const pages = {
     [Roles.Admin]: AdminMainPage,
     [Roles.Teacher]: TeacherMainPage,
-    [Roles.SeniorTeacher] : TeacherMainPage,
+    [Roles.SeniorTeacher]: TeacherMainPage,
     [Roles.Student]: StudentMainPage,
   };
 

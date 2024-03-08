@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import Loader from "../../Loader";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import { Roles } from "../../../models/Roles";
@@ -8,7 +8,6 @@ import "./DisciplinePage.css";
 import AdminDisciplinePage from "./AdminDisciplinePage";
 import TeacherDisciplinePage from "./TeacherDisciplinePage";
 import StudentDisciplinePage from "./StudentDisciplinePage";
-
 
 const DisciplinePage = () => {
   const { id } = useParams();
@@ -43,9 +42,7 @@ const DisciplinePage = () => {
     );
   }
 
-  return (
-    <>{Page && <Page defaultDiscipline={ discipline } />} </>
-  );
-}
+  return <>{Page && <Page defaultDiscipline={discipline} />} </>;
+};
 
 export default DisciplinePage;

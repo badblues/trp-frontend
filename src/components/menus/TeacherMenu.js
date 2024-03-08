@@ -6,10 +6,7 @@ import { UiContext } from "../../contexts/UiContext";
 const TeacherMenu = () => {
   const { darkMode } = useContext(UiContext);
 
-  return (
-    <div className="menu">
-    </div>
-  );
+  return <div className="menu"></div>;
 };
 
 export default TeacherMenu;

@@ -22,5 +22,4 @@ export default class StudentApiService {
       throw error.response.data;
     }
   }
-
 }

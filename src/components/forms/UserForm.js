@@ -29,25 +29,26 @@ const UserForm = ({ user, onFormSubmit }) => {
 
   const onDone = () => {
     setLoading(false);
-  }
+  };
 
   const randomPassword = () => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let password = '';
-    
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let password = "";
+
     for (let i = 0; i < 7; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       password += characters.charAt(randomIndex);
     }
     setPassword(password);
-  }
+  };
 
   const onPasswordChange = (event) => {
     setPassword(event.target.value);
-  }
+  };
 
   const onSubmit = (data) => {
-    if (password === '') {
+    if (password === "") {
       showErrorAlert("Введите пароль");
       return;
     }
@@ -55,17 +56,17 @@ const UserForm = ({ user, onFormSubmit }) => {
       fullName: data.fullName,
       password: password,
       username: data.username,
-    }
+    };
     if (data.role === Roles.Student) {
       newUser.groupId = data.groupId;
     } else if (user && user.role === Roles.Student) {
       newUser.groupId = data.groupId;
-    } 
+    }
     const role = user ? user.role : selectedRole;
     setLoading(true);
     console.log(newUser);
     onFormSubmit(newUser, role, onDone);
-  }
+  };
 
   if (groupsLoading) {
     return (
@@ -78,8 +79,10 @@ const UserForm = ({ user, onFormSubmit }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
-        <h1 className="form-name">{user ? "ИЗМЕНЕНИЕ ИНФОРМАЦИИ" : "СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ"}</h1>
-        
+        <h1 className="form-name">
+          {user ? "ИЗМЕНЕНИЕ ИНФОРМАЦИИ" : "СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ"}
+        </h1>
+
         <div className="form-input-container">
           <label className="form-label" htmlFor="role">
             Тип пользователя:
@@ -96,7 +99,7 @@ const UserForm = ({ user, onFormSubmit }) => {
             <option value={Roles.Student}>Студент</option>
           </select>
         </div>
-        
+
         <div className="form-input-container">
           <label className="form-label" htmlFor="username">
             Имя пользователя:
@@ -136,7 +139,8 @@ const UserForm = ({ user, onFormSubmit }) => {
               className="button button-with-image"
               title="Сгенерировать случайный пароль"
               type="button"
-              onClick={randomPassword}>
+              onClick={randomPassword}
+            >
               <img src={dices} alt="rnd" width="20" />
             </button>
           </div>
@@ -163,7 +167,8 @@ const UserForm = ({ user, onFormSubmit }) => {
           </label>
         </div>
 
-        {(selectedRole === Roles.Student || (user && user.role === Roles.Student)) && (
+        {(selectedRole === Roles.Student ||
+          (user && user.role === Roles.Student)) && (
           <div className="form-input-container">
             <label className="form-label" htmlFor="group">
               Группа:
@@ -175,9 +180,7 @@ const UserForm = ({ user, onFormSubmit }) => {
               {...register("groupId")}
             >
               {groups.map((group) => (
-                <option
-                  key={group.id}
-                  value={group.id}>
+                <option key={group.id} value={group.id}>
                   {group.name}
                 </option>
               ))}
@@ -185,12 +188,14 @@ const UserForm = ({ user, onFormSubmit }) => {
           </div>
         )}
 
-
-        <button
-          disabled={loading}
-          className="button form-button"
-          type="submit">
-          {loading ? <Loader/> : user ? "ИЗМЕНИТЬ ИНФОРМАЦИЮ" : "СОЗДАТЬ ПОЛЬЗОВАТЕЛЯ"}
+        <button disabled={loading} className="button form-button" type="submit">
+          {loading ? (
+            <Loader />
+          ) : user ? (
+            "ИЗМЕНИТЬ ИНФОРМАЦИЮ"
+          ) : (
+            "СОЗДАТЬ ПОЛЬЗОВАТЕЛЯ"
+          )}
         </button>
       </div>
     </form>

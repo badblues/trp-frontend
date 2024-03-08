@@ -6,7 +6,7 @@ import { UiContext } from "../contexts/UiContext";
 import { ApiContext } from "../contexts/ApiContext";
 import { useNavigate } from "react-router-dom";
 import { Roles } from "../models/Roles";
-import logoImg  from "../images/logo.png";
+import logoImg from "../images/logo.png";
 import DarkModeToggle from "./DarkModeToggle";
 import AdminMenu from "./menus/AdminMenu";
 import TeacherMenu from "./menus/TeacherMenu";
@@ -62,7 +62,8 @@ const Navbar = () => {
               className={`logo-image ${darkMode ? "dark-mode" : ""}`}
               src={logoImg}
               alt="Logo"
-              width="25"/>
+              width="25"
+            />
             <Link
               to="/"
               className={`clickable logo-text ${darkMode ? "dark-mode" : ""}`}

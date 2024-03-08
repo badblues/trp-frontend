@@ -32,11 +32,11 @@
   text-decoration: none;
   color: var(--text-color);
   margin-right: 10px;
-  margin-left: 10px
+  margin-left: 10px;
 }
 
 .logo-text.dark-mode {
-  color: var(--dark-mode-text-color)
+  color: var(--dark-mode-text-color);
 }
 
 .logo-image.dark-mode {
@@ -63,10 +63,8 @@
 
 .logout {
   font-size: large;
-
 }
 
 .logout:hover {
   color: red;
 }
-
