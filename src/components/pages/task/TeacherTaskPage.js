@@ -7,22 +7,27 @@ import "./Task.css";
 import Loader from "../../Loader";
 import { UserContext } from "../../../contexts/UserContext";
 import { Roles } from "../../../models/Roles";
+import Tests from "../../item-containers/Tests";
 
 const TeacherTaskPage = ({ defaultTask }) => {
   const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
+  const { taskApiService, disciplineApiService, taskTestApiService } =
+    useContext(ApiContext);
   const { user } = useContext(UserContext);
-  const { taskApiService, disciplineApiService } = useContext(ApiContext);
   const navigate = useNavigate();
   const [task, setTask] = useState(defaultTask);
   const [discipline, setDiscipline] = useState(null);
+  const [tests, setTests] = useState([]);
   const [updating, setUpdating] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const disciplineRespoinse = await disciplineApiService.getDiscipline(
-        task.disciplineId,
+        task.disciplineId
       );
+      const testsResponse = await taskTestApiService.getTaskTestsByTask(task.id);
+      setTests(testsResponse);
       setDiscipline(disciplineRespoinse);
       setLoading(false);
     };
@@ -54,6 +59,16 @@ const TeacherTaskPage = ({ defaultTask }) => {
       showErrorAlert(errorData.error);
     }
   };
+
+  const addTest = async (test, onDone) => {
+    try {
+      await taskTestApiService.createTaskTest(test);
+      showSuccessAlert("Тест добавлен");
+      onDone();
+    } catch(errorData) {
+      showErrorAlert(errorData.error)
+    }
+  }
 
   if (loading) {
     return (
@@ -94,6 +109,8 @@ const TeacherTaskPage = ({ defaultTask }) => {
         <p className={`task-description ${darkMode ? "dark-mode" : ""}`}>
           {task.description}
         </p>
+        <h2>Тесты:</h2>
+        <Tests tests={tests} onAddTest={addTest} task={task}/>
       </div>
       {user.role === Roles.SeniorTeacher ? (
         <div className="task-controll">
@@ -103,7 +120,6 @@ const TeacherTaskPage = ({ defaultTask }) => {
           >
             ИЗМЕНИТЬ ЗАДАНИЕ
           </button>
-          <button className="button control-button">ИЗМЕНИТЬ ТЕСТЫ</button>
           <button className="button control-button" onClick={deleteTask}>
             УДАЛИТЬ ЗАДАНИЕ
           </button>

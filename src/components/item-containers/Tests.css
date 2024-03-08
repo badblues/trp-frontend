@@ -1,0 +1,20 @@
+.tests-container {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.test-item {
+  width: fit-content;
+  margin: 3px;
+}
+
+.test-item.dark-mode {
+  color: var(--dark-mode-text-color);
+}
+
+.add-test-button {
+  margin: 5px 0px 5px 0px;
+}
