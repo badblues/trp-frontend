@@ -10,8 +10,10 @@ import { useNavigate } from "react-router-dom";
 
 const TeacherDisciplinePage = ({ defaultDiscipline }) => {
   const [appointments, setAppointments] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { teacherAppointmentApiService } = useContext(ApiContext);
+  const { teacherAppointmentApiService, taskApiService } =
+    useContext(ApiContext);
   const { user } = useContext(UserContext);
   const discipline = defaultDiscipline;
   const navigate = useNavigate();
@@ -22,8 +24,12 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
       const teacherAppointmentsResponse =
         await teacherAppointmentApiService.getAppointments();
       const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.discipline.id == discipline.id,
+        (a) => a.discipline.id == discipline.id
       );
+      const tasksResponse = await taskApiService.getTasksByDiscipline(
+        discipline.id
+      );
+      setTasks(tasksResponse);
       setAppointments(filteredAppointments);
       setLoading(false);
     };
@@ -51,7 +57,7 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
           Лабораторные работы:
         </h2>
         <Tasks
-          disciplineId={discipline.id}
+          tasks={tasks}
           onSelect={(task) => {
             navigate(`/tasks/${task.id}`);
           }}
@@ -79,7 +85,7 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
             <h4
               onClick={() => {
                 navigate(
-                  `/disciplines/${discipline.id}/groups/${appointment.group.id}`,
+                  `/disciplines/${discipline.id}/groups/${appointment.group.id}`
                 );
               }}
               className="appointments-item clickable"

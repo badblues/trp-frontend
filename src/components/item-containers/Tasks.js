@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useContext, useState, useEffect } from "react";
 import { UiContext } from "../../contexts/UiContext";
 import { ApiContext } from "../../contexts/ApiContext";
@@ -38,6 +39,25 @@ const Tasks = ({ disciplineId, onSelect }) => {
       </div>
     );
   }
+=======
+import React, { useContext } from "react";
+import { UiContext } from "../../contexts/UiContext";
+import "./Tasks.css";
+
+const Tasks = ({ tasks, onSelect }) => {
+  const { darkMode } = useContext(UiContext);
+  tasks.sort((a, b) => {
+    const nameA = a.title.toLowerCase();
+    const nameB = b.title.toLowerCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+>>>>>>> fix_make_containers_dumb
 
   return (
     <div className="tasks-container">
