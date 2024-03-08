@@ -1,34 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
 import { UiContext } from "../../contexts/UiContext";
-import { ApiContext } from "../../contexts/ApiContext";
 import "./Teachers.css";
-import FakeItemsList from "../loaders/FakeItemsList";
 
-const Teachers = () => {
-  const [teachers, setTeachers] = useState([]);
-  const [loading, setLoading] = useState(true);
+const Teachers = ({ teachers, onTeacherSelect }) => {
+  
   const { darkMode } = useContext(UiContext);
-  const { teacherApiService } = useContext(ApiContext);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await teacherApiService.getTeachers();
-      setTeachers(response);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div>
-        <FakeItemsList />
-      </div>
-    );
-  }
 
   return (
     <>
@@ -39,7 +15,7 @@ const Teachers = () => {
         {teachers.map((teacher) => (
           <div
             className={`teacher-item ${darkMode ? "dark-mode" : ""}`}
-            onClick={() => navigate(`/teachers/${teacher.id}`)}
+            onClick={() => onTeacherSelect(teacher.id)}
             key={teacher.id}
           >
             <p>{teacher.fullName}</p>
