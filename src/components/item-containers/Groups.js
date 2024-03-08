@@ -1,34 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { UiContext } from "../../contexts/UiContext";
-import { ApiContext } from "../../contexts/ApiContext";
 import "./Groups.css";
-import { useNavigate } from "react-router-dom";
-import FakeItemsList from "../loaders/FakeItemsList";
 
-const Groups = () => {
-  const [groups, setGroups] = useState([]);
-  const [loading, setLoading] = useState(true);
+const Groups = ({ groups, onGroupSelect }) => {
+  
   const { darkMode } = useContext(UiContext);
-  const { groupApiService } = useContext(ApiContext);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await groupApiService.getGroups();
-      setGroups(response);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-
-
-  if (loading) {
-    return (
-      <div>
-        <FakeItemsList />
-      </div>
-    );
-  }
 
   return (
     <>
@@ -39,7 +15,7 @@ const Groups = () => {
         {groups.map((group) => (
           <div
             className={`group-item ${darkMode ? "dark-mode" : ""}`}
-            onClick={() => navigate(`/groups/${group.id}`)}
+            onClick={() => {onGroupSelect(group.id)}}
             key={group.id}
           >
             <p>
