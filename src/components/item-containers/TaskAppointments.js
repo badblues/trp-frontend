@@ -7,12 +7,12 @@ const TaskAppointments = ({ tasks, onTaskClick }) => {
     const nameA = a.title.toLowerCase();
     const nameB = b.title.toLowerCase();
     if (nameA < nameB) {
-      return -1; // a should come before b
+      return -1;
     }
     if (nameA > nameB) {
-      return 1; // b should come before a
+      return 1;
     }
-    return 0; // names are equal
+    return 0;
   });
   const [taskList, setTaskList] = useState(tasks);
   const { darkMode } = useContext(UiContext);
