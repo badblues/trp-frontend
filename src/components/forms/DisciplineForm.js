@@ -21,7 +21,7 @@ const DisciplineForm = ({ discipline, onFormSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="big-form" onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
         <h1 className="form-name">
           {discipline ? "ИЗМЕНЕНИЕ ДИСЦИПЛИНЫ" : "СОЗДАНИЕ ДИСЦИПЛИНЫ"}

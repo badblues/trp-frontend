@@ -20,7 +20,7 @@ const GroupForm = ({ group, onFormSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="big-form" onSubmit={handleSubmit(onSubmit)}>
       <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
         <h1 className="form-name">
           {group ? "ИЗМЕНЕНИЕ ГРУППЫ" : "СОЗДАНИЕ ГРУППЫ"}

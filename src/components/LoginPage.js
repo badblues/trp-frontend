@@ -31,7 +31,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onLogin)} noValidate>
+      <form className="big-form" onSubmit={handleSubmit(onLogin)} noValidate>
         <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
           <label className="form-name">АВТОРИЗАЦИЯ</label>
           <div className="form-input-container">
