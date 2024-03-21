@@ -16,8 +16,11 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
 
   const onSubmit = (data) => {
     setLoading(true);
-    data.disciplineId = discipline.id;
-    console.log(data);
+    if (task != null) {
+      data.id = task.id;
+    }
+    if (discipline != null)
+      data.disciplineId = discipline.id;
     onFormSubmit(data, onDone);
   };
 

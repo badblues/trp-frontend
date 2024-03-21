@@ -33,7 +33,7 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
   const updateDiscipline = async (updatedDiscipline, onUpdate) => {
     try {
       await disciplineApiService
-        .updateDiscipline(discipline.id, updatedDiscipline)
+        .updateDiscipline(updatedDiscipline.id, updatedDiscipline)
         .then((updatedDiscipline) => {
           showSuccessAlert(`Дисциплина ${updatedDiscipline.name} обновлена`);
           setDiscipline(updatedDiscipline);

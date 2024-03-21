@@ -39,7 +39,7 @@ const TeacherTaskPage = ({ defaultTask }) => {
   const updateTask = async (updatedTask, onUpdate) => {
     try {
       await taskApiService
-        .updateTask(task.id, updatedTask)
+        .updateTask(updatedTask.id, updatedTask)
         .then((updatedTask) => {
           showSuccessAlert(`Задание ${updatedTask.title} обновлено`);
           setTask(updatedTask);

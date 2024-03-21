@@ -16,6 +16,8 @@ const GroupForm = ({ group, onFormSubmit }) => {
 
   const onSubmit = (data) => {
     setLoading(true);
+    if (group != null)
+      data.id = group.id;
     onFormSubmit(data, onDone);
   };
 

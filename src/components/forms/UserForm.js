@@ -63,8 +63,9 @@ const UserForm = ({ user, onFormSubmit }) => {
       newUser.groupId = data.groupId;
     }
     const role = user ? user.role : selectedRole;
+    if (user != null)
+      newUser.id = user.id;
     setLoading(true);
-    console.log(newUser);
     onFormSubmit(newUser, role, onDone);
   };
 

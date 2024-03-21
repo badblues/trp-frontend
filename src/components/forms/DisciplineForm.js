@@ -17,6 +17,8 @@ const DisciplineForm = ({ discipline, onFormSubmit }) => {
 
   const onSubmit = (data) => {
     setLoading(true);
+    if (discipline != null)
+      data.id = discipline.id;
     onFormSubmit(data, onDone);
   };
 

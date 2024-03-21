@@ -53,7 +53,7 @@ const AdminGroupPage = () => {
   const updateGroup = async (updatedGroup, onUpdate) => {
     try {
       await groupApiService
-        .updateGroup(group.id, updatedGroup)
+        .updateGroup(updatedGroup.id, updatedGroup)
         .then((updatedGroup) => {
           showSuccessAlert(`Группа ${updatedGroup.name} обновлена`);
           setGroup(updatedGroup);
