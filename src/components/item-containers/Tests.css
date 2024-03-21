@@ -1,13 +1,16 @@
+.add-test-container {
+  margin: 5px;
+}
+
 .tests-container {
   display: flex;
   flex-direction: column;
   height: fit-content;
-  padding-top: 10px;
-  padding-bottom: 10px;
 }
 
 .test-item {
   width: fit-content;
+  max-width: 400px;
   margin: 3px;
 }
 

@@ -110,3 +110,15 @@
   cursor: pointer;
   color: red;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.icon.dark-mode {
+  filter: invert(100%);
+}
+
+.margin-5 {
+  margin: 5px;
+}

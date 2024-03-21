@@ -23,4 +23,24 @@ export default class TaskTestApiService {
       throw error.response.data;
     }
   }
+
+  async updateTaskTest(id, taskTest) {
+    let url = this.apiUrl + `/${id}`;
+    try {
+      const response = await http.put(url, taskTest);
+      return response.data.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+
+  async deleteTaskTest(id) {
+    let url = this.apiUrl + `/${id}`;
+    try {
+      const response = await http.delete(url);
+      return response.data.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
 }

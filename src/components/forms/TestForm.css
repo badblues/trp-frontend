@@ -18,5 +18,6 @@
 
 .test-form-input.dark-mode {
   color: var(--dark-mode-text-color);
+  border-width: 2px;
   border-color: white;
 }

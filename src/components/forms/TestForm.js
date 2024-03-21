@@ -16,7 +16,12 @@ const TestForm = ({ test, onFormSubmit, task }) => {
 
   const onSubmit = (data) => {
     setLoading(true);
-    data.taskId = task.id;
+    if (test != null) {
+      data.id = test.id;
+    }
+    if (task != null) {
+      data.taskId = task.id;
+    }
     onFormSubmit(data, onDone);
   };
 
