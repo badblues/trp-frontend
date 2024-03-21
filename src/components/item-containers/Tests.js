@@ -41,7 +41,7 @@ const Tests = ({ tests, task, onAddTest, onDeleteTest, onUpdateTest }) => {
         >
           {editingTestId === test.id ? (
             <div>
-              <TestForm test={test} onFormSubmit={updateTest} />
+              <TestForm test={test} onFormSubmit={updateTest} task={task}/>
               <button onClick={() => setEditingTestId(-1)} className="button">
                 ОТМЕНА
               </button>
