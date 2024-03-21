@@ -66,7 +66,7 @@ const StudentDisciplinePage = ({ defaultDiscipline }) => {
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>
           Доступные лабораторные работы:
         </h2>
-        <Tasks tasks={tasks} onSelect={navigateToTask} />
+        <Tasks tasks={tasks} onTaskSelect={navigateToTask} />
       </div>
     </div>
   );

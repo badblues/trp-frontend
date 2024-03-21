@@ -29,16 +29,16 @@ const AdminMainPage = () => {
     fetchData();
   }, []);
 
-  const selectGroup = (groupId) => {
-    navigate(`/groups/${groupId}`);
+  const selectGroup = (group) => {
+    navigate(`/groups/${group.id}`);
   };
 
-  const selectTeacher = (teacherId) => {
-    navigate(`/teachers/${teacherId}`);
+  const selectTeacher = (teacher) => {
+    navigate(`/teachers/${teacher.id}`);
   };
 
-  const selectDiscipline = (disciplineId) => {
-    navigate(`/disciplines/${disciplineId}`);
+  const selectDiscipline = (discipline) => {
+    navigate(`/disciplines/${discipline.id}`);
   };
 
   return (

@@ -15,7 +15,7 @@ const Groups = ({ groups, onGroupSelect }) => {
           <div
             className={`group-item ${darkMode ? "dark-mode" : ""}`}
             onClick={() => {
-              onGroupSelect(group.id);
+              onGroupSelect(group);
             }}
             key={group.id}
           >

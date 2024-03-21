@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { UiContext } from "../../contexts/UiContext";
 import "./Tasks.css";
 
-const Tasks = ({ tasks, onSelect }) => {
+const Tasks = ({ tasks, onTaskSelect }) => {
   const { darkMode } = useContext(UiContext);
   tasks.sort((a, b) => {
     const nameA = a.title.toLowerCase();
@@ -21,7 +21,7 @@ const Tasks = ({ tasks, onSelect }) => {
       {tasks.map((task) => (
         <div
           onClick={() => {
-            onSelect(task);
+            onTaskSelect(task);
           }}
           className={`task-item ${darkMode ? "dark-mode" : ""}`}
           key={task.id}

@@ -14,7 +14,7 @@ const Disciplines = ({ disciplines, onDisciplineSelect }) => {
         {disciplines.map((discipline) => (
           <div
             className={`discipline-item ${darkMode ? "dark-mode" : ""}`}
-            onClick={() => onDisciplineSelect(discipline.id)}
+            onClick={() => onDisciplineSelect(discipline)}
             key={discipline.id}
           >
             <p>{discipline.name}</p>

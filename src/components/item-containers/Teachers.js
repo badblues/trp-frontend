@@ -14,7 +14,7 @@ const Teachers = ({ teachers, onTeacherSelect }) => {
         {teachers.map((teacher) => (
           <div
             className={`teacher-item ${darkMode ? "dark-mode" : ""}`}
-            onClick={() => onTeacherSelect(teacher.id)}
+            onClick={() => onTeacherSelect(teacher)}
             key={teacher.id}
           >
             <p>{teacher.fullName}</p>

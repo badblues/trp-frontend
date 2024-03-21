@@ -36,6 +36,10 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
     fetchData();
   }, []);
 
+  const navigateToTask = (task) => {
+    navigate(`/tasks/${task.id}`);
+  };
+
   if (loading) {
     return (
       <div>
@@ -58,9 +62,7 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
         </h2>
         <Tasks
           tasks={tasks}
-          onSelect={(task) => {
-            navigate(`/tasks/${task.id}`);
-          }}
+          onTaskSelect={navigateToTask}
         />
         {user.role === Roles.SeniorTeacher ? (
           <button

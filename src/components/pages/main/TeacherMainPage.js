@@ -20,8 +20,8 @@ const TeacherMainPage = () => {
     fetchData();
   }, []);
 
-  const selectDiscipline = (disciplineId) => {
-    navigate(`/disciplines/${disciplineId}`);
+  const selectDiscipline = (discipline) => {
+    navigate(`/disciplines/${discipline.id}`);
   };
 
   return (
