@@ -8,7 +8,7 @@ import crossImg from "../../../images/cross.png";
 import "./TeacherPage.css";
 
 const TeacherPage = () => {
-  const { id } = useParams();
+  const { teacherId } = useParams();
   const navigate = useNavigate();
   const { teacherApiService, teacherAppointmentApiService } =
     useContext(ApiContext);
@@ -20,12 +20,12 @@ const TeacherPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const teacherResponse = await teacherApiService.getTeacher(id);
+      const teacherResponse = await teacherApiService.getTeacher(teacherId);
       const teacherAppointmentsResponse =
         await teacherAppointmentApiService.getAppointments();
       setTeacher(teacherResponse);
       const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.teacher.id === id,
+        (a) => a.teacher.id === Number(teacherId),
       );
       setAppointments(filteredAppointments);
       setLoading(false);

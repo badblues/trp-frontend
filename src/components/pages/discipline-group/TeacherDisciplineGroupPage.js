@@ -32,13 +32,13 @@ const TeacherDisciplineGroupPage = () => {
       const allTasks = await taskApiService.getTasksByDiscipline(disciplineId);
       const allStudents = await studentApiService.getStudents();
       const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.group.id === groupId && a.discipline.id === disciplineId,
+        (a) => a.group.id === Number(groupId) && a.discipline.id === Number(disciplineId),
       );
       if (filteredAppointments.length > 0) {
         setGroup(filteredAppointments[0].group);
         setDiscipline(filteredAppointments[0].discipline);
         const filteredStudents = allStudents.filter(
-          (s) => s.group.id === groupId,
+          (s) => s.group.id === Number(groupId),
         );
         for (const student of filteredStudents) {
           student.tasks = JSON.parse(JSON.stringify(allTasks));

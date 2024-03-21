@@ -28,11 +28,11 @@ const AdminGroupPage = () => {
         await teacherAppointmentApiService.getAppointments();
       const allStudents = await studentApiService.getStudents();
       const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.group.id === groupId,
+        (a) => a.group.id === Number(groupId),
       );
       setAppointments(filteredAppointments);
       const filteredStudents = allStudents.filter(
-        (s) => s.group.id === groupId,
+        (s) => s.group.id === Number(groupId),
       );
       setStudents(filteredStudents);
       setLoading(false);

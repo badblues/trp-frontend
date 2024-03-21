@@ -40,7 +40,7 @@ const Main = () => {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
-          <Route path="/teachers/:id" element={<TeacherPage />} exact />
+          <Route path="/teachers/:teacherId" element={<TeacherPage />} exact />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
@@ -59,7 +59,7 @@ const Main = () => {
             />
           }
         >
-          <Route path="/disciplines/:id" element={<DisciplinePage />} exact />
+          <Route path="/disciplines/:disciplineId" element={<DisciplinePage />} exact />
         </Route>
 
         <Route

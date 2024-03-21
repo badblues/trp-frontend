@@ -10,7 +10,7 @@ import TeacherDisciplinePage from "./TeacherDisciplinePage";
 import StudentDisciplinePage from "./StudentDisciplinePage";
 
 const DisciplinePage = () => {
-  const { id } = useParams();
+  const { disciplineId } = useParams();
   const [discipline, setDiscipline] = useState(null);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(UserContext);
@@ -18,7 +18,7 @@ const DisciplinePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const disciplienResponse = await disciplineApiService.getDiscipline(id);
+      const disciplienResponse = await disciplineApiService.getDiscipline(disciplineId);
       setDiscipline(disciplienResponse);
       setLoading(false);
     };
