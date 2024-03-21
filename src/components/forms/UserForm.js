@@ -1,35 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Roles } from "../../models/Roles";
-import { ApiContext } from "../../contexts/ApiContext";
+
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
 import dices from "../../images/dices.png";
 import "./Form.css";
 
-const UserForm = ({ user, onFormSubmit }) => {
+const UserForm = ({ user, groups, onFormSubmit }) => {
   const { register, handleSubmit, formState, watch } = useForm();
   const { errors } = formState;
   const selectedRole = watch("role");
-  const { groupApiService } = useContext(ApiContext);
   const { darkMode, showErrorAlert } = useContext(UiContext);
-  const [groups, setGroups] = useState([]);
-  const [groupsLoading, setGroupsLoading] = useState(true);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const groups = await groupApiService.getGroups();
-      setGroups(groups);
-      setGroupsLoading(false);
-    };
-    fetchData();
-  }, [groupApiService]);
-
-  const onDone = () => {
-    setLoading(false);
-  };
 
   const randomPassword = () => {
     const characters =
@@ -66,16 +50,9 @@ const UserForm = ({ user, onFormSubmit }) => {
     if (user != null)
       newUser.id = user.id;
     setLoading(true);
-    onFormSubmit(newUser, role, onDone);
+    onFormSubmit(newUser, role, () => setLoading(false));
   };
 
-  if (groupsLoading) {
-    return (
-      <div className="loader-container">
-        <Loader />
-      </div>
-    );
-  }
 
   return (
     <form className="big-form" onSubmit={handleSubmit(onSubmit)}>

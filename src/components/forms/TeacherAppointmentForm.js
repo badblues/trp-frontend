@@ -1,37 +1,13 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ApiContext } from "../../contexts/ApiContext";
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
 import "./Form.css";
 
-const TeacherAppointmentForm = ({ onFormSubmit }) => {
+const TeacherAppointmentForm = ({ onFormSubmit, disciplines, teachers, groups }) => {
   const { register, handleSubmit } = useForm();
-  const { disciplineApiService, groupApiService, teacherApiService } =
-    useContext(ApiContext);
   const { darkMode } = useContext(UiContext);
-
-  const [disciplines, setDisciplines] = useState([]);
-  const [groups, setGroups] = useState([]);
-  const [teachers, setTeachers] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const disciplinesResponse = await disciplineApiService.getDisciplines();
-      setDisciplines(disciplinesResponse);
-      const groupsResponse = await groupApiService.getGroups();
-      setGroups(groupsResponse);
-      const teachersResponse = await teacherApiService.getTeachers();
-      setTeachers(teachersResponse);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-
-  const onDone = () => {
-    setLoading(false);
-  };
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (data) => {
     let appointment = {
@@ -40,16 +16,8 @@ const TeacherAppointmentForm = ({ onFormSubmit }) => {
       disciplineId: data.disciplineId,
     };
     setLoading(true);
-    onFormSubmit(appointment, onDone);
+    onFormSubmit(appointment, () => setLoading(false));
   };
-
-  if (loading) {
-    return (
-      <div className="loader-container">
-        <Loader />
-      </div>
-    );
-  }
 
   return (
     <form className="big-form" onSubmit={handleSubmit(onSubmit)}>
