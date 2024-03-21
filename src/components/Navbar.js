@@ -30,7 +30,7 @@ const Navbar = () => {
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [user]);
 
   if (loading) {
     return (
