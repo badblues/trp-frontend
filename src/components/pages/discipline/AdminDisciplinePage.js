@@ -22,7 +22,7 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
       const teacherAppointmentsResponse =
         await teacherAppointmentApiService.getAppointments();
       const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.discipline.id == discipline.id,
+        (a) => a.discipline.id === discipline.id,
       );
       setAppointments(filteredAppointments);
       setLoading(false);
@@ -98,7 +98,7 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
         </h1>
         <h2
           className={` ${darkMode ? "dark-mode" : ""}`}
-        >{`Полугодие: ${discipline.halfYear == "FIRST" ? "Первое" : "Второе"}`}</h2>
+        >{`Полугодие: ${discipline.halfYear === "FIRST" ? "Первое" : "Второе"}`}</h2>
       </div>
       <div>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Группы:</h2>

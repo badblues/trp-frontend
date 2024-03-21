@@ -20,7 +20,7 @@ const TaskAppointments = ({ tasks, onTaskClick }) => {
   const handleTaskChangeState = (task) => {
     const updatedTasks = [...taskList];
     updatedTasks.forEach((t) => {
-      if (t.id == task.id) t.appointed = task.appointed;
+      if (t.id === task.id) t.appointed = task.appointed;
     });
     setTaskList(updatedTasks);
   };

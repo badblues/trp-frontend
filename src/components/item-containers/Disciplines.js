@@ -20,7 +20,7 @@ const Disciplines = ({ disciplines, onDisciplineSelect }) => {
             <p>{discipline.name}</p>
             <p>{discipline.year}</p>
             <p>
-              Полугодие: {discipline.halfYear == "FIRST" ? "Первое" : "Второе"}
+              Полугодие: {discipline.halfYear === "FIRST" ? "Первое" : "Второе"}
             </p>
           </div>
         ))}

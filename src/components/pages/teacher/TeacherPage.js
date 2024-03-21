@@ -25,7 +25,7 @@ const TeacherPage = () => {
         await teacherAppointmentApiService.getAppointments();
       setTeacher(teacherResponse);
       const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.teacher.id == id,
+        (a) => a.teacher.id === id,
       );
       setAppointments(filteredAppointments);
       setLoading(false);

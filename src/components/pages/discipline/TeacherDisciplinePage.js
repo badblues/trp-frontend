@@ -24,7 +24,7 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
       const teacherAppointmentsResponse =
         await teacherAppointmentApiService.getAppointments();
       const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.discipline.id == discipline.id
+        (a) => a.discipline.id === discipline.id
       );
       const tasksResponse = await taskApiService.getTasksByDiscipline(
         discipline.id
@@ -52,7 +52,7 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
         </h1>
         <h2
           className={` ${darkMode ? "dark-mode" : ""}`}
-        >{`Полугодие: ${discipline.halfYear == "FIRST" ? "Первое" : "Второе"}`}</h2>
+        >{`Полугодие: ${discipline.halfYear === "FIRST" ? "Первое" : "Второе"}`}</h2>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>
           Лабораторные работы:
         </h2>
