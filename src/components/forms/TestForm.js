@@ -23,7 +23,7 @@ const TestForm = ({ test, onFormSubmit, task }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="test-form">
-        <div>
+        <div className="test-form-input-container">
           <input
             className={`test-form-input ${darkMode ? "dark-mode" : ""}`}
             id="input"
@@ -32,13 +32,13 @@ const TestForm = ({ test, onFormSubmit, task }) => {
             autoComplete="off"
             defaultValue={test ? test.input : ""}
             {...register("input", {
-              required: "Необходимо ввести вводные данные",
+              required: "Необходимо ввести входные данные",
             })}
           />
           <label>{errors.input?.message}</label>
         </div>
 
-        <div>
+        <div className="test-form-input-container">
           <input
             className={`test-form-input ${darkMode ? "dark-mode" : ""}`}
             id="output"

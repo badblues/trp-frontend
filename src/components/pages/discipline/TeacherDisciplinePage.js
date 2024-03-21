@@ -24,10 +24,10 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
       const teacherAppointmentsResponse =
         await teacherAppointmentApiService.getAppointments();
       const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.discipline.id === discipline.id
+        (a) => a.discipline.id === discipline.id,
       );
       const tasksResponse = await taskApiService.getTasksByDiscipline(
-        discipline.id
+        discipline.id,
       );
       setTasks(tasksResponse);
       setAppointments(filteredAppointments);
@@ -85,7 +85,7 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
             <h4
               onClick={() => {
                 navigate(
-                  `/disciplines/${discipline.id}/groups/${appointment.group.id}`
+                  `/disciplines/${discipline.id}/groups/${appointment.group.id}`,
                 );
               }}
               className="appointments-item clickable"

@@ -31,7 +31,9 @@ const AdminGroupPage = () => {
         (a) => a.group.id === groupId,
       );
       setAppointments(filteredAppointments);
-      const filteredStudents = allStudents.filter((s) => s.group.id === groupId);
+      const filteredStudents = allStudents.filter(
+        (s) => s.group.id === groupId,
+      );
       setStudents(filteredStudents);
       setLoading(false);
     };

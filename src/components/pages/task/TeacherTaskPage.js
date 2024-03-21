@@ -24,9 +24,11 @@ const TeacherTaskPage = ({ defaultTask }) => {
   useEffect(() => {
     const fetchData = async () => {
       const disciplineRespoinse = await disciplineApiService.getDiscipline(
-        task.disciplineId
+        task.disciplineId,
       );
-      const testsResponse = await taskTestApiService.getTaskTestsByTask(task.id);
+      const testsResponse = await taskTestApiService.getTaskTestsByTask(
+        task.id,
+      );
       setTests(testsResponse);
       setDiscipline(disciplineRespoinse);
       setLoading(false);
@@ -65,10 +67,10 @@ const TeacherTaskPage = ({ defaultTask }) => {
       await taskTestApiService.createTaskTest(test);
       showSuccessAlert("Тест добавлен");
       onDone();
-    } catch(errorData) {
-      showErrorAlert(errorData.error)
+    } catch (errorData) {
+      showErrorAlert(errorData.error);
     }
-  }
+  };
 
   if (loading) {
     return (
@@ -110,7 +112,7 @@ const TeacherTaskPage = ({ defaultTask }) => {
           {task.description}
         </p>
         <h2>Тесты:</h2>
-        <Tests tests={tests} onAddTest={addTest} task={task}/>
+        <Tests tests={tests} onAddTest={addTest} task={task} />
       </div>
       {user.role === Roles.SeniorTeacher ? (
         <div className="task-controll">

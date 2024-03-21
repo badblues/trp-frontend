@@ -24,14 +24,14 @@ const StudentDisciplinePage = ({ defaultDiscipline }) => {
     const fetchData = async () => {
       const appointments = await teacherAppointmentApiService.getAppointments();
       const filteredAppointments = appointments.filter(
-        (a) => a.discipline.id === discipline.id
+        (a) => a.discipline.id === discipline.id,
       );
       const teachers = filteredAppointments.map(
-        (appointment) => appointment.teacher
+        (appointment) => appointment.teacher,
       );
       setTeachers(teachers);
       const tasksResponse = await taskApiService.getTasksByDiscipline(
-        discipline.id
+        discipline.id,
       );
       setTasks(tasksResponse);
       setLoading(false);

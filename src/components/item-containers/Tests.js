@@ -17,7 +17,10 @@ const Tests = ({ tests, task, onAddTest }) => {
         </div>
       ))}
 
-      <TestForm onFormSubmit={(test, onDone) => onAddTest(test, onDone)} task={task}/>
+      <TestForm
+        onFormSubmit={(test, onDone) => onAddTest(test, onDone)}
+        task={task}
+      />
     </div>
   );
 };
