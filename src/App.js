@@ -9,15 +9,17 @@ import { useContext } from "react";
 import { UserContext } from "./contexts/UserContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router";
 
 const App = () => {
   const { logout } = useContext(UserContext);
+  const navigate = useNavigate();
 
   //TODO may be better
   axios.interceptors.request.use(requestInterceptor);
   axios.interceptors.response.use(
     (response) => response,
-    (error) => responseErrorInterceptor(error, logout),
+    (error) => responseErrorInterceptor(error, logout, navigate),
   );
 
   return (
