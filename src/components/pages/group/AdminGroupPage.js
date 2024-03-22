@@ -49,8 +49,8 @@ const AdminGroupPage = () => {
       await groupApiService.deleteGroup(group.id);
       showSuccessAlert("Группа удалена");
       navigate("/");
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     }
   };
 
@@ -62,8 +62,8 @@ const AdminGroupPage = () => {
           showSuccessAlert(`Группа ${updatedGroup.name} обновлена`);
           setGroup(updatedGroup);
         });
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     } finally {
       onUpdate();
       setUpdating(false);
@@ -75,8 +75,8 @@ const AdminGroupPage = () => {
       await teacherAppointmentApiService.deleteAppointment(appointment.id);
       setAppointments(appointments.filter((a) => a.id !== appointment.id));
       showSuccessAlert("Назначение удалено");
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     }
   };
 

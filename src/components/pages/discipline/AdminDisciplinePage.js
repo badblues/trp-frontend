@@ -42,8 +42,8 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
           showSuccessAlert(`Дисциплина ${updatedDiscipline.name} обновлена`);
           setDiscipline(updatedDiscipline);
         });
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     } finally {
       onUpdate();
       setUpdating(false);
@@ -55,8 +55,8 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
       await disciplineApiService.deleteDiscipline(discipline.id);
       showSuccessAlert("Дисциплина удалена");
       navigate("/");
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     }
   };
 
@@ -65,8 +65,8 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
       await teacherAppointmentApiService.deleteAppointment(appointment.id);
       setAppointments(appointments.filter((a) => a.id !== appointment.id));
       showSuccessAlert("Назначение удалено");
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     }
   };
 

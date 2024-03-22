@@ -44,8 +44,8 @@ const TeacherDisciplineGroupPage = () => {
         setGroup(groupResponse);
         setDiscipline(disciplineResponse);
         setStudents(studentsResponse);
-      } catch (errorData) {
-        showErrorAlert(errorData.error);
+      } catch (error) {
+        showErrorAlert(error.error);
         navigate("/not-found");
       }
     })().then(() => {

@@ -28,8 +28,8 @@ const TeacherPage = () => {
           );
         setTeacher(teacherResponse);
         setAppointments(teacherAppointmentsResponse);
-      } catch (errorData) {
-        showErrorAlert(errorData.error);
+      } catch (error) {
+        showErrorAlert(error.error);
         navigate("/not-found");
       }
     })().then(() => {
@@ -51,8 +51,8 @@ const TeacherPage = () => {
       await teacherAppointmentApiService.deleteAppointment(appointment.id);
       setAppointments(appointments.filter((a) => a.id !== appointment.id));
       showSuccessAlert("Назначение удалено");
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     }
   };
 

@@ -49,8 +49,8 @@ const TeacherTaskPage = ({ defaultTask }) => {
           showSuccessAlert(`Задание ${updatedTask.title} обновлено`);
           setTask(updatedTask);
         });
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     } finally {
       onUpdate();
       setUpdating(false);
@@ -62,8 +62,8 @@ const TeacherTaskPage = ({ defaultTask }) => {
       await taskApiService.deleteTask(task.id);
       showSuccessAlert("Задание удалено");
       navigate("/");
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     }
   };
 
@@ -73,8 +73,8 @@ const TeacherTaskPage = ({ defaultTask }) => {
       showSuccessAlert("Тест добавлен");
       setTests([...tests, createdTest]);
       onDone();
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     }
   };
 
@@ -84,8 +84,8 @@ const TeacherTaskPage = ({ defaultTask }) => {
       showSuccessAlert("Тест удален");
       setTests(tests.filter((t) => t.id !== test.id));
       onDone();
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     }
   };
 
@@ -95,8 +95,8 @@ const TeacherTaskPage = ({ defaultTask }) => {
       showSuccessAlert("Тест обновлен");
       setTests(tests.map((t) => (t.id === test.id ? test : t)));
       onDone();
-    } catch (errorData) {
-      showErrorAlert(errorData.error);
+    } catch (error) {
+      showErrorAlert(error.error);
     }
   };
 
