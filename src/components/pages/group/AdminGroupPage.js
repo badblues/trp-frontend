@@ -22,20 +22,25 @@ const AdminGroupPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const groupResponse = await groupApiService.getGroup(groupId);
-      setGroup(groupResponse);
-      const teacherAppointmentsResponse =
-        await teacherAppointmentApiService.getAppointments();
-      const allStudents = await studentApiService.getStudents();
-      const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.group.id === Number(groupId),
-      );
-      setAppointments(filteredAppointments);
-      const filteredStudents = allStudents.filter(
-        (s) => s.group.id === Number(groupId),
-      );
-      setStudents(filteredStudents);
-      setLoading(false);
+      try {
+        const groupResponse = await groupApiService.getGroup(groupId);
+        setGroup(groupResponse);
+        const teacherAppointmentsResponse =
+          await teacherAppointmentApiService.getAppointments();
+        const allStudents = await studentApiService.getStudents();
+        const filteredAppointments = teacherAppointmentsResponse.filter(
+          (a) => a.group.id === Number(groupId)
+        );
+        setAppointments(filteredAppointments);
+        const filteredStudents = allStudents.filter(
+          (s) => s.group.id === Number(groupId)
+        );
+        setStudents(filteredStudents);
+        setLoading(false);
+      } catch (errorData) {
+        showErrorAlert(errorData.error);
+        navigate("/not-found");
+      }
     };
     fetchData();
   }, []);

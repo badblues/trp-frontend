@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import { Roles } from "../../../models/Roles";
@@ -10,8 +10,9 @@ import "./Task.css";
 import { UiContext } from "../../../contexts/UiContext";
 
 const TaskPage = () => {
-  const { showErrorAlert } = useContext(UiContext);
   const { taskId } = useParams();
+  const navigate = useNavigate();
+  const { showErrorAlert } = useContext(UiContext);
   const [loading, setLoading] = useState(true);
   const [task, setTask] = useState(null);
   const { user } = useContext(UserContext);
@@ -23,8 +24,9 @@ const TaskPage = () => {
         const task = await taskApiService.getTask(taskId);
         setTask(task);
         setLoading(false);
-      } catch (error) {
-        showErrorAlert(error.error);
+      } catch (errorData) {
+        showErrorAlert(errorData.error);
+        navigate("/not-found");
       }
     };
     fetchData();

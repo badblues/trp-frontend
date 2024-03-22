@@ -132,7 +132,7 @@ const Main = () => {
             />
           }
         >
-          <Route path="/not-found" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </div>

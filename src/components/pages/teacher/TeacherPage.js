@@ -20,15 +20,20 @@ const TeacherPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const teacherResponse = await teacherApiService.getTeacher(teacherId);
-      const teacherAppointmentsResponse =
-        await teacherAppointmentApiService.getAppointments();
-      setTeacher(teacherResponse);
-      const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.teacher.id === Number(teacherId),
-      );
-      setAppointments(filteredAppointments);
-      setLoading(false);
+      try {
+        const teacherResponse = await teacherApiService.getTeacher(teacherId);
+        const teacherAppointmentsResponse =
+          await teacherAppointmentApiService.getAppointments();
+        setTeacher(teacherResponse);
+        const filteredAppointments = teacherAppointmentsResponse.filter(
+          (a) => a.teacher.id === Number(teacherId)
+        );
+        setAppointments(filteredAppointments);
+        setLoading(false);
+      } catch (errorData) {
+        showErrorAlert(errorData.error);
+        navigate("/not-found");
+      }
     };
     fetchData();
   }, []);

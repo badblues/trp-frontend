@@ -25,20 +25,25 @@ const TeacherDisciplineGroupPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const teacherAppointmentsResponse =
-        await teacherAppointmentApiService.getAppointments();
-      const studentAppointmentsResponse =
-        await studentAppointmentApiService.getAppointments();
-      const allTasks = await taskApiService.getTasksByDiscipline(disciplineId);
-      const allStudents = await studentApiService.getStudents();
-      const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.group.id === Number(groupId) && a.discipline.id === Number(disciplineId),
-      );
-      if (filteredAppointments.length > 0) {
+      try {
+        const teacherAppointmentsResponse =
+          await teacherAppointmentApiService.getAppointments();
+        const studentAppointmentsResponse =
+          await studentAppointmentApiService.getAppointments();
+        const allTasks = await taskApiService.getTasksByDiscipline(
+          disciplineId
+        );
+        const allStudents = await studentApiService.getStudents();
+        const filteredAppointments = teacherAppointmentsResponse.filter(
+          (a) =>
+            a.group.id === Number(groupId) &&
+            a.discipline.id === Number(disciplineId)
+        );
+        if (filteredAppointments.length == 0) throw {error: ""};
         setGroup(filteredAppointments[0].group);
         setDiscipline(filteredAppointments[0].discipline);
         const filteredStudents = allStudents.filter(
-          (s) => s.group.id === Number(groupId),
+          (s) => s.group.id === Number(groupId)
         );
         for (const student of filteredStudents) {
           student.tasks = JSON.parse(JSON.stringify(allTasks));
@@ -46,18 +51,21 @@ const TeacherDisciplineGroupPage = () => {
             task.appointed = false;
             if (
               studentAppointmentsResponse.filter(
-                (a) => a.studentId === student.id && a.taskId === task.id,
+                (a) => a.studentId === student.id && a.taskId === task.id
               ).length > 0
             ) {
               task.appointed = true;
               task.appointment = studentAppointmentsResponse.find(
-                (a) => a.studentId === student.id && a.taskId === task.id,
+                (a) => a.studentId === student.id && a.taskId === task.id
               );
             }
           }
+          setStudents(filteredStudents);
+          setLoading(false);
         }
-        setStudents(filteredStudents);
-        setLoading(false);
+      } catch (errorData) {
+        showErrorAlert(errorData.error);
+        navigate("/not-found");
       }
     };
     fetchData();
@@ -72,11 +80,12 @@ const TeacherDisciplineGroupPage = () => {
           studentId: student.id,
           taskId: task.id,
         };
-        newAppointment =
-          await studentAppointmentApiService.createAppointment(appointment);
+        newAppointment = await studentAppointmentApiService.createAppointment(
+          appointment
+        );
       } else {
         await studentAppointmentApiService.deleteAppointment(
-          task.appointment.id,
+          task.appointment.id
         );
       }
       task.appointed = !task.appointed;
@@ -122,12 +131,16 @@ const TeacherDisciplineGroupPage = () => {
           {discipline.name} {discipline.year}
         </h2>
         <h4
-          className={`status-text status-not-appointed ${darkMode ? "dark-mode" : ""}`}
+          className={`status-text status-not-appointed ${
+            darkMode ? "dark-mode" : ""
+          }`}
         >
           Не назначено
         </h4>
         <h4
-          className={`status-text status-appointed ${darkMode ? "dark-mode" : ""}`}
+          className={`status-text status-appointed ${
+            darkMode ? "dark-mode" : ""
+          }`}
         >
           Назначено
         </h4>

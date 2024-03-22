@@ -1,22 +1,28 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ApiContext } from "../../../contexts/ApiContext";
 import TaskForm from "../../forms/TaskForm";
 import Loader from "../../Loader";
 import { UiContext } from "../../../contexts/UiContext";
 
 const CreateTaskPage = () => {
-  const { showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const { disciplineId } = useParams();
+  const navigate = useNavigate();
+  const { showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const { taskApiService, disciplineApiService } = useContext(ApiContext);
   const [discipline, setDiscipline] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await disciplineApiService.getDiscipline(disciplineId);
-      setDiscipline(response);
-      setLoading(false);
+      try {
+        const response = await disciplineApiService.getDiscipline(disciplineId);
+        setDiscipline(response);
+        setLoading(false);
+      } catch (errorData) {
+        showErrorAlert(errorData.error);
+        navigate("/not-found");
+      }
     };
     fetchData();
   }, []);
@@ -26,7 +32,7 @@ const CreateTaskPage = () => {
       await taskApiService
         .createTask(task)
         .then((response) =>
-          showSuccessAlert(`Задание ${response.title} создано`),
+          showSuccessAlert(`Задание ${response.title} создано`)
         );
     } catch (error) {
       showErrorAlert(error.error);
