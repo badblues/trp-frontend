@@ -10,6 +10,7 @@ const CodeEditor = ({ solutionCode, onCodeChange }) => {
   const handleChange = useCallback((val) => {
     setCode(val);
     onCodeChange(val);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

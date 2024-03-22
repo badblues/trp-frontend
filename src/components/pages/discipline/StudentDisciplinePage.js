@@ -65,7 +65,6 @@ const StudentDisciplinePage = ({ defaultDiscipline }) => {
             </h2>
           </div>
         ))}
-        <h2></h2>
       </div>
       <div>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>
