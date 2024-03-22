@@ -74,6 +74,7 @@ const UserForm = ({ user, groups, onFormSubmit }) => {
           >
             <option value={Roles.Admin}>Админ</option>
             <option value={Roles.Teacher}>Преподаватель</option>
+            <option value={Roles.SeniorTeacher}>Лектор</option>
             <option value={Roles.Student}>Студент</option>
           </select>
         </div>
@@ -111,7 +112,6 @@ const UserForm = ({ user, groups, onFormSubmit }) => {
               type="text"
               placeholder="Пароль..."
               autoComplete="off"
-              defaultValue={user ? user.password : ""}
             />
             <button
               className="button button-with-image"
