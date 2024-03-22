@@ -18,16 +18,20 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
   const [updating, setUpdating] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const teacherAppointmentsResponse =
-        await teacherAppointmentApiService.getAppointments();
-      const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.discipline.id === discipline.id,
-      );
-      setAppointments(filteredAppointments);
+    (async () => {
+      try {
+        const teacherApointments =
+          await teacherAppointmentApiService.getAppointmentsByDiscipline(
+            discipline.id
+          );
+        setAppointments(teacherApointments);
+      } catch (error) {
+        showErrorAlert(error.error);
+      }
+    })().then(() => {
       setLoading(false);
-    };
-    fetchData();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateDiscipline = async (updatedDiscipline, onUpdate) => {
@@ -96,9 +100,9 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
         <h1 className={` ${darkMode ? "dark-mode" : ""}`}>
           {discipline.name} {discipline.year}
         </h1>
-        <h2
-          className={` ${darkMode ? "dark-mode" : ""}`}
-        >{`Полугодие: ${discipline.halfYear === "FIRST" ? "Первое" : "Второе"}`}</h2>
+        <h2 className={` ${darkMode ? "dark-mode" : ""}`}>{`Полугодие: ${
+          discipline.halfYear === "FIRST" ? "Первое" : "Второе"
+        }`}</h2>
       </div>
       <div>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>Группы:</h2>

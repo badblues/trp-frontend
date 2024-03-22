@@ -7,7 +7,7 @@ import Loader from "../../Loader";
 import { useNavigate } from "react-router-dom";
 
 const StudentDisciplinePage = ({ defaultDiscipline }) => {
-  const { darkMode } = useContext(UiContext);
+  const { darkMode, showErrorAlert } = useContext(UiContext);
   const [teachers, setTeachers] = useState([]);
   const [tasks, setTasks] = useState([]);
   const { teacherAppointmentApiService, taskApiService } =
@@ -21,22 +21,27 @@ const StudentDisciplinePage = ({ defaultDiscipline }) => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const appointments = await teacherAppointmentApiService.getAppointments();
-      const filteredAppointments = appointments.filter(
-        (a) => a.discipline.id === discipline.id,
-      );
-      const teachers = filteredAppointments.map(
-        (appointment) => appointment.teacher,
-      );
-      setTeachers(teachers);
-      const tasksResponse = await taskApiService.getTasksByDiscipline(
-        discipline.id,
-      );
-      setTasks(tasksResponse);
+    (async () => {
+      try {
+        const teacherApointments =
+          await teacherAppointmentApiService.getAppointmentsByDiscipline(
+            discipline.id
+          );
+        const tasksResponse = await taskApiService.getTasksByDiscipline(
+          discipline.id
+        );
+        const teachers = teacherApointments.map(
+          (appointment) => appointment.teacher
+        );
+        setTeachers(teachers);
+        setTasks(tasksResponse);
+      } catch (error) {
+        showErrorAlert(error.error);
+      }
+    })().then(() => {
       setLoading(false);
-    };
-    fetchData();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {

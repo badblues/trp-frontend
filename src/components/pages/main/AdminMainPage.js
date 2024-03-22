@@ -6,6 +6,7 @@ import Groups from "../../item-containers/Groups";
 import Teachers from "../../item-containers/Teachers";
 import "./MainPage.css";
 import FakeItemsList from "../../loaders/FakeItemsList";
+import { UiContext } from "../../../contexts/UiContext";
 
 const AdminMainPage = () => {
   const navigate = useNavigate();
@@ -13,20 +14,26 @@ const AdminMainPage = () => {
   const [teachers, setTeachers] = useState([]);
   const [disciplines, setDisciplines] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { showErrorAlert } = useContext(UiContext);
   const { groupApiService, teacherApiService, disciplineApiService } =
     useContext(ApiContext);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const groupsResponse = await groupApiService.getGroups();
-      const teachersResponse = await teacherApiService.getTeachers();
-      const disciplinesResponse = await disciplineApiService.getDisciplines();
-      setGroups(groupsResponse);
-      setTeachers(teachersResponse);
-      setDisciplines(disciplinesResponse);
+    (async () => {
+      try {
+        const groupsResponse = await groupApiService.getGroups();
+        const teachersResponse = await teacherApiService.getTeachers();
+        const disciplinesResponse = await disciplineApiService.getDisciplines();
+        setGroups(groupsResponse);
+        setTeachers(teachersResponse);
+        setDisciplines(disciplinesResponse);
+      } catch (error) {
+        showErrorAlert(error.error);
+      }
+    })().then(() => {
       setLoading(false);
-    };
-    fetchData();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const selectGroup = (group) => {

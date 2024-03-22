@@ -14,17 +14,20 @@ const CreateTaskPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       try {
-        const response = await disciplineApiService.getDiscipline(disciplineId);
-        setDiscipline(response);
-        setLoading(false);
-      } catch (errorData) {
-        showErrorAlert(errorData.error);
-        navigate("/not-found");
+        const disciplineResponse = await disciplineApiService.getDiscipline(
+          disciplineId
+        );
+        setDiscipline(disciplineResponse);
+      } catch (error) {
+        showErrorAlert(error.error);
+        if (error.status === 404) navigate("/not-found");
       }
-    };
-    fetchData();
+    })().then(() => {
+      setLoading(false);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const createTask = async (task, onCreate) => {

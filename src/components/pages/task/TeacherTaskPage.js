@@ -22,18 +22,23 @@ const TeacherTaskPage = ({ defaultTask }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const disciplineRespoinse = await disciplineApiService.getDiscipline(
-        task.disciplineId
-      );
-      const testsResponse = await taskTestApiService.getTaskTestsByTask(
-        task.id
-      );
-      setTests(testsResponse);
-      setDiscipline(disciplineRespoinse);
+    (async () => {
+      try {
+        const disciplineRespoinse = await disciplineApiService.getDiscipline(
+          task.disciplineId
+        );
+        const testsResponse = await taskTestApiService.getTaskTestsByTask(
+          task.id
+        );
+        setTests(testsResponse);
+        setDiscipline(disciplineRespoinse);
+      } catch (error) {
+        showErrorAlert(error.error);
+      }
+    })().then(() => {
       setLoading(false);
-    };
-    fetchData();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateTask = async (updatedTask, onUpdate) => {

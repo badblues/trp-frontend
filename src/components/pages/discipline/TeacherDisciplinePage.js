@@ -17,23 +17,27 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
   const { user } = useContext(UserContext);
   const discipline = defaultDiscipline;
   const navigate = useNavigate();
-  const { darkMode } = useContext(UiContext);
+  const { darkMode, showErrorAlert } = useContext(UiContext);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const teacherAppointmentsResponse =
-        await teacherAppointmentApiService.getAppointments();
-      const filteredAppointments = teacherAppointmentsResponse.filter(
-        (a) => a.discipline.id === discipline.id,
-      );
-      const tasksResponse = await taskApiService.getTasksByDiscipline(
-        discipline.id,
-      );
-      setTasks(tasksResponse);
-      setAppointments(filteredAppointments);
+    (async () => {
+      try {
+        const teacherAppointments =
+          await teacherAppointmentApiService.getAppointmentsByDiscipline(
+            discipline.id
+          );
+        const tasksResponse = await taskApiService.getTasksByDiscipline(
+          discipline.id
+        );
+        setAppointments(teacherAppointments);
+        setTasks(tasksResponse);
+      } catch (error) {
+        showErrorAlert(error.error);
+      }
+    })().then(() => {
       setLoading(false);
-    };
-    fetchData();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navigateToTask = (task) => {
@@ -54,16 +58,13 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
         <h1 className={` ${darkMode ? "dark-mode" : ""}`}>
           {discipline.name} {discipline.year}
         </h1>
-        <h2
-          className={` ${darkMode ? "dark-mode" : ""}`}
-        >{`Полугодие: ${discipline.halfYear === "FIRST" ? "Первое" : "Второе"}`}</h2>
+        <h2 className={` ${darkMode ? "dark-mode" : ""}`}>{`Полугодие: ${
+          discipline.halfYear === "FIRST" ? "Первое" : "Второе"
+        }`}</h2>
         <h2 className={`${darkMode ? "dark-mode" : ""}`}>
           Лабораторные работы:
         </h2>
-        <Tasks
-          tasks={tasks}
-          onTaskSelect={navigateToTask}
-        />
+        <Tasks tasks={tasks} onTaskSelect={navigateToTask} />
         {user.role === Roles.SeniorTeacher ? (
           <button
             className={`button button-usual ${darkMode ? "dark-mode" : ""}`}
@@ -87,7 +88,7 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
             <h4
               onClick={() => {
                 navigate(
-                  `/disciplines/${discipline.id}/groups/${appointment.group.id}`,
+                  `/disciplines/${discipline.id}/groups/${appointment.group.id}`
                 );
               }}
               className="appointments-item clickable"

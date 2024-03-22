@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Loader from "../../Loader";
 import { useNavigate } from "react-router-dom";
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
@@ -17,58 +16,42 @@ const TeacherDisciplineGroupPage = () => {
   const [loading, setLoading] = useState(true);
   const {
     studentApiService,
-    teacherAppointmentApiService,
+    groupApiService,
+    disciplineApiService,
     studentAppointmentApiService,
     taskApiService,
   } = useContext(ApiContext);
   const { darkMode, showErrorAlert } = useContext(UiContext);
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       try {
-        const teacherAppointmentsResponse =
-          await teacherAppointmentApiService.getAppointments();
-        const studentAppointmentsResponse =
+        const groupResponse = await groupApiService.getGroup(Number(groupId));
+        const disciplineResponse = await disciplineApiService.getDiscipline(
+          Number(groupId)
+        );
+        const studentAppointments =
           await studentAppointmentApiService.getAppointments();
         const allTasks = await taskApiService.getTasksByDiscipline(
           disciplineId
         );
-        const allStudents = await studentApiService.getStudents();
-        const filteredAppointments = teacherAppointmentsResponse.filter(
-          (a) =>
-            a.group.id === Number(groupId) &&
-            a.discipline.id === Number(disciplineId)
-        );
-        if (filteredAppointments.length == 0) throw {error: ""};
-        setGroup(filteredAppointments[0].group);
-        setDiscipline(filteredAppointments[0].discipline);
-        const filteredStudents = allStudents.filter(
-          (s) => s.group.id === Number(groupId)
-        );
-        for (const student of filteredStudents) {
-          student.tasks = JSON.parse(JSON.stringify(allTasks));
-          for (const task of student.tasks) {
-            task.appointed = false;
-            if (
-              studentAppointmentsResponse.filter(
-                (a) => a.studentId === student.id && a.taskId === task.id
-              ).length > 0
-            ) {
-              task.appointed = true;
-              task.appointment = studentAppointmentsResponse.find(
-                (a) => a.studentId === student.id && a.taskId === task.id
-              );
-            }
-          }
-          setStudents(filteredStudents);
-          setLoading(false);
-        }
+        const studentsResponse =
+          await studentApiService.getStudentsWithTasksByGroup(
+            Number(groupId),
+            allTasks,
+            studentAppointments
+          );
+        setGroup(groupResponse);
+        setDiscipline(disciplineResponse);
+        setStudents(studentsResponse);
       } catch (errorData) {
         showErrorAlert(errorData.error);
         navigate("/not-found");
       }
-    };
-    fetchData();
+    })().then(() => {
+      setLoading(false);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleTaskClick = async (task, handleTaskChangeState, student) => {

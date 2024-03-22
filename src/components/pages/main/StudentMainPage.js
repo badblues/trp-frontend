@@ -4,20 +4,27 @@ import { ApiContext } from "../../../contexts/ApiContext";
 import Disciplines from "../../item-containers/Disciplines";
 import "./MainPage.css";
 import FakeItemsList from "../../loaders/FakeItemsList";
+import { UiContext } from "../../../contexts/UiContext";
 
 const StudentMainPage = () => {
   const navigate = useNavigate();
   const [disciplines, setDisciplines] = useState([]);
   const [loading, setLoading] = useState(true);
   const { disciplineApiService } = useContext(ApiContext);
+  const { showErrorAlert } = useContext(UiContext);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const disciplinesResponse = await disciplineApiService.getDisciplines();
-      setDisciplines(disciplinesResponse);
+    (async () => {
+      try {
+        const disciplinesResponse = await disciplineApiService.getDisciplines();
+        setDisciplines(disciplinesResponse);
+      } catch (error) {
+        showErrorAlert(error.error);
+      }
+    })().then(() => {
       setLoading(false);
-    };
-    fetchData();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const selectDiscipline = (discipline) => {

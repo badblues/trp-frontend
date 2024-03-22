@@ -22,4 +22,34 @@ export default class StudentApiService {
       throw error.response.data;
     }
   }
+
+  async getStudentsByGroup(groupId) {
+    const students = await this.getStudents();
+    return students.filter((s) => (s.group.id = groupId));
+  }
+
+  async getStudentsWithTasksByGroup(groupId, tasks, studentAppointments) {
+    const students = await this.getStudentsByGroup(groupId);
+
+    return students.map((student) => {
+      const updatedTasks = tasks.map((task) => {
+        const isAppointed = studentAppointments.some(
+          (a) => a.studentId === student.id && a.taskId === task.id
+        );
+        const appointment = isAppointed
+          ? studentAppointments.find(
+              (a) => a.studentId === student.id && a.taskId === task.id
+            )
+          : null;
+
+        return {
+          ...task,
+          appointed: isAppointed,
+          appointment: appointment,
+        };
+      });
+
+      return { ...student, tasks: updatedTasks };
+    });
+  }
 }

@@ -19,23 +19,23 @@ const TeacherPage = () => {
   const [updating, setUpdating] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       try {
         const teacherResponse = await teacherApiService.getTeacher(teacherId);
         const teacherAppointmentsResponse =
-          await teacherAppointmentApiService.getAppointments();
+          await teacherAppointmentApiService.getAppointmentsByTeacher(
+            Number(teacherId)
+          );
         setTeacher(teacherResponse);
-        const filteredAppointments = teacherAppointmentsResponse.filter(
-          (a) => a.teacher.id === Number(teacherId)
-        );
-        setAppointments(filteredAppointments);
-        setLoading(false);
+        setAppointments(teacherAppointmentsResponse);
       } catch (errorData) {
         showErrorAlert(errorData.error);
         navigate("/not-found");
       }
-    };
-    fetchData();
+    })().then(() => {
+      setLoading(false);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateTeacher = async () => {

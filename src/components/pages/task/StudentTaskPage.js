@@ -13,16 +13,17 @@ const StudentTaskPage = ({ defaultTask }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       try {
         const loadedCode = await taskApiService.getSolution(defaultTask.id);
         setCode(loadedCode.code);
-      } catch (errorData) {
-      } finally {
-        setLoading(false);
+      } catch (error) {
+        showErrorAlert(error.error);
       }
-    };
-    fetchData();
+    })().then(() => {
+      setLoading(false);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCodeChange = (code) => {

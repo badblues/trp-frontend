@@ -15,21 +15,26 @@ import Loader from "./Loader";
 
 const Navbar = () => {
   const { user, logout } = useContext(UserContext);
-  const { darkMode } = useContext(UiContext);
+  const { darkMode, showErrorAlert } = useContext(UiContext);
   const [loading, setLoading] = useState(true);
   const [group, setGroup] = useState([]);
   const { studentApiService } = useContext(ApiContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (user.role === Roles.Student) {
-        const student = await studentApiService.getStudent(user.id);
-        setGroup(student.group);
+    (async () => {
+      try {
+        if (user.role === Roles.Student) {
+          const student = await studentApiService.getStudent(user.id);
+          setGroup(student.group);
+        }
+      } catch (error) {
+        showErrorAlert(error.error);
       }
+    })().then(() => {
       setLoading(false);
-    };
-    fetchData();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   if (loading) {

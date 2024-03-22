@@ -7,16 +7,21 @@ import Loader from "../../Loader";
 const CreateUserPage = () => {
   const { showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const { userApiService, groupApiService } = useContext(ApiContext);
-  const [groupsLoading, setGroupsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const groups = await groupApiService.getGroups();
-      setGroups(groups);
-      setGroupsLoading(false);
-    };
-    fetchData();
+    (async () => {
+      try {
+        const groupsResponse = await groupApiService.getGroups();
+        setGroups(groupsResponse);
+      } catch (error) {
+        showErrorAlert(error.error);
+      }
+    })().then(() => {
+      setLoading(false);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const createUser = async (user, role, onCreate) => {
@@ -33,7 +38,7 @@ const CreateUserPage = () => {
     }
   };
 
-  if (groupsLoading) {
+  if (loading) {
     return (
       <div className="loader-container">
         <Loader />

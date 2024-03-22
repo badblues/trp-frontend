@@ -19,16 +19,21 @@ const CreateTeacherAppointment = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const disciplinesResponse = await disciplineApiService.getDisciplines();
-      setDisciplines(disciplinesResponse);
-      const groupsResponse = await groupApiService.getGroups();
-      setGroups(groupsResponse);
-      const teachersResponse = await teacherApiService.getTeachers();
-      setTeachers(teachersResponse);
+    (async () => {
+      try {
+        const disciplinesResponse = await disciplineApiService.getDisciplines();
+        const groupsResponse = await groupApiService.getGroups();
+        const teachersResponse = await teacherApiService.getTeachers();
+        setDisciplines(disciplinesResponse);
+        setGroups(groupsResponse);
+        setTeachers(teachersResponse);
+      } catch (error) {
+        showErrorAlert(error.error);
+      }
+    })().then(() => {
       setLoading(false);
-    };
-    fetchData();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const createTeacherAppointment = async (teacherAppointment, onCreate) => {

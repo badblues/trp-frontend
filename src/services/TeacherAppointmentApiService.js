@@ -52,6 +52,21 @@ export class TeacherAppointmentApiService {
       throw error.response.data;
     }
   }
+
+  async getAppointmentsByGroup(groupId) {
+    const appointments = await this.getAppointments();
+    return appointments.filter((a) => a.group.id === groupId);
+  }
+
+  async getAppointmentsByDiscipline(disciplineId) {
+    const appointments = await this.getAppointments();
+    return appointments.filter((a) => a.discipline.id === disciplineId);
+  }
+
+  async getAppointmentsByTeacher(teacherId) {
+    const appointments = await this.getAppointments();
+    return appointments.filter((a) => a.teacher.id === teacherId);
+  }
 }
 
 export default TeacherAppointmentApiService;

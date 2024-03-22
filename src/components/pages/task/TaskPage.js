@@ -19,17 +19,18 @@ const TaskPage = () => {
   const { taskApiService } = useContext(ApiContext);
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       try {
         const task = await taskApiService.getTask(taskId);
         setTask(task);
-        setLoading(false);
-      } catch (errorData) {
-        showErrorAlert(errorData.error);
+      } catch (error) {
+        showErrorAlert(error.error);
         navigate("/not-found");
       }
-    };
-    fetchData();
+    })().then(() => {
+      setLoading(false);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pages = {

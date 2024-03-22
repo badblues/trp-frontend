@@ -21,28 +21,27 @@ const AdminGroupPage = () => {
   const [updating, setUpdating] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       try {
         const groupResponse = await groupApiService.getGroup(groupId);
-        setGroup(groupResponse);
         const teacherAppointmentsResponse =
-          await teacherAppointmentApiService.getAppointments();
-        const allStudents = await studentApiService.getStudents();
-        const filteredAppointments = teacherAppointmentsResponse.filter(
-          (a) => a.group.id === Number(groupId)
+          await teacherAppointmentApiService.getAppointmentsByGroup(
+            Number(groupId)
+          );
+        const studentsResponse = await studentApiService.getStudentsByGroup(
+          Number(groupId)
         );
-        setAppointments(filteredAppointments);
-        const filteredStudents = allStudents.filter(
-          (s) => s.group.id === Number(groupId)
-        );
-        setStudents(filteredStudents);
-        setLoading(false);
-      } catch (errorData) {
-        showErrorAlert(errorData.error);
+        setGroup(groupResponse);
+        setAppointments(teacherAppointmentsResponse);
+        setStudents(studentsResponse);
+      } catch (error) {
+        showErrorAlert(error.error);
         navigate("/not-found");
       }
-    };
-    fetchData();
+    })().then(() => {
+      setLoading(false);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const deleteGroup = async () => {
