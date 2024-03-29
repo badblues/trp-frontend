@@ -1,0 +1,104 @@
+.form-container {
+  border-radius: 43px;
+  background: #b4b4b4;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+  overflow: auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 400px;
+  width: 25%;
+  height: fit-content;
+  font-family: "Montserrat", sans-serif;
+}
+.form-container.dark-mode {
+  background: #2e2e2e;
+  color: #f1f1f1;
+}
+.form-container.dark-mode .form-input-container .form-input, .form-container.dark-mode .form-input-container .form-textarea {
+  background: #212121;
+  color: #f1f1f1;
+}
+.form-container.dark-mode .form-input-container .form-input::placeholder, .form-container.dark-mode .form-input-container .form-textarea::placeholder {
+  color: #f1f1f1;
+}
+.form-container.dark-mode .form-input-container .input-with-button-container .button-with-image .show-password-icon {
+  filter: invert(100%);
+}
+.form-container.dark-mode .form-input-container .form-text {
+  color: #f1f1f1;
+}
+.form-container .form-name {
+  font: 500;
+  font-size: x-large;
+  margin: 0px 0px 10px 0px;
+}
+.form-container .form-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0px 0px 20px 0px;
+}
+.form-container .form-input-container .form-label {
+  font-size: medium;
+  align-self: flex-start;
+  margin: 5px;
+}
+.form-container .form-input-container .form-input, .form-container .form-input-container .form-textarea {
+  width: 100%;
+  min-height: 40px;
+  border-radius: 7px;
+  border: 1px solid #000;
+  padding: 10px;
+}
+.form-container .form-input-container .input-with-button-container {
+  display: flex;
+  width: 100%;
+}
+.form-container .form-input-container .input-with-button-container .button-with-image {
+  background-color: transparent;
+  border: none;
+  margin: 0px;
+  margin: 5px;
+}
+.form-container .form-input-container .input-with-button-container .button-with-image:hover {
+  cursor: pointer;
+}
+.form-container .form-input-container .form-checkbox-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+  margin-bottom: 20px;
+}
+.form-container .form-input-container .form-checkbox-container .form-checkbox {
+  margin-left: 5px;
+}
+.form-container .form-input-container .form-textarea {
+  resize: none;
+  height: 300px;
+}
+.form-container .form-input-container .form-text {
+  color: #8f0000;
+  margin: 4px;
+  align-self: flex-start;
+}
+.form-container .submit-button {
+  height: fit-content;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0px 10px 0px;
+}
+.form-container .submit-button:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=form.css.map */

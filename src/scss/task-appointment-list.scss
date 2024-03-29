@@ -1,0 +1,32 @@
+@import "./variables.scss";
+
+.task-appointment-list {
+  display: flex;
+  flex-direction: row;
+  font-family: $main-font;
+
+  &.dark-mode {
+    .item {
+      &.status-appointed {
+        color: $dark-mode-status-color-appointed;
+      }
+  
+      &.status-not-appointed {
+        color: $dark-mode-status-color-not-appointed;
+      }
+    }
+  }
+  
+  .item {
+    margin: 5px;
+    cursor: pointer;
+
+    &.status-appointed {
+      color: $status-color-appointed;
+    }
+
+    &.status-not-appointed {
+      color: $status-color-not-appointed;
+    }
+  }
+}

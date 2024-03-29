@@ -1,0 +1,62 @@
+@import "./variables.scss";
+
+@mixin move($offset) {
+  transform: translate($offset, 25px);
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+
+  &.dark-mode {
+    .menu-option {
+      color: $dark-mode-text-color;
+    }
+
+    .sub-menu {
+      background-color: $dark-mode-background-secondary-color;
+      .sub-menu-option {
+        color: $dark-mode-text-color;
+      }
+    }
+  }
+
+  .menu-option {
+    text-decoration: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: $text-color;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .sub-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: $background-secondary-color;
+    border: solid;
+    border-width: 1px;
+
+    &.move5 {
+      @include move(5px);
+    }
+
+    &.move90 {
+      @include move(90px);
+    }
+
+    .sub-menu-option {
+      padding: 10px;
+      text-decoration: none;
+      color: $text-color;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}

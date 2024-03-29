@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ApiContext } from "../../../contexts/ApiContext";
 import Disciplines from "../../item-containers/Disciplines";
-import "./MainPage.css";
 import FakeItemsList from "../../loaders/FakeItemsList";
 import { UiContext } from "../../../contexts/UiContext";
+import "../../../styles/main-page.css";
 
 const StudentMainPage = () => {
   const navigate = useNavigate();

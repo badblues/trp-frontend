@@ -4,6 +4,7 @@ import { ApiContext } from "../../../contexts/ApiContext";
 import TaskForm from "../../forms/TaskForm";
 import Loader from "../../Loader";
 import { UiContext } from "../../../contexts/UiContext";
+import "../../../styles/create-item-page.css";
 
 const CreateTaskPage = () => {
   const { disciplineId } = useParams();
@@ -52,7 +53,11 @@ const CreateTaskPage = () => {
     );
   }
 
-  return <TaskForm onFormSubmit={createTask} discipline={discipline} />;
+  return (
+    <div className="create-page">
+      <TaskForm onFormSubmit={createTask} discipline={discipline} />;
+    </div>
+  );
 };
 
 export default CreateTaskPage;

@@ -1,19 +1,19 @@
 import React, { useContext } from "react";
-import "./FakeItemsList.css";
 import { UiContext } from "../../contexts/UiContext";
+import "../../styles/fake-item-list.css";
 
 function FakeItemsList() {
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
 
   return (
-    <div className="fake-list">
-      <div className={`fake-caption ${darkMode ? "dark-mode" : ""}`}></div>
-      <div className={`fake-item ${darkMode ? "dark-mode" : ""}`}></div>
-      <div className={`fake-item ${darkMode ? "dark-mode" : ""}`}></div>
-      <div className={`fake-item ${darkMode ? "dark-mode" : ""}`}></div>
-      <div className={`fake-item ${darkMode ? "dark-mode" : ""}`}></div>
-      <div className={`fake-item ${darkMode ? "dark-mode" : ""}`}></div>
-      <div className={`fake-item ${darkMode ? "dark-mode" : ""}`}></div>
+    <div className={`fake-list ${theme}`}>
+      <div className="fake-caption"></div>
+      <div className="fake-item"></div>
+      <div className="fake-item"></div>
+      <div className="fake-item"></div>
+      <div className="fake-item"></div>
+      <div className="fake-item"></div>
+      <div className="fake-item"></div>
     </div>
   );
 }

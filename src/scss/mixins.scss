@@ -1,0 +1,30 @@
+@import "./variables.scss";
+
+@mixin button($margin: 0px) {
+  height: fit-content;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: $main-font;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: $margin;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@mixin buttonWithImage($margin: 0px) {
+  background-color: transparent;
+  border: none;
+  margin: $margin;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

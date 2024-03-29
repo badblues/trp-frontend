@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ApiContext } from "../../../contexts/ApiContext";
 import DisciplineForm from "../../forms/DisciplineForm";
 import { UiContext } from "../../../contexts/UiContext";
+import "../../../styles/create-item-page.css";
 
 const CreateDisciplinePage = () => {
   const { showSuccessAlert, showErrorAlert } = useContext(UiContext);
@@ -22,7 +23,7 @@ const CreateDisciplinePage = () => {
   };
 
   return (
-    <div>
+    <div className="create-page">
       <DisciplineForm onFormSubmit={createDiscipline} />
     </div>
   );

@@ -1,0 +1,39 @@
+.fake-task-appointments-list {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0px 0px 60px;
+  filter: blur(5px);
+}
+.fake-task-appointments-list.dark-mode .fake-group-name {
+  background-color: #2e2e2e;
+}
+.fake-task-appointments-list.dark-mode .fake-task-appointment .fake-student-name,
+.fake-task-appointments-list.dark-mode .fake-task-appointment .fake-appointment {
+  background-color: #2e2e2e;
+}
+.fake-task-appointments-list .fake-group-name {
+  height: 40px;
+  width: 180px;
+  margin: 0px 0px 10px 5px;
+  background-color: #b4b4b4;
+}
+.fake-task-appointments-list .fake-task-appointment {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+}
+.fake-task-appointments-list .fake-task-appointment .fake-student-name {
+  height: 50px;
+  width: 200px;
+  background-color: #b4b4b4;
+  filter: blur(5px);
+}
+.fake-task-appointments-list .fake-task-appointment .fake-appointment {
+  margin-left: 10px;
+  height: 50px;
+  width: 400px;
+  background-color: #b4b4b4;
+  filter: blur(5px);
+}
+
+/*# sourceMappingURL=fake-task-appointments.css.map */

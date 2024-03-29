@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import "./TaskAppointments.css";
 import { UiContext } from "../../contexts/UiContext";
+import "../../styles/task-appointment-list.css";
 
 const TaskAppointments = ({ tasks, onTaskClick }) => {
   tasks.sort((a, b) => {
@@ -15,7 +15,7 @@ const TaskAppointments = ({ tasks, onTaskClick }) => {
     return 0;
   });
   const [taskList, setTaskList] = useState(tasks);
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
 
   const handleTaskChangeState = (task) => {
     const updatedTasks = [...taskList];
@@ -26,7 +26,7 @@ const TaskAppointments = ({ tasks, onTaskClick }) => {
   };
 
   return (
-    <div className="task-appointments-container">
+    <div className={`task-appointment-list ${theme}`}>
       {taskList.map((task) => (
         <div
           onClick={() => {
@@ -35,7 +35,7 @@ const TaskAppointments = ({ tasks, onTaskClick }) => {
           key={task.id}
         >
           <h4
-            className={`task-appointements-item status-${task.appointed ? "appointed" : "not-appointed"} ${darkMode ? "dark-mode" : ""}`}
+            className={`item status-${task.appointed ? "appointed" : "not-appointed"}`}
           >
             {task.title}
           </h4>

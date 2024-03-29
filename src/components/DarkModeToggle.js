@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import "./DarkModeToggle.css";
 import { UiContext } from "../contexts/UiContext";
+import "../styles/dark-mode-toggle.css";
 
 const DarkModeToggle = () => {
-  const { darkMode, setDarkMode } = useContext(UiContext);
+  const { theme, setTheme } = useContext(UiContext);
 
-  const onSetDarkMode = (event) => {
-    setDarkMode(event.target.checked);
+  const onSettheme = (event) => {
+    setTheme(event.target.checked ? "dark-mode" : "");
   };
 
   return (
@@ -15,8 +15,8 @@ const DarkModeToggle = () => {
         className="checkbox"
         id="toggle"
         type="checkbox"
-        checked={darkMode}
-        onChange={onSetDarkMode}
+        checked={theme}
+        onChange={onSettheme}
       ></input>
       <label htmlFor="toggle" className="toggle">
         <svg

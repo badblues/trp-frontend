@@ -1,0 +1,9 @@
+.main-container {
+  flex-grow: 1;
+  background-color: #fbfbfb;
+}
+.main-container.dark-mode {
+  background-color: #212121;
+}
+
+/*# sourceMappingURL=main.css.map */

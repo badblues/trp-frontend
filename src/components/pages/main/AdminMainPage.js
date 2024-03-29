@@ -4,9 +4,9 @@ import { ApiContext } from "../../../contexts/ApiContext";
 import Disciplines from "../../item-containers/Disciplines";
 import Groups from "../../item-containers/Groups";
 import Teachers from "../../item-containers/Teachers";
-import "./MainPage.css";
 import FakeItemsList from "../../loaders/FakeItemsList";
 import { UiContext } from "../../../contexts/UiContext";
+import "../../../styles/main-page.css";
 
 const AdminMainPage = () => {
   const navigate = useNavigate();

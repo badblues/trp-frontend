@@ -1,19 +1,19 @@
 import React, { useContext } from "react";
 import { UiContext } from "../../contexts/UiContext";
-import "./Groups.css";
+import "../../styles/item-list.css";
 
 const Groups = ({ groups, onGroupSelect }) => {
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
 
   return (
     <>
-      <div className="groups-container">
-        <h2 className={`groups-caption ${darkMode ? "dark-mode" : ""}`}>
+      <div className={`item-list ${theme}`}>
+        <h2 className="caption">
           Группы:
         </h2>
         {groups.map((group) => (
           <div
-            className={`group-item ${darkMode ? "dark-mode" : ""}`}
+            className="item-with-border"
             onClick={() => {
               onGroupSelect(group);
             }}

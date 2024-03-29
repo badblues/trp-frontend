@@ -1,0 +1,68 @@
+.update-resource-page {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px 0px 0px;
+}
+.update-resource-page .close-resource-form-button {
+  height: fit-content;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0px 0px 50px;
+}
+.update-resource-page .close-resource-form-button:hover {
+  cursor: pointer;
+}
+
+.resource-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 70px 0px 50px;
+  font-family: "Montserrat", sans-serif;
+}
+.resource-page.dark-mode {
+  color: #f1f1f1;
+}
+.resource-page .appointment-list .appointment-item {
+  display: flex;
+}
+.resource-page .appointment-list .appointment-item .appointment-link {
+  margin: 10px 0px 0px 0px;
+}
+.resource-page .appointment-list .appointment-item .appointment-link:hover {
+  cursor: pointer;
+  color: red;
+}
+.resource-page .remove-appointment-button {
+  background-color: transparent;
+  border: none;
+  margin: 0px;
+}
+.resource-page .remove-appointment-button:hover {
+  cursor: pointer;
+}
+.resource-page .control-button {
+  height: fit-content;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+}
+.resource-page .control-button:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=admin-resource-page.css.map */

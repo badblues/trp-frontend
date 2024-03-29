@@ -3,10 +3,10 @@ import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import CodeEditor from "../../CodeEditor";
 import Loader from "../../Loader";
-import "./Task.css";
+import "../../../styles/student-task-page.css";
 
 const StudentTaskPage = ({ defaultTask }) => {
-  const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
+  const { theme, showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const { taskApiService } = useContext(ApiContext);
   const [code, setCode] = useState("");
   const [outputText, setOutputText] = useState("");
@@ -62,42 +62,28 @@ const StudentTaskPage = ({ defaultTask }) => {
   }
 
   return (
-    <div className="task-container">
+    <div className={`task-page ${theme}`}>
       <div className="task-information">
-        <h1 className={`${darkMode ? "dark-mode" : ""}`}>
-          {defaultTask.title}
-        </h1>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
-          Название функции: {defaultTask.functionName}
-        </h2>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
-          Язык: {defaultTask.language}
-        </h2>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Задание:</h2>
-        <p className={`task-description ${darkMode ? "dark-mode" : ""}`}>
-          {defaultTask.description}
-        </p>
+        <h1>{defaultTask.title}</h1>
+        <h2>Название функции: {defaultTask.functionName}</h2>
+        <h2>Язык: {defaultTask.language}</h2>
+        <h2>Задание:</h2>
+        <p>{defaultTask.description}</p>
       </div>
-      <div className="right-side-container">
+      <div className="task-ide">
         <div className="editor-and-output">
           <CodeEditor solutionCode={code} onCodeChange={handleCodeChange} />
           <textarea
             value={outputText}
             disabled={true}
-            className={`output ${darkMode ? "dark-mode" : ""}`}
+            className="output"
           ></textarea>
         </div>
         <div className="control-panel">
-          <button
-            className="button control-button save-button"
-            onClick={saveCode}
-          >
+          <button className="control-button" onClick={saveCode}>
             СОХРАНИТЬ
           </button>
-          <button
-            className="button control-button execute-button"
-            onClick={executeSolution}
-          >
+          <button className="control-button" onClick={executeSolution}>
             ЗАПУСТИТЬ
           </button>
         </div>

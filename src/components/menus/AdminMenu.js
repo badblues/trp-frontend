@@ -1,18 +1,18 @@
 import React, { useContext, useState } from "react";
-import "./Menu.css";
 import { Link } from "react-router-dom";
 import { UiContext } from "../../contexts/UiContext";
+import "../../styles/menu.css";
 
 const AdminMenu = () => {
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
 
   const [createOpen, setCreateOpen] = useState(false);
   const [appointOpen, setAppointOpen] = useState(false);
 
   return (
-    <div className="menu">
+    <div className={`menu ${theme}`}>
       <label
-        className={`sub-menu-btn menu-option ${darkMode ? "dark-mode" : ""}`}
+        className="menu-option"
         onClick={() => {
           setCreateOpen(!createOpen);
           setAppointOpen(false);
@@ -23,24 +23,15 @@ const AdminMenu = () => {
       {createOpen ? (
         <div
           onClick={() => setCreateOpen(!createOpen)}
-          className={`sub-menu move5 ${darkMode ? "dark-mode" : ""}`}
+          className="sub-menu move5"
         >
-          <Link
-            to="/create-user"
-            className={`sub-menu-option ${darkMode ? "dark-mode" : ""}`}
-          >
+          <Link to="/create-user" className="sub-menu-option">
             Пользователя
           </Link>
-          <Link
-            to="/create-discipline"
-            className={`sub-menu-option ${darkMode ? "dark-mode" : ""}`}
-          >
+          <Link to="/create-discipline" className="sub-menu-option">
             Дисциплину
           </Link>
-          <Link
-            to="/create-group"
-            className={`sub-menu-option ${darkMode ? "dark-mode" : ""}`}
-          >
+          <Link to="/create-group" className="sub-menu-option">
             Группу
           </Link>
         </div>
@@ -50,19 +41,16 @@ const AdminMenu = () => {
           setAppointOpen(!appointOpen);
           setCreateOpen(false);
         }}
-        className={`menu-option ${darkMode ? "dark-mode" : ""}`}
+        className="menu-option"
       >
         Назначить
       </label>
       {appointOpen ? (
         <div
           onClick={() => setAppointOpen(!appointOpen)}
-          className={`sub-menu move90 ${darkMode ? "dark-mode" : ""}`}
+          className={`sub-menu move90 ${theme}`}
         >
-          <Link
-            to="/assign-teacher"
-            className={`sub-menu-option ${darkMode ? "dark-mode" : ""}`}
-          >
+          <Link to="/assign-teacher" className="sub-menu-option">
             Преподавателя
           </Link>
         </div>

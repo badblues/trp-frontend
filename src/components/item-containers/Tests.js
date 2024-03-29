@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import { UiContext } from "../../contexts/UiContext";
-import "./Tests.css";
 import TestForm from "../forms/TestForm";
 import binImg from "../../images/bin.png";
 import editImg from "../../images/edit.png";
+import "../../styles/test-list.css";
 
 const Tests = ({ tests, task, onAddTest, onDeleteTest, onUpdateTest }) => {
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
   const [isAddingTest, setIsAddingTest] = useState(false);
   const [editingTestId, setEditingTestId] = useState(-1);
 
@@ -18,11 +18,11 @@ const Tests = ({ tests, task, onAddTest, onDeleteTest, onUpdateTest }) => {
   };
 
   return (
-    <div className="tests-container">
+    <div className={`test-list ${theme}`}>
       <div className="add-test-container">
         <button
           onClick={() => setIsAddingTest(!isAddingTest)}
-          className="button"
+          className="open-test-form-button"
         >
           {isAddingTest ? "ЗАКРЫТЬ" : "ДОБАВИТЬ ТЕСТЫ"}
         </button>
@@ -36,7 +36,7 @@ const Tests = ({ tests, task, onAddTest, onDeleteTest, onUpdateTest }) => {
 
       {tests.map((test) => (
         <div
-          className={`test-item ${darkMode ? "dark-mode" : ""}`}
+          className="item"
           key={test.id}
         >
           {editingTestId === test.id ? (
@@ -48,20 +48,20 @@ const Tests = ({ tests, task, onAddTest, onDeleteTest, onUpdateTest }) => {
             </div>
           ) : (
             <div>
-              <span className="bold">In: </span>
+              <span className="bold-text">In: </span>
               <span>{test.input}</span>
               <br />
-              <span className="bold">Out: </span>
+              <span className="bold-text">Out: </span>
               <span>{test.output}</span>
               <div>
                 <button
                   onClick={() => onDeleteTest(test)}
-                  className="button-with-image margin-5"
+                  className="button-with-image"
                 >
                   <img
+                    className="icon"
                     src={binImg}
                     alt="Delete"
-                    className={`icon ${darkMode ? "dark-mode" : ""}`}
                     width="17"
                   ></img>
                 </button>
@@ -69,12 +69,12 @@ const Tests = ({ tests, task, onAddTest, onDeleteTest, onUpdateTest }) => {
                   onClick={() => {
                     setEditingTestId(test.id);
                   }}
-                  className="button-with-image margin-5"
+                  className="button-with-image"
                 >
                   <img
+                    className="icon"
                     src={editImg}
                     alt="Edit"
-                    className={`icon ${darkMode ? "dark-mode" : ""}`}
                     width="17"
                   ></img>
                 </button>

@@ -1,0 +1,10 @@
+@import "./variables.scss";
+
+.main-container {
+  flex-grow: 1;
+  background-color: $background-color;
+
+  &.dark-mode {
+    background-color: $dark-mode-background-color;
+  }
+}

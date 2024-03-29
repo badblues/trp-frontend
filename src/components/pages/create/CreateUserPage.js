@@ -3,6 +3,7 @@ import { ApiContext } from "../../../contexts/ApiContext";
 import UserForm from "../../forms/UserForm";
 import { UiContext } from "../../../contexts/UiContext";
 import Loader from "../../Loader";
+import "../../../styles/create-item-page.css";
 
 const CreateUserPage = () => {
   const { showSuccessAlert, showErrorAlert } = useContext(UiContext);
@@ -47,7 +48,7 @@ const CreateUserPage = () => {
   }
 
   return (
-    <div>
+    <div className="create-page">
       <UserForm groups={groups} onFormSubmit={createUser} />
     </div>
   );

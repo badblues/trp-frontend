@@ -1,0 +1,60 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.task-page {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 20px 10px 20px;
+  font-family: $main-font;
+  color: $text-color;
+
+  &.dark-mode {
+    color: $dark-mode-text-color;
+
+    .task-ide {
+      .editor-and-output {
+        .output {
+          background-color: $dark-mode-background-secondary-color;
+        }
+      }
+      .control-panel {
+        background-color: $dark-mode-background-secondary-color;
+      }
+    }
+  }
+
+  .task-information {
+    max-width: 500px;
+    width: fit-content;
+  }
+
+  .task-ide {
+    display: flex;
+
+    .editor-and-output {
+      display: flex;
+      flex-direction: column;
+
+      .output {
+        margin-top: 10px;
+        padding: 5px;
+        height: 150px;
+        width: 600px;
+        resize: none;
+        background-color: $background-secondary-color;
+      }
+    }
+
+    .control-panel {
+      margin-left: 15px;
+      padding: 5px;
+      background-color: $background-secondary-color;
+      border-radius: 5px;
+      height: fit-content;
+
+      .control-button {
+        @include button(5px 0px 5px 0px);
+      }
+    }
+  }
+}

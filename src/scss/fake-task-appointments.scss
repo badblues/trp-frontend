@@ -1,0 +1,48 @@
+@import "./variables.scss";
+
+.fake-task-appointments-list {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0px 0px 60px;
+  filter: blur(5px);
+
+  &.dark-mode {
+    .fake-group-name {
+      background-color: $dark-mode-background-secondary-color;
+    }
+    .fake-task-appointment {
+      .fake-student-name,
+      .fake-appointment {
+        background-color: $dark-mode-background-secondary-color;
+      }
+    }
+  }
+
+  .fake-group-name {
+    height: 40px;
+    width: 180px;
+    margin: 0px 0px 10px 5px;
+    background-color: $background-secondary-color;
+  }
+
+  .fake-task-appointment {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+
+    .fake-student-name {
+      height: 50px;
+      width: 200px;
+      background-color: $background-secondary-color;
+      filter: blur(5px);
+    }
+
+    .fake-appointment {
+      margin-left: 10px;
+      height: 50px;
+      width: 400px;
+      background-color: $background-secondary-color;
+      filter: blur(5px);
+    }
+  }
+}

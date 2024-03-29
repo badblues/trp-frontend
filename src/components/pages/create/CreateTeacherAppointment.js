@@ -3,6 +3,7 @@ import { ApiContext } from "../../../contexts/ApiContext";
 import TeacherAppointmentForm from "../../forms/TeacherAppointmentForm";
 import { UiContext } from "../../../contexts/UiContext";
 import Loader from "../../Loader";
+import "../../../styles/create-item-page.css";
 
 const CreateTeacherAppointment = () => {
   const { showSuccessAlert, showErrorAlert } = useContext(UiContext);
@@ -57,7 +58,7 @@ const CreateTeacherAppointment = () => {
   }
 
   return (
-    <div>
+    <div className="create-page">
       <TeacherAppointmentForm
         disciplines={disciplines}
         groups={groups}

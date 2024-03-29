@@ -1,0 +1,50 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.add-test-container {
+  margin: 5px;
+}
+
+.test-list {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  font-family: $main-font;
+  color: $text-color;
+
+  &.dark-mode {
+    .item {
+      color: $dark-mode-text-color;
+
+      .button-with-image {
+        .icon {
+          filter: invert(100%);
+        }
+      }
+    }
+  }
+
+  .add-test-container {
+    .open-test-form-button {
+      @include button(5px 0px 5px 0px);
+    }
+  }
+
+  .item {
+    width: fit-content;
+    max-width: 400px;
+    margin: 3px;
+
+    .button-with-image {
+      @include buttonWithImage(3px);
+    }
+
+    .bold-text {
+      font-weight: bold;
+    }
+  }
+}
+
+.add-test-button {
+  margin: 5px 0px 5px 0px;
+}

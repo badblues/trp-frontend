@@ -1,0 +1,15 @@
+@import "./variables.scss";
+
+.footer {
+  min-width: 100%;
+  height: fit-content;
+  background-color: $background-secondary-color;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+
+  &.dark-mode {
+    background-color: $dark-mode-background-secondary-color;
+    color: $dark-mode-text-color;
+  }
+}

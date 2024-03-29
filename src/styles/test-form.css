@@ -1,0 +1,36 @@
+.test-form.dark-mode .test-input-container .test-form-input {
+  color: #f1f1f1;
+  border-width: 1px;
+  border-color: white;
+}
+.test-form .test-input-container {
+  display: flex;
+  flex-direction: column;
+}
+.test-form .test-input-container .test-form-input {
+  background-color: transparent;
+  border-radius: 3px;
+  border-width: 1px;
+  max-width: 200px;
+  margin: 3px 0px 3px 0px;
+  padding: 5px;
+  font-size: medium;
+}
+.test-form .submit-button {
+  height: fit-content;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0px 0px 0px;
+}
+.test-form .submit-button:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=test-form.css.map */

@@ -1,0 +1,108 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.form-container {
+  border-radius: 43px;
+  background: $background-secondary-color;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 50%);
+  overflow: auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 400px;
+  width: 25%;
+  height: fit-content;
+  font-family: $main-font;
+
+  &.dark-mode {
+    background: $dark-mode-background-secondary-color;
+    color: $dark-mode-text-color;
+
+    .form-input-container {
+      .form-input {
+        background: $dark-mode-background-color;
+        color: $dark-mode-text-color;
+        &::placeholder {
+          color: $dark-mode-text-color;
+        }
+      }
+      .input-with-button-container {
+        .button-with-image {
+          .show-password-icon {
+            filter: invert(100%);
+          }
+        }
+      }
+      .form-text {
+        color: $dark-mode-text-color;
+      }
+    }
+  }
+
+  .form-name {
+    font: 500;
+    font-size: x-large;
+    margin: 0px 0px 10px 0px;
+  }
+
+  .form-input-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0px 0px 20px 0px;
+
+    .form-label {
+      font-size: medium;
+      align-self: flex-start;
+      margin: 5px;
+    }
+
+    .form-input {
+      width: 100%;
+      min-height: 40px;
+      border-radius: 7px;
+      border: 1px solid #000;
+      padding: 10px;
+    }
+
+    .input-with-button-container {
+      display: flex;
+      width: 100%;
+
+      .button-with-image {
+        @include buttonWithImage();
+        margin: 5px;
+      }
+    }
+
+    .form-checkbox-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 90%;
+      margin-bottom: 20px;
+
+      .form-checkbox {
+        margin-left: 5px;
+      }
+    }
+
+    .form-textarea {
+      @extend .form-input;
+      resize: none;
+      height: 300px;
+    }
+
+    .form-text {
+      color: #8f0000;
+      margin: 4px;
+      align-self: flex-start;
+    }
+
+  }
+
+  .submit-button {
+    @include button(10px 0px 10px 0px);
+  }
+}

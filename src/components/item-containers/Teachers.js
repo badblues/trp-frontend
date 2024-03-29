@@ -1,19 +1,19 @@
 import React, { useContext } from "react";
 import { UiContext } from "../../contexts/UiContext";
-import "./Teachers.css";
+import "../../styles/item-list.css";
 
 const Teachers = ({ teachers, onTeacherSelect }) => {
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
 
   return (
     <>
-      <div className="teachers-container">
-        <h2 className={`teachers-caption ${darkMode ? "dark-mode" : ""}`}>
+      <div className={`item-list ${theme}`}>
+        <h2 className="caption">
           Преподаватели:
         </h2>
         {teachers.map((teacher) => (
           <div
-            className={`teacher-item ${darkMode ? "dark-mode" : ""}`}
+            className="item-with-border"
             onClick={() => onTeacherSelect(teacher)}
             key={teacher.id}
           >

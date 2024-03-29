@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import { Roles } from "../../../models/Roles";
-import "./DisciplinePage.css";
 import AdminDisciplinePage from "./AdminDisciplinePage";
 import TeacherDisciplinePage from "./TeacherDisciplinePage";
 import StudentDisciplinePage from "./StudentDisciplinePage";

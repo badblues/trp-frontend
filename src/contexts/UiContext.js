@@ -7,22 +7,22 @@ export class UiContextProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      setDarkMode: this.setDarkMode.bind(this),
-      darkMode: this.loadData(),
+      setTheme: this.setTheme.bind(this),
+      theme: this.loadData(),
       showSuccessAlert: this.showSuccessAlert.bind(this),
       showErrorAlert: this.showErrorAlert.bind(this),
     };
   }
 
-  setDarkMode = (darkMode) => {
+  setTheme = (theme) => {
     this.setState({
-      setDarkMode: this.setDarkMode.bind(this),
-      darkMode: darkMode,
+      setTheme: this.setTheme.bind(this),
+      theme: theme,
     });
-    localStorage.setItem("darkMode", darkMode);
+    localStorage.setItem("theme", theme);
   };
 
-  loadData = () => localStorage.getItem("darkMode") === "true";
+  loadData = () => localStorage.getItem("theme");
 
   showSuccessAlert = (text) => {
     toast.success(text, {
@@ -33,7 +33,7 @@ export class UiContextProvider extends Component {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: `${this.state.darkMode ? "dark" : "light"}`,
+      theme: `${this.state.theme ? "dark" : "light"}`,
       transition: Flip,
     });
   };
@@ -47,7 +47,7 @@ export class UiContextProvider extends Component {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: `${this.state.darkMode ? "dark" : "light"}`,
+      theme: `${this.state.theme ? "dark" : "light"}`,
       transition: Flip,
     });
   };

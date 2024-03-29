@@ -1,12 +1,12 @@
 import React from "react";
-import "./Footer.css";
 import { useContext } from "react";
 import { UiContext } from "../contexts/UiContext";
+import "../styles/footer.css";
 
 const Footer = () => {
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
 
-  return <div className={`footer ${darkMode ? "dark-mode" : ""}`}></div>;
+  return <div className={`footer ${theme}`}></div>;
 };
 
 export default Footer;

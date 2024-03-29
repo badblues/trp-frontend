@@ -1,19 +1,19 @@
 import React, { useContext } from "react";
 import { UiContext } from "../../contexts/UiContext";
-import "./Disciplines.css";
+import "../../styles/item-list.css";
 
 const Disciplines = ({ disciplines, onDisciplineSelect }) => {
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
 
   return (
     <>
-      <div className="disciplines-container">
-        <h2 className={`disciplines-caption ${darkMode ? "dark-mode" : ""}`}>
+      <div className={`item-list ${theme}`}>
+        <h2 className="caption">
           Дисциплины:
         </h2>
         {disciplines.map((discipline) => (
           <div
-            className={`discipline-item ${darkMode ? "dark-mode" : ""}`}
+            className="item-with-border"
             onClick={() => onDisciplineSelect(discipline)}
             key={discipline.id}
           >

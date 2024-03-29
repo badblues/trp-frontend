@@ -6,14 +6,14 @@ import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import crossImg from "../../../images/cross.png";
 import GroupForm from "../../forms/GroupForm";
-import "./GroupPage.css";
+import "../../../styles/admin-resource-page.css";
 
 const AdminGroupPage = () => {
   const { groupId } = useParams();
   const navigate = useNavigate();
   const { studentApiService, teacherAppointmentApiService, groupApiService } =
     useContext(ApiContext);
-  const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
+  const { theme, showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const [appointments, setAppointments] = useState([]);
   const [students, setStudents] = useState([]);
   const [group, setGroup] = useState(null);
@@ -90,11 +90,12 @@ const AdminGroupPage = () => {
 
   if (updating) {
     return (
-      <div className="page-container">
-        <div className="group-form-container">
-          <GroupForm onFormSubmit={updateGroup} group={group} />
-        </div>
-        <button className="button" onClick={() => setUpdating(false)}>
+      <div className="update-resource-page">
+        <GroupForm onFormSubmit={updateGroup} group={group} />
+        <button
+          className="close-resource-form-button"
+          onClick={() => setUpdating(false)}
+        >
           ЗАКРЫТЬ
         </button>
       </div>
@@ -102,42 +103,31 @@ const AdminGroupPage = () => {
   }
 
   return (
-    <div className="page-container">
+    <div className={`resource-page ${theme}`}>
       <div>
         <div>
-          <h1 className={`${darkMode ? "dark-mode" : ""}`}>{group.name}</h1>
+          <h1>{group.name}</h1>
         </div>
         {students.map((student) => (
-          <div
-            className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
-            key={student.id}
-          >
-            <h4 className="appointments-item">{student.fullName}</h4>
+          <div className="appointment-list" key={student.id}>
+            <h4 className="appointment-item">{student.fullName}</h4>
           </div>
         ))}
-        <button
-          className="button control-button"
-          onClick={() => setUpdating(true)}
-        >
+        <button className="control-button" onClick={() => setUpdating(true)}>
           ИЗМЕНИТЬ ГРУППУ
         </button>
-        <button className="button control-button" onClick={deleteGroup}>
+        <button className="control-button" onClick={deleteGroup}>
           УДАЛИТЬ ГРУППУ
         </button>
       </div>
       <div>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
-          Текущие дисциплины:
-        </h2>
+        <h2>Текущие дисциплины:</h2>
         {appointments.map((appointment) => (
-          <div
-            className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
-            key={appointment.id}
-          >
-            <div className="appointments-item">
-              <div className="appointments-links">
+          <div className="appointment-list" key={appointment.id}>
+            <div className="appointment-item">
+              <div>
                 <h4
-                  className="clickable"
+                  className="appointment-link"
                   onClick={() => {
                     navigate(`/disciplines/${appointment.discipline.id}`);
                   }}
@@ -145,7 +135,7 @@ const AdminGroupPage = () => {
                   {`${appointment.discipline.name} ${appointment.discipline.year}`}
                 </h4>
                 <label
-                  className="clickable"
+                  className="appointment-link"
                   onClick={() => {
                     navigate(`/teachers/${appointment.teacher.id}`);
                   }}
@@ -154,7 +144,7 @@ const AdminGroupPage = () => {
                 </label>
               </div>
               <button
-                className="button-with-image"
+                className="remove-appointment-button"
                 title="Удалить назначение"
                 onClick={() => deleteAppointment(appointment)}
               >

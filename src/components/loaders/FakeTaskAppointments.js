@@ -1,68 +1,40 @@
 import React, { useContext } from "react";
 import { UiContext } from "../../contexts/UiContext";
-import "./FakeTaskAppointments.css";
+import "../../styles/fake-task-appointments.css";
 
 function FakeTaskAppointments() {
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
 
   return (
-    <div className="fake-task-appointments-list">
-      <div className={`fake-group-name ${darkMode ? "dark-mode" : ""}`}></div>
+    <div className={`fake-task-appointments-list ${theme}`}>
+      <div className="fake-group-name"></div>
       <div className="fake-task-appointment">
-        <div
-          className={`fake-student-name ${darkMode ? "dark-mode" : ""}`}
-        ></div>
-        <div
-          className={`fake-appointment ${darkMode ? "dark-mode" : ""}`}
-        ></div>
+        <div className="fake-student-name"></div>
+        <div className="fake-appointment"></div>
       </div>
       <div className="fake-task-appointment">
-        <div
-          className={`fake-student-name ${darkMode ? "dark-mode" : ""}`}
-        ></div>
-        <div
-          className={`fake-appointment ${darkMode ? "dark-mode" : ""}`}
-        ></div>
+        <div className="fake-student-name"></div>
+        <div className="fake-appointment"></div>
       </div>
       <div className="fake-task-appointment">
-        <div
-          className={`fake-student-name ${darkMode ? "dark-mode" : ""}`}
-        ></div>
-        <div
-          className={`fake-appointment ${darkMode ? "dark-mode" : ""}`}
-        ></div>
+        <div className="fake-student-name"></div>
+        <div className="fake-appointment"></div>
       </div>
       <div className="fake-task-appointment">
-        <div
-          className={`fake-student-name ${darkMode ? "dark-mode" : ""}`}
-        ></div>
-        <div
-          className={`fake-appointment ${darkMode ? "dark-mode" : ""}`}
-        ></div>
+        <div className="fake-student-name"></div>
+        <div className="fake-appointment"></div>
       </div>
       <div className="fake-task-appointment">
-        <div
-          className={`fake-student-name ${darkMode ? "dark-mode" : ""}`}
-        ></div>
-        <div
-          className={`fake-appointment ${darkMode ? "dark-mode" : ""}`}
-        ></div>
+        <div className="fake-student-name"></div>
+        <div className="fake-appointment"></div>
       </div>
       <div className="fake-task-appointment">
-        <div
-          className={`fake-student-name ${darkMode ? "dark-mode" : ""}`}
-        ></div>
-        <div
-          className={`fake-appointment ${darkMode ? "dark-mode" : ""}`}
-        ></div>
+        <div className="fake-student-name"></div>
+        <div className="fake-appointment"></div>
       </div>
       <div className="fake-task-appointment">
-        <div
-          className={`fake-student-name ${darkMode ? "dark-mode" : ""}`}
-        ></div>
-        <div
-          className={`fake-appointment ${darkMode ? "dark-mode" : ""}`}
-        ></div>
+        <div className="fake-student-name"></div>
+        <div className="fake-appointment"></div>
       </div>
     </div>
   );

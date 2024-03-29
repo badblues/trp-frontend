@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import TaskForm from "../../forms/TaskForm";
-import "./Task.css";
 import Loader from "../../Loader";
 import { UserContext } from "../../../contexts/UserContext";
 import { Roles } from "../../../models/Roles";
 import Tests from "../../item-containers/Tests";
+import "../../../styles/teacher-task-page.css";
 
 const TeacherTaskPage = ({ defaultTask }) => {
-  const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
+  const { theme, showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const { taskApiService, disciplineApiService, taskTestApiService } =
     useContext(ApiContext);
   const { user } = useContext(UserContext);
@@ -110,15 +110,16 @@ const TeacherTaskPage = ({ defaultTask }) => {
 
   if (updating) {
     return (
-      <div className="task-container">
-        <div className="task-update-form">
-          <TaskForm
-            discipline={discipline}
-            onFormSubmit={updateTask}
-            task={task}
-          />
-        </div>
-        <button className="button" onClick={() => setUpdating(false)}>
+      <div className="update-task-page">
+        <TaskForm
+          discipline={discipline}
+          onFormSubmit={updateTask}
+          task={task}
+        />
+        <button
+          className="close-task-form-button"
+          onClick={() => setUpdating(false)}
+        >
           ЗАКРЫТЬ
         </button>
       </div>
@@ -126,19 +127,13 @@ const TeacherTaskPage = ({ defaultTask }) => {
   }
 
   return (
-    <div className="task-container">
+    <div className={`task-page ${theme}`}>
       <div className="task-information">
-        <h1 className={`${darkMode ? "dark-mode" : ""}`}>{task.title}</h1>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
-          Название функции: {task.functionName}
-        </h2>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
-          Язык: {task.language}
-        </h2>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Задание:</h2>
-        <p className={`task-description ${darkMode ? "dark-mode" : ""}`}>
-          {task.description}
-        </p>
+        <h1>{task.title}</h1>
+        <h2>Название функции: {task.functionName}</h2>
+        <h2>Язык: {task.language}</h2>
+        <h2>Задание:</h2>
+        <p>{task.description}</p>
         <h2>Тесты:</h2>
         <Tests
           tests={tests}
@@ -149,14 +144,11 @@ const TeacherTaskPage = ({ defaultTask }) => {
         />
       </div>
       {user.role === Roles.SeniorTeacher ? (
-        <div className="task-controll">
-          <button
-            className="button control-button"
-            onClick={() => setUpdating(true)}
-          >
+        <div className="control-panel">
+          <button className="control-button" onClick={() => setUpdating(true)}>
             ИЗМЕНИТЬ ЗАДАНИЕ
           </button>
-          <button className="button control-button" onClick={deleteTask}>
+          <button className="control-button" onClick={deleteTask}>
             УДАЛИТЬ ЗАДАНИЕ
           </button>
         </div>

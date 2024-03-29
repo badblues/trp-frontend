@@ -1,0 +1,56 @@
+@import "./variables.scss";
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: $main-font;
+
+  &.dark-mode {
+    .caption {
+      color: $dark-mode-text-color;
+    }
+
+    .item {
+      color: $dark-mode-text-color;
+    }
+
+    .item-with-border {
+      background-color: $dark-mode-background-secondary-color;
+
+      &:hover {
+        background-color: $primary-color;
+      }
+    }
+  }
+
+  .caption {
+    margin: 0px 0px 10px 5px;
+  }
+
+  .item {
+    padding: 2px;
+    margin: 0px 0px 5px 0px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .item-with-border {
+    @extend .item;
+    background-color: $background-secondary-color;
+    border: solid;
+    padding: 10px;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $dark-mode-text-color;
+    }
+  }
+}

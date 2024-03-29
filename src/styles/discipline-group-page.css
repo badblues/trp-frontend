@@ -1,0 +1,54 @@
+.discipline-group-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 70px 0px 50px;
+  font-family: "Montserrat", sans-serif;
+  color: #181818;
+}
+.discipline-group-page.dark-mode {
+  color: #f1f1f1;
+}
+.discipline-group-page.dark-mode .info-container .status-text {
+  align-self: flex-end;
+}
+.discipline-group-page.dark-mode .info-container .status-text.status-not-appointed {
+  color: grey;
+}
+.discipline-group-page.dark-mode .info-container .status-text.status-appointed {
+  color: white;
+}
+.discipline-group-page .task-appointment-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.discipline-group-page .task-appointment-list .task-appointment-student-name {
+  align-self: center;
+  min-width: 200px;
+  margin: 5px 40px 5px 0px;
+}
+.discipline-group-page .info-container {
+  display: flex;
+  flex-direction: column;
+}
+.discipline-group-page .info-container .status-text {
+  align-self: flex-end;
+}
+.discipline-group-page .info-container .status-text.status-not-appointed {
+  color: grey;
+}
+.discipline-group-page .info-container .status-text.status-appointed {
+  color: black;
+}
+.discipline-group-page .info-container .status-text.status-in-progress {
+  color: red;
+}
+.discipline-group-page .info-container .status-text.status-finished {
+  color: orange;
+}
+.discipline-group-page .info-container .status-text.status-done {
+  color: green;
+}
+
+/*# sourceMappingURL=discipline-group-page.css.map */

@@ -2,12 +2,12 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
-import "./Form.css";
+import "../../styles/form.css";
 
 const GroupForm = ({ group, onFormSubmit }) => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
   const [loading, setLoading] = useState(false);
 
   const onDone = () => {
@@ -22,8 +22,8 @@ const GroupForm = ({ group, onFormSubmit }) => {
   };
 
   return (
-    <form className="big-form" onSubmit={handleSubmit(onSubmit)}>
-      <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className={`form-container ${theme}`}>
         <h1 className="form-name">
           {group ? "ИЗМЕНЕНИЕ ГРУППЫ" : "СОЗДАНИЕ ГРУППЫ"}
         </h1>
@@ -33,7 +33,7 @@ const GroupForm = ({ group, onFormSubmit }) => {
           </label>
           <input
             id="name"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            className="form-input"
             type="text"
             placeholder="Название..."
             autoComplete="off"
@@ -42,12 +42,12 @@ const GroupForm = ({ group, onFormSubmit }) => {
               required: "Необходимо ввести название группы",
             })}
           />
-          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
+          <label className="form-text">
             {errors.name?.message}
           </label>
         </div>
 
-        <button disabled={loading} className="button form-button" type="submit">
+        <button disabled={loading} className="submit-button" type="submit">
           {loading ? <Loader /> : group ? "ИЗМЕНИТЬ ГРУППУ" : "СОЗДАТЬ ГРУППУ"}
         </button>
       </div>

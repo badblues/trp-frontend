@@ -1,0 +1,13 @@
+.error-container {
+  margin: 200px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  color: #181818;
+}
+.error-container.dark-mode {
+  color: #f1f1f1;
+}
+
+/*# sourceMappingURL=not-found-page.css.map */

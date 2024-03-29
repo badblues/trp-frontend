@@ -1,0 +1,42 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.update-task-page {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px 0px 0px;
+
+  .close-task-form-button {
+    @include button(10px 0px 0px 50px);
+  }
+}
+
+
+.task-page {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 20px 10px 20px;
+  font-family: $main-font;
+  color: $text-color;
+
+  &.dark-mode {
+    color: $dark-mode-text-color;
+  }
+
+  .task-information {
+    max-width: 500px;
+    width: fit-content;
+  }
+
+  .control-panel {
+    margin-left: 15px;
+    padding: 5px;
+    background-color: var(--dark-mode-background-secondary-color);
+    border-radius: 5px;
+    height: fit-content;
+
+    .control-button {
+      @include button(10px 0px 0px 0px);
+    }
+  }
+}

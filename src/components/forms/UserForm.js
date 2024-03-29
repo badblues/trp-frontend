@@ -1,17 +1,16 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Roles } from "../../models/Roles";
-
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
 import dices from "../../images/dices.png";
-import "./Form.css";
+import "../../styles/form.css";
 
 const UserForm = ({ user, groups, onFormSubmit }) => {
   const { register, handleSubmit, formState, watch } = useForm();
   const { errors } = formState;
   const selectedRole = watch("role");
-  const { darkMode, showErrorAlert } = useContext(UiContext);
+  const { theme, showErrorAlert } = useContext(UiContext);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -47,16 +46,14 @@ const UserForm = ({ user, groups, onFormSubmit }) => {
       newUser.groupId = data.groupId;
     }
     const role = user ? user.role : selectedRole;
-    if (user != null)
-      newUser.id = user.id;
+    if (user != null) newUser.id = user.id;
     setLoading(true);
     onFormSubmit(newUser, role, () => setLoading(false));
   };
 
-
   return (
-    <form className="big-form" onSubmit={handleSubmit(onSubmit)}>
-      <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className={`form-container ${theme}`}>
         <h1 className="form-name">
           {user ? "ИЗМЕНЕНИЕ ИНФОРМАЦИИ" : "СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ"}
         </h1>
@@ -67,7 +64,7 @@ const UserForm = ({ user, groups, onFormSubmit }) => {
           </label>
           <select
             id="role"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            className="form-input"
             defaultValue={user ? user.role : Roles.Admin}
             disabled={user}
             {...register("role")}
@@ -85,7 +82,7 @@ const UserForm = ({ user, groups, onFormSubmit }) => {
           </label>
           <input
             id="username"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            className="form-input"
             type="text"
             placeholder="Имя пользователя..."
             autoComplete="off"
@@ -94,9 +91,7 @@ const UserForm = ({ user, groups, onFormSubmit }) => {
               required: "Необходимо ввести имя пользователя",
             })}
           />
-          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
-            {errors.username?.message}
-          </label>
+          <label className="form-text">{errors.username?.message}</label>
         </div>
 
         <div className="form-input-container">
@@ -108,13 +103,13 @@ const UserForm = ({ user, groups, onFormSubmit }) => {
               value={password}
               onInput={onPasswordChange}
               id="password"
-              className={`form-input ${darkMode ? "dark-mode" : ""}`}
+              className="form-input"
               type="text"
               placeholder="Пароль..."
               autoComplete="off"
             />
             <button
-              className="button button-with-image"
+              className="button-with-image"
               title="Сгенерировать случайный пароль"
               type="button"
               onClick={randomPassword}
@@ -122,9 +117,7 @@ const UserForm = ({ user, groups, onFormSubmit }) => {
               <img src={dices} alt="rnd" width="20" />
             </button>
           </div>
-          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
-            {errors.password?.message}
-          </label>
+          <label className="form-text">{errors.password?.message}</label>
         </div>
 
         <div className="form-input-container">
@@ -133,16 +126,14 @@ const UserForm = ({ user, groups, onFormSubmit }) => {
           </label>
           <input
             id="fullName"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            className="form-input"
             type="text"
             placeholder="ФИО..."
             autoComplete="off"
             defaultValue={user ? user.fullName : ""}
             {...register("fullName", { required: "Необходимо ввести ФИО" })}
           />
-          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
-            {errors.fullName?.message}
-          </label>
+          <label className="form-text">{errors.fullName?.message}</label>
         </div>
 
         {(selectedRole === Roles.Student ||
@@ -153,7 +144,7 @@ const UserForm = ({ user, groups, onFormSubmit }) => {
             </label>
             <select
               id="group"
-              className={`form-input ${darkMode ? "dark-mode" : ""}`}
+              className="form-input"
               defaultValue={user ? user.group.id : ""}
               {...register("groupId")}
             >
@@ -166,7 +157,7 @@ const UserForm = ({ user, groups, onFormSubmit }) => {
           </div>
         )}
 
-        <button disabled={loading} className="button form-button" type="submit">
+        <button disabled={loading} className="submit-button" type="submit">
           {loading ? (
             <Loader />
           ) : user ? (

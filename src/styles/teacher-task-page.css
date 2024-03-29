@@ -1,0 +1,61 @@
+.update-task-page {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px 0px 0px;
+}
+.update-task-page .close-task-form-button {
+  height: fit-content;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0px 0px 50px;
+}
+.update-task-page .close-task-form-button:hover {
+  cursor: pointer;
+}
+
+.task-page {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 20px 10px 20px;
+  font-family: "Montserrat", sans-serif;
+  color: #181818;
+}
+.task-page.dark-mode {
+  color: #f1f1f1;
+}
+.task-page .task-information {
+  max-width: 500px;
+  width: fit-content;
+}
+.task-page .control-panel {
+  margin-left: 15px;
+  padding: 5px;
+  background-color: var(--dark-mode-background-secondary-color);
+  border-radius: 5px;
+  height: fit-content;
+}
+.task-page .control-panel .control-button {
+  height: fit-content;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+}
+.task-page .control-panel .control-button:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=teacher-task-page.css.map */

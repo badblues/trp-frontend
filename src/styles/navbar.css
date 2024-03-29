@@ -1,0 +1,68 @@
+.navbar-container {
+  min-width: 100%;
+  height: fit-content;
+  min-height: 70px;
+  background-color: #b4b4b4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #181818;
+  font-family: "Montserrat", sans-serif;
+}
+.navbar-container.dark-mode {
+  background-color: #2e2e2e;
+  color: #f1f1f1;
+}
+.navbar-container.dark-mode .logo-container .logo-text {
+  color: #f1f1f1;
+}
+.navbar-container.dark-mode .logo-container .logo-image {
+  filter: invert(100%);
+}
+.navbar-container .logo-container {
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.navbar-container .logo-container .logo-image {
+  object-fit: contain;
+}
+.navbar-container .logo-container .logo-text {
+  font-size: x-large;
+  text-decoration: none;
+  color: #181818;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-family: "Raleway", sans-serif;
+}
+.navbar-container .profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.navbar-container .profile-container .mini-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.navbar-container .profile-container .username {
+  font-size: large;
+}
+.navbar-container .profile-container .username:hover {
+  color: red;
+  cursor: pointer;
+}
+.navbar-container .profile-container .logout {
+  font-size: large;
+}
+.navbar-container .profile-container .logout:hover {
+  color: red;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=navbar.css.map */

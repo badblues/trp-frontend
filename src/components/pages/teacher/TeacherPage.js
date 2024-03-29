@@ -5,14 +5,14 @@ import { ApiContext } from "../../../contexts/ApiContext";
 import Loader from "../../Loader";
 import UserForm from "../../forms/UserForm";
 import crossImg from "../../../images/cross.png";
-import "./TeacherPage.css";
+import "../../../styles/admin-resource-page.css";
 
 const TeacherPage = () => {
   const { teacherId } = useParams();
   const navigate = useNavigate();
   const { teacherApiService, teacherAppointmentApiService } =
     useContext(ApiContext);
-  const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
+  const { theme, showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const [teacher, setTeacher] = useState(null);
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -66,11 +66,12 @@ const TeacherPage = () => {
 
   if (updating) {
     return (
-      <div className="page-container">
-        <div className="user-form-container">
-          <UserForm onFormSubmit={updateTeacher} user={teacher} />
-        </div>
-        <button className="button" onClick={() => setUpdating(false)}>
+      <div className="update-resource-page">
+        <UserForm onFormSubmit={updateTeacher} user={teacher} />
+        <button
+          className="close-resource-form-button"
+          onClick={() => setUpdating(false)}
+        >
           ЗАКРЫТЬ
         </button>
       </div>
@@ -78,24 +79,19 @@ const TeacherPage = () => {
   }
 
   return (
-    <div className="page-container">
+    <div className={`resource-page ${theme}`}>
       <div>
-        <h1 className={`${darkMode ? "dark-mode" : ""}`}>{teacher.fullName}</h1>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>{teacher.username}</h2>
+        <h1>{teacher.fullName}</h1>
+        <h2>{teacher.username}</h2>
       </div>
       <div>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
-          Текущие дисциплины:
-        </h2>
+        <h2>Текущие дисциплины:</h2>
         {appointments.map((appointment) => (
-          <div
-            className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
-            key={appointment.id}
-          >
-            <div className="appointments-item">
-              <div className="appointments-links">
+          <div className="appointment-list" key={appointment.id}>
+            <div className="appointment-item">
+              <div>
                 <h4
-                  className="clickable"
+                  className="appointment-link"
                   onClick={() => {
                     navigate(`/groups/${appointment.group.id}`);
                   }}
@@ -103,7 +99,7 @@ const TeacherPage = () => {
                   {appointment.group.name}
                 </h4>
                 <label
-                  className="clickable"
+                  className="appointment-link"
                   onClick={() => {
                     navigate(`/disciplines/${appointment.discipline.id}`);
                   }}
@@ -112,7 +108,7 @@ const TeacherPage = () => {
                 </label>
               </div>
               <button
-                className="button-with-image"
+                className="remove-appointment-button"
                 title="Удалить назначение"
                 onClick={() => deleteAppointment(appointment)}
               >
@@ -122,12 +118,12 @@ const TeacherPage = () => {
           </div>
         ))}
         <button
-          className="button control-button"
+          className="control-button"
           onClick={() => setUpdating(true)}
         >
           ИЗМЕНИТЬ ИНФОРМАЦИЮ
         </button>
-        <button className="button control-button" onClick={deleteTeacher}>
+        <button className="control-button" onClick={deleteTeacher}>
           УДАЛИТЬ ПОЛЬЗОВАТЕЛЯ
         </button>
       </div>

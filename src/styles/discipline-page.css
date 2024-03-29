@@ -1,0 +1,35 @@
+.discipline-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 70px 0px 50px;
+  font-family: "Montserrat", sans-serif;
+}
+.discipline-page.dark-mode {
+  color: #f1f1f1;
+}
+.discipline-page .appointment-link {
+  margin: 10px 0px 0px 0px;
+}
+.discipline-page .appointment-link:hover {
+  cursor: pointer;
+  color: red;
+}
+.discipline-page .add-lab-button {
+  height: fit-content;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 0px;
+}
+.discipline-page .add-lab-button:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=discipline-page.css.map */

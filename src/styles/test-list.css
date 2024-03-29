@@ -1,0 +1,55 @@
+.add-test-container {
+  margin: 5px;
+}
+
+.test-list {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  font-family: "Montserrat", sans-serif;
+  color: #181818;
+}
+.test-list.dark-mode .item {
+  color: #f1f1f1;
+}
+.test-list.dark-mode .item .button-with-image .icon {
+  filter: invert(100%);
+}
+.test-list .add-test-container .open-test-form-button {
+  height: fit-content;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0px 5px 0px;
+}
+.test-list .add-test-container .open-test-form-button:hover {
+  cursor: pointer;
+}
+.test-list .item {
+  width: fit-content;
+  max-width: 400px;
+  margin: 3px;
+}
+.test-list .item .button-with-image {
+  background-color: transparent;
+  border: none;
+  margin: 3px;
+}
+.test-list .item .button-with-image:hover {
+  cursor: pointer;
+}
+.test-list .item .bold-text {
+  font-weight: bold;
+}
+
+.add-test-button {
+  margin: 5px 0px 5px 0px;
+}
+
+/*# sourceMappingURL=test-list.css.map */

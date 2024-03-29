@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
-import "./DisciplinePage.css";
 import Tasks from "../../item-containers/Tasks";
 import Loader from "../../Loader";
 import { useNavigate } from "react-router-dom";
+import "../../../styles/discipline-page.css";
 
 const StudentDisciplinePage = ({ defaultDiscipline }) => {
-  const { darkMode, showErrorAlert } = useContext(UiContext);
+  const { theme, showErrorAlert } = useContext(UiContext);
   const [teachers, setTeachers] = useState([]);
   const [tasks, setTasks] = useState([]);
   const { teacherAppointmentApiService, taskApiService } =
@@ -46,30 +46,26 @@ const StudentDisciplinePage = ({ defaultDiscipline }) => {
 
   if (loading) {
     return (
-      <div>
+      <div className="loader-container">
         <Loader />
       </div>
     );
   }
 
   return (
-    <div className="page-container">
+    <div className={`discipline-page ${theme}`}>
       <div>
-        <h1 className={`${darkMode ? "dark-mode" : ""}`}>
+        <h1>
           {discipline.name} {discipline.year}
         </h1>
         {teachers.map((teacher) => (
           <div key={teacher.id}>
-            <h2 className={`${darkMode ? "dark-mode" : ""}`}>
-              {teacher.fullName}
-            </h2>
+            <h2>{teacher.fullName}</h2>
           </div>
         ))}
       </div>
       <div>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
-          Доступные лабораторные работы:
-        </h2>
+        <h2>Доступные лабораторные работы:</h2>
         <Tasks tasks={tasks} onTaskSelect={navigateToTask} />
       </div>
     </div>

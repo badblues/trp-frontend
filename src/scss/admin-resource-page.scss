@@ -1,0 +1,46 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.update-resource-page {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px 0px 0px;
+
+  .close-resource-form-button {
+    @include button(10px 0px 0px 50px);
+  }
+}
+
+.resource-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 70px 0px 50px;
+  font-family: $main-font;
+
+  &.dark-mode {
+    color: $dark-mode-text-color;
+  }
+
+  .appointment-list {
+    .appointment-item {
+      display: flex;
+      .appointment-link {
+        margin: 10px 0px 0px 0px;
+
+        &:hover {
+          cursor: pointer;
+          color: red;
+        }
+      }
+    }
+  }
+
+  .remove-appointment-button {
+    @include buttonWithImage();
+  }
+
+  .control-button {
+    @include button(10px 0px 0px 0px);
+  }
+}

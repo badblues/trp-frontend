@@ -1,0 +1,23 @@
+.task-appointment-list {
+  display: flex;
+  flex-direction: row;
+  font-family: "Montserrat", sans-serif;
+}
+.task-appointment-list.dark-mode .item.status-appointed {
+  color: white;
+}
+.task-appointment-list.dark-mode .item.status-not-appointed {
+  color: grey;
+}
+.task-appointment-list .item {
+  margin: 5px;
+  cursor: pointer;
+}
+.task-appointment-list .item.status-appointed {
+  color: black;
+}
+.task-appointment-list .item.status-not-appointed {
+  color: grey;
+}
+
+/*# sourceMappingURL=task-appointment-list.css.map */

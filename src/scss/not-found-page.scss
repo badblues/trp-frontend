@@ -1,0 +1,14 @@
+@import "./variables.scss";
+
+.error-container {
+  margin: 200px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $main-font;
+  color: $text-color;
+
+  &.dark-mode {
+    color: $dark-mode-text-color;
+  }
+}

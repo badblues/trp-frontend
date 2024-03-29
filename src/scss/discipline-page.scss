@@ -1,0 +1,27 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.discipline-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 70px 0px 50px;
+  font-family: $main-font;
+
+  &.dark-mode {
+    color: $dark-mode-text-color;
+  }
+
+  .appointment-link {
+    margin: 10px 0px 0px 0px;
+
+    &:hover {
+      cursor: pointer;
+      color: red;
+    }
+  }
+
+  .add-lab-button {
+    @include button();
+  }
+}

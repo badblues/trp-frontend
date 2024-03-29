@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import RequireAuth from "../guards/RequireAuth";
 import { Roles } from "../models/Roles";
 import { UiContext } from "../contexts/UiContext";
-import "./Main.css";
+import "../styles/main.css";
 import MainPage from "./pages/main/MainPage";
 import TeacherPage from "./pages/teacher/TeacherPage";
 import DisciplinePage from "./pages/discipline/DisciplinePage";
@@ -19,10 +19,10 @@ import CreateTaskPage from "./pages/create/CreateTaskPage";
 import NotFoundPage from "./pages/errors/NotFoundPage";
 
 const Main = () => {
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
 
   return (
-    <div className={`main-container ${darkMode ? "dark-mode" : ""}`}>
+    <div className={`main-container ${theme}`}>
       <Routes>
         <Route
           element={

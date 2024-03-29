@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+import "../styles/navbar.css";
 import { UserContext } from "../contexts/UserContext";
 import { UiContext } from "../contexts/UiContext";
 import { ApiContext } from "../contexts/ApiContext";
@@ -15,7 +15,7 @@ import Loader from "./Loader";
 
 const Navbar = () => {
   const { user, logout } = useContext(UserContext);
-  const { darkMode, showErrorAlert } = useContext(UiContext);
+  const { theme, showErrorAlert } = useContext(UiContext);
   const [loading, setLoading] = useState(true);
   const [group, setGroup] = useState([]);
   const { studentApiService } = useContext(ApiContext);
@@ -39,7 +39,7 @@ const Navbar = () => {
 
   if (loading) {
     return (
-      <div>
+      <div className="loader-container">
         <Loader />
       </div>
     );
@@ -60,35 +60,27 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar">
-        <div className={`navbar-container ${darkMode ? "dark-mode" : ""}`}>
-          <div className="logo">
-            <img
-              className={`logo-image ${darkMode ? "dark-mode" : ""}`}
-              src={logoImg}
-              alt="Logo"
-              width="25"
-            />
-            <Link
-              to="/"
-              className={`clickable logo-text ${darkMode ? "dark-mode" : ""}`}
-            >
+      <nav>
+        <div className={`navbar-container ${theme}`}>
+          <div className="logo-container">
+            <img className="logo-image" src={logoImg} alt="Logo" width="25" />
+            <Link to="/" className="logo-text">
               TRP
             </Link>
-            <DarkModeToggle className="dark-mode-toggle" />
+            <DarkModeToggle />
           </div>
-          <div className="menu">{Menu && <Menu />}</div>
-          <div className="profile">
+          <div>{Menu && <Menu />}</div>
+          <div className="profile-container">
             {user.loggedIn ? (
               <div className="mini-profile">
-                <label className="username clickable">{user.fullName}</label>
+                <label className="username">{user.fullName}</label>
                 {user.role === Roles.Student ? (
                   <label>{group.name}</label>
                 ) : null}
               </div>
             ) : null}
             {user.loggedIn ? (
-              <label className="logout clickable" onClick={onLogout}>
+              <label className="logout" onClick={onLogout}>
                 Выйти
               </label>
             ) : null}

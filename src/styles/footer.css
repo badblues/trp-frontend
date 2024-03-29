@@ -1,0 +1,14 @@
+.footer {
+  min-width: 100%;
+  height: fit-content;
+  background-color: #b4b4b4;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+.footer.dark-mode {
+  background-color: #2e2e2e;
+  color: #f1f1f1;
+}
+
+/*# sourceMappingURL=footer.css.map */

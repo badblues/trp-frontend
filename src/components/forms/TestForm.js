@@ -2,12 +2,12 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
-import "./TestForm.css";
+import "../../styles/test-form.css";
 
 const TestForm = ({ test, onFormSubmit, task }) => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
   const [loading, setLoading] = useState(false);
 
   const onDone = () => {
@@ -27,10 +27,10 @@ const TestForm = ({ test, onFormSubmit, task }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="test-form">
-        <div className="test-form-input-container">
+      <div className={`test-form ${theme}`}>
+        <div className="test-input-container">
           <input
-            className={`test-form-input ${darkMode ? "dark-mode" : ""}`}
+            className="test-form-input"
             id="input"
             type="text"
             placeholder="Вход..."
@@ -43,9 +43,9 @@ const TestForm = ({ test, onFormSubmit, task }) => {
           <label>{errors.input?.message}</label>
         </div>
 
-        <div className="test-form-input-container">
+        <div className="test-input-container">
           <input
-            className={`test-form-input ${darkMode ? "dark-mode" : ""}`}
+            className="test-form-input"
             id="output"
             type="text"
             placeholder="Выход..."
@@ -58,7 +58,7 @@ const TestForm = ({ test, onFormSubmit, task }) => {
           <label>{errors.output?.message}</label>
         </div>
 
-        <button disabled={loading} className="button" type="submit">
+        <button disabled={loading} className="submit-button" type="submit">
           {loading ? <Loader /> : test ? "ИЗМЕНИТЬ" : "ДОБАВИТЬ"}
         </button>
       </div>

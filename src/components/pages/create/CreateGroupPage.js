@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ApiContext } from "../../../contexts/ApiContext";
 import GroupForm from "../../forms/GroupForm";
 import { UiContext } from "../../../contexts/UiContext";
+import "../../../styles/create-item-page.css";
 
 const CreateGroupPage = () => {
   const { showSuccessAlert, showErrorAlert } = useContext(UiContext);
@@ -22,7 +23,7 @@ const CreateGroupPage = () => {
   };
 
   return (
-    <div>
+    <div className="create-page">
       <GroupForm onFormSubmit={createGroup} />
     </div>
   );

@@ -1,0 +1,69 @@
+@import "./variables.scss";
+
+.discipline-group-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 70px 0px 50px;
+  font-family: $main-font;
+  color: $text-color;
+
+  &.dark-mode {
+    color: $dark-mode-text-color;
+
+    .info-container {
+      .status-text {
+        align-self: flex-end;
+
+        &.status-not-appointed {
+          color: $dark-mode-status-color-not-appointed;
+        }
+
+        &.status-appointed {
+          color: $dark-mode-status-color-appointed;
+        }
+      }
+    }
+  }
+
+  .task-appointment-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .task-appointment-student-name {
+      align-self: center;
+      min-width: 200px;
+      margin: 5px 40px 5px 0px;
+    }
+  }
+
+  .info-container {
+    display: flex;
+    flex-direction: column;
+
+    .status-text {
+      align-self: flex-end;
+
+      &.status-not-appointed {
+        color: $status-color-not-appointed;
+      }
+
+      &.status-appointed {
+        color: $status-color-appointed;
+      }
+
+      &.status-in-progress {
+        color: $status-color-in-progress;
+      }
+
+      &.status-finished {
+        color: $status-color-finished;
+      }
+
+      &.status-done {
+        color: $status-color-done;
+      }
+    }
+  }
+}

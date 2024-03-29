@@ -6,8 +6,8 @@ import { Roles } from "../../../models/Roles";
 import Loader from "../../Loader";
 import StudentTaskPage from "./StudentTaskPage";
 import TeacherTaskPage from "./TeacherTaskPage";
-import "./Task.css";
 import { UiContext } from "../../../contexts/UiContext";
+import "../../../styles/task-page.css";
 
 const TaskPage = () => {
   const { taskId } = useParams();

@@ -2,12 +2,12 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
-import "./Form.css";
+import "../../styles/form.css";
 
 const TaskForm = ({ task, onFormSubmit, discipline }) => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
   const [loading, setLoading] = useState(false);
 
   const onDone = () => {
@@ -25,8 +25,8 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
   };
 
   return (
-    <form className="big-form" onSubmit={handleSubmit(onSubmit)}>
-      <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className={`form-container ${theme}`}>
         <h1 className="form-name">
           {task ? "ИЗМЕНЕНИЕ ЗАДАНИЯ" : "СОЗДАНИЕ ЗАДАНИЯ"}
         </h1>
@@ -40,7 +40,7 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
           </label>
           <input
             id="title"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            className="form-input"
             type="text"
             placeholder="Название..."
             autoComplete="off"
@@ -49,7 +49,7 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
               required: "Необходимо ввести название",
             })}
           />
-          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
+          <label className="form-text">
             {errors.title?.message}
           </label>
         </div>
@@ -60,7 +60,7 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
           </label>
           <textarea
             id="description"
-            className={`form-textarea form-input  ${darkMode ? "dark-mode" : ""}`}
+            className="form-textarea"
             type="text"
             placeholder="Описание..."
             autoComplete="off"
@@ -69,7 +69,7 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
               required: "Необходимо ввести описание",
             })}
           />
-          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
+          <label className="form-text">
             {errors.description?.message}
           </label>
         </div>
@@ -80,7 +80,7 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
           </label>
           <input
             id="functionName"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            className="form-input"
             type="text"
             placeholder="Название функции..."
             autoComplete="off"
@@ -89,7 +89,7 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
               required: "Необходимо ввести название функции",
             })}
           />
-          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
+          <label className="form-text">
             {errors.functionName?.message}
           </label>
         </div>
@@ -100,18 +100,18 @@ const TaskForm = ({ task, onFormSubmit, discipline }) => {
           </label>
           <select
             id="language"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            className="form-input"
             defaultValue={task ? task.language : ""}
             {...register("language")}
           >
             <option value={"C"}>C</option>
           </select>
-          <label className={`form-text ${darkMode ? "dark-mode" : ""}`}>
+          <label className="form-text">
             {errors.language?.message}
           </label>
         </div>
 
-        <button disabled={loading} className="button form-button" type="submit">
+        <button disabled={loading} className="submit-button" type="submit">
           {loading ? <Loader /> : task ? "ИЗМЕНИТЬ ЗАДАНИЕ" : "СОЗДАТЬ ЗАДАНИЕ"}
         </button>
       </div>

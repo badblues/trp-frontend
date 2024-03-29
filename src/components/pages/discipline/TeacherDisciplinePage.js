@@ -4,9 +4,9 @@ import { UiContext } from "../../../contexts/UiContext";
 import { ApiContext } from "../../../contexts/ApiContext";
 import { UserContext } from "../../../contexts/UserContext";
 import { Roles } from "../../../models/Roles";
-import "./DisciplinePage.css";
 import Tasks from "../../item-containers/Tasks";
 import { useNavigate } from "react-router-dom";
+import "../../../styles/discipline-page.css";
 
 const TeacherDisciplinePage = ({ defaultDiscipline }) => {
   const [appointments, setAppointments] = useState([]);
@@ -17,7 +17,7 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
   const { user } = useContext(UserContext);
   const discipline = defaultDiscipline;
   const navigate = useNavigate();
-  const { darkMode, showErrorAlert } = useContext(UiContext);
+  const { theme, showErrorAlert } = useContext(UiContext);
 
   useEffect(() => {
     (async () => {
@@ -46,28 +46,26 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
 
   if (loading) {
     return (
-      <div>
+      <div className="loader-container">
         <Loader />
       </div>
     );
   }
 
   return (
-    <div className="page-container">
+    <div className={`discipline-page ${theme}`}>
       <div>
-        <h1 className={` ${darkMode ? "dark-mode" : ""}`}>
+        <h1>
           {discipline.name} {discipline.year}
         </h1>
-        <h2 className={` ${darkMode ? "dark-mode" : ""}`}>{`Полугодие: ${
+        <h2>{`Полугодие: ${
           discipline.halfYear === "FIRST" ? "Первое" : "Второе"
         }`}</h2>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>
-          Лабораторные работы:
-        </h2>
+        <h2>Лабораторные работы:</h2>
         <Tasks tasks={tasks} onTaskSelect={navigateToTask} />
         {user.role === Roles.SeniorTeacher ? (
           <button
-            className={`button button-usual ${darkMode ? "dark-mode" : ""}`}
+            className="add-lab-button"
             onClick={() => {
               navigate(`/disciplines/${discipline.id}/create-task`);
             }}
@@ -77,21 +75,15 @@ const TeacherDisciplinePage = ({ defaultDiscipline }) => {
         ) : null}
       </div>
       <div>
-        <h2 className={` ${darkMode ? "dark-mode" : ""}`}>
-          Группы с этим предметом:
-        </h2>
+        <h2>Группы с этим предметом:</h2>
         {appointments.map((appointment) => (
-          <div
-            className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
-            key={appointment.id}
-          >
+          <div className="appointment-link" key={appointment.id}>
             <h4
               onClick={() => {
                 navigate(
                   `/disciplines/${discipline.id}/groups/${appointment.group.id}`
                 );
               }}
-              className="appointments-item clickable"
             >
               {appointment.group.name}
             </h4>

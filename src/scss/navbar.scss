@@ -1,0 +1,79 @@
+@import "./variables.scss";
+
+.navbar-container {
+  min-width: 100%;
+  height: fit-content;
+  min-height: 70px;
+  background-color: $background-secondary-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: $text-color;
+  font-family: $main-font;
+
+  &.dark-mode {
+    background-color: $dark-mode-background-secondary-color;
+    color: $dark-mode-text-color;
+
+    .logo-container {
+      .logo-text {
+        color: $dark-mode-text-color;
+      }
+
+      .logo-image {
+        filter: invert(100%);
+      }
+    }
+  }
+
+  .logo-container {
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .logo-image {
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-size: x-large;
+      text-decoration: none;
+      color: $text-color;
+      margin-right: 10px;
+      margin-left: 10px;
+      font-family: $heading-font;
+    }
+  }
+
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .mini-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .username {
+      font-size: large;
+      &:hover {
+        color: red;
+        cursor: pointer;
+      }
+    }
+    .logout {
+      font-size: large;
+      &:hover {
+        color: red;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { UiContext } from "../../contexts/UiContext";
 import Loader from "../Loader";
-import "./Form.css";
+import "../../styles/form.css";
 
 const TeacherAppointmentForm = ({ onFormSubmit, disciplines, teachers, groups }) => {
   const { register, handleSubmit } = useForm();
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (data) => {
@@ -20,8 +20,8 @@ const TeacherAppointmentForm = ({ onFormSubmit, disciplines, teachers, groups })
   };
 
   return (
-    <form className="big-form" onSubmit={handleSubmit(onSubmit)}>
-      <div className={`form-container ${darkMode ? "dark-mode" : ""}`}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className={`form-container ${theme}`}>
         <h1 className="form-name">НАЗНАЧЕНИЕ ПРЕПОДАВАТЕЛЯ</h1>
 
         <div className="form-input-container">
@@ -30,7 +30,7 @@ const TeacherAppointmentForm = ({ onFormSubmit, disciplines, teachers, groups })
           </label>
           <select
             id="discipline"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            className="form-input"
             {...register("disciplineId")}
           >
             {disciplines.map((discipline) => (
@@ -48,7 +48,7 @@ const TeacherAppointmentForm = ({ onFormSubmit, disciplines, teachers, groups })
           </label>
           <select
             id="group"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            className="form-input"
             {...register("groupId")}
           >
             {groups.map((group) => (
@@ -65,7 +65,7 @@ const TeacherAppointmentForm = ({ onFormSubmit, disciplines, teachers, groups })
           </label>
           <select
             id="teacher"
-            className={`form-input ${darkMode ? "dark-mode" : ""}`}
+            className="form-input"
             {...register("teacherId")}
           >
             {teachers.map((teacher) => (
@@ -76,7 +76,7 @@ const TeacherAppointmentForm = ({ onFormSubmit, disciplines, teachers, groups })
           </select>
         </div>
 
-        <button disabled={loading} className="button form-button" type="submit">
+        <button disabled={loading} className="submit-button" type="submit">
           {loading ? <Loader /> : "Назначить преподавателя"}
         </button>
       </div>

@@ -1,0 +1,33 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.test-form {
+  &.dark-mode {
+    .test-input-container {
+      .test-form-input {
+        color: $dark-mode-text-color;
+        border-width: 1px;
+        border-color: white;
+      }
+    }
+  }
+
+  .test-input-container {
+    display: flex;
+    flex-direction: column;
+
+    .test-form-input {
+      background-color: transparent;
+      border-radius: 3px;
+      border-width: 1px;
+      max-width: 200px;
+      margin: 3px 0px 3px 0px;
+      padding: 5px;
+      font-size: medium;
+    }
+  }
+
+  .submit-button {
+    @include button(5px 0px 0px 0px);
+  }
+}

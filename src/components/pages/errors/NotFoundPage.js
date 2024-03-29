@@ -1,11 +1,13 @@
-import React from "react";
-import "./NotFoundPage.css";
+import React, { useContext } from "react";
+import { UiContext } from "../../../contexts/UiContext";
+import "../../../styles/not-found-page.css";
 
 function NotFoundPage() {
+  const { theme } = useContext(UiContext);
+
   return (
-    <div className="error-container">
-      <h1 className="error-title">PAGE NOT FOUND</h1>
-      <h2 className="error-description">Something went wrong, return home</h2>
+    <div className={`error-container ${theme}`}>
+      <h1 className="error-title">Страница не найдена</h1>
     </div>
   );
 }

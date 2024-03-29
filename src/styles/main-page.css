@@ -1,0 +1,9 @@
+.main-page-container {
+  display: flex;
+  justify-content: center;
+}
+.main-page-container .main-page-item {
+  margin: 5px 5px 5px 5px;
+}
+
+/*# sourceMappingURL=main-page.css.map */

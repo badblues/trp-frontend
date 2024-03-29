@@ -1,0 +1,70 @@
+.checkbox {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.toggle {
+  align-self: center;
+  width: 50px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 20px;
+  position: relative;
+  background: #ebebeb;
+  box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.4), inset 0px -5px 10px rgba(255, 255, 255, 0.4);
+  transition: 0.3s;
+}
+.toggle::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  top: 1px;
+  left: 1px;
+  position: absolute;
+  background: linear-gradient(180deg, #ffcc89, #d8860b);
+  border-radius: 18px;
+  transition: 0.3s;
+}
+
+.checkbox:checked + .toggle {
+  background: #242424;
+}
+
+.checkbox:checked + .toggle:after {
+  left: 49px;
+  transform: translateX(-100%);
+  background: linear-gradient(180deg, #777, #3a3a3a);
+}
+
+.toggle:active:after {
+  width: 26px;
+}
+
+.toggle svg {
+  z-index: 100;
+  top: 1px;
+  position: absolute;
+}
+
+.toggle .sun {
+  left: 1px;
+  fill: #fff;
+  transition: 0.3s;
+}
+
+.toggle .moon {
+  left: 31px;
+  fill: grey;
+  transition: 0.3s;
+}
+
+.checkbox:checked + .toggle .sun {
+  fill: #7e7e7e;
+}
+
+.checkbox:checked + .toggle .moon {
+  fill: #fff;
+}
+
+/*# sourceMappingURL=dark-mode-toggle.css.map */

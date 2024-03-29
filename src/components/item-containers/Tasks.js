@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { UiContext } from "../../contexts/UiContext";
-import "./Tasks.css";
+import "../../styles/item-list.css";
 
 const Tasks = ({ tasks, onTaskSelect }) => {
-  const { darkMode } = useContext(UiContext);
+  const { theme } = useContext(UiContext);
   tasks.sort((a, b) => {
     const nameA = a.title.toLowerCase();
     const nameB = b.title.toLowerCase();
@@ -17,13 +17,13 @@ const Tasks = ({ tasks, onTaskSelect }) => {
   });
 
   return (
-    <div className="tasks-container">
+    <div className={`item-list ${theme}`}>
       {tasks.map((task) => (
         <div
           onClick={() => {
             onTaskSelect(task);
           }}
-          className={`task-item ${darkMode ? "dark-mode" : ""}`}
+          className="item"
           key={task.id}
         >
           <p>{task.title}</p>

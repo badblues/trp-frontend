@@ -5,13 +5,13 @@ import { ApiContext } from "../../../contexts/ApiContext";
 import crossImg from "../../../images/cross.png";
 import DisciplineForm from "../../forms/DisciplineForm";
 import Loader from "../../Loader";
-import "./DisciplinePage.css";
+import "../../../styles/admin-resource-page.css";
 
 const AdminDisciplinePage = ({ defaultDiscipline }) => {
   const navigate = useNavigate();
   const { teacherAppointmentApiService, disciplineApiService } =
     useContext(ApiContext);
-  const { darkMode, showSuccessAlert, showErrorAlert } = useContext(UiContext);
+  const { theme, showSuccessAlert, showErrorAlert } = useContext(UiContext);
   const [discipline, setDiscipline] = useState(defaultDiscipline);
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -72,7 +72,7 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
 
   if (loading) {
     return (
-      <div>
+      <div className="loader-container">
         <Loader />
       </div>
     );
@@ -80,14 +80,15 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
 
   if (updating) {
     return (
-      <div className="page-container">
-        <div className="discipline-form-container">
-          <DisciplineForm
-            discipline={discipline}
-            onFormSubmit={updateDiscipline}
-          />
-        </div>
-        <button className="button" onClick={() => setUpdating(false)}>
+      <div className={`update-resource-page ${theme}`}>
+        <DisciplineForm
+          discipline={discipline}
+          onFormSubmit={updateDiscipline}
+        />
+        <button
+          className="close-resource-form-button"
+          onClick={() => setUpdating(false)}
+        >
           ЗАКРЫТЬ
         </button>
       </div>
@@ -95,26 +96,23 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
   }
 
   return (
-    <div className="page-container">
+    <div className={`resource-page ${theme}`}>
       <div>
-        <h1 className={` ${darkMode ? "dark-mode" : ""}`}>
+        <h1>
           {discipline.name} {discipline.year}
         </h1>
-        <h2 className={` ${darkMode ? "dark-mode" : ""}`}>{`Полугодие: ${
+        <h2>{`Полугодие: ${
           discipline.halfYear === "FIRST" ? "Первое" : "Второе"
         }`}</h2>
       </div>
       <div>
-        <h2 className={`${darkMode ? "dark-mode" : ""}`}>Группы:</h2>
+        <h2>Группы:</h2>
         {appointments.map((appointment) => (
-          <div
-            className={`appointments-list ${darkMode ? "dark-mode" : ""}`}
-            key={appointment.id}
-          >
-            <div className="appointments-item">
-              <div className="appointments-links">
+          <div className="appointment-list" key={appointment.id}>
+            <div className="appointment-item">
+              <div>
                 <h4
-                  className="clickable"
+                  className="appointment-link"
                   onClick={() => {
                     navigate(`/groups/${appointment.group.id}`);
                   }}
@@ -122,7 +120,7 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
                   {`${appointment.group.name} `}
                 </h4>
                 <label
-                  className="clickable"
+                  className="appointment-link"
                   onClick={() => {
                     navigate(`/teachers/${appointment.teacher.id}`);
                   }}
@@ -131,7 +129,7 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
                 </label>
               </div>
               <button
-                className="button-with-image"
+                className="remove-appointment-button"
                 title="Удалить назначение"
                 onClick={() => deleteAppointment(appointment)}
               >
@@ -141,13 +139,10 @@ const AdminDisciplinePage = ({ defaultDiscipline }) => {
           </div>
         ))}
         <div>
-          <button
-            className="button control-button"
-            onClick={() => setUpdating(true)}
-          >
+          <button className="control-button" onClick={() => setUpdating(true)}>
             ИЗМЕНИТЬ ДИСЦИПЛИНУ
           </button>
-          <button className="button control-button" onClick={deleteDiscipline}>
+          <button className="control-button" onClick={deleteDiscipline}>
             УДАЛИТЬ ДИСЦИПЛИНУ
           </button>
         </div>
