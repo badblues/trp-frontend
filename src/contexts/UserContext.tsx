@@ -5,13 +5,8 @@ import { AuthDTO } from "../models/DTO/AuthDTO.ts";
 import { User } from "../models/domain/User.ts";
 
 export interface UserContextType {
-  user: {
-    loggedIn: boolean;
-    id: number;
-    username: string;
-    fullName: string;
-    role: string;
-  };
+  loggedIn: boolean;
+  user?: User;
   login: (AuthDTO: AuthDTO) => Promise<void>;
   logout: () => void;
 }
@@ -24,23 +19,24 @@ export class UserContextProvider extends Component<{ children: ReactNode }> {
   constructor(props: { children: ReactNode }) {
     super(props);
     this.authService = new AuthApiService();
+
+    const user: User | null = this.loadUser();
     this.state = {
-      user: this.loadUser(),
+      user: user,
+      loggedId: user != null,
       login: this.login.bind(this),
       logout: this.logout.bind(this),
     };
   }
 
   login(AuthDTO: AuthDTO): Promise<void> {
-    return this.authService
-      .login(AuthDTO)
-      .then((token: string | undefined) => {
-        if (token) {
-          localStorage.setItem("userToken", token);
-          this.setUserData(token);
-          this.updateUser();
-        }
-      });
+    return this.authService.login(AuthDTO).then((token: string | undefined) => {
+      if (token) {
+        localStorage.setItem("userToken", token);
+        this.setUserData(token);
+        this.updateUser();
+      }
+    });
   }
 
   setUserData(token: string): void {
@@ -66,37 +62,22 @@ export class UserContextProvider extends Component<{ children: ReactNode }> {
   }
 
   updateUser = (): void => {
+    const user: User | null = this.loadUser();
     this.setState({
-      user: this.loadUser(),
+      user: user,
+      loggedId: user != null,
       login: this.login.bind(this),
       logout: this.logout.bind(this),
     });
   };
 
-  loadUser = (): {
-    loggedIn: boolean;
-    id: number;
-    username: string;
-    fullName: string;
-    role: string;
-  } => {
-    const user = {
-      loggedIn: false,
-      id: 0,
-      username: "",
-      fullName: "",
-      role: "",
-    };
+  loadUser = (): User | null => {
     const data = localStorage.getItem("user");
     if (data != null) {
-      const userInfo: User = JSON.parse(data);
-      user.loggedIn = true;
-      user.id = userInfo.id;
-      user.username = userInfo.username;
-      user.fullName = userInfo.fullName;
-      user.role = userInfo.role;
+      const user: User = JSON.parse(data);
+      return user;
     }
-    return user;
+    return null;
   };
 
   render() {
