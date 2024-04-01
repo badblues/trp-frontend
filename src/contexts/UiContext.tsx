@@ -1,10 +1,24 @@
-import React, { createContext, Component } from "react";
+import React, { createContext, Component, ReactNode } from "react";
 import { toast, Flip } from "react-toastify";
 
-export const UiContext = createContext({});
+export interface UiContextType {
+  setTheme: (theme: string) => void;
+  theme: string | null;
+  showSuccessAlert: (text: string) => void;
+  showErrorAlert: (text: string) => void;
+}
 
-export class UiContextProvider extends Component {
-  constructor(props) {
+export const UiContext = createContext<UiContextType | null>(null);
+
+interface UiContextProviderProps {
+  children: ReactNode;
+}
+
+export class UiContextProvider extends Component<
+  UiContextProviderProps,
+  UiContextType
+> {
+  constructor(props: UiContextProviderProps) {
     super(props);
     this.state = {
       setTheme: this.setTheme.bind(this),
@@ -14,7 +28,7 @@ export class UiContextProvider extends Component {
     };
   }
 
-  setTheme = (theme) => {
+  setTheme = (theme: string) => {
     this.setState({
       setTheme: this.setTheme.bind(this),
       theme: theme,
@@ -24,7 +38,7 @@ export class UiContextProvider extends Component {
 
   loadData = () => localStorage.getItem("theme");
 
-  showSuccessAlert = (text) => {
+  showSuccessAlert = (text: string) => {
     toast.success(text, {
       position: "top-center",
       autoClose: 3000,
@@ -38,7 +52,7 @@ export class UiContextProvider extends Component {
     });
   };
 
-  showErrorAlert = (text) => {
+  showErrorAlert = (text: string) => {
     toast.error(text, {
       position: "top-center",
       autoClose: 3000,
@@ -60,3 +74,5 @@ export class UiContextProvider extends Component {
     );
   }
 }
+
+export default UiContextProvider;

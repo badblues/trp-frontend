@@ -1,5 +1,6 @@
 import http from "axios";
-import { Roles } from "../models/Roles";
+import { Role } from "../models/domain/Role.ts";
+import { UserRegistrationDTO } from "../models/DTO/RegistrationDTO.ts";
 
 export class UserApiService {
   apiUrl = "http://212.20.47.147:8080/admin";
@@ -8,26 +9,29 @@ export class UserApiService {
     http.interceptors.request.use();
   }
 
-  async register(user, role) {
+  async register(RegistrationDTO: UserRegistrationDTO, role: Role) {
     const url = this.getRegistrationUrl(role);
     try {
-      const response = await http.post(url, user);
+      const response = await http.post(url, RegistrationDTO);
       return response.data.data;
     } catch (error) {
       throw error.response.data;
     }
   }
 
-  getRegistrationUrl(role) {
+  getRegistrationUrl(role: Role) {
     let url = this.apiUrl;
     switch (role) {
-      case Roles.Admin:
+      case Role.Admin:
         url += "/registration/admin";
         break;
-      case Roles.Teacher:
-        url += "/registration/teacher";
+      case Role.Teacher:
+        url += "/registration/lab-work-teacher";
         break;
-      case Roles.Student:
+      case Role.SeniorTeacher:
+        url += "/registration/lecture-teacher";
+        break;
+      case Role.Student:
         url += "/registration/student";
         break;
       default:

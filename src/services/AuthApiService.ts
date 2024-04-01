@@ -1,12 +1,13 @@
 import http from "axios";
+import { AuthDTO } from "../models/DTO/AuthDTO";
 
 export class AuthApiService {
   apiUrl = "http://212.20.47.147:8080/auth";
 
-  async login(authData) {
+  async login(AuthDTO: AuthDTO): Promise<string> {
     const url = this.apiUrl + "/login";
     try {
-      const response = await http.post(url, authData);
+      const response = await http.post(url, AuthDTO);
       return response.data.data;
     } catch (error) {
       throw error.response.data;
