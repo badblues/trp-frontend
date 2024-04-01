@@ -1,5 +1,4 @@
 export interface UserRegistrationDTO {
-  id: number | null;
   username: string;
   fullName: string;
   password: string;
