@@ -1,6 +1,4 @@
 import http from "axios";
-import { Task } from "../models/Task";
-import { StudentAppointment } from "../models/domain/TeamAppointment";
 import { Student } from "../models/domain/Student";
 
 export default class StudentApiService {
@@ -29,35 +27,5 @@ export default class StudentApiService {
   async getStudentsByGroup(groupId: number): Promise<Array<Student>> {
     const students = await this.getStudents();
     return students.filter((s) => (s.group.id = groupId));
-  }
-
-  // TS TODO
-  async getStudentsWithTasksByGroup(
-    groupId: number,
-    tasks: Array<Task>,
-    studentAppointments: Array<StudentAppointment>
-  ) {
-    const students = await this.getStudentsByGroup(groupId);
-
-    return students.map((student) => {
-      const updatedTasks = tasks.map((task) => {
-        const isAppointed = studentAppointments.some(
-          (a) => a.studentId === student.id && a.taskId === task.id
-        );
-        const appointment = isAppointed
-          ? studentAppointments.find(
-              (a) => a.studentId === student.id && a.taskId === task.id
-            )
-          : null;
-
-        return {
-          ...task,
-          appointed: isAppointed,
-          appointment: appointment,
-        };
-      });
-
-      return { ...student, tasks: updatedTasks };
-    });
   }
 }
