@@ -1,31 +1,31 @@
-.task-page {
+.lab-work-variant-page {
   display: flex;
   justify-content: space-between;
   margin: 10px 20px 10px 20px;
   font-family: "Montserrat", sans-serif;
   color: #181818;
 }
-.task-page.dark-mode {
+.lab-work-variant-page.dark-mode {
   color: #f1f1f1;
 }
-.task-page.dark-mode .task-ide .editor-and-output .output {
+.lab-work-variant-page.dark-mode .lab-work-variant-ide .editor-and-output .output {
   background-color: #2e2e2e;
 }
-.task-page.dark-mode .task-ide .control-panel {
+.lab-work-variant-page.dark-mode .lab-work-variant-ide .control-panel {
   background-color: #2e2e2e;
 }
-.task-page .task-information {
+.lab-work-variant-page .lab-work-variant-information {
   max-width: 500px;
   width: fit-content;
 }
-.task-page .task-ide {
+.lab-work-variant-page .lab-work-variant-ide {
   display: flex;
 }
-.task-page .task-ide .editor-and-output {
+.lab-work-variant-page .lab-work-variant-ide .editor-and-output {
   display: flex;
   flex-direction: column;
 }
-.task-page .task-ide .editor-and-output .output {
+.lab-work-variant-page .lab-work-variant-ide .editor-and-output .output {
   margin-top: 10px;
   padding: 5px;
   height: 150px;
@@ -33,14 +33,14 @@
   resize: none;
   background-color: #b4b4b4;
 }
-.task-page .task-ide .control-panel {
+.lab-work-variant-page .lab-work-variant-ide .control-panel {
   margin-left: 15px;
   padding: 5px;
   background-color: #b4b4b4;
   border-radius: 5px;
   height: fit-content;
 }
-.task-page .task-ide .control-panel .control-button {
+.lab-work-variant-page .lab-work-variant-ide .control-panel .control-button {
   height: fit-content;
   width: fit-content;
   border-radius: 7px;
@@ -53,8 +53,8 @@
   padding: 10px;
   margin: 5px 0px 5px 0px;
 }
-.task-page .task-ide .control-panel .control-button:hover {
+.lab-work-variant-page .lab-work-variant-ide .control-panel .control-button:hover {
   cursor: pointer;
 }
 
-/*# sourceMappingURL=student-task-page.css.map */
+/*# sourceMappingURL=student-lab-work-variant-page.css.map */

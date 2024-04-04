@@ -1,22 +1,26 @@
 import React, { useContext, useState, useEffect } from "react";
-import { UiContext } from "../../../contexts/UiContext.tsx";
-import { ApiContext } from "../../../contexts/ApiContext.tsx";
+import { UiContext, UiContextType } from "../../../contexts/UiContext.tsx";
+import { ApiContext, ApiContextType } from "../../../contexts/ApiContext.tsx";
 import CodeEditor from "../../CodeEditor.tsx";
 import Loader from "../../Loader.tsx";
-import "../../../styles/student-task-page.css";
+import "../../../styles/student-lab-work-variant-page.css";
 
-const StudentTaskPage = ({ defaultTask }) => {
-  const { theme, showSuccessAlert, showErrorAlert } = useContext(UiContext);
-  const { taskApiService } = useContext(ApiContext);
-  const [code, setCode] = useState("");
-  const [outputText, setOutputText] = useState("");
-  const [loading, setLoading] = useState(true);
+const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
+  const { theme, showSuccessAlert, showErrorAlert } = useContext(
+    UiContext
+  ) as UiContextType;
+  const { labWorkVariantApiService } = useContext(ApiContext) as ApiContextType;
+  const [code, setCode] = useState<string>("");
+  const [outputText, setOutputText] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
       try {
-        const loadedCode = await taskApiService.getSolution(defaultTask.id);
-        setCode(loadedCode.code);
+        const loadedCode = await labWorkVariantApiService.getSolution(
+          defaultLabWorkVariant.id
+        );
+        setCode(loadedCode);
       } catch (error) {
         showErrorAlert(error.error);
       }
@@ -26,9 +30,8 @@ const StudentTaskPage = ({ defaultTask }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleCodeChange = (code) => {
+  const handleCodeChange = (code: string) => {
     setCode(code);
-    console.log(code);
   };
 
   const saveCode = async () => {
@@ -36,7 +39,10 @@ const StudentTaskPage = ({ defaultTask }) => {
       code: code,
     };
     try {
-      await taskApiService.postSolution(defaultTask.id, data);
+      await labWorkVariantApiService.postSolution(
+        defaultLabWorkVariant.id,
+        data
+      );
       showSuccessAlert("Решение сохранено");
     } catch (error) {
       showErrorAlert(error.error);
@@ -46,7 +52,9 @@ const StudentTaskPage = ({ defaultTask }) => {
   const executeSolution = async () => {
     try {
       setOutputText("");
-      const response = await taskApiService.executeSolution(defaultTask.id);
+      const response = await labWorkVariantApiService.executeSolution(
+        defaultLabWorkVariant.id
+      );
       setOutputText(response);
     } catch (error) {
       showErrorAlert(error.error);
@@ -62,15 +70,33 @@ const StudentTaskPage = ({ defaultTask }) => {
   }
 
   return (
-    <div className={`task-page ${theme}`}>
-      <div className="task-information">
-        <h1>{defaultTask.title}</h1>
-        <h2>Название функции: {defaultTask.functionName}</h2>
-        <h2>Язык: {defaultTask.language}</h2>
+    <div className={`lab-work-variant-page ${theme}`}>
+      <div className="lab-work-variant-information">
+        <h1>{defaultLabWorkVariant.title}</h1>
+        <h2>Язык: {defaultLabWorkVariant.language}</h2>
         <h2>Задание:</h2>
-        <p>{defaultTask.description}</p>
+        <p>{defaultLabWorkVariant.description}</p>
+        {defaultLabWorkVariant.testable ? (
+          <>
+            <h2>
+              Функция: {defaultLabWorkVariant.returnType}{" "}
+              {defaultLabWorkVariant.functionName}(
+              {defaultLabWorkVariant.arguments.map((argument, index) => (
+                <>
+                  <span>
+                    {argument.type} {argument.name}
+                  </span>
+                  {index < defaultLabWorkVariant.arguments.length - 1 ? (
+                    <span>, </span>
+                  ) : null}
+                </>
+              ))}
+              )
+            </h2>
+          </>
+        ) : null}
       </div>
-      <div className="task-ide">
+      <div className="lab-work-variant-ide">
         <div className="editor-and-output">
           <CodeEditor solutionCode={code} onCodeChange={handleCodeChange} />
           <textarea
@@ -92,4 +118,4 @@ const StudentTaskPage = ({ defaultTask }) => {
   );
 };
 
-export default StudentTaskPage;
+export default StudentLabWorkVariantPage;

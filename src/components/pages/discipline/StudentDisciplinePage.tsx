@@ -7,6 +7,7 @@ import "../../../styles/discipline-page.css";
 import { Discipline } from "../../../models/domain/Discipline.ts";
 import { LabWork } from "../../../models/domain/LabWork.ts";
 import { Teacher } from "../../../models/domain/Teacher.ts";
+import StudentLabWorksList from "../../item-containers/StudentLabWorksList.tsx";
 
 interface Props {
   defaultDiscipline: Discipline;
@@ -82,6 +83,12 @@ const StudentDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
       </div>
       <div>
         <h2>Доступные лабораторные работы:</h2>
+        <StudentLabWorksList
+          labWorks={labWorks}
+          onLabWorkVariantSelect={(variant) =>
+            navigate(`/lab-work-variants/${variant.id}`)
+          }
+        />
       </div>
     </div>
   );

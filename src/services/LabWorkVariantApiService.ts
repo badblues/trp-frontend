@@ -45,7 +45,8 @@ export default class LabWorkVariantApiService {
     let url = this.apiUrl + `/${labWorkVariantId}/solution`;
     try {
       const response = await http.get(url);
-      return response.data.data;
+      //TODO FIX
+      return response.data.data.code;
     } catch (error) {
       throw error.response.data;
     }
@@ -65,7 +66,7 @@ export default class LabWorkVariantApiService {
   }
 
   async executeSolution(labWorkVariantId: number): Promise<TestResult> {
-    let url = this.apiUrl + `/${labWorkVariantId}/solution/execute/student`;
+    let url = this.apiUrl + `/${labWorkVariantId}/solution/execute`;
     try {
       const response = await http.post(url);
       return response.data.data;
