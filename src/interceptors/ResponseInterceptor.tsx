@@ -5,7 +5,7 @@ export const responseErrorInterceptor = (error, logout, navigate) => {
     switch (error.response.status) {
       case 401:
         logout();
-        return;
+        break;
       default:
         break;
     }
