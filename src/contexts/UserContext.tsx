@@ -23,7 +23,7 @@ export class UserContextProvider extends Component<{ children: ReactNode }> {
     const user: User | null = this.loadUser();
     this.state = {
       user: user,
-      loggedId: user != null,
+      loggedIn: user !== null,
       login: this.login.bind(this),
       logout: this.logout.bind(this),
     };
@@ -65,7 +65,7 @@ export class UserContextProvider extends Component<{ children: ReactNode }> {
     const user: User | null = this.loadUser();
     this.setState({
       user: user,
-      loggedId: user != null,
+      loggedIn: user != null,
       login: this.login.bind(this),
       logout: this.logout.bind(this),
     });
