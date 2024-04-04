@@ -77,16 +77,16 @@ const Navbar = () => {
           <div className="profile-container">
             {loggedIn ? (
               <div className="mini-profile">
-                <label className="username">{user?.fullName}</label>
+                <p className="username">{user?.fullName}</p>
                 {user?.role === Role.Student ? (
-                  <label>{group?.name}</label>
+                  <p>{group?.name}</p>
                 ) : null}
               </div>
             ) : null}
             {loggedIn ? (
-              <label className="logout" onClick={onLogout}>
+              <p className="logout" onClick={onLogout}>
                 Выйти
-              </label>
+              </p>
             ) : null}
           </div>
         </div>

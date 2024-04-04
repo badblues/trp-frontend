@@ -99,9 +99,9 @@ const UserForm: React.FC<Props> = ({edit, user, groups, onFormSubmit}) => {
               required: "Необходимо ввести имя пользователя",
             })}
           />
-          <label className="form-text">
+          <p className="form-text">
             {errors.username?.message as string}
-          </label>
+          </p>
         </div>
 
         <div className="form-input-container">
@@ -110,9 +110,9 @@ const UserForm: React.FC<Props> = ({edit, user, groups, onFormSubmit}) => {
           </label>
           <div className="input-with-button-container">
             <input
+              id="password"
               value={password}
               onInput={onPasswordChange}
-              id="password"
               className="form-input"
               type="text"
               placeholder="Пароль..."
@@ -127,9 +127,9 @@ const UserForm: React.FC<Props> = ({edit, user, groups, onFormSubmit}) => {
               <img src={dices} alt="rnd" width="20" />
             </button>
           </div>
-          <label className="form-text">
+          <p className="form-text">
             {errors.password?.message as string}
-          </label>
+          </p>
         </div>
 
         <div className="form-input-container">
@@ -145,9 +145,9 @@ const UserForm: React.FC<Props> = ({edit, user, groups, onFormSubmit}) => {
             defaultValue={edit ? user?.fullName : ""}
             {...register("fullName", { required: "Необходимо ввести ФИО" })}
           />
-          <label className="form-text">
+          <p className="form-text">
             {errors.fullName?.message as string}
-          </label>
+          </p>
         </div>
 
         {(selectedRole === Role.Student ||

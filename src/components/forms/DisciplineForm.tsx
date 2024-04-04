@@ -13,7 +13,11 @@ interface Props {
   onFormSubmit: (disciplineDTO: DisciplineDTO, onDone: () => void) => void;
 }
 
-const DisciplineForm: React.FC<Props> = ({ edit, discipline, onFormSubmit }) => {
+const DisciplineForm: React.FC<Props> = ({
+  edit,
+  discipline,
+  onFormSubmit,
+}) => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const { theme } = useContext(UiContext) as UiContextType;
@@ -49,7 +53,7 @@ const DisciplineForm: React.FC<Props> = ({ edit, discipline, onFormSubmit }) => 
               required: "Необходимо ввести название дисциплины",
             })}
           />
-          <label className="form-text">{errors.name?.message as string}</label>
+          <p className="form-text">{errors.name?.message as string}</p>
         </div>
         <div className="form-input-container">
           <label className="form-label" htmlFor="year">
@@ -65,7 +69,7 @@ const DisciplineForm: React.FC<Props> = ({ edit, discipline, onFormSubmit }) => 
               required: "Необходимо ввести год",
             })}
           />
-          <label className="form-text">{errors.year?.message as string}</label>
+          <p className="form-text">{errors.year?.message as string}</p>
         </div>
         <div className="form-input-container">
           <label className="form-label" htmlFor="halfYear">
@@ -82,7 +86,7 @@ const DisciplineForm: React.FC<Props> = ({ edit, discipline, onFormSubmit }) => 
             <option value={HalfYear.First}>Первое</option>
             <option value={HalfYear.Second}>Второе</option>
           </select>
-          <label className="form-text">{errors.halfYear?.message as string}</label>
+          <p className="form-text">{errors.halfYear?.message as string}</p>
         </div>
 
         <button disabled={loading} className="submit-button" type="submit">

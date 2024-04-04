@@ -70,9 +70,7 @@ const LabWorkVariantForm: React.FC<Props> = ({
           >
             <option value={"C"}>C</option>
           </select>
-          <label className="form-text">
-            {errors.language?.message as string}
-          </label>
+          <p className="form-text">{errors.language?.message as string}</p>
         </div>
 
         <div className="form-input-container">
@@ -90,7 +88,7 @@ const LabWorkVariantForm: React.FC<Props> = ({
               required: "Необходимо ввести название",
             })}
           />
-          <label className="form-text">{errors.title?.message as string}</label>
+          <p className="form-text">{errors.title?.message as string}</p>
         </div>
 
         <div className="form-input-container">
@@ -107,9 +105,7 @@ const LabWorkVariantForm: React.FC<Props> = ({
               required: "Необходимо ввести описание",
             })}
           />
-          <label className="form-text">
-            {errors.description?.message as string}
-          </label>
+          <p className="form-text">{errors.description?.message as string}</p>
         </div>
 
         <div className="form-input-container">
@@ -144,9 +140,9 @@ const LabWorkVariantForm: React.FC<Props> = ({
                   required: "Необходимо ввести название функции",
                 })}
               />
-              <label className="form-text">
+              <p className="form-text">
                 {errors.functionName?.message as string}
-              </label>
+              </p>
             </div>
 
             <div className="form-input-container">
@@ -175,9 +171,9 @@ const LabWorkVariantForm: React.FC<Props> = ({
                   {CType.CharArrayArray}
                 </option>
               </select>
-              <label className="form-text">
+              <p className="form-text">
                 {errors.language?.message as string}
-              </label>
+              </p>
             </div>
 
             <div className="form-input-container">

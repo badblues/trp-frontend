@@ -11,7 +11,7 @@ const AdminMenu = () => {
 
   return (
     <div className={`menu ${theme}`}>
-      <label
+      <p
         className="menu-option"
         onClick={() => {
           setCreateOpen(!createOpen);
@@ -19,7 +19,7 @@ const AdminMenu = () => {
         }}
       >
         Создать
-      </label>
+      </p>
       {createOpen ? (
         <div
           onClick={() => setCreateOpen(!createOpen)}
@@ -36,7 +36,7 @@ const AdminMenu = () => {
           </Link>
         </div>
       ) : null}
-      <label
+      <p
         onClick={() => {
           setAppointOpen(!appointOpen);
           setCreateOpen(false);
@@ -44,7 +44,7 @@ const AdminMenu = () => {
         className="menu-option"
       >
         Назначить
-      </label>
+      </p>
       {appointOpen ? (
         <div
           onClick={() => setAppointOpen(!appointOpen)}

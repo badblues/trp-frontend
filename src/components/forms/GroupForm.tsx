@@ -46,7 +46,7 @@ const GroupForm: React.FC<Props> = ({ edit, group, onFormSubmit }) => {
               required: "Необходимо ввести название группы",
             })}
           />
-          <label className="form-text">{errors.name?.message as string}</label>
+          <p className="form-text">{errors.name?.message as string}</p>
         </div>
 
         <button disabled={loading} className="submit-button" type="submit">

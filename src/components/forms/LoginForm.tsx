@@ -27,20 +27,24 @@ const LoginForm: React.FC<Props> = ({ onFormSubmit }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className={`form-container ${theme}`}>
-        <label className="form-name">АВТОРИЗАЦИЯ</label>
+        <h4 className="form-name">АВТОРИЗАЦИЯ</h4>
         <div className="form-input-container">
           <label className="form-label" htmlFor="username">
             Имя пользователя:
           </label>
           <input
+            id="username"
             className="form-input"
             type="text"
+            autoComplete="on"
             placeholder="username..."
             {...register("username", {
               required: "Необходимо ввести имя пользователя",
             })}
           />
-          <label className="form-text">{errors.username?.message as string}</label>
+          <p className="form-text">
+            {errors.username?.message as string}
+          </p>
         </div>
         <div className="form-input-container">
           <label className="form-label" htmlFor="password">
@@ -48,6 +52,7 @@ const LoginForm: React.FC<Props> = ({ onFormSubmit }) => {
           </label>
           <div className="input-with-button-container">
             <input
+              id="password"
               className="form-input"
               type={`${showPassword ? "text" : "password"}`}
               placeholder="password..."
@@ -70,7 +75,9 @@ const LoginForm: React.FC<Props> = ({ onFormSubmit }) => {
               />
             </button>
           </div>
-          <label className="form-text">{errors.password?.message as string}</label>
+          <p className="form-text">
+            {errors.password?.message as string}
+          </p>
         </div>
         <img src={logoImg} alt="logo" width="100px" />
         <button disabled={loading} className="submit-button">

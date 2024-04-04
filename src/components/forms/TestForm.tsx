@@ -62,7 +62,7 @@ const TestForm: React.FC<Props> = ({
               required: "Необходимо ввести входные данные",
             })}
           />
-          <label>{errors.input?.message as string}</label>
+          <p>{errors.input?.message as string}</p>
         </div>
 
         <div className="test-input-container">
@@ -77,7 +77,7 @@ const TestForm: React.FC<Props> = ({
               required: "Необходимо ввести выходные данные",
             })}
           />
-          <label>{errors.output?.message as string}</label>
+          <p>{errors.output?.message as string}</p>
         </div>
 
         <button disabled={loading} className="submit-button" type="submit">

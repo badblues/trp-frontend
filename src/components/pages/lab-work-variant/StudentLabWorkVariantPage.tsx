@@ -100,6 +100,7 @@ const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
         <div className="editor-and-output">
           <CodeEditor solutionCode={code} onCodeChange={handleCodeChange} />
           <textarea
+            id="output"
             value={outputText}
             disabled={true}
             className="output"

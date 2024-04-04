@@ -60,7 +60,7 @@ const LabWorkForm: React.FC<Props> = ({
               required: "Необходимо ввести название",
             })}
           />
-          <label className="form-text">{errors.title?.message as string}</label>
+          <p className="form-text">{errors.title?.message as string}</p>
         </div>
 
         <div className="form-input-container">
@@ -78,9 +78,9 @@ const LabWorkForm: React.FC<Props> = ({
               required: "Необходимо ввести максимальный балл",
             })}
           />
-          <label className="form-text">
+          <p className="form-text">
             {errors.maxRating?.message as string}
-          </label>
+          </p>
         </div>
 
         <button disabled={loading} className="submit-button" type="submit">
