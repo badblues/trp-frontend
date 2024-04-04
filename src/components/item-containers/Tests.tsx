@@ -12,12 +12,14 @@ interface Props {
   tests: LabWorkVariantTest[];
   labWorkVariant: LabWorkVariant;
   onAddTest: (testDTO: LabWorkVariantTestDTO, onDone: () => void) => void;
-  onDeleteTest: (test: LabWorkVariantTest, onDone: () => void) => void;
+  onDeleteTest: (test: LabWorkVariantTest) => void;
   onUpdateTest: (
     testId: number,
     testDTO: LabWorkVariantTestDTO,
     onDone: () => void
   ) => void;
+  inputRegex: string;
+  outputRegex: string;
 }
 
 const Tests: React.FC<Props> = ({
@@ -26,6 +28,8 @@ const Tests: React.FC<Props> = ({
   onAddTest,
   onDeleteTest,
   onUpdateTest,
+  inputRegex,
+  outputRegex,
 }) => {
   const { theme } = useContext(UiContext) as UiContextType;
   const [isAddingTest, setIsAddingTest] = useState(false);
@@ -60,6 +64,8 @@ const Tests: React.FC<Props> = ({
             edit={false}
             onFormSubmit={(test, onDone) => onAddTest(test, onDone)}
             labWorkVariant={labWorkVariant}
+            inputRegex={inputRegex}
+            outputRegex={outputRegex}
           />
         ) : null}
       </div>
@@ -73,6 +79,8 @@ const Tests: React.FC<Props> = ({
                 test={test}
                 onFormSubmit={updateTest}
                 labWorkVariant={labWorkVariant}
+                inputRegex={inputRegex}
+                outputRegex={outputRegex}
               />
               <button onClick={() => setEditingTest(null)} className="button">
                 ОТМЕНА

@@ -170,6 +170,8 @@ const TeacherLabWorkVariantPage: React.FC<Props> = ({
               onAddTest={addTest}
               onUpdateTest={updateTest}
               onDeleteTest={deleteTest}
+              inputRegex={labWorkVariant.inputRegex}
+              outputRegex={labWorkVariant.outputRegex}
             />
           </>
         ) : null}

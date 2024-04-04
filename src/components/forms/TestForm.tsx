@@ -12,12 +12,21 @@ interface Props {
   test?: LabWorkVariantTest;
   labWorkVariant: LabWorkVariant;
   onFormSubmit: (testDTO: LabWorkVariantTestDTO, onDone: () => void) => void;
+  inputRegex: string;
+  outputRegex: string;
 }
 
-const TestForm: React.FC<Props> = ({ edit, test, onFormSubmit, labWorkVariant }) => {
+const TestForm: React.FC<Props> = ({
+  edit,
+  test,
+  onFormSubmit,
+  labWorkVariant,
+  inputRegex,
+  outputRegex,
+}) => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
-  const { theme } = useContext(UiContext) as UiContextType;
+  const { theme, showErrorAlert } = useContext(UiContext) as UiContextType;
   const [loading, setLoading] = useState(false);
 
   const onDone = () => {
@@ -25,6 +34,14 @@ const TestForm: React.FC<Props> = ({ edit, test, onFormSubmit, labWorkVariant })
   };
 
   const onSubmit = (data: any) => {
+    if (!RegExp(inputRegex).test(data.input)) {
+      showErrorAlert("Некорректные входные данные");
+      return;
+    }
+    if (!RegExp(outputRegex).test(data.output)) {
+      showErrorAlert("Некорректные выходные данные");
+      return;
+    }
     setLoading(true);
     data.labWorkVariantId = labWorkVariant.id;
     onFormSubmit(data as LabWorkVariantTestDTO, onDone);
