@@ -11,5 +11,7 @@ export interface LabWorkVariant {
   functionName: string;
   returnType: CType;
   arguments: Argument[];
+  inputRegex: string;
+  outputRegex: string;
   testable: boolean;
 }
