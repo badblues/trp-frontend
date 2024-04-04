@@ -1,4 +1,4 @@
-const requestInterceptor = (config) => {
+const requestInterceptor = (config: any) => {
   const token = localStorage.getItem("userToken");
   if (token) {
     config.headers["Authorization"] = "Bearer " + token;
