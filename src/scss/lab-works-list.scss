@@ -1,0 +1,74 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.lab-work-list {
+  color: $text-color;
+
+  &.dark-mode {
+    color: $dark-mode-text-color;
+    .lab-work {
+      .lab-work-container {
+        .arrow {
+          filter: invert(100%);
+        }
+        .buttons-container {
+          .button-with-image {
+            .icon {
+              filter: invert(100%);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .lab-work {
+    margin: 5px 0px 5px 0px;
+
+    .lab-work-container {
+      display: flex;
+      align-items: center;
+
+      .title-container {
+        display: flex;
+        align-items: center;
+        width: 200px;
+        overflow: hidden;
+
+        &:hover {
+          cursor: pointer;
+          color: red;
+        }
+
+        .arrow {
+          margin: 0px 5px 0px 0px;
+        }
+
+        .title {
+          font-weight: normal;
+        }
+      }
+
+      .buttons-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0px 0px 0px 10px;
+
+        .button-with-image {
+          @include buttonWithImage(0px 5px 0px 5px);
+        }
+      }
+    }
+
+    .variant {
+      margin: 5px 0px 5px 40px;
+      width: 200px;
+      overflow: hidden;
+
+      .variant-title {
+        white-space: nowrap;
+      }
+    }
+  }
+}

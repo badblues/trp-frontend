@@ -1,0 +1,59 @@
+.lab-work-list {
+  color: #181818;
+}
+.lab-work-list.dark-mode {
+  color: #f1f1f1;
+}
+.lab-work-list.dark-mode .lab-work .lab-work-container .arrow {
+  filter: invert(100%);
+}
+.lab-work-list.dark-mode .lab-work .lab-work-container .buttons-container .button-with-image .icon {
+  filter: invert(100%);
+}
+.lab-work-list .lab-work {
+  margin: 5px 0px 5px 0px;
+}
+.lab-work-list .lab-work .lab-work-container {
+  display: flex;
+  align-items: center;
+}
+.lab-work-list .lab-work .lab-work-container .title-container {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  overflow: hidden;
+}
+.lab-work-list .lab-work .lab-work-container .title-container:hover {
+  cursor: pointer;
+  color: red;
+}
+.lab-work-list .lab-work .lab-work-container .title-container .arrow {
+  margin: 0px 5px 0px 0px;
+}
+.lab-work-list .lab-work .lab-work-container .title-container .title {
+  font-weight: normal;
+}
+.lab-work-list .lab-work .lab-work-container .buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px 0px 0px 10px;
+}
+.lab-work-list .lab-work .lab-work-container .buttons-container .button-with-image {
+  background-color: transparent;
+  border: none;
+  margin: 0px 5px 0px 5px;
+}
+.lab-work-list .lab-work .lab-work-container .buttons-container .button-with-image:hover {
+  cursor: pointer;
+}
+.lab-work-list .lab-work .variant {
+  margin: 5px 0px 5px 40px;
+  width: 200px;
+  overflow: hidden;
+}
+.lab-work-list .lab-work .variant .variant-title {
+  white-space: nowrap;
+}
+
+/*# sourceMappingURL=lab-works-list.css.map */

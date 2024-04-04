@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   min-width: 400px;
   width: 25%;
   height: fit-content;
@@ -36,6 +37,13 @@
       }
       .form-text {
         color: $dark-mode-text-color;
+      }
+    }
+    .buttons-container {
+      .button-with-image {
+        .icon {
+          filter: invert(100%);
+        }
       }
     }
   }
@@ -99,7 +107,27 @@
       margin: 4px;
       align-self: flex-start;
     }
+  }
 
+  .argument-input-container {
+    display: flex;
+    margin: 0px 0px 10px 0px;
+
+    .form-input {
+      &.name {
+        margin: 0px 10px 0px 0px;
+      }
+
+      &.type {
+        width: 100px;
+      }
+    }
+  }
+
+  .buttons-container {
+    .button-with-image {
+      @include buttonWithImage(0px 5px 0px 0px);
+    }
   }
 
   .submit-button {
