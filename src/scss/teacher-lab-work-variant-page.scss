@@ -1,18 +1,18 @@
 @import "./variables.scss";
 @import "./mixins.scss";
 
-.update-task-page {
+.update-lab-work-variant-page {
   display: flex;
   justify-content: center;
   margin: 20px 0px 0px 0px;
 
-  .close-task-form-button {
+  .close-lab-work-variant-form-button {
     @include button(10px 0px 0px 50px);
   }
 }
 
 
-.task-page {
+.lab-work-variant-page {
   display: flex;
   justify-content: space-between;
   margin: 10px 20px 10px 20px;
@@ -23,7 +23,7 @@
     color: $dark-mode-text-color;
   }
 
-  .task-information {
+  .lab-work-variant-information {
     max-width: 500px;
     width: fit-content;
   }

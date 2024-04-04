@@ -85,7 +85,7 @@ const Main = () => {
           }
         >
           <Route
-            path="/lab-work-variant/:labWorkVariantId"
+            path="/lab-work-variants/:labWorkVariantId"
             element={<LabWorkVariantPage />}
           />
         </Route>

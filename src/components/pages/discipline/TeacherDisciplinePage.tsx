@@ -83,6 +83,9 @@ const TeacherDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
           onAddLabWorkVariantClick={(labWork: LabWork) => {
             navigate(`/lab-works/${labWork.id}/create-lab-work-variant`);
           }}
+          onLabWorkVariantSelect={(variant) =>
+            navigate(`/lab-work-variants/${variant.id}`)
+          }
         />
         {user!.role === Role.SeniorTeacher ? (
           <button

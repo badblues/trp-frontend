@@ -7,13 +7,15 @@ import binImg from "../../images/bin.png";
 import editImg from "../../images/edit.png";
 import plusImg from "../../images/plus.png";
 import "../../styles/lab-works-list.css";
+import { LabWorkVariant } from "../../models/domain/LabWorkVariant.ts";
 
 interface Props {
   labWorks: LabWork[];
   onAddLabWorkVariantClick: (labWork: LabWork) => void;
+  onLabWorkVariantSelect: (labWorkVariant: LabWorkVariant) => void;
 }
 
-const LabWorks: React.FC<Props> = ({ labWorks, onAddLabWorkVariantClick }) => {
+const LabWorks: React.FC<Props> = ({ labWorks, onAddLabWorkVariantClick, onLabWorkVariantSelect }) => {
   const { theme } = useContext(UiContext) as UiContextType;
   const [openLabWorks, setOpenLabWorks] = useState<Set<LabWork>>(new Set());
 
@@ -89,7 +91,12 @@ const LabWorks: React.FC<Props> = ({ labWorks, onAddLabWorkVariantClick }) => {
           {openLabWorks.has(labWork)
             ? labWork.variants.map((variant) => (
                 <div className="variant" key={variant.id}>
-                  <p className="variant-title">{variant.title}</p>
+                  <p
+                    onClick={() => onLabWorkVariantSelect(variant)}
+                    className="variant-title"
+                  >
+                    {variant.title}
+                  </p>
                 </div>
               ))
             : null}

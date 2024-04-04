@@ -1,36 +1,46 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { UiContext, UiContextType } from "../../../contexts/UiContext.tsx";
 import { ApiContext, ApiContextType } from "../../../contexts/ApiContext.tsx";
 import Loader from "../../Loader.tsx";
-import { UserContext, UserContextType } from "../../../contexts/UserContext.tsx";
+import {
+  UserContext,
+  UserContextType,
+} from "../../../contexts/UserContext.tsx";
 import { Role } from "../../../models/domain/Role.ts";
 import Tests from "../../item-containers/Tests.tsx";
-import "../../../styles/teacher-task-page.css";
+import "../../../styles/teacher-lab-work-variant-page.css";
+import { LabWorkVariant } from "../../../models/domain/LabWorkVariant.ts";
+import { LabWorkVariantTest } from "../../../models/domain/LabWorkVariantTest.ts";
+import { LabWorkVariantTestDTO } from "../../../models/DTO/LabWorkVariantTestDTO.ts";
+import LabWorkVariantForm from "../../forms/LabWorkVariantForm.tsx";
 
-const TeacherTaskPage = ({ defaultTask }) => {
-  const { theme, showSuccessAlert, showErrorAlert } = useContext(UiContext) as UiContextType;
-  const { taskApiService, disciplineApiService, taskTestApiService } =
-    useContext(ApiContext) as ApiContextType;
+interface Props {
+  defaultLabWorkVariant: LabWorkVariant;
+}
+
+const TeacherLabWorkVariantPage: React.FC<Props> = ({
+  defaultLabWorkVariant,
+}) => {
+  const { theme, showSuccessAlert, showErrorAlert } = useContext(
+    UiContext
+  ) as UiContextType;
+  const { labWorkVariantApiService, labWorkVariantTestApiService } = useContext(
+    ApiContext
+  ) as ApiContextType;
   const { user } = useContext(UserContext) as UserContextType;
-  const navigate = useNavigate();
-  const [task, setTask] = useState(defaultTask);
-  const [discipline, setDiscipline] = useState(null);
-  const [tests, setTests] = useState([]);
-  const [updating, setUpdating] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [labWorkVariant, setLabWorkVariant] = useState(defaultLabWorkVariant);
+  const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
+  const [updating, setUpdating] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
       try {
-        const disciplineRespoinse = await disciplineApiService.getDiscipline(
-          task.disciplineId
-        );
-        const testsResponse = await taskTestApiService.getTaskTestsByTask(
-          task.id
-        );
+        const testsResponse =
+          await labWorkVariantTestApiService.getLabWorkVariantTestsByLabWorkVariant(
+            labWorkVariant.id
+          );
         setTests(testsResponse);
-        setDiscipline(disciplineRespoinse);
       } catch (error) {
         showErrorAlert(error.error);
       }
@@ -40,59 +50,67 @@ const TeacherTaskPage = ({ defaultTask }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const updateTask = async (updatedTask, onUpdate) => {
+  // const updateLabWorkVariant = async (updatedLabWorkVariant, onUpdate) => {
+  //   try {
+  //     await labWorkVariantApiService
+  //       .updateLabWorkVariant(updatedLabWorkVariant.id, updatedLabWorkVariant)
+  //       .then((updatedLabWorkVariant) => {
+  //         showSuccessAlert(`Задание ${updatedLabWorkVariant.title} обновлено`);
+  //         setLabWorkVariant(updatedLabWorkVariant);
+  //       });
+  //   } catch (error) {
+  //     showErrorAlert(error.error);
+  //   } finally {
+  //     onUpdate();
+  //     setUpdating(false);
+  //   }
+  // };
+
+  // const deleteLabWorkVariant = async () => {
+  //   try {
+  //     await labWorkVariantApiService.deleteLabWorkVariant(labWorkVariant.id);
+  //     showSuccessAlert("Задание удалено");
+  //     navigate("/");
+  //   } catch (error) {
+  //     showErrorAlert(error.error);
+  //   }
+  // };
+
+  const addTest = async (test: LabWorkVariantTestDTO, onDone: () => void) => {
     try {
-      await taskApiService
-        .updateTask(updatedTask.id, updatedTask)
-        .then((updatedTask) => {
-          showSuccessAlert(`Задание ${updatedTask.title} обновлено`);
-          setTask(updatedTask);
-        });
+      const createdTest =
+        await labWorkVariantTestApiService.createLabWorkVariantTest(test);
+      showSuccessAlert("Тест добавлен");
+      setTests([...tests, createdTest]);
     } catch (error) {
       showErrorAlert(error.error);
     } finally {
-      onUpdate();
-      setUpdating(false);
-    }
-  };
-
-  const deleteTask = async () => {
-    try {
-      await taskApiService.deleteTask(task.id);
-      showSuccessAlert("Задание удалено");
-      navigate("/");
-    } catch (error) {
-      showErrorAlert(error.error);
-    }
-  };
-
-  const addTest = async (test, onDone) => {
-    try {
-      const createdTest = await taskTestApiService.createTaskTest(test);
-      showSuccessAlert("Тест добавлен");
-      setTests([...tests, createdTest]);
       onDone();
+    }
+  };
+
+  const deleteTest = async (test: LabWorkVariantTest): Promise<void> => {
+    try {
+      // await labWorkVariantTestApiService.deleteLabWorkVariantTest(test.id);
+      showSuccessAlert("Тест удален(нет)");
+      //setTests(tests.filter((t) => t.id !== test.id));
     } catch (error) {
       showErrorAlert(error.error);
     }
   };
 
-  const deleteTest = async (test, onDone) => {
+  const updateTest = async (
+    testId: number,
+    test: LabWorkVariantTestDTO,
+    onDone: () => void
+  ) => {
     try {
-      await taskTestApiService.deleteTaskTest(test.id);
-      showSuccessAlert("Тест удален");
-      setTests(tests.filter((t) => t.id !== test.id));
-      onDone();
-    } catch (error) {
-      showErrorAlert(error.error);
-    }
-  };
-
-  const updateTest = async (test, onDone) => {
-    try {
-      await taskTestApiService.updateTaskTest(test.id, test);
-      showSuccessAlert("Тест обновлен");
-      setTests(tests.map((t) => (t.id === test.id ? test : t)));
+      // await labWorkVariantTestApiService.updateLabWorkVariantTest(
+      //   test.id,
+      //   test
+      // );
+      showSuccessAlert("Тест обновлен(нет)");
+      //setTests(tests.map((t) => (t.id === test.id ? test : t)));
       onDone();
     } catch (error) {
       showErrorAlert(error.error);
@@ -109,10 +127,9 @@ const TeacherTaskPage = ({ defaultTask }) => {
 
   if (updating) {
     return (
-      <div className="update-task-page">
-       
+      <div className="update-lab-work-variant-page">
         <button
-          className="close-task-form-button"
+          className="close-lab-work-variant-form-button"
           onClick={() => setUpdating(false)}
         >
           ЗАКРЫТЬ
@@ -122,34 +139,51 @@ const TeacherTaskPage = ({ defaultTask }) => {
   }
 
   return (
-    <div className={`task-page ${theme}`}>
-      <div className="task-information">
-        <h1>{task.title}</h1>
-        <h2>Название функции: {task.functionName}</h2>
-        <h2>Язык: {task.language}</h2>
+    <div className={`lab-work-variant-page ${theme}`}>
+      <div className="lab-work-variant-information">
+        <h1>{labWorkVariant.title}</h1>
+        <h2>Язык: {labWorkVariant.language}</h2>
         <h2>Задание:</h2>
-        <p>{task.description}</p>
-        <h2>Тесты:</h2>
-        <Tests
-          tests={tests}
-          task={task}
-          onAddTest={addTest}
-          onUpdateTest={updateTest}
-          onDeleteTest={deleteTest}
-        />
+        <p>{labWorkVariant.description}</p>
+        {labWorkVariant.testable ? (
+          <>
+            <h2>
+              Функция: {labWorkVariant.returnType} {labWorkVariant.functionName}
+              (
+              {labWorkVariant.arguments.map((argument, index) => (
+                <>
+                  <span>
+                    {argument.type} {argument.name}
+                  </span>
+                  {index < labWorkVariant.arguments.length - 1 ? (
+                    <span>, </span>
+                  ) : null}
+                </>
+              ))}
+              )
+            </h2>
+
+            <h2>Тесты:</h2>
+            <Tests
+              tests={tests}
+              labWorkVariant={labWorkVariant}
+              onAddTest={addTest}
+              onUpdateTest={updateTest}
+              onDeleteTest={deleteTest}
+            />
+          </>
+        ) : null}
       </div>
-      {user.role === Role.SeniorTeacher ? (
+      {user!.role === Role.SeniorTeacher ? (
         <div className="control-panel">
           <button className="control-button" onClick={() => setUpdating(true)}>
             ИЗМЕНИТЬ ЗАДАНИЕ
           </button>
-          <button className="control-button" onClick={deleteTask}>
-            УДАЛИТЬ ЗАДАНИЕ
-          </button>
+          <button className="control-button">УДАЛИТЬ ЗАДАНИЕ</button>
         </div>
       ) : null}
     </div>
   );
 };
 
-export default TeacherTaskPage;
+export default TeacherLabWorkVariantPage;

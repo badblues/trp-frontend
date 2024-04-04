@@ -7,7 +7,6 @@ import "../../../styles/discipline-page.css";
 import { Discipline } from "../../../models/domain/Discipline.ts";
 import { LabWork } from "../../../models/domain/LabWork.ts";
 import { Teacher } from "../../../models/domain/Teacher.ts";
-import LabWorks from "../../item-containers/LabWorks.tsx";
 
 interface Props {
   defaultDiscipline: Discipline;
@@ -83,7 +82,6 @@ const StudentDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
       </div>
       <div>
         <h2>Доступные лабораторные работы:</h2>
-        <LabWorks labWorks={labWorks} />
       </div>
     </div>
   );

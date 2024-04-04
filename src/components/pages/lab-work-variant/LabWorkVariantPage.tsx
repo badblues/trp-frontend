@@ -10,23 +10,24 @@ import Loader from "../../Loader.tsx";
 import StudentLabWorkVariantPage from "./StudentLabWorkVariantPage.tsx";
 import TeacherLabWorkVariantPage from "./TeacherLabWorkVariantPage.tsx";
 import { UiContext, UiContextType } from "../../../contexts/UiContext.tsx";
+import { LabWorkVariant } from "../../../models/domain/LabWorkVariant.ts";
 
 const LabWorkVariantPage = () => {
   const { labWorkVariantId } = useParams();
   const navigate = useNavigate();
   const { showErrorAlert } = useContext(UiContext) as UiContextType;
-  const [loading, setLoading] = useState(true);
-  const [labWorkVariant, setLabWorkVariant] = useState(null);
   const { user } = useContext(UserContext) as UserContextType;
   const { labWorkVariantApiService } = useContext(ApiContext) as ApiContextType;
+  const [loading, setLoading] = useState<boolean>(true);
+  const [labWorkVariant, setLabWorkVariant] = useState<LabWorkVariant>();
 
   useEffect(() => {
     (async () => {
       try {
-        const labWorkVariant = await labWorkVariantApiService.getLabWorkVariant(
+        const labWorkVariantResponse = await labWorkVariantApiService.getLabWorkVariant(
           Number(labWorkVariantId) 
         );
-        setLabWorkVariant(labWorkVariant);
+        setLabWorkVariant(labWorkVariantResponse);
       } catch (error) {
         showErrorAlert(error.error);
         navigate("/not-found");

@@ -12,7 +12,7 @@ interface Props {
   tests: LabWorkVariantTest[];
   labWorkVariant: LabWorkVariant;
   onAddTest: (testDTO: LabWorkVariantTestDTO, onDone: () => void) => void;
-  onDeleteTest: (test: LabWorkVariantTest) => void;
+  onDeleteTest: (test: LabWorkVariantTest, onDone: () => void) => void;
   onUpdateTest: (
     testId: number,
     testDTO: LabWorkVariantTestDTO,
