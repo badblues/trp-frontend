@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
-import { UserContextProvider } from "./contexts/UserContext";
-import { UiContextProvider } from "./contexts/UiContext";
-import { ApiContextProvider } from "./contexts/ApiContext";
+import { UserContextProvider } from "./contexts/UserContext.tsx";
+import { UiContextProvider } from "./contexts/UiContext.tsx";
+import { ApiContextProvider } from "./contexts/ApiContext.tsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

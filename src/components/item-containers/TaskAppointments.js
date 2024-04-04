@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { UiContext } from "../../contexts/UiContext";
+import { UiContext } from "../../contexts/UiContext.tsx";
 import "../../styles/task-appointment-list.css";
 
 const TaskAppointments = ({ tasks, onTaskClick }) => {
