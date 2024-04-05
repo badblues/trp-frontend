@@ -9,6 +9,7 @@ import LabWorkVariantApiService from "../services/LabWorkVariantApiService.ts";
 import LabWorkVariantTestApiService from "../services/LabWorkVariantTestApiService.ts";
 import TeacherApiService from "../services/TeacherApiService.ts";
 import StudentApiService from "../services/StudentApiService.ts";
+import TeamApiService from "../services/TeamApiService.ts";
 
 export interface ApiContextType {
   userApiService: UserApiService;
@@ -16,6 +17,7 @@ export interface ApiContextType {
   groupApiService: GroupApiService;
   teacherAppointmentApiService: TeacherAppointmentApiService;
   teamAppointmentApiService: TeamAppointmentApiService;
+  teamApiService: TeamApiService;
   labWorkApiService: LabWorkApiService;
   labWorkVariantApiService: LabWorkVariantApiService;
   labWorkVariantTestApiService: LabWorkVariantTestApiService;
@@ -43,6 +45,7 @@ export class ApiContextProvider extends Component<
       teamAppointmentApiService: new TeamAppointmentApiService(),
       labWorkApiService: new LabWorkApiService(),
       labWorkVariantApiService: new LabWorkVariantApiService(),
+      teamApiService: new TeamApiService(),
       labWorkVariantTestApiService: new LabWorkVariantTestApiService(),
       teacherApiService: new TeacherApiService(),
       studentApiService: new StudentApiService(),
