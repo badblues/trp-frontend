@@ -1,5 +1,7 @@
+import { Student } from "./Student";
+
 export interface Team {
   id: number;
   disciplineId: number;
-  sudentIds: number[];
+  students: Student[];
 }
