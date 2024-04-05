@@ -43,14 +43,6 @@ const StudentDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
           (appointment) => appointment.teacher
         );
         setTeachers(teachers);
-        //TODO REWORK
-        const promises = labWorksResponse.map(async (labWork) => {
-          labWork.variants =
-            await labWorkVariantApiService.getLabWorkVariantsByLabWork(
-              labWork.id
-            );
-        });
-        await Promise.all(promises);
         setLabWorks(labWorksResponse);
       } catch (error) {
         showErrorAlert(error.error);
