@@ -29,7 +29,10 @@ export default class StudentApiService {
     let url = this.groupApiUrl + `/${groupId}/students`;
     try {
       const response = await http.get(url);
-      return response.data.data;
+      const groupResponse = await http.get(this.groupApiUrl + `/${groupId}`);
+      const students: Student[] = response.data.data;
+      students.forEach((s) => (s.group = groupResponse.data.data));
+      return students;
     } catch (error) {
       throw error.response.data;
     }
