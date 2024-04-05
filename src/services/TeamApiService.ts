@@ -48,11 +48,22 @@ export class TeamApiService {
     }
   }
 
+  //TODO refactor
   async createTeam(team: TeamDTO): Promise<Team> {
     let url = this.apiUrl;
     try {
       const response = await http.post(url, team);
-      return response.data.data;
+      const createdTeam: Team = response.data.data;
+      createdTeam.students = [];
+      await Promise.all(
+        createdTeam.studentIds.map(async (studentId) => {
+          const studentResponse = await http.get(
+            this.studentApiUrl + `/${studentId}`
+          );
+          createdTeam.students.push(studentResponse.data.data);
+        })
+      );
+      return createdTeam;
     } catch (error) {
       throw error.response.data;
     }

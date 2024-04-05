@@ -28,6 +28,9 @@
 .item-list .item:hover, .item-list .item-with-border:hover {
   cursor: pointer;
 }
+.item-list .item.dragged, .item-list .dragged.item-with-border {
+  opacity: 0.5;
+}
 .item-list .item-with-border {
   background-color: #b4b4b4;
   border: solid;

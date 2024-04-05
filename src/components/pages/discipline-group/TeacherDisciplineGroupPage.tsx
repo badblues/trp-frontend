@@ -8,16 +8,26 @@ import "../../../styles/discipline-group-page.css";
 import { Group } from "../../../models/domain/Group.ts";
 import { Discipline } from "../../../models/domain/Discipline.ts";
 import { Student } from "../../../models/domain/Student.ts";
+import { Team } from "../../../models/domain/Team.ts";
+import Teams from "../../item-containers/Teams.tsx";
+import StudentsDraggable from "../../item-containers/StudentsDraggable.tsx";
+import TeamForm from "../../forms/TeamForm.tsx";
+import { TeamDTO } from "../../../models/DTO/TeamDTO.ts";
 
 const TeacherDisciplineGroupPage = () => {
   const { disciplineId, groupId } = useParams();
   const navigate = useNavigate();
-  const { studentApiService, groupApiService, disciplineApiService } =
-    useContext(ApiContext) as ApiContextType;
+  const {
+    studentApiService,
+    groupApiService,
+    disciplineApiService,
+    teamApiService,
+  } = useContext(ApiContext) as ApiContextType;
   const { theme, showErrorAlert } = useContext(UiContext) as UiContextType;
   const [group, setGroup] = useState<Group>();
   const [discipline, setDiscipline] = useState<Discipline>();
-  const [students, setStudents] = useState<Student[]>();
+  const [studentsWithoutTeam, setStudentsWithoutTeam] = useState<Student[]>();
+  const [teams, setTeams] = useState<Team[]>();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -30,9 +40,21 @@ const TeacherDisciplineGroupPage = () => {
         const studentsResponse = await studentApiService.getStudentsByGroup(
           Number(groupId)
         );
+        const teamsResponse = await teamApiService.getTeamsByDisciplineAndGroup(
+          Number(disciplineId),
+          Number(groupId)
+        );
         setGroup(groupResponse);
         setDiscipline(disciplineResponse);
-        setStudents(studentsResponse);
+        setStudentsWithoutTeam(
+          studentsResponse.filter(
+            (student) =>
+              !teamsResponse.some((team) =>
+                team.students.some((member) => member.id === student.id)
+              )
+          )
+        );
+        setTeams(teamsResponse);
       } catch (error) {
         showErrorAlert(error.error);
         navigate("/not-found");
@@ -42,6 +64,22 @@ const TeacherDisciplineGroupPage = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const createTeam = async (teamDTO: TeamDTO, onDone: () => void) => {
+    try {
+      const createdTeam: Team = await teamApiService.createTeam(teamDTO);
+      setStudentsWithoutTeam(
+        studentsWithoutTeam!.filter(
+          (s) => !teamDTO.studentIds.some((studentId) => studentId === s.id)
+        )
+      );
+      setTeams([createdTeam, ...teams!]);
+    } catch (error) {
+      showErrorAlert(error.error);
+    } finally {
+      onDone();
+    }
+  };
 
   if (loading) {
     return (
@@ -55,13 +93,11 @@ const TeacherDisciplineGroupPage = () => {
     <div className={`discipline-group-page ${theme}`}>
       <div>
         <h1>{group!.name}</h1>
-        {students!.map((student) => (
-          <div className="task-appointment-list" key={student.id}>
-            <h4 className="task-appointment-student-name">
-              {student.fullName}
-            </h4>
-          </div>
-        ))}
+        <TeamForm discipline={discipline!} onFormSubmit={createTeam} />
+        <StudentsDraggable students={studentsWithoutTeam!} />
+      </div>
+      <div>
+        <Teams teams={teams!}></Teams>
       </div>
       <div className="info-container">
         <h2>

@@ -37,6 +37,10 @@
     &:hover {
       cursor: pointer;
     }
+
+    &.dragged {
+      opacity: 0.5;
+    }
   }
 
   .item-with-border {
