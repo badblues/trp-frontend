@@ -1,0 +1,14 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.team-form-container {
+  border: solid;
+  border-width: 1px;
+  border-color: white;
+  border-radius: 5px;
+  padding: 10px;
+
+  .create-team-button {
+    @include button();
+  }
+}

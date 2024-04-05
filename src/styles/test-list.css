@@ -17,6 +17,7 @@
 }
 .test-list .add-test-container .open-test-form-button {
   height: fit-content;
+  min-width: 100px;
   width: fit-content;
   border-radius: 7px;
   background: #1e1e1e;

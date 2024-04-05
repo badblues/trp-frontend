@@ -1,0 +1,26 @@
+.team-form-container {
+  border: solid;
+  border-width: 1px;
+  border-color: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+.team-form-container .create-team-button {
+  height: fit-content;
+  min-width: 100px;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 0px;
+}
+.team-form-container .create-team-button:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=team-form.css.map */

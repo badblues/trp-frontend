@@ -5,6 +5,7 @@
 }
 .update-lab-work-variant-page .close-lab-work-variant-form-button {
   height: fit-content;
+  min-width: 100px;
   width: fit-content;
   border-radius: 7px;
   background: #1e1e1e;
@@ -43,6 +44,7 @@
 }
 .lab-work-variant-page .control-panel .control-button {
   height: fit-content;
+  min-width: 100px;
   width: fit-content;
   border-radius: 7px;
   background: #1e1e1e;
