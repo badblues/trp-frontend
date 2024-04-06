@@ -1,0 +1,62 @@
+.team-lab-works-container {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+}
+.team-lab-works-container.dark-mode .team-container {
+  background-color: #2e2e2e;
+  border-color: black;
+}
+.team-lab-works-container .team-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #b4b4b4;
+  border-color: white;
+  border: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  padding: 5px 10px 5px 10px;
+  margin: 0px 0px 10px 0px;
+}
+.team-lab-works-container .team-container .team-title {
+  margin: 0px 10px 0px 0px;
+}
+.team-lab-works-container .team-container .lab-works-with-variants-container {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.team-lab-works-container .team-container .lab-works-with-variants-container .lab-works-container {
+  max-width: 100%;
+  display: flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.team-lab-works-container .team-container .lab-works-with-variants-container .lab-works-container .lab-work-title {
+  margin: 0px 5px 0px 5px;
+  max-width: 300px;
+  overflow: hidden;
+}
+.team-lab-works-container .team-container .lab-works-with-variants-container .lab-works-container .lab-work-title:hover {
+  cursor: pointer;
+}
+.team-lab-works-container .team-container .lab-works-with-variants-container .variants-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0px 10px 0px;
+  max-width: 100%;
+}
+.team-lab-works-container .team-container .lab-works-with-variants-container .variants-container .variant {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0px 5px 5px 5px;
+}
+.team-lab-works-container .team-container .lab-works-with-variants-container .variants-container .variant .variant-title:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=team-lab-works.css.map */

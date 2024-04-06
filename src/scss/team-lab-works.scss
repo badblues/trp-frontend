@@ -1,0 +1,76 @@
+@import "./variables.scss";
+
+.team-lab-works-container {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+
+  &.dark-mode {
+    .team-container {
+      background-color: $dark-mode-background-secondary-color;
+      border-color: black;
+    }
+  }
+
+  .team-container {
+    display: flex;
+    flex-direction: row;
+    background-color: $background-secondary-color;
+    border-color: white;
+    border: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    padding: 5px 10px 5px 10px;
+    margin: 0px 0px 10px 0px;
+
+    .team-title {
+      margin: 0px 10px 0px 0px;
+    }
+
+    .lab-works-with-variants-container {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      .lab-works-container {
+        max-width: 100%;
+        display: flex;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        .lab-work-title {
+          margin: 0px 5px 0px 5px;
+          max-width: 300px;
+          overflow: hidden;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .variants-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 10px 0px 10px 0px;
+        max-width: 100%;
+
+        .variant {
+          max-width: 300px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          margin: 0px 5px 5px 5px;
+
+          .variant-title {
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

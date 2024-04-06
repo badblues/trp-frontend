@@ -6,6 +6,7 @@ import { TestResult } from "../models/domain/TestResult";
 export default class LabWorkVariantApiService {
   apiUrl = "http://212.20.47.147:8080/api/v2/lab-work-variants";
   labWorksApiUrl = "http://212.20.47.147:8080/api/v2/lab-works";
+  teamApiUrl = "http://212.20.47.147:8080/api/v2/teams";
 
   async getLabWorkVariantsByLabWork(
     labWorkId: number
@@ -19,10 +20,18 @@ export default class LabWorkVariantApiService {
     }
   }
 
-  async getLabWorkVariant(
-    labWorkVariantId: number
-  ): Promise<LabWorkVariant> {
+  async getLabWorkVariant(labWorkVariantId: number): Promise<LabWorkVariant> {
     let url = this.apiUrl + `/${labWorkVariantId}`;
+    try {
+      const response = await http.get(url);
+      return response.data.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+
+  async getLabWorkVariantByTeam(teamId: number): Promise<LabWorkVariant> {
+    let url = this.teamApiUrl + `/${teamId}/lab-work-variants`;
     try {
       const response = await http.get(url);
       return response.data.data;
