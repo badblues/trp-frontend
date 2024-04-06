@@ -1,0 +1,25 @@
+.page-with-tabs {
+  color: #181818;
+}
+.page-with-tabs.dark-mode .switch-panel .switch-panel-button {
+  color: #f1f1f1;
+  background-color: #2e2e2e;
+}
+.page-with-tabs .switch-panel {
+  display: flex;
+  justify-content: space-around;
+}
+.page-with-tabs .switch-panel .switch-panel-button {
+  width: 100%;
+  min-height: 40px;
+  height: fit-content;
+  font-size: large;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 0px;
+}
+.page-with-tabs .switch-panel .switch-panel-button.open {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/*# sourceMappingURL=page-with-tabs.css.map */
