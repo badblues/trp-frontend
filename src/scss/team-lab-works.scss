@@ -9,6 +9,20 @@
     .team-container {
       background-color: $dark-mode-background-secondary-color;
       border-color: black;
+
+      .lab-works-with-variants-container {
+        .variants-container {
+          .variant {
+            &.appointed {
+              color: $dark-mode-status-color-appointed;
+            }
+
+            &.not-appointed {
+              color: $dark-mode-status-color-not-appointed;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -63,6 +77,14 @@
           text-overflow: ellipsis;
           white-space: nowrap;
           margin: 0px 5px 5px 5px;
+
+          &.appointed {
+            color: $status-color-appointed;
+          }
+
+          &.not-appointed {
+            color: $status-color-not-appointed;
+          }
 
           .variant-title {
             &:hover {

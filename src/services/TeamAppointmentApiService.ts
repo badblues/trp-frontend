@@ -3,7 +3,7 @@ import { TeamAppointment } from "../models/domain/TeamAppointment";
 import { TeamAppointmentDTO } from "../models/DTO/TeamAppointmentDTO";
 
 export class TeamAppointmentApiService {
-  apiUrl = "http://212.20.47.147:8080/api/v2/student-appointments";
+  apiUrl = "http://212.20.47.147:8080/api/v2/team-appointments";
 
   async getTeamAppointmentsByDiscipline(): Promise<TeamAppointment[]> {
     let url = this.apiUrl;
