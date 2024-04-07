@@ -30,7 +30,7 @@ export default class LabWorkVariantApiService {
     }
   }
 
-  async getLabWorkVariantByTeam(teamId: number): Promise<LabWorkVariant> {
+  async getLabWorkVariantsByTeam(teamId: number): Promise<LabWorkVariant[]> {
     let url = this.teamApiUrl + `/${teamId}/lab-work-variants`;
     try {
       const response = await http.get(url);
