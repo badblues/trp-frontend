@@ -15,7 +15,7 @@
 }
 .team-lab-works-container .team-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color: #b4b4b4;
   border-color: white;
   border: solid;
@@ -24,8 +24,15 @@
   padding: 5px 10px 5px 10px;
   margin: 0px 0px 10px 0px;
 }
-.team-lab-works-container .team-container .team-title {
-  margin: 0px 10px 0px 0px;
+.team-lab-works-container .team-container .team-name {
+  display: flex;
+}
+.team-lab-works-container .team-container .team-name .team-title {
+  font-weight: bold;
+  margin: 0px 5px 0px 0px;
+}
+.team-lab-works-container .team-container .team-name .student-name {
+  margin: 0px 5px 0px 5px;
 }
 .team-lab-works-container .team-container .lab-works-with-variants-container {
   max-width: 100%;

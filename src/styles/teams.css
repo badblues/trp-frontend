@@ -1,0 +1,18 @@
+.teams {
+  color: #181818;
+}
+.teams.dark-mode {
+  color: #f1f1f1;
+}
+.teams .team {
+  margin: 5px 0px 5px 0px;
+  cursor: default;
+}
+.teams .team .team-name {
+  font-weight: bold;
+}
+.teams .team .student-name {
+  margin: 0px 0px 0px 5px;
+}
+
+/*# sourceMappingURL=teams.css.map */

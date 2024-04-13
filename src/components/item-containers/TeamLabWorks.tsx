@@ -60,7 +60,12 @@ const TeamLabWorks: React.FC<Props> = ({
     <div className={`team-lab-works-container ${theme}`}>
       {teamsWithVariants.map((teamWithVariants, index) => (
         <div key={index} className="team-container">
-          <p className="team-title">Бригада {teamWithVariants.team.id}</p>
+          <div className="team-name">
+            <p className="team-title">Бригада {teamWithVariants.team.id}:</p>
+            {teamWithVariants.team.students.map((student) => (
+              <p className="student-name">{student.fullName}</p>
+            ))}
+          </div>
           <div className="lab-works-with-variants-container">
             <div className="lab-works-container">
               {labWorks.map((labWork, index) => (

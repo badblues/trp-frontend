@@ -28,7 +28,7 @@
 
   .team-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: $background-secondary-color;
     border-color: white;
     border: solid;
@@ -37,8 +37,17 @@
     padding: 5px 10px 5px 10px;
     margin: 0px 0px 10px 0px;
 
-    .team-title {
-      margin: 0px 10px 0px 0px;
+    .team-name {
+      display: flex;
+
+      .team-title {
+        font-weight: bold;
+        margin: 0px 5px 0px 0px;
+      }
+
+      .student-name {
+        margin: 0px 5px 0px 5px;
+      }
     }
 
     .lab-works-with-variants-container {
