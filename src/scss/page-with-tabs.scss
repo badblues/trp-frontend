@@ -2,8 +2,6 @@
 @import "./mixins.scss";
 
 .page-with-tabs {
-  color: $text-color;
-
   &.dark-mode {
     .switch-panel {
       .switch-panel-button {
@@ -18,16 +16,23 @@
     justify-content: space-around;
 
     .switch-panel-button {
+      color: $text-color;
       width: 100%;
       min-height: 40px;
       height: fit-content;
       font-size: large;
       font-family: $main-font;
-      border-radius: 0px;
+      border: solid;
+      border-width: 1px;
+      border-color: transparent white transparent white;
+      background-color: $background-secondary-color;
+
+      &:hover {
+        cursor: pointer;
+      }
 
       &.open {
         background-color: transparent;
-        border-color: transparent;
       }
     }
   }
