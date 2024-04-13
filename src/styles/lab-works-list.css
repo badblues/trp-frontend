@@ -55,5 +55,9 @@
 .lab-work-list .lab-work .variant .variant-title {
   white-space: nowrap;
 }
+.lab-work-list .lab-work .variant .variant-title:hover {
+  cursor: pointer;
+  color: red;
+}
 
 /*# sourceMappingURL=lab-works-list.css.map */

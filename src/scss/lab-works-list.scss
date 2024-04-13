@@ -68,6 +68,11 @@
 
       .variant-title {
         white-space: nowrap;
+
+        &:hover {
+          cursor: pointer;
+          color: red;
+        }
       }
     }
   }
