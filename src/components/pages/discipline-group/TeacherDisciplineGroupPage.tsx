@@ -19,6 +19,7 @@ import TeamLabWorkAppointments from "../../item-containers/TeamLabWorkAppointmen
 import { TeamWithVariants } from "../../../models/domain/TeamWithVariants.ts";
 import { LabWorkVariant } from "../../../models/domain/LabWorkVariant.ts";
 import { TeamAppointmentDTO } from "../../../models/DTO/TeamAppointmentDTO.ts";
+import TeamLabWorks from "../../item-containers/TeamLabWorks.tsx";
 
 const TeacherDisciplineGroupPage = () => {
   const { disciplineId, groupId } = useParams();
@@ -150,11 +151,17 @@ const TeacherDisciplineGroupPage = () => {
     >
       <div className={`discipline-group-page ${theme}`}>
         <div>
+          <TeamLabWorks
+            teamsWithVariants={teamsWithVariants}
+            labWorks={labWorks}
+            onVariantClick={() => navigate("/review")}
+          />
+        </div>
+        <div>
           <h1>{group!.name}</h1>
           <h2>
             {discipline!.name} {discipline!.year}
           </h2>
-          <h2>Бригады:</h2>
         </div>
       </div>
       <div className={`discipline-group-page ${theme}`}>
