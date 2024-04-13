@@ -93,6 +93,9 @@ const Tests: React.FC<Props> = ({
               <br />
               <span className="bold-text">Out: </span>
               <span>{test.output}</span>
+              <p>
+                Открытый: <input type="checkbox" checked={test.open}></input>
+              </p>
               <div>
                 <button
                   onClick={() => onDeleteTest(test)}

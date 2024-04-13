@@ -42,6 +42,10 @@
     .bold-text {
       font-weight: bold;
     }
+
+    .button {
+      @include button();
+    }
   }
 }
 

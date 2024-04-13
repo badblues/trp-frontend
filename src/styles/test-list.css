@@ -48,6 +48,23 @@
 .test-list .item .bold-text {
   font-weight: bold;
 }
+.test-list .item .button {
+  height: fit-content;
+  min-width: 100px;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 0px;
+}
+.test-list .item .button:hover {
+  cursor: pointer;
+}
 
 .add-test-button {
   margin: 5px 0px 5px 0px;

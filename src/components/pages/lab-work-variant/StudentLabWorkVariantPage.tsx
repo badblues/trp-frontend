@@ -5,15 +5,19 @@ import CodeEditor from "../../CodeEditor.tsx";
 import Loader from "../../Loader.tsx";
 import "../../../styles/student-lab-work-variant-page.css";
 import { SolutionDTO } from "../../../models/DTO/SolutionDTO.ts";
+import { LabWorkVariantTest } from "../../../models/domain/LabWorkVariantTest.ts";
 
 const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
   const { theme, showSuccessAlert, showErrorAlert } = useContext(
     UiContext
   ) as UiContextType;
-  const { labWorkVariantApiService } = useContext(ApiContext) as ApiContextType;
+  const { labWorkVariantApiService, labWorkVariantTestApiService } = useContext(
+    ApiContext
+  ) as ApiContextType;
   const [code, setCode] = useState<string>("");
   const [outputText, setOutputText] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
+  const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -21,6 +25,12 @@ const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
         const solution = await labWorkVariantApiService.getSolution(
           defaultLabWorkVariant.id
         );
+        const testsResponse =
+          await labWorkVariantTestApiService.getLabWorkVariantTestsByLabWorkVariant(
+            defaultLabWorkVariant.id
+          );
+        setTests(testsResponse);
+        console.log(testsResponse);
         setCode(solution.code);
       } catch (error) {
         showErrorAlert(error.error);

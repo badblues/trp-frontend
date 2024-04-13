@@ -3,4 +3,5 @@ export interface LabWorkVariantTest {
   labWorkVariantId: number;
   input: string;
   output: string;
+  open: boolean;
 }

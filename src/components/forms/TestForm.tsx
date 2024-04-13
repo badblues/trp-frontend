@@ -80,6 +80,17 @@ const TestForm: React.FC<Props> = ({
           <p>{errors.output?.message as string}</p>
         </div>
 
+        <div className="test-checkbox-container">
+          <label className="test-form-label">Открытый:</label>
+          <input
+            className="test-form-checkbox"
+            id="open"
+            type="checkbox"
+            defaultChecked={edit ? test?.open : false}
+            {...register("open")}
+          />
+        </div>
+
         <button disabled={loading} className="submit-button" type="submit">
           {loading ? <Loader /> : edit ? "ИЗМЕНИТЬ" : "ДОБАВИТЬ"}
         </button>

@@ -1,3 +1,9 @@
+.test-form {
+  color: #181818;
+}
+.test-form.dark-mode {
+  color: #f1f1f1;
+}
 .test-form.dark-mode .test-input-container .test-form-input {
   color: #f1f1f1;
   border-width: 1px;
@@ -13,6 +19,19 @@
   border-width: 1px;
   max-width: 200px;
   margin: 3px 0px 3px 0px;
+  padding: 5px;
+  font-size: medium;
+}
+.test-form .test-checkbox-container {
+  display: flex;
+  flex-direction: row;
+}
+.test-form .test-checkbox-container .test-form-checkbox {
+  background-color: transparent;
+  border-radius: 3px;
+  border-width: 1px;
+  max-width: 200px;
+  margin: 3px 0px 3px 10px;
   padding: 5px;
   font-size: medium;
 }
