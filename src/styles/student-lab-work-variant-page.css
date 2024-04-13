@@ -15,8 +15,10 @@
   background-color: #2e2e2e;
 }
 .lab-work-variant-page .lab-work-variant-information {
+  min-width: 200px;
   max-width: 500px;
   width: fit-content;
+  margin: 0px 10px 0px 0px;
 }
 .lab-work-variant-page .lab-work-variant-ide {
   display: flex;
