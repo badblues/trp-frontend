@@ -15,7 +15,7 @@ const DarkModeToggle = () => {
         className="checkbox"
         id="toggle"
         type="checkbox"
-        checked={theme != ""}
+        checked={theme === "dark-mode"}
         onChange={onSettheme}
       ></input>
       <label htmlFor="toggle" className="toggle">
