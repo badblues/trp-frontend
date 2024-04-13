@@ -1,54 +1,64 @@
 @import "./variables.scss";
 @import "./mixins.scss";
 
-.add-test-container {
-  margin: 5px;
-}
-
 .test-list {
-  display: flex;
-  flex-direction: column;
   height: fit-content;
   font-family: $main-font;
   color: $text-color;
 
   &.dark-mode {
-    .item {
-      color: $dark-mode-text-color;
+    .tests {
+      .item {
+        color: $dark-mode-text-color;
 
-      .button-with-image {
-        .icon {
-          filter: invert(100%);
+        .test-content {
+          background-color: $dark-mode-background-secondary-color;
+        }
+
+        .button-with-image {
+          .icon {
+            filter: invert(100%);
+          }
         }
       }
     }
   }
 
   .add-test-container {
+    margin: 5px;
+
     .open-test-form-button {
       @include button(5px 0px 5px 0px);
     }
   }
 
-  .item {
-    width: fit-content;
-    max-width: 400px;
-    margin: 3px;
+  .tests {
+    display: flex;
+    flex-wrap: wrap;
 
-    .button-with-image {
-      @include buttonWithImage(3px);
-    }
+    .item {
+      width: fit-content;
+      max-width: 400px;
+      margin: 3px;
+      font-size: large;
 
-    .bold-text {
-      font-weight: bold;
-    }
+      .button-with-image {
+        @include buttonWithImage(3px);
+      }
 
-    .button {
-      @include button();
+      .bold-text {
+        font-weight: bold;
+      }
+
+      .test-content {
+        background-color: $background-secondary-color;
+        border-radius: 5px;
+        padding: 4px;
+      }
+
+      .button {
+        @include button();
+      }
     }
   }
-}
-
-.add-test-button {
-  margin: 5px 0px 5px 0px;
 }

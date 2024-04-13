@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { LabWork } from "../../models/domain/LabWork";
-import { Team } from "../../models/domain/Team";
 import "../../styles/team-lab-works.css";
 import { UiContext, UiContextType } from "../../contexts/UiContext.tsx";
 import { TeamWithVariants } from "../../models/domain/TeamWithVariants.ts";
@@ -24,6 +23,10 @@ const TeamLabWorks: React.FC<Props> = ({
 }) => {
   const { theme } = useContext(UiContext) as UiContextType;
   const [openTeamLabWorks, setOpenTeamLabWorks] = useState<TeamLabWork[]>([]);
+
+  teamsWithVariants.sort((t1, t2): number => {
+    return t1.team.id - t2.team.id;
+  });
 
   const onTeamLabWorkSelect = (teamWithVariants, labWork: LabWork): void => {
     if (

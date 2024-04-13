@@ -37,6 +37,13 @@ const Tests: React.FC<Props> = ({
     null
   );
 
+  tests.sort((t1, t2): number => {
+    if (t1.open && t2.open) return 0;
+    else if (t1.open && !t2.open) return -1;
+    else if (!t1.open && t2.open) return 1;
+    else return 0;
+  });
+
   const updateTest = (
     testDTO: LabWorkVariantTestDTO,
     onDone: () => void
@@ -70,52 +77,60 @@ const Tests: React.FC<Props> = ({
         ) : null}
       </div>
 
-      {tests.map((test) => (
-        <div className="item" key={test.id}>
-          {editingTest === test ? (
-            <div>
-              <TestForm
-                edit={true}
-                test={test}
-                onFormSubmit={updateTest}
-                labWorkVariant={labWorkVariant}
-                inputRegex={inputRegex}
-                outputRegex={outputRegex}
-              />
-              <button onClick={() => setEditingTest(null)} className="button">
-                ОТМЕНА
-              </button>
-            </div>
-          ) : (
-            <div>
-              <span className="bold-text">In: </span>
-              <span>{test.input}</span>
-              <br />
-              <span className="bold-text">Out: </span>
-              <span>{test.output}</span>
-              <p>
-                Открытый: <input type="checkbox" checked={test.open}></input>
-              </p>
+      <div className="tests">
+        {tests.map((test) => (
+          <div className="item" key={test.id}>
+            {editingTest === test ? (
               <div>
-                <button
-                  onClick={() => onDeleteTest(test)}
-                  className="button-with-image"
-                >
-                  <img className="icon" src={binImg} alt="Delete" width="17" />
-                </button>
-                <button
-                  onClick={() => {
-                    setEditingTest(test);
-                  }}
-                  className="button-with-image"
-                >
-                  <img className="icon" src={editImg} alt="Edit" width="17" />
+                <TestForm
+                  edit={true}
+                  test={test}
+                  onFormSubmit={updateTest}
+                  labWorkVariant={labWorkVariant}
+                  inputRegex={inputRegex}
+                  outputRegex={outputRegex}
+                />
+                <button onClick={() => setEditingTest(null)} className="button">
+                  ОТМЕНА
                 </button>
               </div>
-            </div>
-          )}
-        </div>
-      ))}
+            ) : (
+              <div>
+                <p className="bold-text">Тест {test.id}:</p>
+                <span className="bold-text">In: </span>
+                <span className="test-content">{test.input}</span>
+                <br />
+                <span className="bold-text">Out: </span>
+                <span className="test-content">{test.output}</span>
+                <p>
+                  Открытый: <input type="checkbox" checked={test.open}></input>
+                </p>
+                <div>
+                  <button
+                    onClick={() => onDeleteTest(test)}
+                    className="button-with-image"
+                  >
+                    <img
+                      className="icon"
+                      src={binImg}
+                      alt="Delete"
+                      width="17"
+                    />
+                  </button>
+                  <button
+                    onClick={() => {
+                      setEditingTest(test);
+                    }}
+                    className="button-with-image"
+                  >
+                    <img className="icon" src={editImg} alt="Edit" width="17" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,19 +1,19 @@
-.add-test-container {
-  margin: 5px;
-}
-
 .test-list {
-  display: flex;
-  flex-direction: column;
   height: fit-content;
   font-family: "Montserrat", sans-serif;
   color: #181818;
 }
-.test-list.dark-mode .item {
+.test-list.dark-mode .tests .item {
   color: #f1f1f1;
 }
-.test-list.dark-mode .item .button-with-image .icon {
+.test-list.dark-mode .tests .item .test-content {
+  background-color: #2e2e2e;
+}
+.test-list.dark-mode .tests .item .button-with-image .icon {
   filter: invert(100%);
+}
+.test-list .add-test-container {
+  margin: 5px;
 }
 .test-list .add-test-container .open-test-form-button {
   height: fit-content;
@@ -32,23 +32,33 @@
 .test-list .add-test-container .open-test-form-button:hover {
   cursor: pointer;
 }
-.test-list .item {
+.test-list .tests {
+  display: flex;
+  flex-wrap: wrap;
+}
+.test-list .tests .item {
   width: fit-content;
   max-width: 400px;
   margin: 3px;
+  font-size: large;
 }
-.test-list .item .button-with-image {
+.test-list .tests .item .button-with-image {
   background-color: transparent;
   border: none;
   margin: 3px;
 }
-.test-list .item .button-with-image:hover {
+.test-list .tests .item .button-with-image:hover {
   cursor: pointer;
 }
-.test-list .item .bold-text {
+.test-list .tests .item .bold-text {
   font-weight: bold;
 }
-.test-list .item .button {
+.test-list .tests .item .test-content {
+  background-color: #b4b4b4;
+  border-radius: 5px;
+  padding: 4px;
+}
+.test-list .tests .item .button {
   height: fit-content;
   min-width: 100px;
   width: fit-content;
@@ -62,12 +72,8 @@
   padding: 10px;
   margin: 0px;
 }
-.test-list .item .button:hover {
+.test-list .tests .item .button:hover {
   cursor: pointer;
-}
-
-.add-test-button {
-  margin: 5px 0px 5px 0px;
 }
 
 /*# sourceMappingURL=test-list.css.map */

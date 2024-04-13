@@ -14,7 +14,7 @@
 .resource-page {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 20px 70px 0px 50px;
   font-family: $main-font;
 
@@ -37,7 +37,7 @@
   }
 
   .remove-appointment-button {
-    @include buttonWithImage();
+    @include buttonWithImage(0px 0px 0px 10px);
   }
 
   .control-button {

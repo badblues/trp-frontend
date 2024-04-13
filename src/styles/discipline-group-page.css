@@ -1,7 +1,7 @@
 .discipline-group-page {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 20px 70px 0px 50px;
   font-family: "Montserrat", sans-serif;
   color: #181818;

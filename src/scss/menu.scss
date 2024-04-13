@@ -27,6 +27,7 @@
     padding-left: 10px;
     padding-right: 10px;
     color: $text-color;
+    font-size: large;
 
     &:hover {
       cursor: pointer;
@@ -40,6 +41,7 @@
     background-color: $background-secondary-color;
     border: solid;
     border-width: 1px;
+    font-size: large;
 
     &.move5 {
       @include move(5px);

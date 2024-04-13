@@ -10,6 +10,10 @@ interface Props {
 const Teams: React.FC<Props> = ({ teams }) => {
   const { theme } = useContext(UiContext) as UiContextType;
 
+  teams.sort((t1, t2): number => {
+    return t1.id - t2.id;
+  })
+
   return (
     <div className={`teams ${theme}`}>
       {teams.map((team) => (

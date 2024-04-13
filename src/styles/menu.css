@@ -17,6 +17,7 @@
   padding-left: 10px;
   padding-right: 10px;
   color: #181818;
+  font-size: large;
 }
 .menu .menu-option:hover {
   cursor: pointer;
@@ -28,6 +29,7 @@
   background-color: #b4b4b4;
   border: solid;
   border-width: 1px;
+  font-size: large;
 }
 .menu .sub-menu.move5 {
   transform: translate(5px, 25px);

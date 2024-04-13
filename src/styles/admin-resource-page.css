@@ -24,7 +24,7 @@
 .resource-page {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 20px 70px 0px 50px;
   font-family: "Montserrat", sans-serif;
 }
@@ -44,7 +44,7 @@
 .resource-page .remove-appointment-button {
   background-color: transparent;
   border: none;
-  margin: 0px;
+  margin: 0px 0px 0px 10px;
 }
 .resource-page .remove-appointment-button:hover {
   cursor: pointer;
