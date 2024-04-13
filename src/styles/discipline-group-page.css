@@ -18,6 +18,9 @@
 .discipline-group-page.dark-mode .info-container .status-text.status-appointed {
   color: white;
 }
+.discipline-group-page.dark-mode .info-container {
+  background-color: #2e2e2e;
+}
 .discipline-group-page .task-appointment-list {
   display: flex;
   flex-direction: row;
@@ -31,6 +34,10 @@
 .discipline-group-page .info-container {
   display: flex;
   flex-direction: column;
+  height: fit-content;
+  background-color: #b4b4b4;
+  padding: 5px;
+  border-radius: 10px;
 }
 .discipline-group-page .info-container .status-text {
   align-self: flex-end;

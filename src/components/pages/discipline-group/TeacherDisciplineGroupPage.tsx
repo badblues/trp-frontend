@@ -145,7 +145,9 @@ const TeacherDisciplineGroupPage = () => {
   }
 
   return (
-    <PageWithTabs titles={["Студенты", "Назначения"]}>
+    <PageWithTabs
+      titles={["Проверка лабораторных", "Назначение лабораторных", "Бригады"]}
+    >
       <div className={`discipline-group-page ${theme}`}>
         <div>
           <h1>{group!.name}</h1>
@@ -153,12 +155,6 @@ const TeacherDisciplineGroupPage = () => {
             {discipline!.name} {discipline!.year}
           </h2>
           <h2>Бригады:</h2>
-          <Teams teams={teams!} />
-        </div>
-        <div>
-          <TeamForm discipline={discipline!} onFormSubmit={createTeam} />
-          <h2>Студенты без бригад:</h2>
-          <StudentsDraggable students={studentsWithoutTeam!} />
         </div>
       </div>
       <div className={`discipline-group-page ${theme}`}>
@@ -175,14 +171,26 @@ const TeacherDisciplineGroupPage = () => {
           />
         </div>
         <div className="info-container">
+          <h3>
+            {discipline!.name} {discipline!.year}
+          </h3>
+          <h3 className="status-text status-not-appointed">Не назначено</h3>
+          <h3 className="status-text status-appointed">Назначено</h3>
+        </div>
+      </div>
+      <div className={`discipline-group-page ${theme}`}>
+        <div>
+          <h1>{group!.name}</h1>
           <h2>
             {discipline!.name} {discipline!.year}
           </h2>
-          <h4 className="status-text status-not-appointed">Не назначено</h4>
-          <h4 className="status-text status-appointed">Назначено</h4>
-          <h4 className="status-text status-in-progress">В процессе</h4>
-          <h4 className="status-text status-finished">Выполнено</h4>
-          <h4 className="status-text status-done">Зачтено</h4>
+          <h2>Бригады:</h2>
+          <Teams teams={teams!} />
+        </div>
+        <div>
+          <TeamForm discipline={discipline!} onFormSubmit={createTeam} />
+          <h2>Студенты без бригад:</h2>
+          <StudentsDraggable students={studentsWithoutTeam!} />
         </div>
       </div>
     </PageWithTabs>

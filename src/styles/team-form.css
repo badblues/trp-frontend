@@ -1,12 +1,13 @@
 .team-form-container {
-  border: solid;
-  border-width: 1px;
-  border-color: white;
+  background-color: #b4b4b4;
   border-radius: 5px;
   padding: 10px;
 }
 .team-form-container:hover {
   cursor: default;
+}
+.team-form-container.dark-mode {
+  background-color: #2e2e2e;
 }
 .team-form-container.dark-mode .student-container .remove-student-button .icon {
   filter: invert(100%);

@@ -24,6 +24,10 @@
         }
       }
     }
+
+    .info-container {
+      background-color: $dark-mode-background-secondary-color;
+    }
   }
 
   .task-appointment-list {
@@ -41,6 +45,10 @@
   .info-container {
     display: flex;
     flex-direction: column;
+    height: fit-content;
+    background-color: $background-secondary-color;
+    padding: 5px;
+    border-radius: 10px;
 
     .status-text {
       align-self: flex-end;
