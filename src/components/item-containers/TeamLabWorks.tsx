@@ -74,7 +74,13 @@ const TeamLabWorks: React.FC<Props> = ({
               {labWorks.map((labWork, index) => (
                 <div key={index}>
                   <p
-                    className="lab-work-title"
+                    className={`lab-work-title ${
+                      teamWithVariants.variants.some((v1) =>
+                        labWork.variants.some((v2) => v1.id === v2.id)
+                      )
+                        ? "appointed"
+                        : "not-appointed"
+                    }`}
                     onClick={() =>
                       onTeamLabWorkSelect(teamWithVariants.team, labWork)
                     }

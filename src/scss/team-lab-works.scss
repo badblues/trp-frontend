@@ -11,6 +11,18 @@
       border-color: black;
 
       .lab-works-with-variants-container {
+        .lab-works-container {
+          .lab-work-title {
+            &.appointed {
+              color: $dark-mode-status-color-appointed;
+            }
+
+            &.not-appointed {
+              color: $dark-mode-status-color-not-appointed;
+            }
+          }
+        }
+
         .variants-container {
           .variant {
             &.appointed {
@@ -67,6 +79,14 @@
           margin: 0px 5px 0px 5px;
           max-width: 300px;
           overflow: hidden;
+
+          &.appointed {
+            color: $status-color-appointed;
+          }
+
+          &.not-appointed {
+            color: $status-color-not-appointed;
+          }
 
           &:hover {
             cursor: pointer;
