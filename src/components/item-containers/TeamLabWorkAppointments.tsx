@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { LabWork } from "../../models/domain/LabWork";
-import "../../styles/team-lab-works.css";
+import { LabWork } from "../../models/domain/LabWork.ts";
+import "../../styles/team-lab-work-appointments.css";
 import { UiContext, UiContextType } from "../../contexts/UiContext.tsx";
 import { TeamWithVariants } from "../../models/domain/TeamWithVariants.ts";
 import { LabWorkVariant } from "../../models/domain/LabWorkVariant.ts";
@@ -16,7 +16,7 @@ interface TeamLabWork {
   labWorkId: number;
 }
 
-const TeamLabWorks: React.FC<Props> = ({
+const TeamLabWorkAppointments: React.FC<Props> = ({
   teamsWithVariants,
   labWorks,
   onVariantClick,
@@ -60,7 +60,7 @@ const TeamLabWorks: React.FC<Props> = ({
   };
 
   return (
-    <div className={`team-lab-works-container ${theme}`}>
+    <div className={`team-lab-work-appointments-container ${theme}`}>
       {teamsWithVariants.map((teamWithVariants, index) => (
         <div key={index} className="team-container">
           <div className="team-name">
@@ -132,4 +132,4 @@ const TeamLabWorks: React.FC<Props> = ({
   );
 };
 
-export default TeamLabWorks;
+export default TeamLabWorkAppointments;

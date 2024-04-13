@@ -15,7 +15,7 @@ import TeamForm from "../../forms/TeamForm.tsx";
 import { TeamDTO } from "../../../models/DTO/TeamDTO.ts";
 import PageWithTabs from "../../PageWithTabs.tsx";
 import { LabWork } from "../../../models/domain/LabWork.ts";
-import TeamLabWorks from "../../item-containers/TeamLabWorks.tsx";
+import TeamLabWorkAppointments from "../../item-containers/TeamLabWorkAppointments.tsx";
 import { TeamWithVariants } from "../../../models/domain/TeamWithVariants.ts";
 import { LabWorkVariant } from "../../../models/domain/LabWorkVariant.ts";
 import { TeamAppointmentDTO } from "../../../models/DTO/TeamAppointmentDTO.ts";
@@ -164,7 +164,7 @@ const TeacherDisciplineGroupPage = () => {
             {discipline!.name} {discipline!.year}
           </h2>
           <h2>Бригады:</h2>
-          <TeamLabWorks
+          <TeamLabWorkAppointments
             teamsWithVariants={teamsWithVariants}
             labWorks={labWorks}
             onVariantClick={handleVariantClick}
