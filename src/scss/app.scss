@@ -1,7 +1,18 @@
+@import "./variables.scss";
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  
+  &::-webkit-scrollbar {
+    background: $dark-mode-background-color;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $status-color-not-appointed;
+    border-radius: 4px;
+  }
 }
 
 .page {
@@ -11,6 +22,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
 }
 
 .loader-container {

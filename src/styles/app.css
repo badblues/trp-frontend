@@ -3,6 +3,13 @@
   margin: 0;
   padding: 0;
 }
+*::-webkit-scrollbar {
+  background: #212121;
+}
+*::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 4px;
+}
 
 .page {
   min-height: 100vh;
