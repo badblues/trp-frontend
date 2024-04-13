@@ -1,12 +1,15 @@
 import http from "axios";
 import { LabWorkVariantTest } from "../models/domain/LabWorkVariantTest";
 import { LabWorkVariantTestDTO } from "../models/DTO/LabWorkVariantTestDTO";
+import urls from "./urls.ts";
 
 export default class LabWorkVariantTestApiService {
-  apiUrl = "http://212.20.47.147:8080/api/v2/lab-work-variant-tests";
-  labWorkVariantApiUrl = "http://212.20.47.147:8080/api/v2/lab-work-variants";
+  apiUrl = urls.labWorkVariantTestsUrl;
+  labWorkVariantApiUrl = urls.labWorkVariantsUrl;
 
-  async getLabWorkVariantTestsByLabWorkVariant(labWorkVariantId: number): Promise<LabWorkVariantTest[]> {
+  async getLabWorkVariantTestsByLabWorkVariant(
+    labWorkVariantId: number
+  ): Promise<LabWorkVariantTest[]> {
     let url = this.labWorkVariantApiUrl + `/${labWorkVariantId}/tests`;
     try {
       const response = await http.get(url);
@@ -16,7 +19,9 @@ export default class LabWorkVariantTestApiService {
     }
   }
 
-  async createLabWorkVariantTest(taskTest: LabWorkVariantTestDTO): Promise<LabWorkVariantTest> {
+  async createLabWorkVariantTest(
+    taskTest: LabWorkVariantTestDTO
+  ): Promise<LabWorkVariantTest> {
     let url = this.apiUrl;
     try {
       const response = await http.post(url, taskTest);

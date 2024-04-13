@@ -1,9 +1,10 @@
 import http from "axios";
 import { Role } from "../models/domain/Role.ts";
 import { UserRegistrationDTO } from "../models/DTO/RegistrationDTO.ts";
+import urls from "./urls.ts";
 
 export class UserApiService {
-  apiUrl = "http://212.20.47.147:8080/admin";
+  apiUrl = urls.adminUrl;
 
   constructor() {
     http.interceptors.request.use();

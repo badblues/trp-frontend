@@ -1,9 +1,10 @@
 import http from "axios";
 import { TeacherAppointment } from "../models/domain/TeacherAppointment";
 import { TeacherAppointmentDTO } from "../models/DTO/TeacherAppointmentDTO";
+import urls from "./urls.ts";
 
 export class TeacherAppointmentApiService {
-  apiUrl = "http://212.20.47.147:8080/api/v2/teacher-appointments";
+  apiUrl = urls.teacherAppointmentsUrl;
 
   async getAppointments(): Promise<Array<TeacherAppointment>> {
     let url = this.apiUrl + `/all`;

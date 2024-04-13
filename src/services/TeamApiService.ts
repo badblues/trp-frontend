@@ -2,11 +2,12 @@ import http from "axios";
 import { Team } from "../models/domain/Team";
 import { TeamDTO } from "../models/DTO/TeamDTO";
 import { Student } from "../models/domain/Student";
+import urls from "./urls.ts";
 
 export class TeamApiService {
-  apiUrl = "http://212.20.47.147:8080/api/v2/teams";
-  disciplineApiUrl = "http://212.20.47.147:8080/api/v2/disciplines";
-  studentApiUrl = "http://212.20.47.147:8080/api/v2/students";
+  apiUrl = urls.teamsUrl;
+  disciplineApiUrl = urls.disciplinesUrl;
+  studentApiUrl = urls.studentsUrl;
 
   async getTeamsByDiscipline(disciplineId: number): Promise<Team[]> {
     let url = this.disciplineApiUrl + `/${disciplineId}/teams`;

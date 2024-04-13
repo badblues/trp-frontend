@@ -2,13 +2,14 @@ import http from "axios";
 import { LabWorkVariant } from "../models/domain/LabWorkVariant";
 import { LabWorkVariantDTO } from "../models/DTO/LabWorkVariantDTO";
 import { TestResult } from "../models/domain/TestResult";
-import { Solution } from "../models/domain/Solution"
-import { SolutionDTO } from "../models/DTO/SolutionDTO"
+import { Solution } from "../models/domain/Solution";
+import { SolutionDTO } from "../models/DTO/SolutionDTO";
+import urls from "./urls.ts";
 
 export default class LabWorkVariantApiService {
-  apiUrl = "http://212.20.47.147:8080/api/v2/lab-work-variants";
-  labWorksApiUrl = "http://212.20.47.147:8080/api/v2/lab-works";
-  teamApiUrl = "http://212.20.47.147:8080/api/v2/teams";
+  apiUrl = urls.labWorkVariantsUrl;
+  labWorksApiUrl = urls.labWorksUrl;
+  teamApiUrl = urls.teamsUrl;
 
   async getLabWorkVariantsByLabWork(
     labWorkId: number

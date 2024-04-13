@@ -1,8 +1,9 @@
 import http from "axios";
 import { AuthDTO } from "../models/DTO/AuthDTO";
+import urls from "./urls.ts";
 
 export class AuthApiService {
-  apiUrl = "http://212.20.47.147:8080/auth";
+  apiUrl = urls.authUrl;
 
   async login(AuthDTO: AuthDTO): Promise<string> {
     const url = this.apiUrl + "/login";

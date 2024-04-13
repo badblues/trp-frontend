@@ -1,8 +1,9 @@
 import http from "axios";
 import { User } from "../models/domain/User";
+import urls from "./urls.ts";
 
 export default class TeacherApiService {
-  apiUrl = "http://212.20.47.147:8080/api/v2/teachers";
+  apiUrl = urls.teachersUrls;
 
   async getTeachers(): Promise<Array<User>> {
     let url = this.apiUrl;

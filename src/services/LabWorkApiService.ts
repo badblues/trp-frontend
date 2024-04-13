@@ -1,10 +1,11 @@
 import http from "axios";
 import { LabWork } from "../models/domain/LabWork";
 import { LabWorkDTO } from "../models/DTO/LabWorkDTO";
+import urls from "./urls.ts";
 
 export class LabWorkApiService {
-  apiUrl = "http://212.20.47.147:8080/api/v2/lab-works";
-  disciplineApiUrl = "http://212.20.47.147:8080/api/v2/disciplines";
+  apiUrl = urls.labWorksUrl;
+  disciplineApiUrl = urls.disciplinesUrl;
 
   async getLabWork(id: number): Promise<LabWork> {
     let url = this.apiUrl + `/${id}`;

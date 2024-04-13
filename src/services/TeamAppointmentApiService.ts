@@ -1,9 +1,10 @@
 import http from "axios";
 import { TeamAppointment } from "../models/domain/TeamAppointment";
 import { TeamAppointmentDTO } from "../models/DTO/TeamAppointmentDTO";
+import urls from "./urls.ts";
 
 export class TeamAppointmentApiService {
-  apiUrl = "http://212.20.47.147:8080/api/v2/team-appointments";
+  apiUrl = urls.teamAppointmentsUrl;
 
   async getTeamAppointmentsByDiscipline(): Promise<TeamAppointment[]> {
     let url = this.apiUrl;

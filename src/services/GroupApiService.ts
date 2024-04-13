@@ -1,9 +1,10 @@
 import http from "axios";
 import { Group } from "../models/domain/Group";
 import { GroupDTO } from "../models/DTO/GroupDTO";
+import urls from "./urls.ts";
 
 export class GroupApiService {
-  apiUrl = "http://212.20.47.147:8080/api/v2/groups";
+  apiUrl = urls.groupsUrl;
 
   async getGroups(): Promise<Group[]> {
     let url = this.apiUrl;

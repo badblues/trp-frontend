@@ -1,9 +1,10 @@
 import http from "axios";
 import { Discipline } from "../models/domain/Discipline";
 import { DisciplineDTO } from "../models/DTO/DisciplineDTO";
+import urls from "./urls.ts";
 
 export class DisciplineApiService {
-  apiUrl = "http://212.20.47.147:8080/api/v2/disciplines";
+  apiUrl = urls.disciplinesUrl;
 
   async getDisciplines(): Promise<Discipline[]> {
     let url = this.apiUrl;
