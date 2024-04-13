@@ -25,15 +25,8 @@ const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
         const solution = await labWorkVariantApiService.getSolution(
           defaultLabWorkVariant.id
         );
-        const testsResponse =
-          await labWorkVariantTestApiService.getLabWorkVariantTestsByLabWorkVariant(
-            defaultLabWorkVariant.id
-          );
-        setTests(testsResponse);
-        console.log(testsResponse);
         setCode(solution.code);
       } catch (error) {
-        showErrorAlert(error.error);
       }
     })().then(() => {
       setLoading(false);
