@@ -2,6 +2,8 @@ import http from "axios";
 import { LabWorkVariant } from "../models/domain/LabWorkVariant";
 import { LabWorkVariantDTO } from "../models/DTO/LabWorkVariantDTO";
 import { TestResult } from "../models/domain/TestResult";
+import { Solution } from "../models/domain/Solution"
+import { SolutionDTO } from "../models/DTO/SolutionDTO"
 
 export default class LabWorkVariantApiService {
   apiUrl = "http://212.20.47.147:8080/api/v2/lab-work-variants";
@@ -50,12 +52,11 @@ export default class LabWorkVariantApiService {
     }
   }
 
-  async getSolution(labWorkVariantId: number): Promise<string> {
+  async getSolution(labWorkVariantId: number): Promise<Solution> {
     let url = this.apiUrl + `/${labWorkVariantId}/solution`;
     try {
       const response = await http.get(url);
-      //TODO FIX
-      return response.data.data.code;
+      return response.data.data;
     } catch (error) {
       throw error.response.data;
     }
@@ -63,11 +64,11 @@ export default class LabWorkVariantApiService {
 
   async postSolution(
     labWorkVariantId: number,
-    solution: string
+    solutionDTO: SolutionDTO
   ): Promise<string> {
     let url = this.apiUrl + `/${labWorkVariantId}/solution`;
     try {
-      const response = await http.post(url, solution);
+      const response = await http.post(url, solutionDTO);
       return response.data.data;
     } catch (error) {
       throw error.response.data;

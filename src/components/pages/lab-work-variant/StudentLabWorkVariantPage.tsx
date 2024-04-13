@@ -4,6 +4,7 @@ import { ApiContext, ApiContextType } from "../../../contexts/ApiContext.tsx";
 import CodeEditor from "../../CodeEditor.tsx";
 import Loader from "../../Loader.tsx";
 import "../../../styles/student-lab-work-variant-page.css";
+import { SolutionDTO } from "../../../models/DTO/SolutionDTO.ts";
 
 const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
   const { theme, showSuccessAlert, showErrorAlert } = useContext(
@@ -17,10 +18,10 @@ const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
   useEffect(() => {
     (async () => {
       try {
-        const loadedCode = await labWorkVariantApiService.getSolution(
+        const solution = await labWorkVariantApiService.getSolution(
           defaultLabWorkVariant.id
         );
-        setCode(loadedCode);
+        setCode(solution.code);
       } catch (error) {
         showErrorAlert(error.error);
       }
@@ -35,13 +36,13 @@ const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
   };
 
   const saveCode = async () => {
-    const data = {
+    const solutionDTO: SolutionDTO = {
       code: code,
     };
     try {
       await labWorkVariantApiService.postSolution(
         defaultLabWorkVariant.id,
-        data
+        solutionDTO
       );
       showSuccessAlert("Решение сохранено");
     } catch (error) {
