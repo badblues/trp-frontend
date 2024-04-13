@@ -7,6 +7,9 @@
   background-color: #2e2e2e;
   border-color: black;
 }
+.team-lab-work-appointments-container.dark-mode .team-container .team-name {
+  background-color: #212121;
+}
 .team-lab-work-appointments-container.dark-mode .team-container .lab-works-with-variants-container .lab-works-container .lab-work-title.appointed {
   color: white;
 }
@@ -32,6 +35,10 @@
 }
 .team-lab-work-appointments-container .team-container .team-name {
   display: flex;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0px 0px 10px 0px;
 }
 .team-lab-work-appointments-container .team-container .team-name .team-title {
   font-weight: bold;

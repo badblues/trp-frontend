@@ -159,11 +159,6 @@ const TeacherDisciplineGroupPage = () => {
       </div>
       <div className={`discipline-group-page ${theme}`}>
         <div>
-          <h1>{group!.name}</h1>
-          <h2>
-            {discipline!.name} {discipline!.year}
-          </h2>
-          <h2>Бригады:</h2>
           <TeamLabWorkAppointments
             teamsWithVariants={teamsWithVariants}
             labWorks={labWorks}
@@ -171,9 +166,10 @@ const TeacherDisciplineGroupPage = () => {
           />
         </div>
         <div className="info-container">
-          <h3>
+          <h1>{group!.name}</h1>
+          <h2>
             {discipline!.name} {discipline!.year}
-          </h3>
+          </h2>
           <h3 className="status-text status-not-appointed">Не назначено</h3>
           <h3 className="status-text status-appointed">Назначено</h3>
         </div>

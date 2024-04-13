@@ -10,6 +10,10 @@
       background-color: $dark-mode-background-secondary-color;
       border-color: black;
 
+      .team-name {
+        background-color: $dark-mode-background-color;
+      }
+
       .lab-works-with-variants-container {
         .lab-works-container {
           .lab-work-title {
@@ -51,6 +55,11 @@
 
     .team-name {
       display: flex;
+      background-color: $background-color;
+      border-radius: 5px;
+      padding: 5px;
+
+      margin: 0px 0px 10px 0px;
 
       .team-title {
         font-weight: bold;

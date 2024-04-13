@@ -34,13 +34,11 @@
 .discipline-group-page .info-container {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   height: fit-content;
   background-color: #b4b4b4;
   padding: 5px;
   border-radius: 10px;
-}
-.discipline-group-page .info-container .status-text {
-  align-self: flex-end;
 }
 .discipline-group-page .info-container .status-text.status-not-appointed {
   color: grey;
