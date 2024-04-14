@@ -43,4 +43,8 @@
   .control-button {
     @include button(10px 0px 0px 0px);
   }
+
+  .delete-button {
+    @include redButton(10px 0px 0px 0px);
+  }
 }

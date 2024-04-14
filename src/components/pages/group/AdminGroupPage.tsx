@@ -116,7 +116,7 @@ const AdminGroupPage = () => {
     <div className={`resource-page ${theme}`}>
       <div>
         <div>
-          <h1>{group?.name}</h1>
+          <h1>{group?.name}:</h1>
         </div>
         {students.map((student) => (
           <div className="appointment-list" key={student.id}>
@@ -126,7 +126,7 @@ const AdminGroupPage = () => {
         <button className="control-button" onClick={() => setUpdating(true)}>
           ИЗМЕНИТЬ ГРУППУ
         </button>
-        <button className="control-button" onClick={deleteGroup}>
+        <button className="delete-button" onClick={deleteGroup}>
           УДАЛИТЬ ГРУППУ
         </button>
       </div>

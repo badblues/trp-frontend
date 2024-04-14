@@ -127,7 +127,7 @@ const TeacherPage = () => {
         <button className="control-button" onClick={() => setUpdating(true)}>
           ИЗМЕНИТЬ ИНФОРМАЦИЮ
         </button>
-        <button className="control-button" onClick={deleteTeacher}>
+        <button className="delete-button" onClick={deleteTeacher}>
           УДАЛИТЬ ПОЛЬЗОВАТЕЛЯ
         </button>
       </div>

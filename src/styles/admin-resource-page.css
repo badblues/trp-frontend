@@ -66,5 +66,22 @@
 .resource-page .control-button:hover {
   cursor: pointer;
 }
+.resource-page .delete-button {
+  height: fit-content;
+  min-width: 100px;
+  width: fit-content;
+  border-radius: 7px;
+  background: #a00000;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+}
+.resource-page .delete-button:hover {
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=admin-resource-page.css.map */

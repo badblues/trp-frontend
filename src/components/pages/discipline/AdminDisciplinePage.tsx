@@ -157,7 +157,7 @@ const AdminDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
           <button className="control-button" onClick={() => setUpdating(true)}>
             ИЗМЕНИТЬ ДИСЦИПЛИНУ
           </button>
-          <button className="control-button" onClick={deleteDiscipline}>
+          <button className="delete-button" onClick={deleteDiscipline}>
             УДАЛИТЬ ДИСЦИПЛИНУ
           </button>
         </div>

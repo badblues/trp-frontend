@@ -20,6 +20,26 @@
   }
 }
 
+@mixin redButton($margin: 0px) {
+  height: fit-content;
+  min-width: 100px;
+  width: fit-content;
+  border-radius: 7px;
+  background: $dark-red-color;
+  font-family: $main-font;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: $margin;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 @mixin buttonWithImage($margin: 0px) {
   background-color: transparent;
   border: none;

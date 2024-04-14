@@ -181,7 +181,7 @@ const TeacherLabWorkVariantPage: React.FC<Props> = ({
           <button className="control-button" onClick={() => setUpdating(true)}>
             ИЗМЕНИТЬ ЗАДАНИЕ
           </button>
-          <button className="control-button">УДАЛИТЬ ЗАДАНИЕ</button>
+          <button className="delete-button">УДАЛИТЬ ЗАДАНИЕ</button>
         </div>
       ) : null}
     </div>
