@@ -34,12 +34,9 @@ const LabWorkVariantForm: React.FC<Props> = ({
   const [argsNumber, setArgsNumber] = useState<number>(1);
 
   const onSubmit = (data: any) => {
-    //TODO
-    if (testable) {
-      setLoading(true);
-      data.labWorkId = labWork.id;
-      onFormSubmit(data, () => setLoading(false));
-    }
+    setLoading(true);
+    data.labWorkId = labWork.id;
+    onFormSubmit(data as LabWorkVariantDTO, () => setLoading(false));
   };
 
   const increaseArgsNumber = () => {
@@ -171,9 +168,7 @@ const LabWorkVariantForm: React.FC<Props> = ({
                   {CType.CharArrayArray}
                 </option>
               </select>
-              <p className="form-text">
-                {errors.language?.message as string}
-              </p>
+              <p className="form-text">{errors.language?.message as string}</p>
             </div>
 
             <div className="form-input-container">
