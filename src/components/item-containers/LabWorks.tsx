@@ -15,7 +15,11 @@ interface Props {
   onLabWorkVariantSelect: (labWorkVariant: LabWorkVariant) => void;
 }
 
-const LabWorks: React.FC<Props> = ({ labWorks, onAddLabWorkVariantClick, onLabWorkVariantSelect }) => {
+const LabWorks: React.FC<Props> = ({
+  labWorks,
+  onAddLabWorkVariantClick,
+  onLabWorkVariantSelect,
+}) => {
   const { theme } = useContext(UiContext) as UiContextType;
   const [openLabWorks, setOpenLabWorks] = useState<Set<LabWork>>(new Set());
 
@@ -69,7 +73,7 @@ const LabWorks: React.FC<Props> = ({ labWorks, onAddLabWorkVariantClick, onLabWo
               <h4 className="title">{labWork.title}</h4>
             </div>
             <div className="buttons-container">
-              <button className="button-with-image">
+              <button className="button-with-image" title="Добавить вариант">
                 <img
                   onClick={() => {
                     onAddLabWorkVariantClick(labWork);
@@ -80,10 +84,16 @@ const LabWorks: React.FC<Props> = ({ labWorks, onAddLabWorkVariantClick, onLabWo
                   width="13"
                 />
               </button>
-              <button className="button-with-image">
+              <button
+                className="button-with-image"
+                title="Редактировать лабораторную работу"
+              >
                 <img className="icon" src={editImg} alt="Edit" width="13" />
               </button>
-              <button className="button-with-image">
+              <button
+                className="button-with-image"
+                title="Удалить лабораторную работу"
+              >
                 <img className="icon" src={binImg} alt="Delete" width="13" />
               </button>
             </div>
