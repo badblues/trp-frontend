@@ -12,7 +12,7 @@ import "../../../styles/teacher-lab-work-variant-page.css";
 import { LabWorkVariant } from "../../../models/domain/LabWorkVariant.ts";
 import { LabWorkVariantTest } from "../../../models/domain/LabWorkVariantTest.ts";
 import { LabWorkVariantTestDTO } from "../../../models/DTO/LabWorkVariantTestDTO.ts";
-import LabWorkVariantForm from "../../forms/LabWorkVariantForm.tsx";
+import ConfirmationPopup from "../../ConfirmationPopup.tsx";
 
 interface Props {
   defaultLabWorkVariant: LabWorkVariant;
@@ -32,6 +32,7 @@ const TeacherLabWorkVariantPage: React.FC<Props> = ({
   const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
   const [updating, setUpdating] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isOpenConfirmPopup, setIsOpenConfirmPopup] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -140,6 +141,16 @@ const TeacherLabWorkVariantPage: React.FC<Props> = ({
 
   return (
     <div className={`lab-work-variant-page ${theme}`}>
+      <ConfirmationPopup
+        isOpen={isOpenConfirmPopup}
+        message="Вы действительно хотите удалить вариант?"
+        onContinue={() => {
+          setIsOpenConfirmPopup(false);
+        }}
+        onCancel={() => {
+          setIsOpenConfirmPopup(false);
+        }}
+      />
       <div className="lab-work-variant-information">
         <h1>{labWorkVariant.title}</h1>
         <h2>Язык: {labWorkVariant.language}</h2>
@@ -181,7 +192,12 @@ const TeacherLabWorkVariantPage: React.FC<Props> = ({
           <button className="control-button" onClick={() => setUpdating(true)}>
             ИЗМЕНИТЬ ЗАДАНИЕ
           </button>
-          <button className="delete-button">УДАЛИТЬ ЗАДАНИЕ</button>
+          <button
+            className="delete-button"
+            onClick={() => setIsOpenConfirmPopup(true)}
+          >
+            УДАЛИТЬ ЗАДАНИЕ
+          </button>
         </div>
       ) : null}
     </div>
