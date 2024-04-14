@@ -60,7 +60,7 @@ const TeamLabWorks: React.FC<Props> = ({
   };
 
   return (
-    <div className={`team-lab-work-appointments-container ${theme}`}>
+    <div className={`team-lab-works-container ${theme}`}>
       {teamsWithVariants.map((teamWithVariants, index) => (
         <div key={index} className="team-container">
           <div className="team-name">
@@ -69,55 +69,41 @@ const TeamLabWorks: React.FC<Props> = ({
               <p className="student-name">{student.fullName}</p>
             ))}
           </div>
-          <div className="lab-works-with-variants-container">
-            <div className="lab-works-container">
-              {labWorks.map((labWork, index) =>
-                teamWithVariants.variants.some((v1) =>
-                  labWork.variants.some((v2) => v1.id === v2.id)
-                ) ? (
-                  <div key={index}>
-                    <p
-                      className="lab-work-title"
-                      onClick={() =>
-                        onTeamLabWorkSelect(teamWithVariants.team, labWork)
-                      }
-                    >
-                      {labWork.title}
-                    </p>
+          <div className="lab-works-container">
+            {labWorks.map((labWork, index) =>
+              teamWithVariants.variants.some((v1) =>
+                labWork.variants.some((v2) => v1.id === v2.id)
+              ) ? (
+                <div key={index}>
+                  <h4
+                    className="lab-work-title"
+                    onClick={() =>
+                      onTeamLabWorkSelect(teamWithVariants.team, labWork)
+                    }
+                  >
+                    {labWork.title}:
+                  </h4>
+                  <div className="variants-container">
+                    {labWork.variants.map((variant, index) =>
+                      teamWithVariants.variants.some(
+                        (v) => v.id === variant.id
+                      ) ? (
+                        <div key={index} className="variant">
+                          <p
+                            className="variant-title"
+                            onClick={() => {
+                              onVariantClick(teamWithVariants, variant);
+                            }}
+                          >
+                            {variant.title}
+                          </p>
+                        </div>
+                      ) : null
+                    )}
                   </div>
-                ) : null
-              )}
-            </div>
-            {openTeamLabWorks.some(
-              (tlw) => tlw.teamId === teamWithVariants.team.id
-            ) ? (
-              <div className="variants-container">
-                {labWorks
-                  .filter((lW) =>
-                    openTeamLabWorks.some(
-                      (tlw) =>
-                        tlw.labWorkId === lW.id &&
-                        tlw.teamId === teamWithVariants.team.id
-                    )
-                  )[0]
-                  .variants.map((variant, index) =>
-                    teamWithVariants.variants.some(
-                      (v) => v.id === variant.id
-                    ) ? (
-                      <div key={index} className="variant">
-                        <p
-                          className="variant-title"
-                          onClick={() => {
-                            onVariantClick(teamWithVariants, variant);
-                          }}
-                        >
-                          {variant.title}
-                        </p>
-                      </div>
-                    ) : null
-                  )}
-              </div>
-            ) : null}
+                </div>
+              ) : null
+            )}
           </div>
         </div>
       ))}

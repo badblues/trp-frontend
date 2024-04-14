@@ -22,42 +22,10 @@ const TeamLabWorkAppointments: React.FC<Props> = ({
   onVariantClick,
 }) => {
   const { theme } = useContext(UiContext) as UiContextType;
-  const [openTeamLabWorks, setOpenTeamLabWorks] = useState<TeamLabWork[]>([]);
 
   teamsWithVariants.sort((t1, t2): number => {
     return t1.team.id - t2.team.id;
   });
-
-  const onTeamLabWorkSelect = (teamWithVariants, labWork: LabWork): void => {
-    if (
-      openTeamLabWorks.some(
-        (tlw) =>
-          tlw.teamId === teamWithVariants.id && tlw.labWorkId === labWork.id
-      )
-    ) {
-      setOpenTeamLabWorks(
-        openTeamLabWorks.filter(
-          (tlw) =>
-            !(
-              tlw.teamId === teamWithVariants.id && tlw.labWorkId === labWork.id
-            )
-        )
-      );
-    } else if (
-      openTeamLabWorks.some((tlw) => tlw.teamId === teamWithVariants.id)
-    ) {
-      openTeamLabWorks.forEach((tlw) => {
-        if (tlw.teamId === teamWithVariants.id) tlw.labWorkId = labWork.id;
-      });
-      setOpenTeamLabWorks([...openTeamLabWorks]);
-    } else {
-      openTeamLabWorks.push({
-        teamId: teamWithVariants.id,
-        labWorkId: labWork.id,
-      });
-      setOpenTeamLabWorks([...openTeamLabWorks]);
-    }
-  };
 
   return (
     <div className={`team-lab-work-appointments-container ${theme}`}>
@@ -69,40 +37,22 @@ const TeamLabWorkAppointments: React.FC<Props> = ({
               <p className="student-name">{student.fullName}</p>
             ))}
           </div>
-          <div className="lab-works-with-variants-container">
-            <div className="lab-works-container">
-              {labWorks.map((labWork, index) => (
-                <div key={index}>
-                  <p
-                    className={`lab-work-title ${
-                      teamWithVariants.variants.some((v1) =>
-                        labWork.variants.some((v2) => v1.id === v2.id)
-                      )
-                        ? "appointed"
-                        : "not-appointed"
-                    }`}
-                    onClick={() =>
-                      onTeamLabWorkSelect(teamWithVariants.team, labWork)
-                    }
-                  >
-                    {labWork.title}
-                  </p>
-                </div>
-              ))}
-            </div>
-            {openTeamLabWorks.some(
-              (tlw) => tlw.teamId === teamWithVariants.team.id
-            ) ? (
-              <div className="variants-container">
-                {labWorks
-                  .filter((lW) =>
-                    openTeamLabWorks.some(
-                      (tlw) =>
-                        tlw.labWorkId === lW.id &&
-                        tlw.teamId === teamWithVariants.team.id
+          <div className="lab-works-container">
+            {labWorks.map((labWork, index) => (
+              <div key={index}>
+                <h4
+                  className={`lab-work-title ${
+                    teamWithVariants.variants.some((v1) =>
+                      labWork.variants.some((v2) => v1.id === v2.id)
                     )
-                  )[0]
-                  .variants.map((variant, index) => (
+                      ? "appointed"
+                      : "not-appointed"
+                  }`}
+                >
+                  {labWork.title}:
+                </h4>
+                <div className="variants-container">
+                  {labWork.variants.map((variant, index) => (
                     <div
                       key={index}
                       className={`variant ${
@@ -123,8 +73,9 @@ const TeamLabWorkAppointments: React.FC<Props> = ({
                       </p>
                     </div>
                   ))}
+                </div>
               </div>
-            ) : null}
+            ))}
           </div>
         </div>
       ))}

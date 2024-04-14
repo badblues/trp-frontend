@@ -157,7 +157,7 @@ const TeacherDisciplineGroupPage = () => {
             onVariantClick={() => navigate("/review")}
           />
         </div>
-        <div>
+        <div className="info-container">
           <h1>{group!.name}</h1>
           <h2>
             {discipline!.name} {discipline!.year}

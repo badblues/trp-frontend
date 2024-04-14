@@ -1,6 +1,6 @@
 @import "./variables.scss";
 
-.team-lab-work-appointments-container {
+.team-lab-works-container {
   display: flex;
   flex-direction: column;
   width: 95%;
@@ -14,16 +14,14 @@
         background-color: $dark-mode-background-color;
       }
 
-      .lab-works-with-variants-container {
-        .lab-works-container {
-          .lab-work-title {
-            &.appointed {
-              color: $dark-mode-status-color-appointed;
-            }
+      .lab-works-container {
+        .lab-work-title {
+          &.appointed {
+            color: $dark-mode-status-color-appointed;
+          }
 
-            &.not-appointed {
-              color: $dark-mode-status-color-not-appointed;
-            }
+          &.not-appointed {
+            color: $dark-mode-status-color-not-appointed;
           }
         }
 
@@ -71,35 +69,25 @@
       }
     }
 
-    .lab-works-with-variants-container {
+    .lab-works-container {
       max-width: 100%;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
 
-      .lab-works-container {
-        max-width: 100%;
-        display: flex;
+      .lab-work-title {
+        margin: 0px 5px 0px 5px;
+        max-width: 300px;
         overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
 
-        .lab-work-title {
-          margin: 0px 5px 0px 5px;
-          max-width: 300px;
-          overflow: hidden;
+        &.appointed {
+          color: $status-color-appointed;
+        }
 
-          &.appointed {
-            color: $status-color-appointed;
-          }
-
-          &.not-appointed {
-            color: $status-color-not-appointed;
-          }
-
-          &:hover {
-            cursor: pointer;
-          }
+        &.not-appointed {
+          color: $status-color-not-appointed;
         }
       }
 
@@ -114,7 +102,7 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          margin: 0px 5px 5px 5px;
+          margin: 0px 5px 5px 20px;
 
           &.appointed {
             color: $status-color-appointed;
