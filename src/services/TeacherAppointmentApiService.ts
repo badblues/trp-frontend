@@ -1,4 +1,4 @@
-import http from "axios";
+import http, { AxiosError } from "axios";
 import { TeacherAppointment } from "../models/domain/TeacherAppointment";
 import { TeacherAppointmentDTO } from "../models/DTO/TeacherAppointmentDTO";
 import urls from "./urls.ts";
@@ -16,7 +16,9 @@ export class TeacherAppointmentApiService {
     }
   }
 
-  async createAppointment(appointment: TeacherAppointmentDTO): Promise<TeacherAppointmentDTO> {
+  async createAppointment(
+    appointment: TeacherAppointmentDTO
+  ): Promise<TeacherAppointmentDTO> {
     let url = this.apiUrl;
     try {
       const response = await http.post(url, appointment);
@@ -36,17 +38,23 @@ export class TeacherAppointmentApiService {
     }
   }
 
-  async getAppointmentsByGroup(groupId: number): Promise<Array<TeacherAppointment>> {
+  async getAppointmentsByGroup(
+    groupId: number
+  ): Promise<Array<TeacherAppointment>> {
     const appointments = await this.getAppointments();
     return appointments.filter((a) => a.group.id === groupId);
   }
 
-  async getAppointmentsByDiscipline(disciplineId: number): Promise<Array<TeacherAppointment>> {
+  async getAppointmentsByDiscipline(
+    disciplineId: number
+  ): Promise<Array<TeacherAppointment>> {
     const appointments = await this.getAppointments();
     return appointments.filter((a) => a.discipline.id === disciplineId);
   }
 
-  async getAppointmentsByTeacher(teacherId: number): Promise<Array<TeacherAppointment>> {
+  async getAppointmentsByTeacher(
+    teacherId: number
+  ): Promise<Array<TeacherAppointment>> {
     const appointments = await this.getAppointments();
     return appointments.filter((a) => a.teacher.id === teacherId);
   }
