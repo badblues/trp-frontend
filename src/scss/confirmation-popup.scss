@@ -1,0 +1,46 @@
+@import "./mixins.scss";
+@import "./variables.scss";
+
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 5% 0px 0px 0px;
+  display: flex;
+  justify-content: center;
+
+  &.dark-mode {
+    .popup-content {
+      background-color: $dark-mode-background-secondary-color;
+    }
+  }
+
+  .popup-content {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $background-secondary-color;
+    border-radius: 10px;
+    padding: 20px;
+
+    .message {
+    }
+
+    .buttons-container {
+      display: flex;
+
+      .continue-button {
+        @include redButton(10px);
+      }
+
+      .cancel-button {
+        @include button(10px);
+      }
+    }
+  }
+}

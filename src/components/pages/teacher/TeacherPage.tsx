@@ -8,6 +8,7 @@ import crossImg from "../../../images/cross.png";
 import "../../../styles/admin-resource-page.css";
 import { Teacher } from "../../../models/domain/Teacher.ts";
 import { TeacherAppointment } from "../../../models/domain/TeacherAppointment.ts";
+import ConfirmationPopup from "../../ConfirmationPopup.tsx";
 
 const TeacherPage = () => {
   const { teacherId } = useParams();
@@ -22,6 +23,7 @@ const TeacherPage = () => {
   const [appointments, setAppointments] = useState<TeacherAppointment[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [updating, setUpdating] = useState<boolean>(false);
+  const [isOpenConfirmPopup, setIsOpenConfirmPopup] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -87,6 +89,14 @@ const TeacherPage = () => {
 
   return (
     <div className={`resource-page ${theme}`}>
+      <ConfirmationPopup
+        isOpen={isOpenConfirmPopup}
+        message="Вы действительно хотите удалить пользователя?"
+        onContinue={deleteTeacher}
+        onCancel={() => {
+          setIsOpenConfirmPopup(false);
+        }}
+      />
       <div>
         <h1>{teacher?.fullName}</h1>
         <h2>{teacher?.username}</h2>
@@ -127,7 +137,10 @@ const TeacherPage = () => {
         <button className="control-button" onClick={() => setUpdating(true)}>
           ИЗМЕНИТЬ ИНФОРМАЦИЮ
         </button>
-        <button className="delete-button" onClick={deleteTeacher}>
+        <button
+          className="delete-button"
+          onClick={() => setIsOpenConfirmPopup(true)}
+        >
           УДАЛИТЬ ПОЛЬЗОВАТЕЛЯ
         </button>
       </div>

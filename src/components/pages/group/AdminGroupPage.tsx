@@ -11,6 +11,7 @@ import { TeacherAppointment } from "../../../models/domain/TeacherAppointment.ts
 import { Student } from "../../../models/domain/Student.ts";
 import { Group } from "../../../models/domain/Group.ts";
 import { GroupDTO } from "../../../models/DTO/GroupDTO.ts";
+import ConfirmationPopup from "../../ConfirmationPopup.tsx";
 
 const AdminGroupPage = () => {
   const { groupId } = useParams();
@@ -25,6 +26,7 @@ const AdminGroupPage = () => {
   const [group, setGroup] = useState<Group>();
   const [loading, setLoading] = useState<boolean>(true);
   const [updating, setUpdating] = useState<boolean>(false);
+  const [isOpenConfirmPopup, setIsOpenConfirmPopup] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -55,6 +57,7 @@ const AdminGroupPage = () => {
       if (group != null) {
         await groupApiService.deleteGroup(group.id);
         showSuccessAlert("Группа удалена");
+        setIsOpenConfirmPopup(false);
         navigate("/");
       }
     } catch (error) {
@@ -114,6 +117,14 @@ const AdminGroupPage = () => {
 
   return (
     <div className={`resource-page ${theme}`}>
+      <ConfirmationPopup
+        isOpen={isOpenConfirmPopup}
+        message="Вы действительно хотите удалить группу?"
+        onContinue={deleteGroup}
+        onCancel={() => {
+          setIsOpenConfirmPopup(false);
+        }}
+      />
       <div>
         <div>
           <h1>{group?.name}:</h1>
@@ -126,7 +137,10 @@ const AdminGroupPage = () => {
         <button className="control-button" onClick={() => setUpdating(true)}>
           ИЗМЕНИТЬ ГРУППУ
         </button>
-        <button className="delete-button" onClick={deleteGroup}>
+        <button
+          className="delete-button"
+          onClick={() => setIsOpenConfirmPopup(true)}
+        >
           УДАЛИТЬ ГРУППУ
         </button>
       </div>

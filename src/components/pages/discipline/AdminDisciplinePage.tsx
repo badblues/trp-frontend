@@ -10,6 +10,7 @@ import { Discipline } from "../../../models/domain/Discipline.ts";
 import { TeacherAppointment } from "../../../models/domain/TeacherAppointment.ts";
 import { DisciplineDTO } from "../../../models/DTO/DisciplineDTO.ts";
 import { HalfYear } from "../../../models/domain/HalfYear.ts";
+import ConfirmationPopup from "../../ConfirmationPopup.tsx";
 
 interface Props {
   defaultDiscipline: Discipline;
@@ -27,6 +28,7 @@ const AdminDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
   const [appointments, setAppointments] = useState<TeacherAppointment[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [updating, setUpdating] = useState<boolean>(false);
+  const [isOpenConfirmPopup, setIsOpenConfirmPopup] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -68,6 +70,7 @@ const AdminDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
     try {
       await disciplineApiService.deleteDiscipline(discipline.id);
       showSuccessAlert("Дисциплина удалена");
+      setIsOpenConfirmPopup(false);
       navigate("/");
     } catch (error) {
       showErrorAlert(error.error);
@@ -112,6 +115,14 @@ const AdminDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
 
   return (
     <div className={`resource-page ${theme}`}>
+      <ConfirmationPopup
+        isOpen={isOpenConfirmPopup}
+        message="Вы действительно хотите удалить дисциплину?"
+        onContinue={deleteDiscipline}
+        onCancel={() => {
+          setIsOpenConfirmPopup(false);
+        }}
+      />
       <div>
         <h1>
           {discipline.name} {discipline.year}
@@ -157,7 +168,10 @@ const AdminDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
           <button className="control-button" onClick={() => setUpdating(true)}>
             ИЗМЕНИТЬ ДИСЦИПЛИНУ
           </button>
-          <button className="delete-button" onClick={deleteDiscipline}>
+          <button
+            className="delete-button"
+            onClick={() => setIsOpenConfirmPopup(true)}
+          >
             УДАЛИТЬ ДИСЦИПЛИНУ
           </button>
         </div>
