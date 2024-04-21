@@ -1,5 +1,11 @@
+import { LabWorkVariant } from "./LabWorkVariant";
+import { Team } from "./Team";
+import { TeamAppointmentStatus } from "./TeamAppointmentStatus";
+
 export interface TeamAppointment {
   id: number;
-  teamId: number;
-  labWorkVariantId: number;
+  team: Team;
+  status: TeamAppointmentStatus;
+  labWorkVariant: LabWorkVariant;
+  codeReviewIds: number[];
 }
