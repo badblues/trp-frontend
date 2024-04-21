@@ -19,39 +19,24 @@ export class TeamApiService {
     }
   }
 
-  //TODO refactor
   async getTeamsByDisciplineAndGroup(
     disciplineId: number,
     groupId: number
   ): Promise<Team[]> {
-    let url = this.disciplineApiUrl + `/${disciplineId}/teams`;
+    let url = this.apiUrl + `?disciplineId=${disciplineId}&groupId=${groupId}`;
     try {
       const response = await http.get(url);
-      const teamsByDiscipline: Team[] = response.data.data;
-      return teamsByDiscipline.filter((team: Team) =>
-        team.students.every((s: Student) => s.group.id == groupId)
-      );
+      return response.data.data;
     } catch (error) {
       throw error.response.data;
     }
   }
 
-  //TODO refactor
   async createTeam(team: TeamDTO): Promise<Team> {
     let url = this.apiUrl;
     try {
       const response = await http.post(url, team);
-      const createdTeam: Team = response.data.data;
-      createdTeam.students = [];
-      await Promise.all(
-        createdTeam.studentIds.map(async (studentId) => {
-          const studentResponse = await http.get(
-            this.studentApiUrl + `/${studentId}`
-          );
-          createdTeam.students.push(studentResponse.data.data);
-        })
-      );
-      return createdTeam;
+      return response.data.data;
     } catch (error) {
       throw error.response.data;
     }
