@@ -1,0 +1,62 @@
+.code-review-page {
+  color: #181818;
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0px 0px 0px;
+}
+.code-review-page.dark-mode {
+  color: #f1f1f1;
+}
+.code-review-page.dark-mode .chat-container {
+  background-color: #2e2e2e;
+}
+.code-review-page .chat-container {
+  width: 400px;
+  height: 400px;
+  background-color: #b4b4b4;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.code-review-page .chat-container .chat-messages {
+  display: flex;
+  flex-direction: column;
+}
+.code-review-page .chat-container .chat-messages .message {
+  font-family: "Montserrat", sans-serif;
+}
+.code-review-page .chat-container .chat-messages .message.left {
+  align-self: flex-start;
+}
+.code-review-page .chat-container .chat-messages .message.right {
+  align-self: flex-end;
+}
+.code-review-page .chat-container .send-message-container {
+  justify-self: flex-end;
+  display: flex;
+}
+.code-review-page .chat-container .send-message-container .message-input {
+  resize: none;
+  width: 100%;
+}
+.code-review-page .chat-container .send-message-container .send-message-button {
+  height: fit-content;
+  min-width: 100px;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 0px;
+}
+.code-review-page .chat-container .send-message-container .send-message-button:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=code-review-page.css.map */

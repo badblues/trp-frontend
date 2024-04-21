@@ -18,7 +18,7 @@ import CreateTeacherAppointment from "./pages/create/CreateTeacherAppointment.ts
 import NotFoundPage from "./pages/errors/NotFoundPage.tsx";
 import CreateLabWorkPage from "./pages/create/CreateLabWorkPage.tsx";
 import CreateLabWorkVariantPage from "./pages/create/CreateLabWorkVariantPage.tsx";
-import ReviewPage from "./pages/review-page/ReviewPage.tsx";
+import CodeReviewPage from "./pages/code-review/CodeReviewPage.tsx";
 
 const Main = () => {
   const { theme } = useContext(UiContext) as UiContextType;
@@ -98,7 +98,10 @@ const Main = () => {
             />
           }
         >
-          <Route path="/review" element={<ReviewPage />} />
+          <Route
+            path="/code-review/:codeReviewId"
+            element={<CodeReviewPage />}
+          />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[Role.Admin]} />}>
