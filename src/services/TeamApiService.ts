@@ -28,19 +28,6 @@ export class TeamApiService {
     try {
       const response = await http.get(url);
       const teamsByDiscipline: Team[] = response.data.data;
-      await Promise.all(
-        teamsByDiscipline.map(async (team) => {
-          team.students = [];
-          await Promise.all(
-            team.studentIds.map(async (studentId) => {
-              const studentResponse = await http.get(
-                this.studentApiUrl + `/${studentId}`
-              );
-              team.students.push(studentResponse.data.data);
-            })
-          );
-        })
-      );
       return teamsByDiscipline.filter((team: Team) =>
         team.students.every((s: Student) => s.group.id == groupId)
       );
