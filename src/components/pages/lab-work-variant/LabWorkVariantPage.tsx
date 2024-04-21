@@ -11,6 +11,8 @@ import StudentLabWorkVariantPage from "./StudentLabWorkVariantPage.tsx";
 import TeacherLabWorkVariantPage from "./TeacherLabWorkVariantPage.tsx";
 import { UiContext, UiContextType } from "../../../contexts/UiContext.tsx";
 import { LabWorkVariant } from "../../../models/domain/LabWorkVariant.ts";
+import { Language } from "../../../models/domain/Language.ts";
+import { CType } from "../../../models/domain/Type.ts";
 
 const LabWorkVariantPage = () => {
   const { labWorkVariantId } = useParams();
@@ -24,10 +26,36 @@ const LabWorkVariantPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const labWorkVariantResponse = await labWorkVariantApiService.getLabWorkVariant(
-          Number(labWorkVariantId) 
-        );
-        setLabWorkVariant(labWorkVariantResponse);
+        //TEMPORARY
+        // const labWorkVariantResponse =
+        //   await labWorkVariantApiService.getLabWorkVariant(
+        //     Number(labWorkVariantId)
+        //   );
+        //setLabWorkVariant(labWorkVariantResponse);
+        //TEMPORARY
+        setLabWorkVariant({
+          id: 1,
+          labWorkId: 1,
+          title: "1. Функция суммы",
+          description:
+            "Создайте функцию add, которая принимает два аргумента (числа) и возвращает их сумму.",
+          language: Language.C,
+          testable: true,
+          functionName: "add",
+          returnType: CType.Int,
+          arguments: [
+            {
+              name: "a",
+              type: "int",
+            },
+            {
+              name: "b",
+              type: "int",
+            },
+          ],
+          inputRegex: "",
+          outputRegex: "",
+        });
       } catch (error) {
         showErrorAlert(error.error);
         navigate("/not-found");

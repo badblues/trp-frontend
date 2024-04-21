@@ -59,5 +59,22 @@
 .lab-work-variant-page .lab-work-variant-ide .control-panel .control-button:hover {
   cursor: pointer;
 }
+.lab-work-variant-page .lab-work-variant-ide .control-panel .send-button {
+  height: fit-content;
+  min-width: 100px;
+  width: fit-content;
+  border-radius: 7px;
+  background: #05a000;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 0px;
+}
+.lab-work-variant-page .lab-work-variant-ide .control-panel .send-button:hover {
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=student-lab-work-variant-page.css.map */

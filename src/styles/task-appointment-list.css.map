@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../scss/task-appointment-list.scss","../scss/variables.scss"],"names":[],"mappings":"AAEA;EACE;EACA;EACA,aCmBU;;ADfN;EACE,OCW2B;;ADR7B;EACE,OCM+B;;ADDrC;EACE;EACA;;AAEA;EACE,OCVmB;;ADarB;EACE,OCfuB","file":"task-appointment-list.css"}
+{"version":3,"sourceRoot":"","sources":["../scss/task-appointment-list.scss","../scss/variables.scss"],"names":[],"mappings":"AAEA;EACE;EACA;EACA,aCoBU;;ADhBN;EACE,OCY2B;;ADT7B;EACE,OCO+B;;ADFrC;EACE;EACA;;AAEA;EACE,OCTmB;;ADYrB;EACE,OCduB","file":"task-appointment-list.css"}

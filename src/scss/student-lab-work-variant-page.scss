@@ -57,6 +57,10 @@
       .control-button {
         @include button(5px 0px 5px 0px);
       }
+
+      .send-button {
+        @include greenButton();
+      }
     }
   }
 }
