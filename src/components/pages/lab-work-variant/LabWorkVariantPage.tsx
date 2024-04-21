@@ -58,7 +58,6 @@ const LabWorkVariantPage = () => {
         });
       } catch (error) {
         showErrorAlert(error.error);
-        navigate("/not-found");
       }
     })().then(() => {
       setLoading(false);

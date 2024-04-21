@@ -39,7 +39,6 @@ const TeacherPage = () => {
         setAppointments(teacherAppointmentsResponse);
       } catch (error) {
         showErrorAlert(error.error);
-        navigate("/not-found");
       }
     })().then(() => {
       setLoading(false);

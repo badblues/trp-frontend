@@ -44,7 +44,6 @@ const AdminGroupPage = () => {
         setStudents(studentsResponse);
       } catch (error) {
         showErrorAlert(error.error);
-        navigate("/not-found");
       }
     })().then(() => {
       setLoading(false);
