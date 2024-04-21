@@ -82,13 +82,6 @@
         max-width: 300px;
         overflow: hidden;
 
-        &.appointed {
-          color: $status-color-appointed;
-        }
-
-        &.not-appointed {
-          color: $status-color-not-appointed;
-        }
       }
 
       .variants-container {
@@ -103,14 +96,6 @@
           text-overflow: ellipsis;
           white-space: nowrap;
           margin: 0px 5px 5px 20px;
-
-          &.appointed {
-            color: $status-color-appointed;
-          }
-
-          &.not-appointed {
-            color: $status-color-not-appointed;
-          }
 
           .variant-title {
             &:hover {

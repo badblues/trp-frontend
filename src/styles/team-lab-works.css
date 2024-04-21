@@ -60,12 +60,6 @@
   max-width: 300px;
   overflow: hidden;
 }
-.team-lab-works-container .team-container .lab-works-container .lab-work-title.appointed {
-  color: black;
-}
-.team-lab-works-container .team-container .lab-works-container .lab-work-title.not-appointed {
-  color: grey;
-}
 .team-lab-works-container .team-container .lab-works-container .variants-container {
   display: flex;
   flex-wrap: wrap;
@@ -78,12 +72,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: 0px 5px 5px 20px;
-}
-.team-lab-works-container .team-container .lab-works-container .variants-container .variant.appointed {
-  color: black;
-}
-.team-lab-works-container .team-container .lab-works-container .variants-container .variant.not-appointed {
-  color: grey;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title:hover {
   cursor: pointer;
