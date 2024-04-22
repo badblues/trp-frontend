@@ -8,7 +8,6 @@ import "../styles/main.css";
 import MainPage from "./pages/main/MainPage.tsx";
 import TeacherPage from "./pages/teacher/TeacherPage.tsx";
 import DisciplinePage from "./pages/discipline/DisciplinePage.tsx";
-import LabWorkVariantPage from "./pages/lab-work-variant/LabWorkVariantPage.tsx";
 import AdminGroupPage from "./pages/group/AdminGroupPage.tsx";
 import TeacherDisciplineGroupPage from "./pages/discipline-group/TeacherDisciplineGroupPage.tsx";
 import CreateGroupPage from "./pages/create/CreateGroupPage.tsx";
@@ -20,6 +19,7 @@ import CreateLabWorkPage from "./pages/create/CreateLabWorkPage.tsx";
 import CreateLabWorkVariantPage from "./pages/create/CreateLabWorkVariantPage.tsx";
 import CodeReviewPage from "./pages/code-review/CodeReviewPage.tsx";
 import StudentLabWorkVariantPage from "./pages/lab-work-variant/StudentLabWorkVariantPage.tsx";
+import TeacherLabWorkVariantPage from "./pages/lab-work-variant/TeacherLabWorkVariantPage.tsx";
 
 const Main = () => {
   const { theme } = useContext(UiContext) as UiContextType;
@@ -88,7 +88,7 @@ const Main = () => {
         >
           <Route
             path="/lab-work-variants/:labWorkVariantId"
-            element={<LabWorkVariantPage />}
+            element={<TeacherLabWorkVariantPage />}
           />
         </Route>
 

@@ -9,18 +9,14 @@ import {
 import { Role } from "../../../models/domain/Role.ts";
 import Tests from "../../item-containers/Tests.tsx";
 import "../../../styles/teacher-lab-work-variant-page.css";
-import { LabWorkVariant } from "../../../models/domain/LabWorkVariant.ts";
 import { LabWorkVariantTest } from "../../../models/domain/LabWorkVariantTest.ts";
 import { LabWorkVariantTestDTO } from "../../../models/DTO/LabWorkVariantTestDTO.ts";
 import ConfirmationPopup from "../../ConfirmationPopup.tsx";
+import { useParams } from "react-router-dom";
+import { LabWorkVariant } from "../../../models/domain/LabWorkVariant.ts";
 
-interface Props {
-  defaultLabWorkVariant: LabWorkVariant;
-}
-
-const TeacherLabWorkVariantPage: React.FC<Props> = ({
-  defaultLabWorkVariant,
-}) => {
+const TeacherLabWorkVariantPage = () => {
+  const { labWorkVariantId } = useParams();
   const { theme, showSuccessAlert, showErrorAlert } = useContext(
     UiContext
   ) as UiContextType;
@@ -28,7 +24,7 @@ const TeacherLabWorkVariantPage: React.FC<Props> = ({
     ApiContext
   ) as ApiContextType;
   const { user } = useContext(UserContext) as UserContextType;
-  const [labWorkVariant, setLabWorkVariant] = useState(defaultLabWorkVariant);
+  const [labWorkVariant, setLabWorkVariant] = useState<LabWorkVariant>();
   const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
   const [updating, setUpdating] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -37,10 +33,15 @@ const TeacherLabWorkVariantPage: React.FC<Props> = ({
   useEffect(() => {
     (async () => {
       try {
+        const labWorkVariantResponse =
+          await labWorkVariantApiService.getLabWorkVariant(
+            Number(labWorkVariantId)
+          );
         const testsResponse =
           await labWorkVariantTestApiService.getLabWorkVariantTestsByLabWorkVariant(
-            labWorkVariant.id
+            labWorkVariantResponse.id
           );
+        setLabWorkVariant(labWorkVariantResponse);
         setTests(testsResponse);
       } catch (error) {
         showErrorAlert(error.error);
@@ -152,21 +153,21 @@ const TeacherLabWorkVariantPage: React.FC<Props> = ({
         }}
       />
       <div className="lab-work-variant-information">
-        <h1>{labWorkVariant.title}</h1>
-        <h2>Язык: {labWorkVariant.language}</h2>
+        <h1>{labWorkVariant!.title}</h1>
+        <h2>Язык: {labWorkVariant!.language}</h2>
         <h2>Задание:</h2>
-        <p>{labWorkVariant.description}</p>
-        {labWorkVariant.testable ? (
+        <p>{labWorkVariant!.description}</p>
+        {labWorkVariant!.testable ? (
           <>
             <h2>
-              Функция: {labWorkVariant.returnType} {labWorkVariant.functionName}
-              (
-              {labWorkVariant.arguments.map((argument, index) => (
+              Функция: {labWorkVariant!.returnType}{" "}
+              {labWorkVariant!.functionName}(
+              {labWorkVariant!.arguments.map((argument, index) => (
                 <>
                   <span>
                     {argument.type} {argument.name}
                   </span>
-                  {index < labWorkVariant.arguments.length - 1 ? (
+                  {index < labWorkVariant!.arguments.length - 1 ? (
                     <span>, </span>
                   ) : null}
                 </>
@@ -177,12 +178,12 @@ const TeacherLabWorkVariantPage: React.FC<Props> = ({
             <h2>Тесты:</h2>
             <Tests
               tests={tests}
-              labWorkVariant={labWorkVariant}
+              labWorkVariant={labWorkVariant!}
               onAddTest={addTest}
               onUpdateTest={updateTest}
               onDeleteTest={deleteTest}
-              inputRegex={labWorkVariant.inputRegex}
-              outputRegex={labWorkVariant.outputRegex}
+              inputRegex={labWorkVariant!.inputRegex}
+              outputRegex={labWorkVariant!.outputRegex}
             />
           </>
         ) : null}
