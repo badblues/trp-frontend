@@ -19,6 +19,7 @@ import NotFoundPage from "./pages/errors/NotFoundPage.tsx";
 import CreateLabWorkPage from "./pages/create/CreateLabWorkPage.tsx";
 import CreateLabWorkVariantPage from "./pages/create/CreateLabWorkVariantPage.tsx";
 import CodeReviewPage from "./pages/code-review/CodeReviewPage.tsx";
+import StudentLabWorkVariantPage from "./pages/lab-work-variant/StudentLabWorkVariantPage.tsx";
 
 const Main = () => {
   const { theme } = useContext(UiContext) as UiContextType;
@@ -81,13 +82,26 @@ const Main = () => {
         <Route
           element={
             <RequireAuth
-              allowedRoles={[Role.Teacher, Role.SeniorTeacher, Role.Student]}
+              allowedRoles={[Role.Teacher, Role.SeniorTeacher]}
             />
           }
         >
           <Route
             path="/lab-work-variants/:labWorkVariantId"
             element={<LabWorkVariantPage />}
+          />
+        </Route>
+
+        <Route
+          element={
+            <RequireAuth
+              allowedRoles={[Role.Student]}
+            />
+          }
+        >
+          <Route
+            path="/disciplines/:disciplineId/lab-work-variants/:labWorkVariantId"
+            element={<StudentLabWorkVariantPage />}
           />
         </Route>
 

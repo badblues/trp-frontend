@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UiContext, UiContextType } from "../../../contexts/UiContext.tsx";
 import { ApiContext, ApiContextType } from "../../../contexts/ApiContext.tsx";
+import { useParams } from "react-router-dom";
 import CodeEditor from "../../CodeEditor.tsx";
 import Loader from "../../Loader.tsx";
 import "../../../styles/student-lab-work-variant-page.css";
@@ -18,15 +19,18 @@ import {
   UserContextType,
 } from "../../../contexts/UserContext.tsx";
 import PageWithTabs from "../../PageWithTabs.tsx";
+import { Discipline } from "../../../models/domain/Discipline.ts";
 
-const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
+const StudentLabWorkVariantPage = () => {
+  const { disciplineId, labWorkVariantId } = useParams();
   const { theme, showSuccessAlert, showErrorAlert } = useContext(
     UiContext
   ) as UiContextType;
   const { user } = useContext(UserContext) as UserContextType;
-  const { labWorkVariantApiService, labWorkVariantTestApiService } = useContext(
-    ApiContext
-  ) as ApiContextType;
+  const {
+    labWorkVariantApiService,
+    labWorkVariantTestApiService,
+  } = useContext(ApiContext) as ApiContextType;
   const navigate = useNavigate();
   const [code, setCode] = useState<string>("");
   const [outputText, setOutputText] = useState<string>("");
@@ -46,14 +50,14 @@ const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
         setTests([
           {
             id: 1,
-            labWorkVariantId: defaultLabWorkVariant.id,
+            labWorkVariantId: 2,
             input: "in",
             output: "out",
             open: true,
           },
           {
             id: 2,
-            labWorkVariantId: defaultLabWorkVariant.id,
+            labWorkVariantId: 2,
             input: "in2",
             output: "out2",
             open: true,
@@ -132,7 +136,7 @@ const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
     };
     try {
       await labWorkVariantApiService.postSolution(
-        defaultLabWorkVariant.id,
+        teamAppointment!.labWorkVariant.id,
         solutionDTO
       );
       showSuccessAlert("Решение сохранено");
@@ -145,7 +149,7 @@ const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
     try {
       setOutputText("");
       const response = await labWorkVariantApiService.executeSolution(
-        defaultLabWorkVariant.id
+        teamAppointment!.labWorkVariant.id
       );
       setOutputText(response);
     } catch (error) {
@@ -165,21 +169,21 @@ const StudentLabWorkVariantPage = ({ defaultLabWorkVariant }) => {
     <div className={`lab-work-variant-page ${theme}`}>
       <PageWithTabs titles={["Задание", "КодРевью"]}>
         <div className="lab-work-variant-information">
-          <h1>{defaultLabWorkVariant.title}</h1>
-          <h2>Язык: {defaultLabWorkVariant.language}</h2>
+          <h1>{teamAppointment!.labWorkVariant.title}</h1>
+          <h2>Язык: {teamAppointment!.labWorkVariant.language}</h2>
           <h2>Задание:</h2>
-          <p>{defaultLabWorkVariant.description}</p>
-          {defaultLabWorkVariant.testable ? (
+          <p>{teamAppointment!.labWorkVariant.description}</p>
+          {teamAppointment!.labWorkVariant.testable ? (
             <>
               <h2>
-                Функция: {defaultLabWorkVariant.returnType}{" "}
-                {defaultLabWorkVariant.functionName}(
-                {defaultLabWorkVariant.arguments.map((argument, index) => (
+                Функция: {teamAppointment!.labWorkVariant.returnType}{" "}
+                {teamAppointment!.labWorkVariant.functionName}(
+                {teamAppointment!.labWorkVariant.arguments.map((argument, index) => (
                   <>
                     <span>
                       {argument.type} {argument.name}
                     </span>
-                    {index < defaultLabWorkVariant.arguments.length - 1 ? (
+                    {index < teamAppointment!.labWorkVariant.arguments.length - 1 ? (
                       <span>, </span>
                     ) : null}
                   </>

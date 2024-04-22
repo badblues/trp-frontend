@@ -171,7 +171,9 @@ const StudentDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
           labWorks={labWorks}
           teamAppointments={teamAppointments}
           onLabWorkVariantSelect={(variant) =>
-            navigate(`/lab-work-variants/${variant.id}`)
+            navigate(
+              `/disciplines/${discipline.id}/lab-work-variants/${variant.id}`
+            )
           }
         />
       </div>
