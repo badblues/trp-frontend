@@ -158,29 +158,29 @@ const TeacherDisciplineGroupPage = () => {
     }
   };
 
-  // const handleVariantClick = (
-  //   teamWithVariants: TeamWithVariants,
-  //   variant: LabWorkVariant
-  // ) => {
-  //   try {
-  //     if (teamWithVariants.variants.some((v) => v.id === variant.id)) {
-  //       //TODO REMOVE APPOINTMENT
-  //     } else {
-  //       const appointment: TeamAppointmentDTO = {
-  //         teamId: teamWithVariants.team.id,
-  //         labWorkVariantId: variant.id,
-  //       };
-  //       teamAppointmentApiService.createAppointment(appointment);
-  //       teamsWithVariants.forEach((twv) => {
-  //         if (twv.team.id === teamWithVariants.team.id)
-  //           twv.variants.push(variant);
-  //       });
-  //       setTeamsWithVariants([...teamsWithVariants]);
-  //     }
-  //   } catch (error) {
-  //     showErrorAlert(error.error);
-  //   }
-  // };
+  const handleVariantClick = async (variant: LabWorkVariant, team: Team) => {
+    try {
+      if (
+        teamAppointments.some(
+          (appointment) =>
+            appointment.team.id === team.id &&
+            appointment.labWorkVariant.id === variant.id
+        )
+      ) {
+        //TODO REMOVE APPOINTMENT
+      } else {
+        const appointment: TeamAppointmentDTO = {
+          teamId: team.id,
+          labWorkVariantId: variant.id,
+        };
+        const newAppointment =
+          await teamAppointmentApiService.createAppointment(appointment);
+        setTeamAppointments([newAppointment, ...teamAppointments]);
+      }
+    } catch (error) {
+      showErrorAlert(error.error);
+    }
+  };
 
   if (loading) {
     return (
@@ -212,7 +212,13 @@ const TeacherDisciplineGroupPage = () => {
         </div>
       </div>
       <div className={`discipline-group-page ${theme}`}>
-        <div></div>
+        <div>
+          <TeamLabWorkAppointments
+            teamAppointments={teamAppointments}
+            labWorks={labWorks}
+            onVariantClick={handleVariantClick}
+          />
+        </div>
         <div className="info-container">
           <h1>{group!.name}</h1>
           <h2>

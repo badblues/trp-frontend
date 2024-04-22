@@ -27,12 +27,14 @@
 
         .variants-container {
           .variant {
-            &.appointed {
-              color: $dark-mode-status-color-appointed;
-            }
+            .variant-title {
+              &.appointed {
+                color: $dark-mode-status-color-appointed;
+              }
 
-            &.not-appointed {
-              color: $dark-mode-status-color-not-appointed;
+              &.not-appointed {
+                color: $dark-mode-status-color-not-appointed;
+              }
             }
           }
         }
@@ -104,15 +106,15 @@
           white-space: nowrap;
           margin: 0px 5px 5px 20px;
 
-          &.appointed {
-            color: $status-color-appointed;
-          }
-
-          &.not-appointed {
-            color: $status-color-not-appointed;
-          }
-
           .variant-title {
+            &.appointed {
+              color: $status-color-appointed;
+            }
+
+            &.not-appointed {
+              color: $status-color-not-appointed;
+            }
+
             &:hover {
               cursor: pointer;
             }

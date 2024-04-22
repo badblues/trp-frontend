@@ -16,10 +16,10 @@
 .team-lab-work-appointments-container.dark-mode .team-container .lab-works-container .lab-work-title.not-appointed {
   color: grey;
 }
-.team-lab-work-appointments-container.dark-mode .team-container .lab-works-container .variants-container .variant.appointed {
+.team-lab-work-appointments-container.dark-mode .team-container .lab-works-container .variants-container .variant .variant-title.appointed {
   color: white;
 }
-.team-lab-work-appointments-container.dark-mode .team-container .lab-works-container .variants-container .variant.not-appointed {
+.team-lab-work-appointments-container.dark-mode .team-container .lab-works-container .variants-container .variant .variant-title.not-appointed {
   color: grey;
 }
 .team-lab-work-appointments-container .team-container {
@@ -79,10 +79,10 @@
   white-space: nowrap;
   margin: 0px 5px 5px 20px;
 }
-.team-lab-work-appointments-container .team-container .lab-works-container .variants-container .variant.appointed {
+.team-lab-work-appointments-container .team-container .lab-works-container .variants-container .variant .variant-title.appointed {
   color: black;
 }
-.team-lab-work-appointments-container .team-container .lab-works-container .variants-container .variant.not-appointed {
+.team-lab-work-appointments-container .team-container .lab-works-container .variants-container .variant .variant-title.not-appointed {
   color: grey;
 }
 .team-lab-work-appointments-container .team-container .lab-works-container .variants-container .variant .variant-title:hover {

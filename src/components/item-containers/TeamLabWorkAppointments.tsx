@@ -2,79 +2,90 @@ import React, { useContext, useState } from "react";
 import { LabWork } from "../../models/domain/LabWork.ts";
 import "../../styles/team-lab-work-appointments.css";
 import { UiContext, UiContextType } from "../../contexts/UiContext.tsx";
-import { TeamWithVariants } from "../../models/domain/TeamWithVariants.ts";
 import { LabWorkVariant } from "../../models/domain/LabWorkVariant.ts";
+import { TeamAppointment } from "../../models/domain/TeamAppointment.ts";
+import { Team } from "../../models/domain/Team.ts";
 
 interface Props {
-  teamsWithVariants: TeamWithVariants[];
+  teamAppointments: TeamAppointment[];
   labWorks: LabWork[];
-  onVariantClick: (team: TeamWithVariants, variant: LabWorkVariant) => void;
-}
-
-interface TeamLabWork {
-  teamId: number;
-  labWorkId: number;
+  onVariantClick: (variant: LabWorkVariant, team: Team) => void;
 }
 
 const TeamLabWorkAppointments: React.FC<Props> = ({
-  teamsWithVariants,
+  teamAppointments,
   labWorks,
   onVariantClick,
 }) => {
   const { theme } = useContext(UiContext) as UiContextType;
 
-  teamsWithVariants.sort((t1, t2): number => {
+  teamAppointments.sort((t1, t2): number => {
     return t1.team.id - t2.team.id;
   });
 
+  const teamIds = Array.from(
+    new Set(teamAppointments.map((appointment) => appointment.team.id))
+  );
+
   return (
     <div className={`team-lab-work-appointments-container ${theme}`}>
-      {teamsWithVariants.map((teamWithVariants, index) => (
+      {teamIds.map((teamId, index) => (
         <div key={index} className="team-container">
           <div className="team-name">
-            <p className="team-title">Бригада {teamWithVariants.team.id}:</p>
-            {teamWithVariants.team.students.map((student) => (
-              <p className="student-name">{student.fullName}</p>
-            ))}
+            <p className="team-title">Бригада {teamId}:</p>
+            {teamAppointments
+              .filter((appointment) => appointment.team.id == teamId)[0]
+              .team.students.map((student) => (
+                <p className="student-name">{student.fullName}</p>
+              ))}
           </div>
           <div className="lab-works-container">
-            {labWorks.map((labWork, index) => (
-              <div key={index}>
-                <h4
+            {labWorks.map((labWork) => (
+              <>
+                <p
                   className={`lab-work-title ${
-                    teamWithVariants.variants.some((v1) =>
-                      labWork.variants.some((v2) => v1.id === v2.id)
+                    labWork.variants.some((variant) =>
+                      teamAppointments.some(
+                        (appointment) =>
+                          variant.id === appointment.labWorkVariant.id &&
+                          appointment.team.id === teamId
+                      )
                     )
                       ? "appointed"
                       : "not-appointed"
                   }`}
                 >
-                  {labWork.title}:
-                </h4>
+                  {labWork.title}
+                </p>
                 <div className="variants-container">
-                  {labWork.variants.map((variant, index) => (
+                  {labWork.variants.map((variant) => (
                     <div
-                      key={index}
-                      className={`variant ${
-                        teamWithVariants.variants.some(
-                          (v) => v.id === variant.id
+                      className="variant"
+                      onClick={() =>
+                        onVariantClick(
+                          variant,
+                          teamAppointments.filter((t) => t.team.id === teamId)[0]
+                            .team
                         )
-                          ? "appointed"
-                          : "not-appointed"
-                      }`}
+                      }
                     >
                       <p
-                        className="variant-title"
-                        onClick={() => {
-                          onVariantClick(teamWithVariants, variant);
-                        }}
+                        className={`variant-title ${
+                          teamAppointments.some(
+                            (appointment) =>
+                              variant.id === appointment.labWorkVariant.id &&
+                              appointment.team.id === teamId
+                          )
+                            ? "appointed"
+                            : "not-appointed"
+                        }`}
                       >
                         {variant.title}
                       </p>
                     </div>
                   ))}
                 </div>
-              </div>
+              </>
             ))}
           </div>
         </div>
