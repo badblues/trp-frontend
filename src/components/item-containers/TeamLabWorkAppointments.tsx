@@ -64,8 +64,9 @@ const TeamLabWorkAppointments: React.FC<Props> = ({
                       onClick={() =>
                         onVariantClick(
                           variant,
-                          teamAppointments.filter((t) => t.team.id === teamId)[0]
-                            .team
+                          teamAppointments.filter(
+                            (t) => t.team.id === teamId
+                          )[0].team
                         )
                       }
                     >

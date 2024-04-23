@@ -113,7 +113,7 @@ const Main = () => {
           }
         >
           <Route
-            path="/code-review/:codeReviewId"
+            path="disciplines/:disciplineId/team-appointments/:teamAppointmentId/code-review/:codeReviewId"
             element={<CodeReviewPage />}
           />
         </Route>

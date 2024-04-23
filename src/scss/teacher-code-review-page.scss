@@ -1,0 +1,90 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.code-review-page {
+  color: $text-color;
+  display: flex;
+  justify-content: space-around;
+  font-family: $main-font;
+
+  &.dark-mode {
+    color: $dark-mode-text-color;
+
+    .left-container {
+      .info-container {
+        .chat-container {
+          background-color: $dark-mode-background-secondary-color;
+
+          .chat-messages {
+            .message {
+              background-color: $dark-mode-background-color;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .left-container {
+    width: 40%;
+
+    .info-container {
+      display: flex;
+      margin: 20px;
+
+      .team-container {
+        margin: 20px;
+      }
+
+      .chat-container {
+        width: 400px;
+        height: 400px;
+        background-color: $background-secondary-color;
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .chat-messages {
+          display: flex;
+          flex-direction: column;
+
+          .message {
+            font-family: $main-font;
+            background-color: $background-color;
+            border-radius: 5px;
+            padding: 3px;
+
+            &.left {
+              align-self: flex-start;
+            }
+            &.right {
+              align-self: flex-end;
+            }
+          }
+        }
+
+        .send-message-container {
+          justify-self: flex-end;
+          display: flex;
+
+          .message-input {
+            resize: none;
+            width: 100%;
+            border-radius: 5px;
+          }
+
+          .send-message-button {
+            @include button(0px);
+          }
+        }
+      }
+    }
+  }
+
+  .code-container {
+    width: 40%;
+    margin: 20px;
+  }
+}

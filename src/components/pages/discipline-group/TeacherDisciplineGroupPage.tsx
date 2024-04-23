@@ -200,7 +200,7 @@ const TeacherDisciplineGroupPage = () => {
             teamAppointments={teamAppointments}
             labWorks={labWorks}
             onVariantClick={(appointment: TeamAppointment) =>
-              navigate(`/code-review/${appointment.codeReviewIds[0]}`)
+              navigate(`/disciplines/${discipline!.id}/team-appointments/${appointment.id}/code-review/${appointment.codeReviewIds[0]}`)
             }
           />
         </div>

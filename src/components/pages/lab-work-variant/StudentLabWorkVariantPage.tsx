@@ -27,10 +27,9 @@ const StudentLabWorkVariantPage = () => {
     UiContext
   ) as UiContextType;
   const { user } = useContext(UserContext) as UserContextType;
-  const {
-    labWorkVariantApiService,
-    labWorkVariantTestApiService,
-  } = useContext(ApiContext) as ApiContextType;
+  const { labWorkVariantApiService, labWorkVariantTestApiService } = useContext(
+    ApiContext
+  ) as ApiContextType;
   const navigate = useNavigate();
   const [code, setCode] = useState<string>("");
   const [outputText, setOutputText] = useState<string>("");
@@ -178,16 +177,19 @@ const StudentLabWorkVariantPage = () => {
               <h2>
                 Функция: {teamAppointment!.labWorkVariant.returnType}{" "}
                 {teamAppointment!.labWorkVariant.functionName}(
-                {teamAppointment!.labWorkVariant.arguments.map((argument, index) => (
-                  <>
-                    <span>
-                      {argument.type} {argument.name}
-                    </span>
-                    {index < teamAppointment!.labWorkVariant.arguments.length - 1 ? (
-                      <span>, </span>
-                    ) : null}
-                  </>
-                ))}
+                {teamAppointment!.labWorkVariant.arguments.map(
+                  (argument, index) => (
+                    <>
+                      <span>
+                        {argument.type} {argument.name}
+                      </span>
+                      {index <
+                      teamAppointment!.labWorkVariant.arguments.length - 1 ? (
+                        <span>, </span>
+                      ) : null}
+                    </>
+                  )
+                )}
                 )
               </h2>
               <h2>Примеры тестов:</h2>
@@ -197,7 +199,13 @@ const StudentLabWorkVariantPage = () => {
         </div>
         <div className="lab-work-variant-information">
           {teamAppointment?.codeReviewIds.map((cR) => (
-            <h4 onClick={() => navigate(`/code-review/${cR}`)}>
+            <h4
+              onClick={() =>
+                navigate(
+                  `/disciplines/${disciplineId}/team-appointments/${teamAppointment.id}/code-review/${cR}`
+                )
+              }
+            >
               Код Ревью {cR}
             </h4>
           ))}
