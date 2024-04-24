@@ -164,8 +164,8 @@ const StudentCodeReviewPage = () => {
                   >
                     <p>
                       {taskMessage.roleType === Role.Student
-                        ? "Студенты:\n"
-                        : "Преподаватель:\n"}
+                        ? "Студенты:"
+                        : "Преподаватель:"}
                     </p>
                     {taskMessage.message}
                   </p>

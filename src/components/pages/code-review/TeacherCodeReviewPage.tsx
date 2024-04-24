@@ -164,11 +164,10 @@ const TeacherCodeReviewPage = () => {
                       taskMessage.roleType === Role.Student ? "left" : "right"
                     }`}
                   >
-                    <p>
-                      {taskMessage.roleType === Role.Student
-                        ? "Студенты:\n"
-                        : "Преподаватель:\n"}
-                    </p>
+                    {taskMessage.roleType === Role.Student
+                      ? "Студенты:"
+                      : "Преподаватель:"}
+                    <br />
                     {taskMessage.message}
                   </p>
                 ))}
@@ -209,13 +208,13 @@ const TeacherCodeReviewPage = () => {
                   )
                 </h2>
                 <h2>Примеры тестов:</h2>
-                <StudentTestList tests={tests!}/>
+                <StudentTestList tests={tests!} />
               </>
             ) : null}
           </div>
         </PageWithTabs>
       </div>
-      <div className="code-container">
+      <div className="right-container">
         <ReactCodeMirror
           value={codeReview?.code}
           editable={false}
@@ -224,6 +223,10 @@ const TeacherCodeReviewPage = () => {
           minWidth="600px"
           extensions={[java()]}
         />
+        <div className="buttons-container">
+          <button>На доработку</button>
+
+        </div>
       </div>
     </div>
   );

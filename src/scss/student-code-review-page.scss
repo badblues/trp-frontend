@@ -54,13 +54,16 @@
             font-family: $main-font;
             background-color: $background-color;
             border-radius: 5px;
-            padding: 3px;
+            padding: 5px;
+            max-width: 80%;
+            margin: 10px 0px 0px 0px;
 
             &.left {
               align-self: flex-start;
             }
             &.right {
               align-self: flex-end;
+              text-align: end;
             }
           }
         }

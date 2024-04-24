@@ -41,13 +41,16 @@
   font-family: "Montserrat", sans-serif;
   background-color: #fbfbfb;
   border-radius: 5px;
-  padding: 3px;
+  padding: 5px;
+  max-width: 80%;
+  margin: 10px 0px 0px 0px;
 }
 .code-review-page .left-container .info-container .chat-container .chat-messages .message.left {
   align-self: flex-start;
 }
 .code-review-page .left-container .info-container .chat-container .chat-messages .message.right {
   align-self: flex-end;
+  text-align: end;
 }
 .code-review-page .left-container .info-container .chat-container .send-message-container {
   justify-self: flex-end;

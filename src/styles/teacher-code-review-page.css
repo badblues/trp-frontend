@@ -41,13 +41,16 @@
   font-family: "Montserrat", sans-serif;
   background-color: #fbfbfb;
   border-radius: 5px;
-  padding: 3px;
+  padding: 5px;
+  max-width: 80%;
+  margin: 10px 0px 0px 0px;
 }
 .code-review-page .left-container .info-container .chat-container .chat-messages .message.left {
   align-self: flex-start;
 }
 .code-review-page .left-container .info-container .chat-container .chat-messages .message.right {
   align-self: flex-end;
+  text-align: end;
 }
 .code-review-page .left-container .info-container .chat-container .send-message-container {
   justify-self: flex-end;
@@ -75,9 +78,31 @@
 .code-review-page .left-container .info-container .chat-container .send-message-container .send-message-button:hover {
   cursor: pointer;
 }
-.code-review-page .code-container {
+.code-review-page .right-container {
   width: 40%;
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.code-review-page .right-container .buttons-container {
+  display: flex;
+}
+.code-review-page .right-container .buttons-container .reject-button {
+  height: fit-content;
+  min-width: 100px;
+  width: fit-content;
+  border-radius: 7px;
+  background: #a00000;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+}
+.code-review-page .right-container .buttons-container .reject-button:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=teacher-code-review-page.css.map */
