@@ -4,6 +4,6 @@ import { CodeThread } from "./CodeThread";
 export interface CodeReview {
   id: number;
   code: string;
-  taskMessages: TaskMessage[];
+  messages: TaskMessage[];
   codeThreads: CodeThread[];
 }
