@@ -6,6 +6,7 @@ const urls = {
   labWorksUrl: domainUrl + "/api/v2/lab-works",
   labWorkVariantsUrl: domainUrl + "/api/v2/lab-work-variants",
   labWorkVariantTestsUrl: domainUrl + "/api/v2/lab-work-variant-tests",
+  codeReviewUrl: domainUrl + "/api/v2/code-reviews",
   teamsUrl: domainUrl + "/api/v2/teams",
   teamAppointmentsUrl: domainUrl + "/api/v2/team-appointments",
   teacherAppointmentsUrl: domainUrl + "/api/v2/teacher-appointments",

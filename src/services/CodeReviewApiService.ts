@@ -3,7 +3,7 @@ import { CodeReview } from "../models/domain/CodeReview";
 import urls from "./urls.ts";
 
 export class CodeReviewApiService {
-  apiUrl = urls.groupsUrl;
+  apiUrl = urls.codeReviewUrl;
 
   async getCodeReview(codeReviewId: number): Promise<CodeReview> {
     let url = this.apiUrl + `/${codeReviewId}`;
