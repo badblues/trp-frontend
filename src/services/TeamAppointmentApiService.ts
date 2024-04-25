@@ -5,9 +5,10 @@ import urls from "./urls.ts";
 
 export class TeamAppointmentApiService {
   apiUrl = urls.teamAppointmentsUrl;
+  disciplinesUrl = urls.disciplinesUrl;
 
-  async getTeamAppointmentsByDiscipline(): Promise<TeamAppointment[]> {
-    let url = this.apiUrl;
+  async getTeamAppointmentsByDiscipline(disciplineId: number): Promise<TeamAppointment[]> {
+    let url = this.disciplinesUrl + `/${disciplineId}/team-appointments`;
     try {
       const response = await http.get(url);
       return response.data.data;
