@@ -1,0 +1,62 @@
+.form-upper-container {
+  display: flex;
+}
+.form-upper-container .grade-form-container {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 10px;
+}
+.form-upper-container .grade-form-container.dark-mode {
+  background: #2e2e2e;
+  color: #f1f1f1;
+}
+.form-upper-container .grade-form-container.dark-mode .form-input-container .form-input {
+  background: #212121;
+  color: #f1f1f1;
+}
+.form-upper-container .grade-form-container.dark-mode .form-input-container .form-input::placeholder {
+  color: #f1f1f1;
+}
+.form-upper-container .grade-form-container.dark-mode .form-input-container .form-text {
+  color: #f1f1f1;
+}
+.form-upper-container .grade-form-container .form-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0px 0px 5px 0px;
+}
+.form-upper-container .grade-form-container .form-input-container .form-label {
+  font-size: medium;
+  align-self: flex-start;
+  margin: 5px;
+}
+.form-upper-container .grade-form-container .form-input-container .form-input {
+  width: 100%;
+  min-height: 40px;
+  border-radius: 7px;
+  border: 1px solid #000;
+  padding: 10px;
+}
+.form-upper-container .grade-form-container .submit-button {
+  height: fit-content;
+  min-width: 100px;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0px 5px 0px;
+}
+.form-upper-container .grade-form-container .submit-button:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=grade-form.css.map */

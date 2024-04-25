@@ -94,6 +94,7 @@
 
     .buttons-container {
       display: flex;
+      justify-content: space-between;
 
       .reject-button {
         @include redButton(10px);

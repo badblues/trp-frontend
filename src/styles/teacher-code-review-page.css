@@ -86,6 +86,7 @@
 }
 .code-review-page .right-container .buttons-container {
   display: flex;
+  justify-content: space-between;
 }
 .code-review-page .right-container .buttons-container .reject-button {
   height: fit-content;

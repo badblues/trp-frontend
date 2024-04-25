@@ -16,6 +16,7 @@ import Loader from "../../Loader.tsx";
 import Tests from "../../item-containers/Tests.tsx";
 import { LabWorkVariantTest } from "../../../models/domain/LabWorkVariantTest.ts";
 import StudentTestList from "../../item-containers/StudentTestList.tsx";
+import GradeForm from "../../forms/GradeForm.tsx";
 
 const TeacherCodeReviewPage = () => {
   const { disciplineId, teamAppointmentId, codeReviewId } = useParams();
@@ -224,8 +225,11 @@ const TeacherCodeReviewPage = () => {
           extensions={[java()]}
         />
         <div className="buttons-container">
-          <button>На доработку</button>
-
+          <GradeForm
+            students={teamAppointment!.team.students}
+            onFormSubmit={() => {}}
+          />
+          <button className="reject-button">На доработку</button>
         </div>
       </div>
     </div>
