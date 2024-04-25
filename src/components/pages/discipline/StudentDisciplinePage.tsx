@@ -44,98 +44,15 @@ const StudentDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
         const teachers = teacherApointments.map(
           (appointment) => appointment.teacher
         );
+        const labWorksResponse =
+          await labWorkApiService.getLabWorksByDiscipline(discipline.id);
+        const teamAppointmentsResponse =
+          await teamAppointmentApiService.getTeamAppointmentsByDiscipline(
+            discipline.id
+          );
+        setTeamAppointments(teamAppointmentsResponse);
+        setLabWorks(labWorksResponse);
         setTeachers(teachers);
-        //TEMPORARY
-        setLabWorks([
-          {
-            id: 1,
-            title: "LR 1",
-            disciplineId: 1,
-            maxRating: 100,
-            variants: [
-              {
-                id: 1,
-                labWorkId: 1,
-                title: "1. Функция суммы",
-                description:
-                  "Создайте функцию add, которая принимает два аргумента (числа) и возвращает их сумму.",
-                language: Language.C,
-                testable: true,
-                functionName: "add",
-                returnType: CType.Int,
-                arguments: [
-                  {
-                    name: "a",
-                    type: "int",
-                  },
-                  {
-                    name: "b",
-                    type: "int",
-                  },
-                ],
-                inputRegex: "",
-                outputRegex: "",
-              },
-            ],
-          },
-        ]);
-        //TEMPORARY
-        setTeamAppointments([
-          {
-            id: 1,
-            team: {
-              id: 18,
-              disciplineId: 1,
-              students: [
-                {
-                  id: 5,
-                  group: {
-                    id: 1,
-                    name: "AVTTEMPORARY",
-                  },
-                  fullName: "ALEXEY",
-                  username: "username",
-                  role: Role.Student,
-                },
-                {
-                  id: 38,
-                  group: {
-                    id: 1,
-                    name: "AVTTEMPORARY",
-                  },
-                  fullName: "asdf",
-                  username: "username",
-                  role: Role.Student,
-                },
-              ],
-            },
-            status: TeamAppointmentStatus.InProgress,
-            labWorkVariant: {
-              id: 1,
-              labWorkId: 1,
-              title: "1. Функция суммы",
-              description:
-                "Создайте функцию add, которая принимает два аргумента (числа) и возвращает их сумму.",
-              language: Language.C,
-              testable: true,
-              functionName: "add",
-              returnType: CType.Int,
-              arguments: [
-                {
-                  name: "a",
-                  type: "int",
-                },
-                {
-                  name: "b",
-                  type: "int",
-                },
-              ],
-              inputRegex: "",
-              outputRegex: "",
-            },
-            codeReviewIds: [],
-          },
-        ]);
       } catch (error) {
         showErrorAlert(error.error);
       }
