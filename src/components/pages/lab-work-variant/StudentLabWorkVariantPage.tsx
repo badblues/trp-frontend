@@ -9,17 +9,13 @@ import { SolutionDTO } from "../../../models/DTO/SolutionDTO.ts";
 import { LabWorkVariantTest } from "../../../models/domain/LabWorkVariantTest.ts";
 import { TeamAppointment } from "../../../models/domain/TeamAppointment.ts";
 import StudentTestList from "../../item-containers/StudentTestList.tsx";
-import { Role } from "../../../models/domain/Role.ts";
 import { TeamAppointmentStatus } from "../../../models/domain/TeamAppointmentStatus.ts";
-import { Language } from "../../../models/domain/Language.ts";
-import { CType } from "../../../models/domain/Type.ts";
 import { useNavigate } from "react-router";
 import {
   UserContext,
   UserContextType,
 } from "../../../contexts/UserContext.tsx";
 import PageWithTabs from "../../PageWithTabs.tsx";
-import { Discipline } from "../../../models/domain/Discipline.ts";
 
 const StudentLabWorkVariantPage = () => {
   const { disciplineId, labWorkVariantId } = useParams();
@@ -27,9 +23,11 @@ const StudentLabWorkVariantPage = () => {
     UiContext
   ) as UiContextType;
   const { user } = useContext(UserContext) as UserContextType;
-  const { labWorkVariantApiService, labWorkVariantTestApiService } = useContext(
-    ApiContext
-  ) as ApiContextType;
+  const {
+    labWorkVariantApiService,
+    teamAppointmentApiService,
+    labWorkVariantTestApiService,
+  } = useContext(ApiContext) as ApiContextType;
   const navigate = useNavigate();
   const [code, setCode] = useState<string>("");
   const [outputText, setOutputText] = useState<string>("");
@@ -40,84 +38,29 @@ const StudentLabWorkVariantPage = () => {
   useEffect(() => {
     (async () => {
       try {
+        const teamAppointments =
+          await teamAppointmentApiService.getTeamAppointmentsByDiscipline(
+            Number(disciplineId)
+          );
+        const teamAppointment = teamAppointments.find(
+          (tA) => tA.labWorkVariant.id === Number(labWorkVariantId)
+        );
+        if (teamAppointment === undefined) {
+          navigate("/not-found");
+          return;
+        }
+        const testsResponse =
+          await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
+            Number(labWorkVariantId)
+          );
+        const solution = await labWorkVariantApiService.getSolution(
+          Number(labWorkVariantId)
+        );
         //TEMPORARY
-        // const solution = await labWorkVariantApiService.getSolution(
-        //   defaultLabWorkVariant.id
-        // );
-        // setCode(solution.code);
-        //TEMPORARY
-        setTests([
-          {
-            id: 1,
-            labWorkVariantId: 2,
-            input: "in",
-            output: "out",
-            open: true,
-          },
-          {
-            id: 2,
-            labWorkVariantId: 2,
-            input: "in2",
-            output: "out2",
-            open: true,
-          },
-        ]);
-        //TEMPORARY
-        setTeamAppointment({
-          id: 1,
-          team: {
-            id: 18,
-            disciplineId: 1,
-            students: [
-              {
-                id: 5,
-                group: {
-                  id: 1,
-                  name: "AVTTEMPORARY",
-                },
-                fullName: "ALEXEY",
-                username: "username",
-                role: Role.Student,
-              },
-              {
-                id: 38,
-                group: {
-                  id: 1,
-                  name: "AVTTEMPORARY",
-                },
-                fullName: "asdf",
-                username: "username",
-                role: Role.Student,
-              },
-            ],
-            leaderId: 38,
-          },
-          status: TeamAppointmentStatus.InProgress,
-          labWorkVariant: {
-            id: 1,
-            labWorkId: 1,
-            title: "1. Функция суммы",
-            description:
-              "Создайте функцию add, которая принимает два аргумента (числа) и возвращает их сумму.",
-            language: Language.C,
-            testable: true,
-            functionName: "add",
-            returnType: CType.Int,
-            arguments: [
-              {
-                name: "a",
-                type: "int",
-              },
-              {
-                name: "b",
-                type: "int",
-              },
-            ],
-            inputRegex: "",
-            outputRegex: "",
-          },
-          codeReviewIds: [1, 2],
-        });
+        teamAppointment.codeReviewIds = [1, 2];
+        setTests(testsResponse);
+        setTeamAppointment(teamAppointment);
+        setCode(solution.code);
       } catch (error) {}
     })().then(() => {
       setLoading(false);
