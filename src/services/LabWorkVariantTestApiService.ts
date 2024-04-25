@@ -19,6 +19,18 @@ export default class LabWorkVariantTestApiService {
     }
   }
 
+  async getOpenLabWorkVariantTestsByLabWorkVariant(
+    labWorkVariantId: number
+  ): Promise<LabWorkVariantTest[]> {
+    let url = this.labWorkVariantApiUrl + `/${labWorkVariantId}/openTests`;
+    try {
+      const response = await http.get(url);
+      return response.data.data.labWorkVariantTests;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+
   async createLabWorkVariantTest(
     taskTest: LabWorkVariantTestDTO
   ): Promise<LabWorkVariantTest> {
