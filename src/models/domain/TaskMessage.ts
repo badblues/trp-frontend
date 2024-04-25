@@ -1,6 +1,6 @@
-import { Role } from "./Role";
+import { User } from "./User";
 
 export interface TaskMessage {
   message: string;
-  roleType: Role;
+  user: User;
 }
