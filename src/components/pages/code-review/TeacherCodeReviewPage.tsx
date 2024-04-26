@@ -17,16 +17,20 @@ import { LabWorkVariantTest } from "../../../models/domain/LabWorkVariantTest.ts
 import StudentTestList from "../../item-containers/StudentTestList.tsx";
 import GradeForm from "../../forms/GradeForm.tsx";
 import { ApiContext, ApiContextType } from "../../../contexts/ApiContext.tsx";
+import { LabWork } from "../../../models/domain/LabWork.ts";
 
 const TeacherCodeReviewPage = () => {
   const { disciplineId, teamAppointmentId, codeReviewId } = useParams();
   const { theme, showErrorAlert } = useContext(UiContext) as UiContextType;
-  const { codeReviewApiService } = useContext(ApiContext) as ApiContextType;
+  const { codeReviewApiService, labWorkApiService } = useContext(
+    ApiContext
+  ) as ApiContextType;
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
   const [codeReview, setCodeReview] = useState<CodeReview>();
   const [teamAppointment, setTeamAppointment] = useState<TeamAppointment>();
   const [messageText, setMessageText] = useState<string>("");
+  const [labWork, setLabWork] = useState<LabWork>();
   const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
 
   useEffect(() => {
@@ -48,64 +52,79 @@ const TeacherCodeReviewPage = () => {
             open: true,
           },
         ]);
-        setTeamAppointment({
-          id: 1,
-          team: {
-            id: 18,
-            disciplineId: 1,
-            students: [
-              {
-                id: 5,
-                group: {
-                  id: 1,
-                  name: "AVTTEMPORARY",
-                },
-                fullName: "ALEXEY",
-                username: "username",
-                role: Role.Student,
-              },
-              {
-                id: 38,
-                group: {
-                  id: 1,
-                  name: "AVTTEMPORARY",
-                },
-                fullName: "asdf",
-                username: "username",
-                role: Role.Student,
-              },
-            ],
-            leaderId: 38,
-          },
-          status: TeamAppointmentStatus.InProgress,
-          labWorkVariant: {
+        const teamAppointments = [
+          {
             id: 1,
-            labWorkId: 1,
-            title: "1. Функция суммы",
-            description:
-              "Создайте функцию add, которая принимает два аргумента (числа) и возвращает их сумму.",
-            language: Language.C,
-            testable: true,
-            functionName: "add",
-            returnType: CType.Int,
-            arguments: [
-              {
-                name: "a",
-                type: "int",
-              },
-              {
-                name: "b",
-                type: "int",
-              },
-            ],
-            inputRegex: "",
-            outputRegex: "",
+            team: {
+              id: 18,
+              disciplineId: 1,
+              students: [
+                {
+                  id: 5,
+                  group: {
+                    id: 1,
+                    name: "AVTTEMPORARY",
+                  },
+                  fullName: "ALEXEY",
+                  username: "username",
+                  role: Role.Student,
+                },
+                {
+                  id: 38,
+                  group: {
+                    id: 1,
+                    name: "AVTTEMPORARY",
+                  },
+                  fullName: "asdf",
+                  username: "username",
+                  role: Role.Student,
+                },
+              ],
+              leaderId: 38,
+            },
+            status: TeamAppointmentStatus.InProgress,
+            labWorkVariant: {
+              id: 1,
+              labWorkId: 1,
+              title: "1. Функция суммы",
+              description:
+                "Создайте функцию add, которая принимает два аргумента (числа) и возвращает их сумму.",
+              language: Language.C,
+              testable: true,
+              functionName: "add",
+              returnType: CType.Int,
+              arguments: [
+                {
+                  name: "a",
+                  type: "int",
+                },
+                {
+                  name: "b",
+                  type: "int",
+                },
+              ],
+              inputRegex: "",
+              outputRegex: "",
+            },
+            codeReviewIds: [],
           },
-          codeReviewIds: [],
-        });
+        ];
+        const teamAppointment = teamAppointments.find(
+          (tA) => tA.id === Number(teamAppointmentId)
+        );
+        if (teamAppointment === undefined) {
+          navigate("/not-found");
+          return;
+        }
+        setTeamAppointment(teamAppointment);
+        //rework
+        const labWorkResponse = await labWorkApiService.getLabWork(
+          teamAppointment.id
+        );
         const codeReviewResponse = await codeReviewApiService.getCodeReview(
           Number(codeReviewId)
         );
+        setLabWork(labWorkResponse);
         setCodeReview(codeReviewResponse);
       } catch (error) {
         showErrorAlert(error.error);
@@ -218,6 +237,7 @@ const TeacherCodeReviewPage = () => {
           <GradeForm
             students={teamAppointment!.team.students}
             onFormSubmit={() => {}}
+            maxGrade={labWork!.maxRating}
           />
           <button className="reject-button">На доработку</button>
         </div>
