@@ -18,6 +18,7 @@ import StudentTestList from "../../item-containers/StudentTestList.tsx";
 import GradeForm from "../../forms/GradeForm.tsx";
 import { ApiContext, ApiContextType } from "../../../contexts/ApiContext.tsx";
 import { LabWork } from "../../../models/domain/LabWork.ts";
+import { CodeReviewMessageDTO } from "../../../models/DTO/CodeReviewMessageDTO.ts";
 
 const TeacherCodeReviewPage = () => {
   const { disciplineId, teamAppointmentId, codeReviewId } = useParams();
@@ -27,6 +28,7 @@ const TeacherCodeReviewPage = () => {
   ) as ApiContextType;
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
+  const [messageSending, setMessageSending] = useState<boolean>(false);
   const [codeReview, setCodeReview] = useState<CodeReview>();
   const [teamAppointment, setTeamAppointment] = useState<TeamAppointment>();
   const [messageText, setMessageText] = useState<string>("");
@@ -140,6 +142,29 @@ const TeacherCodeReviewPage = () => {
     setMessageText(event.target.value);
   };
 
+  const sendMessage = async (): Promise<void> => {
+    if (messageText && messageText.length) {
+      try {
+        const messageDTO: CodeReviewMessageDTO = {
+          taskMessages: [{ message: messageText }],
+          codeMessages: [],
+        };
+        setMessageSending(true);
+        const codeReviewResponse = await codeReviewApiService.sendMessage(
+          Number(codeReviewId),
+          messageDTO
+        );
+        setCodeReview(codeReviewResponse);
+        setMessageSending(false);
+        setMessageText("");
+        console.log("asdfhjkas");
+      } catch (error) {
+        console.log(error)
+        showErrorAlert(error.error);
+      }
+    }
+  };
+
   if (loading) {
     return (
       <div className="loader-container">
@@ -185,10 +210,16 @@ const TeacherCodeReviewPage = () => {
               <div className="send-message-container">
                 <textarea
                   className="message-input"
-                  content={messageText}
+                  value={messageText}
                   onChange={onMessageTextChange}
-                ></textarea>
-                <button className="send-message-button">Отправить</button>
+                />
+                <button
+                  className="send-message-button"
+                  disabled={messageSending}
+                  onClick={sendMessage}
+                >
+                  {messageSending ? <Loader /> : "Отправить"}
+                </button>
               </div>
             </div>
           </div>
