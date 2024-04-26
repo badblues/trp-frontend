@@ -129,7 +129,7 @@ const TeacherDisciplineGroupPage = () => {
               inputRegex: "",
               outputRegex: "",
             },
-            codeReviewIds: [],
+            codeReviewIds: [1],
           },
         ]);
         setTeams(teamsResponse);

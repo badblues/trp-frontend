@@ -13,14 +13,15 @@ import { Language } from "../../../models/domain/Language.ts";
 import { CType } from "../../../models/domain/Type.ts";
 import PageWithTabs from "../../PageWithTabs.tsx";
 import Loader from "../../Loader.tsx";
-import Tests from "../../item-containers/Tests.tsx";
 import { LabWorkVariantTest } from "../../../models/domain/LabWorkVariantTest.ts";
 import StudentTestList from "../../item-containers/StudentTestList.tsx";
 import GradeForm from "../../forms/GradeForm.tsx";
+import { ApiContext, ApiContextType } from "../../../contexts/ApiContext.tsx";
 
 const TeacherCodeReviewPage = () => {
   const { disciplineId, teamAppointmentId, codeReviewId } = useParams();
   const { theme, showErrorAlert } = useContext(UiContext) as UiContextType;
+  const { codeReviewApiService } = useContext(ApiContext) as ApiContextType;
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
   const [codeReview, setCodeReview] = useState<CodeReview>();
@@ -102,21 +103,10 @@ const TeacherCodeReviewPage = () => {
           },
           codeReviewIds: [],
         });
-        setCodeReview({
-          id: 1,
-          code: "int func(int a, int b) {\n\treturn a + b;\n}",
-          taskMessages: [
-            {
-              message: "Hello",
-              roleType: Role.Student,
-            },
-            {
-              message: "Hellor there ",
-              roleType: Role.Teacher,
-            },
-          ],
-          codeThreads: [],
-        });
+        const codeReviewResponse = await codeReviewApiService.getCodeReview(
+          Number(codeReviewId)
+        );
+        setCodeReview(codeReviewResponse);
       } catch (error) {
         showErrorAlert(error.error);
         if (error.status === 404) navigate("/not-found");
@@ -159,13 +149,13 @@ const TeacherCodeReviewPage = () => {
             </div>
             <div className="chat-container">
               <div className="chat-messages">
-                {codeReview?.taskMessages.map((taskMessage) => (
+                {codeReview?.messages.map((taskMessage) => (
                   <p
                     className={`message ${
-                      taskMessage.roleType === Role.Student ? "left" : "right"
+                      taskMessage.user.role === Role.Student ? "left" : "right"
                     }`}
                   >
-                    {taskMessage.roleType === Role.Student
+                    {taskMessage.user.role === Role.Student
                       ? "Студенты:"
                       : "Преподаватель:"}
                     <br />
