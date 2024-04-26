@@ -48,6 +48,7 @@ const StudentCodeReviewPage = () => {
         const codeReviewResponse = await codeReviewApiService.getCodeReview(
           Number(codeReviewId)
         );
+
         const testsResponse =
           await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
             teamAppointment.labWorkVariant.id
@@ -110,9 +111,9 @@ const StudentCodeReviewPage = () => {
               <h3 className="team-title">
                 Бригада {teamAppointment?.team.id}:
               </h3>
-              {teamAppointment?.team.students.map((student) => (
+              {teamAppointment!.team.students.map((student) => (
                 <p className="student-name">
-                  {teamAppointment.team.leaderId === student.id
+                  {teamAppointment!.team.leaderId === student.id
                     ? "Лидер: "
                     : ""}
                   {student.fullName}
@@ -121,17 +122,13 @@ const StudentCodeReviewPage = () => {
             </div>
             <div className="chat-container">
               <div className="chat-messages">
-                {codeReview?.messages.map((taskMessage) => (
+                {codeReview!.messages.map((taskMessage) => (
                   <p
                     className={`message ${
                       taskMessage.user.role === Role.Student ? "right" : "left"
                     }`}
                   >
-                    <p>
-                      {taskMessage.user.role === Role.Student
-                        ? "Студенты:"
-                        : "Преподаватель:"}
-                    </p>
+                    <p>{taskMessage.user.fullName}</p>
                     {taskMessage.message}
                   </p>
                 ))}

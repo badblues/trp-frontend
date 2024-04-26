@@ -49,6 +49,7 @@
         .chat-messages {
           display: flex;
           flex-direction: column;
+          overflow-y: auto;
 
           .message {
             font-family: $main-font;
@@ -56,7 +57,7 @@
             border-radius: 5px;
             padding: 5px;
             max-width: 80%;
-            margin: 10px 0px 0px 0px;
+            margin: 10px 10px 0px 0px;
 
             &.left {
               align-self: flex-start;

@@ -36,6 +36,7 @@
 .code-review-page .left-container .info-container .chat-container .chat-messages {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 .code-review-page .left-container .info-container .chat-container .chat-messages .message {
   font-family: "Montserrat", sans-serif;
@@ -43,7 +44,7 @@
   border-radius: 5px;
   padding: 5px;
   max-width: 80%;
-  margin: 10px 0px 0px 0px;
+  margin: 10px 10px 0px 0px;
 }
 .code-review-page .left-container .info-container .chat-container .chat-messages .message.left {
   align-self: flex-start;

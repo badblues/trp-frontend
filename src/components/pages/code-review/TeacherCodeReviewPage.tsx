@@ -159,7 +159,7 @@ const TeacherCodeReviewPage = () => {
         setMessageText("");
         console.log("asdfhjkas");
       } catch (error) {
-        console.log(error)
+        console.log(error);
         showErrorAlert(error.error);
       }
     }
@@ -199,9 +199,7 @@ const TeacherCodeReviewPage = () => {
                       taskMessage.user.role === Role.Student ? "left" : "right"
                     }`}
                   >
-                    {taskMessage.user.role === Role.Student
-                      ? "Студенты:"
-                      : "Преподаватель:"}
+                    {taskMessage.user.fullName}
                     <br />
                     {taskMessage.message}
                   </p>
