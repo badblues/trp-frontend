@@ -12,7 +12,7 @@ interface Props {
   onFormSubmit: (gradeDTO: GradeDTO[], onDone: () => void) => void;
 }
 
-const GradeForm: React.FC<Props> = ({ students, onFormSubmit }) => {
+const GradeForm: React.FC<Props> = ({ students, onFormSubmit, maxGrade }) => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const { theme } = useContext(UiContext) as UiContextType;
@@ -20,8 +20,21 @@ const GradeForm: React.FC<Props> = ({ students, onFormSubmit }) => {
   const [sameGrade, setSameGrade] = useState<boolean>(true);
 
   const onSubmit = (data: any) => {
+    let gradeDTOs: GradeDTO[];
+    if (sameGrade) {
+      gradeDTOs = students.map((s) => ({
+        studentId: s.id,
+        grade: data.grade,
+      }));
+    } else {
+      gradeDTOs = students.map((s, index) => ({
+        studentId: s.id,
+        grade: data.grade[index],
+      }));
+    }
     setLoading(true);
-    onFormSubmit(data as GradeDTO, () => {
+    console.log(gradeDTOs);
+    onFormSubmit(gradeDTOs, () => {
       setLoading(false);
     });
   };
@@ -37,9 +50,15 @@ const GradeForm: React.FC<Props> = ({ students, onFormSubmit }) => {
               </label>
               <input
                 className="form-input"
-                name="gradeInput"
                 type="number"
-                defaultValue={99}
+                defaultValue={maxGrade}
+                max={maxGrade}
+                min={0}
+                {...register("grade", {
+                  required: "Необходимо ввести название группы",
+                  max: maxGrade,
+                  min: 0,
+                })}
               ></input>
             </div>
 
@@ -76,11 +95,13 @@ const GradeForm: React.FC<Props> = ({ students, onFormSubmit }) => {
                 id="name"
                 className="form-input"
                 type="number"
-                placeholder="Название..."
-                autoComplete="off"
-                defaultValue={99}
-                {...register("name", {
+                defaultValue={maxGrade}
+                max={maxGrade}
+                min={0}
+                {...register(`grade[${index}]`, {
                   required: "Необходимо ввести название группы",
+                  max: maxGrade,
+                  min: 0,
                 })}
               />
               <p className="form-text">{errors.name?.message as string}</p>
