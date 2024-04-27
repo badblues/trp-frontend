@@ -159,7 +159,7 @@ const StudentLabWorkVariantPage = () => {
           </div>
           <div className="lab-work-variant-information">
             {teamAppointment?.codeReviewIds.map((cR) => (
-              <h4
+              <h4 className="code-review-link"
                 onClick={() =>
                   navigate(
                     `/disciplines/${disciplineId}/team-appointments/${teamAppointment.id}/code-review/${cR}`

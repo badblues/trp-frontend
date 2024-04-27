@@ -31,6 +31,13 @@
     .lab-work-variant-information {
       width: fit-content;
       margin: 0px 10px 0px 0px;
+
+      .code-review-link {
+        &:hover {
+          cursor: pointer;
+          color: red;
+        }
+      }
     }
 
     .lab-work-variant-ide {

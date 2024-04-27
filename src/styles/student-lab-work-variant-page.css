@@ -23,6 +23,10 @@
   width: fit-content;
   margin: 0px 10px 0px 0px;
 }
+.lab-work-variant-page .left-container .lab-work-variant-information .code-review-link:hover {
+  cursor: pointer;
+  color: red;
+}
 .lab-work-variant-page .left-container .lab-work-variant-ide {
   display: flex;
 }
