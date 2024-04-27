@@ -13,9 +13,6 @@
   height: fit-content;
   font-size: large;
   font-family: "Montserrat", sans-serif;
-  border: solid;
-  border-width: 1px;
-  border-color: transparent white transparent white;
   background-color: #b4b4b4;
 }
 .page-with-tabs .switch-panel .switch-panel-button:hover {
