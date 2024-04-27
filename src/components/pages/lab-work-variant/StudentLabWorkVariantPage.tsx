@@ -16,6 +16,7 @@ import {
   UserContextType,
 } from "../../../contexts/UserContext.tsx";
 import PageWithTabs from "../../PageWithTabs.tsx";
+import { TestResult } from "../../../models/domain/TestResult.ts";
 
 const StudentLabWorkVariantPage = () => {
   const { disciplineId, labWorkVariantId } = useParams();
@@ -34,6 +35,7 @@ const StudentLabWorkVariantPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
   const [teamAppointment, setTeamAppointment] = useState<TeamAppointment>();
+  const [isTesting, setIsTesting] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -89,13 +91,27 @@ const StudentLabWorkVariantPage = () => {
 
   const executeSolution = async () => {
     try {
-      setOutputText("");
-      const response = await labWorkVariantApiService.executeSolution(
+      setIsTesting(true);
+      const testResult = await labWorkVariantApiService.executeSolution(
         teamAppointment!.labWorkVariant.id
       );
-      setOutputText(response);
+      const testSuccess = testResult.totalTests === testResult.testPassed;
+      setOutputText(
+        `\nПройдено ${testResult.testPassed}/${testResult.totalTests} тестов` +
+          `${
+            testSuccess
+              ? "\nУспешно"
+              : `\nИдентификаторы проваленных тестов: ${testResult.failedTestIds.map(
+                  (id) => id.toString()
+                )}`
+          }`
+      );
+      setIsTesting(false);
     } catch (error) {
       showErrorAlert(error.error);
+      const testResult = error.data as TestResult;
+      setOutputText(`${testResult.errorMessage}`);
+      setIsTesting(false);
     }
   };
 
@@ -175,8 +191,12 @@ const StudentLabWorkVariantPage = () => {
           ) : null}
           {teamAppointment?.status === TeamAppointmentStatus.InProgress ||
           teamAppointment?.status === TeamAppointmentStatus.Tested ? (
-            <button className="control-button" onClick={executeSolution}>
-              ЗАПУСТИТЬ
+            <button
+              className="control-button"
+              onClick={executeSolution}
+              disabled={isTesting}
+            >
+              {isTesting ? <Loader /> : "ЗАПУСТИТЬ"}
             </button>
           ) : null}
           {teamAppointment?.status === TeamAppointmentStatus.Tested &&
