@@ -23,44 +23,64 @@
     }
   }
 
-  .lab-work-variant-information {
-    min-width: 200px;
-    max-width: 500px;
-    width: fit-content;
-    margin: 0px 10px 0px 0px;
+  .left-container {
+    width: 40%;
+    min-width: none;
+
+    .lab-work-variant-information {
+      width: fit-content;
+      margin: 0px 10px 0px 0px;
+    }
+
+    .lab-work-variant-ide {
+      display: flex;
+
+      .editor-and-output {
+        display: flex;
+        flex-direction: column;
+
+        .output {
+          margin-top: 10px;
+          padding: 5px;
+          height: 150px;
+          width: 600px;
+          resize: none;
+          background-color: $background-secondary-color;
+        }
+      }
+
+      .control-panel {
+        margin-left: 15px;
+        padding: 5px;
+        background-color: $background-secondary-color;
+        border-radius: 5px;
+        height: fit-content;
+
+        .control-button {
+          @include button(5px 0px 5px 0px);
+        }
+
+        .send-button {
+          @include greenButton();
+        }
+      }
+    }
   }
 
   .lab-work-variant-ide {
     display: flex;
 
     .editor-and-output {
-      display: flex;
-      flex-direction: column;
-
       .output {
-        margin-top: 10px;
-        padding: 5px;
-        height: 150px;
         width: 600px;
+        height: 200px;
         resize: none;
-        background-color: $background-secondary-color;
+        overflow-y: auto;
       }
     }
 
     .control-panel {
-      margin-left: 15px;
-      padding: 5px;
-      background-color: $background-secondary-color;
-      border-radius: 5px;
-      height: fit-content;
-
-      .control-button {
-        @include button(5px 0px 5px 0px);
-      }
-
-      .send-button {
-        @include greenButton();
-      }
+      width: fit-content;
     }
   }
 }

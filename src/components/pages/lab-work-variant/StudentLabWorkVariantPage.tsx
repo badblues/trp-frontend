@@ -109,51 +109,53 @@ const StudentLabWorkVariantPage = () => {
 
   return (
     <div className={`lab-work-variant-page ${theme}`}>
-      <PageWithTabs titles={["Задание", "КодРевью"]}>
-        <div className="lab-work-variant-information">
-          <h1>{teamAppointment!.labWorkVariant.title}</h1>
-          <h2>Язык: {teamAppointment!.labWorkVariant.language}</h2>
-          <h2>Задание:</h2>
-          <p>{teamAppointment!.labWorkVariant.description}</p>
-          {teamAppointment!.labWorkVariant.testable ? (
-            <>
-              <h2>
-                Функция: {teamAppointment!.labWorkVariant.returnType}{" "}
-                {teamAppointment!.labWorkVariant.functionName}(
-                {teamAppointment!.labWorkVariant.arguments.map(
-                  (argument, index) => (
-                    <>
-                      <span>
-                        {argument.type} {argument.name}
-                      </span>
-                      {index <
-                      teamAppointment!.labWorkVariant.arguments.length - 1 ? (
-                        <span>, </span>
-                      ) : null}
-                    </>
+      <div className="left-container">
+        <PageWithTabs titles={["Задание", "КодРевью"]}>
+          <div className="lab-work-variant-information">
+            <h1>{teamAppointment!.labWorkVariant.title}</h1>
+            <h2>Язык: {teamAppointment!.labWorkVariant.language}</h2>
+            <h2>Задание:</h2>
+            <p>{teamAppointment!.labWorkVariant.description}</p>
+            {teamAppointment!.labWorkVariant.testable ? (
+              <>
+                <h2>
+                  Функция: {teamAppointment!.labWorkVariant.returnType}{" "}
+                  {teamAppointment!.labWorkVariant.functionName}(
+                  {teamAppointment!.labWorkVariant.arguments.map(
+                    (argument, index) => (
+                      <>
+                        <span>
+                          {argument.type} {argument.name}
+                        </span>
+                        {index <
+                        teamAppointment!.labWorkVariant.arguments.length - 1 ? (
+                          <span>, </span>
+                        ) : null}
+                      </>
+                    )
+                  )}
                   )
-                )}
-                )
-              </h2>
-              <h2>Примеры тестов:</h2>
-              <StudentTestList tests={tests} />
-            </>
-          ) : null}
-        </div>
-        <div className="lab-work-variant-information">
-          {teamAppointment?.codeReviewIds.map((cR) => (
-            <h4
-              onClick={() =>
-                navigate(
-                  `/disciplines/${disciplineId}/team-appointments/${teamAppointment.id}/code-review/${cR}`
-                )
-              }
-            >
-              Код Ревью {cR}
-            </h4>
-          ))}
-        </div>
-      </PageWithTabs>
+                </h2>
+                <h2>Примеры тестов:</h2>
+                <StudentTestList tests={tests} />
+              </>
+            ) : null}
+          </div>
+          <div className="lab-work-variant-information">
+            {teamAppointment?.codeReviewIds.map((cR) => (
+              <h4
+                onClick={() =>
+                  navigate(
+                    `/disciplines/${disciplineId}/team-appointments/${teamAppointment.id}/code-review/${cR}`
+                  )
+                }
+              >
+                Код Ревью {cR}
+              </h4>
+            ))}
+          </div>
+        </PageWithTabs>
+      </div>
       <div className="lab-work-variant-ide">
         <div className="editor-and-output">
           <CodeEditor solutionCode={code} onCodeChange={handleCodeChange} />
