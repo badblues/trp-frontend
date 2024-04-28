@@ -14,6 +14,7 @@ import { ApiContext, ApiContextType } from "../../../contexts/ApiContext.tsx";
 import { LabWorkVariantTest } from "../../../models/domain/LabWorkVariantTest.ts";
 import StudentTestList from "../../item-containers/StudentTestList.tsx";
 import { CodeReviewMessageDTO } from "../../../models/DTO/CodeReviewMessageDTO.ts";
+import { LabWork } from "../../../models/domain/LabWork.ts";
 
 const StudentCodeReviewPage = () => {
   const { disciplineId, teamAppointmentId, codeReviewId } = useParams();
@@ -22,6 +23,7 @@ const StudentCodeReviewPage = () => {
     teamAppointmentApiService,
     codeReviewApiService,
     labWorkVariantTestApiService,
+    labWorkApiService,
   } = useContext(ApiContext) as ApiContextType;
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
@@ -29,6 +31,7 @@ const StudentCodeReviewPage = () => {
   const [teamAppointment, setTeamAppointment] = useState<TeamAppointment>();
   const [messageText, setMessageText] = useState<string>("");
   const [messageSending, setMessageSending] = useState<boolean>(false);
+  const [labWork, setLabWork] = useState<LabWork>();
   const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
 
   useEffect(() => {
@@ -53,6 +56,10 @@ const StudentCodeReviewPage = () => {
           await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
             teamAppointment.labWorkVariant.id
           );
+        const labWorkResponse = await labWorkApiService.getLabWork(
+          teamAppointment.labWorkVariant.labWorkId
+        );
+        setLabWork(labWorkResponse);
         setTests(testsResponse);
         setCodeReview(codeReviewResponse);
         setTeamAppointment(teamAppointment);
@@ -151,6 +158,7 @@ const StudentCodeReviewPage = () => {
           </div>
           <div className="lab-work-variant-information">
             <h1>{teamAppointment!.labWorkVariant.title}</h1>
+            <h2>Максимальный балл: {labWork?.maxRating}</h2>
             <h2>Язык: {teamAppointment!.labWorkVariant.language}</h2>
             <h2>Задание:</h2>
             <p>{teamAppointment!.labWorkVariant.description}</p>

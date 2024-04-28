@@ -223,6 +223,7 @@ const TeacherCodeReviewPage = () => {
           </div>
           <div className="lab-work-variant-information">
             <h1>{teamAppointment!.labWorkVariant.title}</h1>
+            <h2>Максимальный балл: {labWork?.maxRating}</h2>
             <h2>Язык: {teamAppointment!.labWorkVariant.language}</h2>
             <h2>Задание:</h2>
             <p>{teamAppointment!.labWorkVariant.description}</p>
