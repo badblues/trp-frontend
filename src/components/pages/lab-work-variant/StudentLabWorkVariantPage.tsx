@@ -44,31 +44,32 @@ const StudentLabWorkVariantPage = () => {
           await teamAppointmentApiService.getTeamAppointmentsByDiscipline(
             Number(disciplineId)
           );
-        const teamAppointment = teamAppointments.find(
+        const teamAppointmentResponse = teamAppointments.find(
           (tA) => tA.labWorkVariant.id === Number(labWorkVariantId)
         );
-        if (teamAppointment === undefined) {
+        if (teamAppointmentResponse === undefined) {
           navigate("/not-found");
           return;
         }
-        const testsResponse =
-          await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
-            Number(labWorkVariantId)
-          );
+        console.log(teamAppointmentResponse);
+        // const testsResponse =
+        //   await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
+        //     Number(labWorkVariantId)
+        //   );
         const solution = await labWorkVariantApiService.getSolution(
           Number(labWorkVariantId)
         );
-        //TEMPORARY
-        teamAppointment.codeReviewIds = [1, 2];
-        setTests(testsResponse);
-        setTeamAppointment(teamAppointment);
+        // setTests(testsResponse);
+        setTeamAppointment(teamAppointmentResponse);
         setCode(solution.code);
-      } catch (error) {}
+      } catch (error) {
+        showErrorAlert(error.error);
+      }
     })().then(() => {
       setLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [outputText]);
 
   const handleCodeChange = (code: string) => {
     setCode(code);
@@ -128,6 +129,7 @@ const StudentLabWorkVariantPage = () => {
       </div>
     );
   }
+  console.log(teamAppointment);
 
   return (
     <div className={`lab-work-variant-page ${theme}`}>
@@ -164,7 +166,7 @@ const StudentLabWorkVariantPage = () => {
             ) : null}
           </div>
           <div className="lab-work-variant-information">
-            {teamAppointment?.codeReviewIds.map((cR) => (
+            {teamAppointment?.codeReviewIds?.map((cR) => (
               <h4
                 className="code-review-link"
                 onClick={() =>
