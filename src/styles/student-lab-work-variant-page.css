@@ -27,14 +27,14 @@
   cursor: pointer;
   color: red;
 }
-.lab-work-variant-page .left-container .lab-work-variant-ide {
+.lab-work-variant-page .lab-work-variant-ide {
   display: flex;
 }
-.lab-work-variant-page .left-container .lab-work-variant-ide .editor-and-output {
+.lab-work-variant-page .lab-work-variant-ide .editor-and-output {
   display: flex;
   flex-direction: column;
 }
-.lab-work-variant-page .left-container .lab-work-variant-ide .editor-and-output .output {
+.lab-work-variant-page .lab-work-variant-ide .editor-and-output .output {
   margin-top: 10px;
   padding: 5px;
   height: 150px;
@@ -42,14 +42,14 @@
   resize: none;
   background-color: #b4b4b4;
 }
-.lab-work-variant-page .left-container .lab-work-variant-ide .control-panel {
+.lab-work-variant-page .lab-work-variant-ide .control-panel {
   margin-left: 15px;
   padding: 5px;
   background-color: #b4b4b4;
   border-radius: 5px;
   height: fit-content;
 }
-.lab-work-variant-page .left-container .lab-work-variant-ide .control-panel .control-button {
+.lab-work-variant-page .lab-work-variant-ide .control-panel .control-button {
   height: fit-content;
   min-width: 100px;
   width: fit-content;
@@ -63,10 +63,10 @@
   padding: 10px;
   margin: 5px 0px 5px 0px;
 }
-.lab-work-variant-page .left-container .lab-work-variant-ide .control-panel .control-button:hover {
+.lab-work-variant-page .lab-work-variant-ide .control-panel .control-button:hover {
   cursor: pointer;
 }
-.lab-work-variant-page .left-container .lab-work-variant-ide .control-panel .send-button {
+.lab-work-variant-page .lab-work-variant-ide .control-panel .send-to-review-button {
   height: fit-content;
   min-width: 100px;
   width: fit-content;
@@ -78,9 +78,9 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  margin: 0px;
+  margin: 5px 0px 5px 0px;
 }
-.lab-work-variant-page .left-container .lab-work-variant-ide .control-panel .send-button:hover {
+.lab-work-variant-page .lab-work-variant-ide .control-panel .send-to-review-button:hover {
   cursor: pointer;
 }
 .lab-work-variant-page .lab-work-variant-ide {

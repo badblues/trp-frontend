@@ -115,6 +115,12 @@ const StudentLabWorkVariantPage = () => {
     }
   };
 
+  const sendToReview = async () => {
+    try {
+      await teamAppointmentApiService.sendToCodeReview(teamAppointment!.id);
+    } catch {}
+  };
+
   if (loading) {
     return (
       <div className="loader-container">
@@ -159,7 +165,8 @@ const StudentLabWorkVariantPage = () => {
           </div>
           <div className="lab-work-variant-information">
             {teamAppointment?.codeReviewIds.map((cR) => (
-              <h4 className="code-review-link"
+              <h4
+                className="code-review-link"
                 onClick={() =>
                   navigate(
                     `/disciplines/${disciplineId}/team-appointments/${teamAppointment.id}/code-review/${cR}`
@@ -200,8 +207,8 @@ const StudentLabWorkVariantPage = () => {
             </button>
           ) : null}
           {teamAppointment?.status === TeamAppointmentStatus.Tested &&
-          user?.id === teamAppointment.team.leaderId ? (
-            <button className="send-button" onClick={executeSolution}>
+          user?.id === teamAppointment.team.leaderStudentId ? (
+            <button className="send-to-review-button" onClick={sendToReview}>
               НА ПРОВЕРКУ
             </button>
           ) : null}

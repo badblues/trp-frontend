@@ -4,5 +4,5 @@ export interface Team {
   id: number;
   disciplineId: number;
   students: Student[];
-  leaderId: number;
+  leaderStudentId: number;
 }

@@ -39,38 +39,37 @@
         }
       }
     }
+  }
+  .lab-work-variant-ide {
+    display: flex;
 
-    .lab-work-variant-ide {
+    .editor-and-output {
       display: flex;
+      flex-direction: column;
 
-      .editor-and-output {
-        display: flex;
-        flex-direction: column;
+      .output {
+        margin-top: 10px;
+        padding: 5px;
+        height: 150px;
+        width: 600px;
+        resize: none;
+        background-color: $background-secondary-color;
+      }
+    }
 
-        .output {
-          margin-top: 10px;
-          padding: 5px;
-          height: 150px;
-          width: 600px;
-          resize: none;
-          background-color: $background-secondary-color;
-        }
+    .control-panel {
+      margin-left: 15px;
+      padding: 5px;
+      background-color: $background-secondary-color;
+      border-radius: 5px;
+      height: fit-content;
+
+      .control-button {
+        @include button(5px 0px 5px 0px);
       }
 
-      .control-panel {
-        margin-left: 15px;
-        padding: 5px;
-        background-color: $background-secondary-color;
-        border-radius: 5px;
-        height: fit-content;
-
-        .control-button {
-          @include button(5px 0px 5px 0px);
-        }
-
-        .send-button {
-          @include greenButton();
-        }
+      .send-to-review-button {
+        @include greenButton(5px 0px 5px 0px);
       }
     }
   }
