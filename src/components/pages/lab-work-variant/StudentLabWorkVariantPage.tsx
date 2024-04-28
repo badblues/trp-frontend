@@ -192,13 +192,15 @@ const StudentLabWorkVariantPage = () => {
           ></textarea>
         </div>
         <div className="control-panel">
-          {teamAppointment?.status === TeamAppointmentStatus.InProgress ||
+          {teamAppointment?.status === TeamAppointmentStatus.New ||
+          teamAppointment?.status === TeamAppointmentStatus.InProgress ||
           teamAppointment?.status === TeamAppointmentStatus.Tested ? (
             <button className="control-button" onClick={saveCode}>
               СОХРАНИТЬ
             </button>
           ) : null}
-          {teamAppointment?.status === TeamAppointmentStatus.InProgress ||
+          {teamAppointment?.status === TeamAppointmentStatus.New ||
+          teamAppointment?.status === TeamAppointmentStatus.InProgress ||
           teamAppointment?.status === TeamAppointmentStatus.Tested ? (
             <button
               className="control-button"
