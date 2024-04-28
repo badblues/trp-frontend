@@ -9,35 +9,32 @@ import { Team } from "../../models/domain/Team.ts";
 interface Props {
   teamAppointments: TeamAppointment[];
   labWorks: LabWork[];
+  teams: Team[];
   onVariantClick: (variant: LabWorkVariant, team: Team) => void;
 }
 
 const TeamLabWorkAppointments: React.FC<Props> = ({
   teamAppointments,
   labWorks,
+  teams,
   onVariantClick,
 }) => {
   const { theme } = useContext(UiContext) as UiContextType;
 
-  teamAppointments.sort((t1, t2): number => {
-    return t1.team.id - t2.team.id;
+  teams.sort((t1, t2): number => {
+    return t1.id - t2.id;
   });
-
-  const teamIds = Array.from(
-    new Set(teamAppointments.map((appointment) => appointment.team.id))
-  );
+  console.log(teams);
 
   return (
     <div className={`team-lab-work-appointments-container ${theme}`}>
-      {teamIds.map((teamId, index) => (
-        <div key={index} className="team-container">
+      {teams.map((team) => (
+        <div key={team.id} className="team-container">
           <div className="team-name">
-            <p className="team-title">Бригада {teamId}:</p>
-            {teamAppointments
-              .filter((appointment) => appointment.team.id == teamId)[0]
-              .team.students.map((student) => (
-                <p className="student-name">{student.fullName}</p>
-              ))}
+            <p className="team-title">Бригада {team.id}:</p>
+            {team.students.map((student) => (
+              <p className="student-name">{student.fullName}</p>
+            ))}
           </div>
           <div className="lab-works-container">
             {labWorks.map((labWork) => (
@@ -48,7 +45,7 @@ const TeamLabWorkAppointments: React.FC<Props> = ({
                       teamAppointments.some(
                         (appointment) =>
                           variant.id === appointment.labWorkVariant.id &&
-                          appointment.team.id === teamId
+                          appointment.team.id === team.id
                       )
                     )
                       ? "appointed"
@@ -61,20 +58,14 @@ const TeamLabWorkAppointments: React.FC<Props> = ({
                   {labWork.variants.map((variant) => (
                     <div
                       className="variant"
-                      onClick={() =>
-                        onVariantClick(
-                          variant,
-                          teamAppointments.find((t) => t.team.id === teamId)!
-                            .team
-                        )
-                      }
+                      onClick={() => onVariantClick(variant, team)}
                     >
                       <p
                         className={`variant-title ${
                           teamAppointments.some(
                             (appointment) =>
                               variant.id === appointment.labWorkVariant.id &&
-                              appointment.team.id === teamId
+                              appointment.team.id === team.id
                           )
                             ? "appointed"
                             : "not-appointed"

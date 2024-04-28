@@ -41,7 +41,7 @@ const TeacherDisciplineGroupPage = () => {
   const [group, setGroup] = useState<Group>();
   const [discipline, setDiscipline] = useState<Discipline>();
   const [studentsWithoutTeam, setStudentsWithoutTeam] = useState<Student[]>();
-  const [teams, setTeams] = useState<Team[]>();
+  const [teams, setTeams] = useState<Team[]>([]);
   const [teamAppointments, setTeamAppointments] = useState<TeamAppointment[]>(
     []
   );
@@ -124,6 +124,7 @@ const TeacherDisciplineGroupPage = () => {
         };
         const newAppointment =
           await teamAppointmentApiService.createAppointment(appointment);
+        newAppointment.team = team;
         setTeamAppointments([newAppointment, ...teamAppointments]);
       }
     } catch (error) {
@@ -163,6 +164,7 @@ const TeacherDisciplineGroupPage = () => {
           <TeamLabWorks
             teamAppointments={teamAppointments}
             labWorks={labWorks}
+            teams={teams}
             onVariantClick={handleVariantClick}
           />
         </div>
@@ -178,6 +180,7 @@ const TeacherDisciplineGroupPage = () => {
           <TeamLabWorkAppointments
             teamAppointments={teamAppointments}
             labWorks={labWorks}
+            teams={teams}
             onVariantClick={appointVariant}
           />
         </div>
