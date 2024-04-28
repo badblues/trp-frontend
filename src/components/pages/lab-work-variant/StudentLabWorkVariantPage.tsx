@@ -52,14 +52,14 @@ const StudentLabWorkVariantPage = () => {
           return;
         }
         console.log(teamAppointmentResponse);
-        // const testsResponse =
-        //   await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
-        //     Number(labWorkVariantId)
-        //   );
+        const testsResponse =
+          await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
+            Number(labWorkVariantId)
+          );
         const solution = await labWorkVariantApiService.getSolution(
           Number(labWorkVariantId)
         );
-        // setTests(testsResponse);
+        setTests(testsResponse);
         setTeamAppointment(teamAppointmentResponse);
         setCode(solution.code);
       } catch (error) {
