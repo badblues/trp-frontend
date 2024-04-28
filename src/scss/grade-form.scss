@@ -3,7 +3,7 @@
 
 .form-upper-container {
   display: flex;
-  
+
   .grade-form-container {
     overflow: auto;
     display: flex;
@@ -11,11 +11,11 @@
     align-items: center;
     font-family: $main-font;
     border-radius: 10px;
-  
+
     &.dark-mode {
       background: $dark-mode-background-secondary-color;
       color: $dark-mode-text-color;
-  
+
       .form-input-container {
         .form-input {
           background: $dark-mode-background-color;
@@ -29,19 +29,19 @@
         }
       }
     }
-  
+
     .form-input-container {
       display: flex;
       flex-direction: column;
       width: 90%;
       margin: 0px 0px 5px 0px;
-  
+
       .form-label {
         font-size: medium;
         align-self: flex-start;
         margin: 5px;
       }
-  
+
       .form-input {
         width: 100%;
         min-height: 40px;
@@ -50,10 +50,18 @@
         padding: 10px;
       }
     }
-  
+
     .submit-button {
-      @include button(5px 0px 5px 0px);
+      @include greenButton(5px 0px 5px 0px);
+    }
+  }
+
+  .sameGradeToggle {
+    user-select: none;
+    margin: 10px;
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }
-

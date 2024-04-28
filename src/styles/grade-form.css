@@ -46,7 +46,7 @@
   min-width: 100px;
   width: fit-content;
   border-radius: 7px;
-  background: #1e1e1e;
+  background: #05a000;
   font-family: "Montserrat", sans-serif;
   color: white;
   display: flex;
@@ -56,6 +56,13 @@
   margin: 5px 0px 5px 0px;
 }
 .form-upper-container .grade-form-container .submit-button:hover {
+  cursor: pointer;
+}
+.form-upper-container .sameGradeToggle {
+  user-select: none;
+  margin: 10px;
+}
+.form-upper-container .sameGradeToggle:hover {
   cursor: pointer;
 }
 

@@ -11,6 +11,7 @@
   padding-right: 20px;
   color: #181818;
   font-family: "Montserrat", sans-serif;
+  user-select: none;
 }
 .navbar-container.dark-mode {
   background-color: #2e2e2e;

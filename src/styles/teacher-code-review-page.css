@@ -83,11 +83,12 @@
   width: 40%;
   margin: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 .code-review-page .right-container .buttons-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  margin: 10px;
 }
 .code-review-page .right-container .buttons-container .reject-button {
   height: fit-content;
@@ -101,7 +102,7 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  margin: 10px;
+  margin: 20px 0px 0px 0px;
 }
 .code-review-page .right-container .buttons-container .reject-button:hover {
   cursor: pointer;

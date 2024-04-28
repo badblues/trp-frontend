@@ -82,7 +82,7 @@ const TeacherCodeReviewPage = () => {
                   role: Role.Student,
                 },
               ],
-              leaderId: 38,
+              leaderStudentId: 38,
             },
             status: TeamAppointmentStatus.InProgress,
             labWorkVariant: {
@@ -184,7 +184,7 @@ const TeacherCodeReviewPage = () => {
               </h3>
               {teamAppointment?.team.students.map((student) => (
                 <p className="student-name">
-                  {teamAppointment.team.leaderId === student.id
+                  {teamAppointment.team.leaderStudentId === student.id
                     ? "Лидер: "
                     : ""}
                   {student.fullName}

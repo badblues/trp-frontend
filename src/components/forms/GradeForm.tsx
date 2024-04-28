@@ -49,6 +49,7 @@ const GradeForm: React.FC<Props> = ({ students, onFormSubmit, maxGrade }) => {
                 Балл
               </label>
               <input
+                disabled={loading}
                 className="form-input"
                 type="number"
                 defaultValue={maxGrade}
@@ -67,16 +68,16 @@ const GradeForm: React.FC<Props> = ({ students, onFormSubmit, maxGrade }) => {
             </button>
           </div>
         </form>
-        <div>
-          <label htmlFor="sameGradeInput">Одна оценка для всех</label>
-          <input
-            name="sameGradeInput"
-            type="checkbox"
-            checked={sameGrade}
-            onClick={() => {
-              setSameGrade(!sameGrade);
-            }}
-          />
+        <div
+          className="sameGradeToggle"
+          onClick={() => {
+            setSameGrade(!sameGrade);
+          }}
+        >
+          <p>Оценка:</p>
+          <div>
+            <p>{sameGrade ? "Одна" : "Разные"}</p>
+          </div>
         </div>
       </div>
     );
@@ -92,6 +93,7 @@ const GradeForm: React.FC<Props> = ({ students, onFormSubmit, maxGrade }) => {
                 {student.fullName}
               </label>
               <input
+                disabled={loading}
                 id="name"
                 className="form-input"
                 type="number"
@@ -113,16 +115,16 @@ const GradeForm: React.FC<Props> = ({ students, onFormSubmit, maxGrade }) => {
           </button>
         </div>
       </form>
-      <div>
-        <label htmlFor="sameGradeInput">Одна оценка для всех</label>
-        <input
-          name="sameGradeInput"
-          type="checkbox"
-          checked={sameGrade}
-          onClick={() => {
-            setSameGrade(!sameGrade);
-          }}
-        />
+      <div
+        className="sameGradeToggle"
+        onClick={() => {
+          setSameGrade(!sameGrade);
+        }}
+      >
+        <p>Оценка:</p>
+        <div>
+          <p>{sameGrade ? "Одна" : "Разные"}</p>
+        </div>
       </div>
     </div>
   );

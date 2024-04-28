@@ -91,14 +91,15 @@
     width: 40%;
     margin: 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 
     .buttons-container {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      margin: 10px;
 
       .reject-button {
-        @include redButton(10px);
+        @include redButton(20px 0px 0px 0px);
       }
     }
   }

@@ -13,6 +13,7 @@
   padding-right: 20px;
   color: $text-color;
   font-family: $main-font;
+  user-select: none;
 
   &.dark-mode {
     background-color: $dark-mode-background-secondary-color;
