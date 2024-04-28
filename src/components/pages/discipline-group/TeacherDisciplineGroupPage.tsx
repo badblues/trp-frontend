@@ -143,6 +143,7 @@ const TeacherDisciplineGroupPage = () => {
           appointment.id
         }/code-review/${appointment.codeReviewIds[0]}`
       );
+    else showErrorAlert("Задание не готово к проверке");
   };
 
   if (loading) {
