@@ -81,7 +81,12 @@ const StudentLabWorksList: React.FC<Props> = ({
                       onClick={() => onLabWorkVariantSelect(variant)}
                       className="variant-title"
                     >
-                      {variant.title}
+                      {variant.title}{" "}
+                      {`${
+                        teamAppointments.find(
+                          (tA) => tA.labWorkVariant.labWorkId === labWork.id
+                        )?.status
+                      }`}
                     </p>
                   </div>
                 ))

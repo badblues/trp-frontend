@@ -20,7 +20,6 @@
 .lab-work-list .lab-work .lab-work-container .title-container {
   display: flex;
   align-items: center;
-  width: 200px;
   overflow: hidden;
   user-select: none;
 }
@@ -50,7 +49,6 @@
 }
 .lab-work-list .lab-work .variant {
   margin: 5px 0px 5px 40px;
-  width: 200px;
   overflow: hidden;
 }
 .lab-work-list .lab-work .variant .variant-title {
