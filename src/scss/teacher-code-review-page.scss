@@ -27,6 +27,7 @@
 
   .left-container {
     width: 40%;
+    flex-shrink: 1;
 
     .info-container {
       display: flex;
@@ -73,9 +74,13 @@
           justify-self: flex-end;
           display: flex;
 
+          align-items: center;
+
           .message-input {
+            padding: 5px;
             resize: none;
             width: 100%;
+            height: 100px;
             border-radius: 5px;
           }
 
@@ -88,7 +93,7 @@
   }
 
   .right-container {
-    width: 40%;
+    width: 50%;
     margin: 20px;
     display: flex;
     flex-direction: row;
