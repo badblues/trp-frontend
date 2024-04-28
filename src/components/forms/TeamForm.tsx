@@ -21,10 +21,14 @@ const TeamForm: React.FC<Props> = ({ discipline, onFormSubmit }) => {
   const { theme, showErrorAlert } = useContext(UiContext) as UiContextType;
   const [loading, setLoading] = useState<boolean>(false);
   const [students, setStudents] = useState<Student[]>([]);
+  const [leaderId, setLeaderId] = useState<number>();
 
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: "student",
     drop: (student: StudentContainer) => {
+      if (students.length === 0) {
+        setLeaderId(student.student.id);
+      }
       if (!students.some((s) => s.id === student.student.id))
         setStudents([student.student, ...students]);
     },
@@ -49,8 +53,13 @@ const TeamForm: React.FC<Props> = ({ discipline, onFormSubmit }) => {
       disciplineId: discipline.id,
       groupId: students[0].group.id,
       studentIds: students.map((s) => s.id),
+      leaderIndex: students.findIndex((s) => s.id === leaderId),
     };
     onFormSubmit(teamDTO, onDone);
+  };
+
+  const changeLeader = (studentId: number) => {
+    setLeaderId(studentId);
   };
 
   const removeStudent = (student: Student) => {
@@ -62,7 +71,6 @@ const TeamForm: React.FC<Props> = ({ discipline, onFormSubmit }) => {
       <h4>ПЕРЕТАЩИТЕ СТУДЕНТОВ</h4>
       {students.map((student, index) => (
         <div key={index} className="student-container">
-          <p className="student-name">{student.fullName}</p>
           <button
             className="remove-student-button"
             onClick={() => {
@@ -71,9 +79,24 @@ const TeamForm: React.FC<Props> = ({ discipline, onFormSubmit }) => {
           >
             <img className="icon" src={binImg} alt="Delete" width="13" />
           </button>
+          <p className="student-name">
+            {student.fullName}
+            <input
+              type="checkbox"
+              checked={leaderId === student.id}
+              onClick={() => {
+                changeLeader(student.id);
+              }}
+            />
+            {leaderId === student.id ? "Лидер" : null}
+          </p>
         </div>
       ))}
-      <button className="create-team-button" onClick={onSubmit}>
+      <button
+        className="create-team-button"
+        onClick={onSubmit}
+        disabled={loading}
+      >
         {loading ? <Loader /> : "СОЗДАТЬ БРИГАДУ"}
       </button>
     </div>
