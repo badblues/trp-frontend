@@ -53,7 +53,7 @@ const TeamForm: React.FC<Props> = ({ discipline, onFormSubmit }) => {
       disciplineId: discipline.id,
       groupId: students[0].group.id,
       studentIds: students.map((s) => s.id),
-      leaderIndex: students.findIndex((s) => s.id === leaderId),
+      leaderId: leaderId!,
     };
     onFormSubmit(teamDTO, onDone);
   };
