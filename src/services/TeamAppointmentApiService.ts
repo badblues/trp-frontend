@@ -2,6 +2,7 @@ import http from "axios";
 import { TeamAppointment } from "../models/domain/TeamAppointment";
 import { TeamAppointmentDTO } from "../models/DTO/TeamAppointmentDTO";
 import urls from "./urls.ts";
+import { CodeReview } from "../models/domain/CodeReview.ts";
 
 export class TeamAppointmentApiService {
   apiUrl = urls.teamAppointmentsUrl;
@@ -38,6 +39,16 @@ export class TeamAppointmentApiService {
     let url = this.apiUrl;
     try {
       const response = await http.post(url, appointment);
+      return response.data.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+
+  async sendToCodeReview(appointmentId: number): Promise<CodeReview> {
+    let url = this.apiUrl + `/${appointmentId}/code-review`;
+    try {
+      const response = await http.post(url);
       return response.data.data;
     } catch (error) {
       throw error.response.data;
