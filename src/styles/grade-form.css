@@ -62,6 +62,9 @@
   user-select: none;
   margin: 10px;
 }
+.form-upper-container .sameGradeToggle .hide {
+  opacity: 50%;
+}
 .form-upper-container .sameGradeToggle:hover {
   cursor: pointer;
 }

@@ -19,17 +19,6 @@
           }
         }
       }
-      .variant {
-        .variant-title {
-          .status {
-            &.NEW,
-            &.IN_PROGRESS {
-              background-color: $dark-mode-status-color-appointed;
-              color: black;
-            }
-          }
-        }
-      }
     }
   }
 
@@ -89,8 +78,7 @@
 
           &.NEW,
           &.IN_PROGRESS {
-            background-color: $status-color-appointed;
-            color: white;
+            background-color: $status-color-in-progress;
           }
 
           &.TESTED {

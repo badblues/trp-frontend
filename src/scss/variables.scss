@@ -1,13 +1,13 @@
-
 // COLORS
 $primary-color: #ff3c3c;
 $secondary-color: #3cff53;
-$status-color-rework: red;
-$status-color-tested: yellow;
-$status-color-code-review: orange;
-$status-color-done: green;
-$dark-red-color: #a00000; 
-$dark-green-color: #05a000; 
+$status-color-in-progress: rgb(197, 255, 255, 0.85);
+$status-color-rework: rgba(255, 0, 0, 0.85);
+$status-color-tested: rgba(255, 255, 0, 0.85);
+$status-color-code-review: rgba(255, 166, 0, 0.85);
+$status-color-done: rgba(0, 128, 0, 0.85);
+$dark-red-color: #a00000;
+$dark-green-color: #05a000;
 
 // COLORS, LIGHT MODE
 $text-color: #181818;

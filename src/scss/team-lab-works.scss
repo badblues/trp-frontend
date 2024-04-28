@@ -14,25 +14,6 @@
         background-color: $dark-mode-background-color;
       }
 
-      .lab-works-container {
-        .variants-container {
-          .variant {
-            .variant-title {
-              .status {
-                &.NEW,
-                &.IN_PROGRESS {
-                  color: $dark-mode-status-color-appointed;
-                  color: white;
-                }
-              }
-
-              &:hover {
-                cursor: pointer;
-              }
-            }
-          }
-        }
-      }
     }
   }
 
@@ -98,8 +79,7 @@
 
               &.NEW,
               &.IN_PROGRESS {
-                background-color: $status-color-appointed;
-                color: white;
+                background-color: $status-color-in-progress;
               }
 
               &.TESTED {

@@ -74,9 +74,9 @@ const GradeForm: React.FC<Props> = ({ students, onFormSubmit, maxGrade }) => {
             setSameGrade(!sameGrade);
           }}
         >
-          <p>Оценка:</p>
           <div>
-            <p>{sameGrade ? "Одна" : "Разные"}</p>
+            <h3 className={`${sameGrade ? "" : "hide"}`}>Одна</h3>
+            <h3 className={`${sameGrade ? "hide" : ""}`}>Разные</h3>
           </div>
         </div>
       </div>
@@ -121,9 +121,9 @@ const GradeForm: React.FC<Props> = ({ students, onFormSubmit, maxGrade }) => {
           setSameGrade(!sameGrade);
         }}
       >
-        <p>Оценка:</p>
         <div>
-          <p>{sameGrade ? "Одна" : "Разные"}</p>
+          <h3 className={`${sameGrade ? "" : "hide"}`}>Одна</h3>
+          <h3 className={`${sameGrade ? "hide" : ""}`}>Разные</h3>
         </div>
       </div>
     </div>

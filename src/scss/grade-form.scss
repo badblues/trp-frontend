@@ -60,6 +60,10 @@
     user-select: none;
     margin: 10px;
 
+    .hide {
+      opacity: 50%;
+    }
+
     &:hover {
       cursor: pointer;
     }
