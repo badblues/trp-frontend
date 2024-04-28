@@ -61,7 +61,24 @@ const StudentCodeReviewPage = () => {
         );
         setLabWork(labWorkResponse);
         setTests(testsResponse);
-        setCodeReview(codeReviewResponse);
+        //TEMPORARY
+        const codeReviewTemporary: CodeReview = {
+          id: 5,
+          code: "int add(int a, int b)\n {return a + b;}",
+          messages: [
+            {
+              message: "Ублюдошные, мертворожденные интерфейсы",
+              user: {
+                fullName: "Преподаватель преподавателев",
+                id: 5,
+                username: "",
+                role: Role.Teacher,
+              },
+            },
+          ],
+          codeThreads: [],
+        };
+        setCodeReview(codeReviewTemporary);
         setTeamAppointment(teamAppointment);
       } catch (error) {
         console.log(error, "EROEROEJOR");

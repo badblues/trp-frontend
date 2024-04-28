@@ -21,11 +21,11 @@ import { LabWork } from "../../../models/domain/LabWork.ts";
 import { CodeReviewMessageDTO } from "../../../models/DTO/CodeReviewMessageDTO.ts";
 
 const TeacherCodeReviewPage = () => {
-  const { disciplineId, teamAppointmentId, codeReviewId } = useParams();
+  const { disciplineId, groupId, teamAppointmentId, codeReviewId } =
+    useParams();
   const { theme, showErrorAlert } = useContext(UiContext) as UiContextType;
-  const { codeReviewApiService, labWorkApiService } = useContext(
-    ApiContext
-  ) as ApiContextType;
+  const { codeReviewApiService, labWorkApiService, teamAppointmentApiService } =
+    useContext(ApiContext) as ApiContextType;
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
   const [messageSending, setMessageSending] = useState<boolean>(false);
@@ -54,63 +54,11 @@ const TeacherCodeReviewPage = () => {
             open: true,
           },
         ]);
-        const teamAppointments = [
-          {
-            id: 1,
-            team: {
-              id: 18,
-              disciplineId: 1,
-              students: [
-                {
-                  id: 5,
-                  group: {
-                    id: 1,
-                    name: "AVTTEMPORARY",
-                  },
-                  fullName: "ALEXEY",
-                  username: "username",
-                  role: Role.Student,
-                },
-                {
-                  id: 38,
-                  group: {
-                    id: 1,
-                    name: "AVTTEMPORARY",
-                  },
-                  fullName: "asdf",
-                  username: "username",
-                  role: Role.Student,
-                },
-              ],
-              leaderStudentId: 38,
-            },
-            status: TeamAppointmentStatus.InProgress,
-            labWorkVariant: {
-              id: 1,
-              labWorkId: 1,
-              title: "1. Функция суммы",
-              description:
-                "Создайте функцию add, которая принимает два аргумента (числа) и возвращает их сумму.",
-              language: Language.C,
-              testable: true,
-              functionName: "add",
-              returnType: CType.Int,
-              arguments: [
-                {
-                  name: "a",
-                  type: "int",
-                },
-                {
-                  name: "b",
-                  type: "int",
-                },
-              ],
-              inputRegex: "",
-              outputRegex: "",
-            },
-            codeReviewIds: [],
-          },
-        ];
+        const teamAppointments =
+          await teamAppointmentApiService.getTeamAppointmentsByDisciplineAndGroup(
+            Number(disciplineId),
+            Number(groupId)
+          );
         const teamAppointment = teamAppointments.find(
           (tA) => tA.id === Number(teamAppointmentId)
         );
@@ -121,13 +69,30 @@ const TeacherCodeReviewPage = () => {
         setTeamAppointment(teamAppointment);
         //rework
         const labWorkResponse = await labWorkApiService.getLabWork(
-          teamAppointment.id
+          teamAppointment.labWorkVariant.labWorkId
         );
         const codeReviewResponse = await codeReviewApiService.getCodeReview(
           Number(codeReviewId)
         );
         setLabWork(labWorkResponse);
-        setCodeReview(codeReviewResponse);
+        //TEMPORARY
+        const codeReviewTemporary: CodeReview = {
+          id: 5,
+          code: "int add(int a, int b)\n {return a + b;}",
+          messages: [
+            {
+              message: "Ублюдошные, мертворожденные интерфейсы",
+              user: {
+                fullName: "Преподаватель преподавателев",
+                id: 5,
+                username: "",
+                role: Role.Teacher,
+              },
+            },
+          ],
+          codeThreads: [],
+        };
+        setCodeReview(codeReviewTemporary);
       } catch (error) {
         showErrorAlert(error.error);
         if (error.status === 404) navigate("/not-found");

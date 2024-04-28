@@ -20,6 +20,8 @@ import CreateLabWorkVariantPage from "./pages/create/CreateLabWorkVariantPage.ts
 import CodeReviewPage from "./pages/code-review/CodeReviewPage.tsx";
 import StudentLabWorkVariantPage from "./pages/lab-work-variant/StudentLabWorkVariantPage.tsx";
 import TeacherLabWorkVariantPage from "./pages/lab-work-variant/TeacherLabWorkVariantPage.tsx";
+import TeacherCodeReviewPage from "./pages/code-review/TeacherCodeReviewPage.tsx";
+import StudentCodeReviewPage from "./pages/code-review/StudentCodeReviewPage.tsx";
 
 const Main = () => {
   const { theme } = useContext(UiContext) as UiContextType;
@@ -108,13 +110,26 @@ const Main = () => {
         <Route
           element={
             <RequireAuth
-              allowedRoles={[Role.Teacher, Role.SeniorTeacher, Role.Student]}
+              allowedRoles={[Role.Student]}
             />
           }
         >
           <Route
             path="disciplines/:disciplineId/team-appointments/:teamAppointmentId/code-review/:codeReviewId"
-            element={<CodeReviewPage />}
+            element={<StudentCodeReviewPage />}
+          />
+        </Route>
+
+        <Route
+          element={
+            <RequireAuth
+              allowedRoles={[Role.Teacher, Role.SeniorTeacher]}
+            />
+          }
+        >
+          <Route
+            path="disciplines/:disciplineId/groups/:groupId/team-appointments/:teamAppointmentId/code-review/:codeReviewId"
+            element={<TeacherCodeReviewPage />}
           />
         </Route>
 

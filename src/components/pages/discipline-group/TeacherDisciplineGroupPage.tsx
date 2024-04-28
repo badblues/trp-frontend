@@ -133,10 +133,11 @@ const TeacherDisciplineGroupPage = () => {
       appointment.status === TeamAppointmentStatus.SentToCodeReview ||
       appointment.status === TeamAppointmentStatus.CodeReview ||
       appointment.status === TeamAppointmentStatus.WaitingForGrade ||
-      appointment.status === TeamAppointmentStatus.Graded
+      appointment.status === TeamAppointmentStatus.Graded ||
+      appointment.status === TeamAppointmentStatus.Tested
     )
       navigate(
-        `/disciplines/${discipline!.id}/team-appointments/${
+        `/disciplines/${discipline!.id}/groups/${group!.id}/team-appointments/${
           appointment.id
         }/code-review/${appointment.codeReviewIds[0]}`
       );
