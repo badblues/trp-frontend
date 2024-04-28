@@ -51,28 +51,5 @@
     background-color: $background-secondary-color;
     padding: 5px;
     border-radius: 10px;
-
-    .status-text {
-
-      &.status-not-appointed {
-        color: $status-color-not-appointed;
-      }
-
-      &.status-appointed {
-        color: $status-color-appointed;
-      }
-
-      &.status-in-progress {
-        color: $status-color-in-progress;
-      }
-
-      &.status-finished {
-        color: $status-color-finished;
-      }
-
-      &.status-done {
-        color: $status-color-done;
-      }
-    }
   }
 }

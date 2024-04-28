@@ -53,7 +53,7 @@ const TeamLabWorks: React.FC<Props> = ({
                         >
                           <p className="variant-title">
                             {appointment.labWorkVariant.title}{" "}
-                            {`${appointment.status}`}
+                            <span className={`status ${appointment.status}`}>{`${appointment.status}`}</span>
                           </p>
                         </div>
                       </div>

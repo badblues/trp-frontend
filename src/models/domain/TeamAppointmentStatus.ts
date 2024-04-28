@@ -5,7 +5,7 @@ export enum TeamAppointmentStatus {
   Tested = "TESTED",
   SentToCodeReview = "SENT_TO_CODE_REVIEW",
   CodeReview = "CODE_REVIEW",
-  SentToRevork = "SENT_TO_REVORK",
+  SentToRework = "SENT_TO_REWORK",
   WaitingForGrade = "WAITING_FOR_GRADE",
   Graded = "RATED",
 }

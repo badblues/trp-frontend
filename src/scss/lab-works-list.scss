@@ -19,6 +19,16 @@
           }
         }
       }
+      .variant {
+        .variant-title {
+          .status {
+            &.NEW,
+            &.IN_PROGRESS {
+              color: $dark-mode-status-color-appointed;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -32,7 +42,7 @@
       .title-container {
         display: flex;
         align-items: center;
-        
+
         overflow: hidden;
 
         &:hover {
@@ -65,11 +75,31 @@
 
     .variant {
       margin: 5px 0px 5px 40px;
-      
+
       overflow: hidden;
 
       .variant-title {
         white-space: nowrap;
+
+        .status {
+          &.NEW,
+          &.IN_PROGRESS {
+            color: $status-color-appointed;
+          }
+
+          &.TESTED {
+            color: $status-color-tested;
+          }
+
+          &.SENT_TO_REWORK {
+            color: $status-color-rework;
+          }
+
+          &.SENT_TO_CODE_REVIEW,
+          &.WAITING_FOR_GRADE {
+            color: $status-color-code-review;
+          }
+        }
 
         &:hover {
           cursor: pointer;

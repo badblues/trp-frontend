@@ -82,11 +82,19 @@ const StudentLabWorksList: React.FC<Props> = ({
                       className="variant-title"
                     >
                       {variant.title}{" "}
-                      {`${
-                        teamAppointments.find(
-                          (tA) => tA.labWorkVariant.labWorkId === labWork.id
-                        )?.status
-                      }`}
+                      <span
+                        className={`status ${
+                          teamAppointments.find(
+                            (tA) => tA.labWorkVariant.labWorkId === labWork.id
+                          )?.status
+                        }`}
+                      >
+                        {`${
+                          teamAppointments.find(
+                            (tA) => tA.labWorkVariant.labWorkId === labWork.id
+                          )?.status
+                        }`}
+                      </span>
                     </p>
                   </div>
                 ))

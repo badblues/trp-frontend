@@ -10,17 +10,11 @@
 .team-lab-works-container.dark-mode .team-container .team-name {
   background-color: #212121;
 }
-.team-lab-works-container.dark-mode .team-container .lab-works-container .lab-work-title.appointed {
+.team-lab-works-container.dark-mode .team-container .lab-works-container .variants-container .variant .variant-title .status.NEW, .team-lab-works-container.dark-mode .team-container .lab-works-container .variants-container .variant .variant-title .status.IN_PROGRESS {
   color: white;
 }
-.team-lab-works-container.dark-mode .team-container .lab-works-container .lab-work-title.not-appointed {
-  color: grey;
-}
-.team-lab-works-container.dark-mode .team-container .lab-works-container .variants-container .variant.appointed {
-  color: white;
-}
-.team-lab-works-container.dark-mode .team-container .lab-works-container .variants-container .variant.not-appointed {
-  color: grey;
+.team-lab-works-container.dark-mode .team-container .lab-works-container .variants-container .variant .variant-title:hover {
+  cursor: pointer;
 }
 .team-lab-works-container .team-container {
   display: flex;
@@ -70,6 +64,18 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: 0px 5px 5px 20px;
+}
+.team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.NEW, .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.IN_PROGRESS {
+  color: black;
+}
+.team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.TESTED {
+  color: yellow;
+}
+.team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.SENT_TO_REWORK {
+  color: red;
+}
+.team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.SENT_TO_CODE_REVIEW, .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.WAITING_FOR_GRADE {
+  color: orange;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title:hover {
   cursor: pointer;

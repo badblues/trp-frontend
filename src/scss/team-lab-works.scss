@@ -15,24 +15,19 @@
       }
 
       .lab-works-container {
-        .lab-work-title {
-          &.appointed {
-            color: $dark-mode-status-color-appointed;
-          }
-
-          &.not-appointed {
-            color: $dark-mode-status-color-not-appointed;
-          }
-        }
-
         .variants-container {
           .variant {
-            &.appointed {
-              color: $dark-mode-status-color-appointed;
-            }
+            .variant-title {
+              .status {
+                &.NEW,
+                &.IN_PROGRESS {
+                  color: $dark-mode-status-color-appointed;
+                }
+              }
 
-            &.not-appointed {
-              color: $dark-mode-status-color-not-appointed;
+              &:hover {
+                cursor: pointer;
+              }
             }
           }
         }
@@ -80,7 +75,6 @@
       .lab-work-title {
         margin: 0px 5px 0px 5px;
         overflow: hidden;
-
       }
 
       .variants-container {
@@ -96,6 +90,26 @@
           margin: 0px 5px 5px 20px;
 
           .variant-title {
+            .status {
+              &.NEW,
+              &.IN_PROGRESS {
+                color: $status-color-appointed;
+              }
+
+              &.TESTED {
+                color: $status-color-tested;
+              }
+
+              &.SENT_TO_REWORK {
+                color: $status-color-rework;
+              }
+
+              &.SENT_TO_CODE_REVIEW,
+              &.WAITING_FOR_GRADE {
+                color: $status-color-code-review;
+              }
+            }
+
             &:hover {
               cursor: pointer;
             }
