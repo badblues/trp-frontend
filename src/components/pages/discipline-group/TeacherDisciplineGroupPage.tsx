@@ -20,10 +20,7 @@ import { LabWorkVariant } from "../../../models/domain/LabWorkVariant.ts";
 import { TeamAppointmentDTO } from "../../../models/DTO/TeamAppointmentDTO.ts";
 import TeamLabWorks from "../../item-containers/TeamLabWorks.tsx";
 import { TeamAppointment } from "../../../models/domain/TeamAppointment.ts";
-import { Role } from "../../../models/domain/Role.ts";
 import { TeamAppointmentStatus } from "../../../models/domain/TeamAppointmentStatus.ts";
-import { Language } from "../../../models/domain/Language.ts";
-import { CType } from "../../../models/domain/Type.ts";
 
 const TeacherDisciplineGroupPage = () => {
   const { disciplineId, groupId } = useParams();
@@ -34,7 +31,6 @@ const TeacherDisciplineGroupPage = () => {
     disciplineApiService,
     teamApiService,
     labWorkApiService,
-    labWorkVariantApiService,
     teamAppointmentApiService,
   } = useContext(ApiContext) as ApiContextType;
   const { theme, showErrorAlert } = useContext(UiContext) as UiContextType;
