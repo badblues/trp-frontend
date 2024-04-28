@@ -106,7 +106,7 @@ const Tests: React.FC<Props> = ({
                   Открытый: <input type="checkbox" checked={test.open}></input>
                 </p>
                 <div>
-                  <button
+                  {/* <button
                     onClick={() => onDeleteTest(test)}
                     className="button-with-image"
                   >
@@ -124,7 +124,7 @@ const Tests: React.FC<Props> = ({
                     className="button-with-image"
                   >
                     <img className="icon" src={editImg} alt="Edit" width="17" />
-                  </button>
+                  </button> */}
                 </div>
               </div>
             )}

@@ -190,7 +190,7 @@ const TeacherLabWorkVariantPage = () => {
       </div>
       {user!.role === Role.SeniorTeacher ? (
         <div className="control-panel">
-          <button className="control-button" onClick={() => setUpdating(true)}>
+          {/* <button className="control-button" onClick={() => setUpdating(true)}>
             ИЗМЕНИТЬ ЗАДАНИЕ
           </button>
           <button
@@ -198,7 +198,7 @@ const TeacherLabWorkVariantPage = () => {
             onClick={() => setIsOpenConfirmPopup(true)}
           >
             УДАЛИТЬ ЗАДАНИЕ
-          </button>
+          </button> */}
         </div>
       ) : null}
     </div>

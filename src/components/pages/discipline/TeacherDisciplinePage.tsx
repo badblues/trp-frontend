@@ -23,7 +23,6 @@ const TeacherDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
   const {
     teacherAppointmentApiService,
     labWorkApiService,
-    labWorkVariantApiService,
   } = useContext(ApiContext) as ApiContextType;
   const { theme, showErrorAlert } = useContext(UiContext) as UiContextType;
   const { user } = useContext(UserContext) as UserContextType;

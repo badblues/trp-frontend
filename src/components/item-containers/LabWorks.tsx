@@ -88,7 +88,7 @@ const LabWorks: React.FC<Props> = ({
                     width="13"
                   />
                 </button>
-                <button
+                {/* <button
                   className="button-with-image"
                   title="Редактировать лабораторную работу"
                 >
@@ -99,7 +99,7 @@ const LabWorks: React.FC<Props> = ({
                   title="Удалить лабораторную работу"
                 >
                   <img className="icon" src={binImg} alt="Delete" width="13" />
-                </button>
+                </button> */}
               </div>
             ) : null}
           </div>
