@@ -22,6 +22,7 @@
   align-items: center;
   width: 200px;
   overflow: hidden;
+  user-select: none;
 }
 .lab-work-list .lab-work .lab-work-container .title-container:hover {
   cursor: pointer;

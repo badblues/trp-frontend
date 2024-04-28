@@ -16,6 +16,7 @@
     inset 0px 5px 10px #00000066,
     inset 0px -5px 10px #ffffff66;
   transition: 0.3s;
+  user-select: none;
 
   &::after {
     content: "";
