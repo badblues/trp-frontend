@@ -75,63 +75,12 @@ const TeacherDisciplineGroupPage = () => {
               )
           )
         );
-        setTeamAppointments([
-          {
-            id: 1,
-            team: {
-              id: 18,
-              disciplineId: 1,
-              students: [
-                {
-                  id: 5,
-                  group: {
-                    id: 1,
-                    name: "AVTTEMPORARY",
-                  },
-                  fullName: "ALEXEY",
-                  username: "username",
-                  role: Role.Student,
-                },
-                {
-                  id: 38,
-                  group: {
-                    id: 1,
-                    name: "AVTTEMPORARY",
-                  },
-                  fullName: "asdf",
-                  username: "username",
-                  role: Role.Student,
-                },
-              ],
-              leaderId: 38,
-            },
-            status: TeamAppointmentStatus.InProgress,
-            labWorkVariant: {
-              id: 1,
-              labWorkId: 1,
-              title: "1. Функция суммы",
-              description:
-                "Создайте функцию add, которая принимает два аргумента (числа) и возвращает их сумму.",
-              language: Language.C,
-              testable: true,
-              functionName: "add",
-              returnType: CType.Int,
-              arguments: [
-                {
-                  name: "a",
-                  type: "int",
-                },
-                {
-                  name: "b",
-                  type: "int",
-                },
-              ],
-              inputRegex: "",
-              outputRegex: "",
-            },
-            codeReviewIds: [1],
-          },
-        ]);
+        const teamAppointmentsResponse =
+          await teamAppointmentApiService.getTeamAppointmentsByDisciplineAndGroup(
+            Number(disciplineId),
+            Number(groupId)
+          );
+        setTeamAppointments(teamAppointmentsResponse);
         setTeams(teamsResponse);
       } catch (error) {
         showErrorAlert(error.error);
@@ -158,7 +107,7 @@ const TeacherDisciplineGroupPage = () => {
     }
   };
 
-  const handleVariantClick = async (variant: LabWorkVariant, team: Team) => {
+  const appointVariant = async (variant: LabWorkVariant, team: Team) => {
     try {
       if (
         teamAppointments.some(
@@ -182,6 +131,20 @@ const TeacherDisciplineGroupPage = () => {
     }
   };
 
+  const handleVariantClick = (appointment: TeamAppointment) => {
+    if (
+      appointment.status === TeamAppointmentStatus.SentToCodeReview ||
+      appointment.status === TeamAppointmentStatus.CodeReview ||
+      appointment.status === TeamAppointmentStatus.WaitingForGrade ||
+      appointment.status === TeamAppointmentStatus.Graded
+    )
+      navigate(
+        `/disciplines/${discipline!.id}/team-appointments/${
+          appointment.id
+        }/code-review/${appointment.codeReviewIds[0]}`
+      );
+  };
+
   if (loading) {
     return (
       <div>
@@ -199,9 +162,7 @@ const TeacherDisciplineGroupPage = () => {
           <TeamLabWorks
             teamAppointments={teamAppointments}
             labWorks={labWorks}
-            onVariantClick={(appointment: TeamAppointment) =>
-              navigate(`/disciplines/${discipline!.id}/team-appointments/${appointment.id}/code-review/${appointment.codeReviewIds[0]}`)
-            }
+            onVariantClick={handleVariantClick}
           />
         </div>
         <div className="info-container">
@@ -216,7 +177,7 @@ const TeacherDisciplineGroupPage = () => {
           <TeamLabWorkAppointments
             teamAppointments={teamAppointments}
             labWorks={labWorks}
-            onVariantClick={handleVariantClick}
+            onVariantClick={appointVariant}
           />
         </div>
         <div className="info-container">

@@ -11,18 +11,12 @@ interface Props {
   onVariantClick: (teamAppointment: TeamAppointment) => void;
 }
 
-interface TeamLabWork {
-  teamId: number;
-  labWorkId: number;
-}
-
 const TeamLabWorks: React.FC<Props> = ({
   teamAppointments,
   labWorks,
   onVariantClick,
 }) => {
   const { theme } = useContext(UiContext) as UiContextType;
-  const [openTeamLabWorks, setOpenTeamLabWorks] = useState<TeamLabWork[]>([]);
 
   teamAppointments.sort((t1, t2): number => {
     return t1.team.id - t2.team.id;
@@ -62,7 +56,7 @@ const TeamLabWorks: React.FC<Props> = ({
                           onClick={() => onVariantClick(appointment)}
                         >
                           <p className="variant-title">
-                            {appointment.labWorkVariant.title}
+                            {appointment.labWorkVariant.title} {`${appointment.status}`}
                           </p>
                         </div>
                       </div>

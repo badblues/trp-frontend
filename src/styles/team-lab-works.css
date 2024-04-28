@@ -57,7 +57,6 @@
 }
 .team-lab-works-container .team-container .lab-works-container .lab-work-title {
   margin: 0px 5px 0px 5px;
-  max-width: 300px;
   overflow: hidden;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container {
@@ -67,7 +66,6 @@
   max-width: 100%;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant {
-  max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
