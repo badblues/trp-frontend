@@ -12,6 +12,7 @@
 }
 .team-lab-works-container.dark-mode .team-container .lab-works-container .variants-container .variant .variant-title .status.NEW, .team-lab-works-container.dark-mode .team-container .lab-works-container .variants-container .variant .variant-title .status.IN_PROGRESS {
   color: white;
+  color: white;
 }
 .team-lab-works-container.dark-mode .team-container .lab-works-container .variants-container .variant .variant-title:hover {
   cursor: pointer;
@@ -65,17 +66,23 @@
   white-space: nowrap;
   margin: 0px 5px 5px 20px;
 }
-.team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.NEW, .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.IN_PROGRESS {
+.team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status {
   color: black;
+  padding: 2px;
+  border-radius: 5px;
+}
+.team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.NEW, .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.IN_PROGRESS {
+  background-color: black;
+  color: white;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.TESTED {
-  color: yellow;
+  background-color: yellow;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.SENT_TO_REWORK {
-  color: red;
+  background-color: red;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.SENT_TO_CODE_REVIEW, .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.WAITING_FOR_GRADE {
-  color: orange;
+  background-color: orange;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title:hover {
   cursor: pointer;

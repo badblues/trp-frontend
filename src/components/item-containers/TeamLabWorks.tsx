@@ -4,6 +4,7 @@ import "../../styles/team-lab-works.css";
 import { UiContext, UiContextType } from "../../contexts/UiContext.tsx";
 import { TeamAppointment } from "../../models/domain/TeamAppointment.ts";
 import { Team } from "../../models/domain/Team.ts";
+import { TeamAppointmentStatus } from "../../models/domain/TeamAppointmentStatus.ts";
 
 interface Props {
   teamAppointments: TeamAppointment[];
@@ -23,6 +24,18 @@ const TeamLabWorks: React.FC<Props> = ({
   teams.sort((t1, t2): number => {
     return t1.id - t2.id;
   });
+
+  const statusToTextMap = {
+    [TeamAppointmentStatus.New]: "Выполняется",
+    [TeamAppointmentStatus.InProgress]: "Выполняется",
+    [TeamAppointmentStatus.Testing]: "Выполняется",
+    [TeamAppointmentStatus.Tested]: "Протестирована",
+    [TeamAppointmentStatus.SentToCodeReview]: "Отправлена",
+    [TeamAppointmentStatus.CodeReview]: "На проверке",
+    [TeamAppointmentStatus.WaitingForGrade]: "На проверке",
+    [TeamAppointmentStatus.SentToRework]: "Возвращена",
+    [TeamAppointmentStatus.Graded]: "Выполнена",
+  };
 
   //Works only if team has 1 variant per labWork
   return (
@@ -53,7 +66,9 @@ const TeamLabWorks: React.FC<Props> = ({
                         >
                           <p className="variant-title">
                             {appointment.labWorkVariant.title}{" "}
-                            <span className={`status ${appointment.status}`}>{`${appointment.status}`}</span>
+                            <span
+                              className={`status ${appointment.status}`}
+                            >{`${statusToTextMap[appointment.status]}`}</span>
                           </p>
                         </div>
                       </div>

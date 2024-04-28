@@ -22,6 +22,7 @@
                 &.NEW,
                 &.IN_PROGRESS {
                   color: $dark-mode-status-color-appointed;
+                  color: white;
                 }
               }
 
@@ -91,22 +92,27 @@
 
           .variant-title {
             .status {
+              color: black;
+              padding: 2px;
+              border-radius: 5px;
+
               &.NEW,
               &.IN_PROGRESS {
-                color: $status-color-appointed;
+                background-color: $status-color-appointed;
+                color: white;
               }
 
               &.TESTED {
-                color: $status-color-tested;
+                background-color: $status-color-tested;
               }
 
               &.SENT_TO_REWORK {
-                color: $status-color-rework;
+                background-color: $status-color-rework;
               }
 
               &.SENT_TO_CODE_REVIEW,
               &.WAITING_FOR_GRADE {
-                color: $status-color-code-review;
+                background-color: $status-color-code-review;
               }
             }
 

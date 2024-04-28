@@ -11,7 +11,8 @@
   filter: invert(100%);
 }
 .lab-work-list.dark-mode .lab-work .variant .variant-title .status.NEW, .lab-work-list.dark-mode .lab-work .variant .variant-title .status.IN_PROGRESS {
-  color: white;
+  background-color: white;
+  color: black;
 }
 .lab-work-list .lab-work {
   margin: 5px 0px 5px 0px;
@@ -57,17 +58,23 @@
 .lab-work-list .lab-work .variant .variant-title {
   white-space: nowrap;
 }
-.lab-work-list .lab-work .variant .variant-title .status.NEW, .lab-work-list .lab-work .variant .variant-title .status.IN_PROGRESS {
+.lab-work-list .lab-work .variant .variant-title .status {
   color: black;
+  padding: 2px;
+  border-radius: 5px;
+}
+.lab-work-list .lab-work .variant .variant-title .status.NEW, .lab-work-list .lab-work .variant .variant-title .status.IN_PROGRESS {
+  background-color: black;
+  color: white;
 }
 .lab-work-list .lab-work .variant .variant-title .status.TESTED {
-  color: yellow;
+  background-color: yellow;
 }
 .lab-work-list .lab-work .variant .variant-title .status.SENT_TO_REWORK {
-  color: red;
+  background-color: red;
 }
 .lab-work-list .lab-work .variant .variant-title .status.SENT_TO_CODE_REVIEW, .lab-work-list .lab-work .variant .variant-title .status.WAITING_FOR_GRADE {
-  color: orange;
+  background-color: orange;
 }
 .lab-work-list .lab-work .variant .variant-title:hover {
   cursor: pointer;

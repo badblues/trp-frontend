@@ -6,6 +6,7 @@ import downArrow from "../../images/down-arrow.png";
 import "../../styles/lab-works-list.css";
 import { LabWorkVariant } from "../../models/domain/LabWorkVariant.ts";
 import { TeamAppointment } from "../../models/domain/TeamAppointment.ts";
+import { TeamAppointmentStatus } from "../../models/domain/TeamAppointmentStatus.ts";
 
 interface Props {
   labWorks: LabWork[];
@@ -42,6 +43,18 @@ const StudentLabWorksList: React.FC<Props> = ({
       openLabWorks.add(labWork);
     }
     setOpenLabWorks(new Set(openLabWorks));
+  };
+
+  const statusToTextMap = {
+    [TeamAppointmentStatus.New]: "Новая",
+    [TeamAppointmentStatus.InProgress]: "Выполняется",
+    [TeamAppointmentStatus.Testing]: "Выполняется",
+    [TeamAppointmentStatus.Tested]: "Протестирована",
+    [TeamAppointmentStatus.SentToCodeReview]: "Отправлена",
+    [TeamAppointmentStatus.CodeReview]: "На проверке",
+    [TeamAppointmentStatus.WaitingForGrade]: "На проверке",
+    [TeamAppointmentStatus.SentToRework]: "Возвращена",
+    [TeamAppointmentStatus.Graded]: "Выполнена",
   };
 
   return (
@@ -90,9 +103,11 @@ const StudentLabWorksList: React.FC<Props> = ({
                         }`}
                       >
                         {`${
-                          teamAppointments.find(
-                            (tA) => tA.labWorkVariant.labWorkId === labWork.id
-                          )?.status
+                          statusToTextMap[
+                            teamAppointments.find(
+                              (tA) => tA.labWorkVariant.labWorkId === labWork.id
+                            )!.status
+                          ]
                         }`}
                       </span>
                     </p>

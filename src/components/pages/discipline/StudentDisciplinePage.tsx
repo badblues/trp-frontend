@@ -9,10 +9,6 @@ import { LabWork } from "../../../models/domain/LabWork.ts";
 import { Teacher } from "../../../models/domain/Teacher.ts";
 import StudentLabWorksList from "../../item-containers/StudentLabWorksList.tsx";
 import { TeamAppointment } from "../../../models/domain/TeamAppointment.ts";
-import { Role } from "../../../models/domain/Role.ts";
-import { TeamAppointmentStatus } from "../../../models/domain/TeamAppointmentStatus.ts";
-import { Language } from "../../../models/domain/Language.ts";
-import { CType } from "../../../models/domain/Type.ts";
 
 interface Props {
   defaultDiscipline: Discipline;
