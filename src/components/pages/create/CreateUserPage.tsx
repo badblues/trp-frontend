@@ -6,12 +6,17 @@ import Loader from "../../Loader.tsx";
 import "../../../styles/create-item-page.css";
 import { Role } from "../../../models/domain/Role.ts";
 import { UserRegistrationDTO } from "../../../models/RegistrationDTO.ts";
+import { Group } from "../../../models/domain/Group.ts";
 
 const CreateUserPage = () => {
-  const { showSuccessAlert, showErrorAlert } = useContext(UiContext) as UiContextType;
-  const { userApiService, groupApiService } = useContext(ApiContext) as ApiContextType;
-  const [loading, setLoading] = useState(true);
-  const [groups, setGroups] = useState([]);
+  const { showSuccessAlert, showErrorAlert } = useContext(
+    UiContext
+  ) as UiContextType;
+  const { userApiService, groupApiService } = useContext(
+    ApiContext
+  ) as ApiContextType;
+  const [loading, setLoading] = useState<boolean>(true);
+  const [groups, setGroups] = useState<Group[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -27,7 +32,11 @@ const CreateUserPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const createUser = async (RegistrationDTO: UserRegistrationDTO, role: Role, onCreate: () => void) => {
+  const createUser = async (
+    RegistrationDTO: UserRegistrationDTO,
+    role: Role,
+    onCreate: () => void
+  ) => {
     try {
       console.log(RegistrationDTO);
       await userApiService
