@@ -19,8 +19,12 @@ const TeacherCodeReviewPage = () => {
   const { disciplineId, groupId, teamAppointmentId, codeReviewId } =
     useParams();
   const { theme, showErrorAlert } = useContext(UiContext) as UiContextType;
-  const { codeReviewApiService, labWorkApiService, teamAppointmentApiService } =
-    useContext(ApiContext) as ApiContextType;
+  const {
+    codeReviewApiService,
+    labWorkApiService,
+    teamAppointmentApiService,
+    labWorkVariantTestApiService,
+  } = useContext(ApiContext) as ApiContextType;
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
   const [messageSending, setMessageSending] = useState<boolean>(false);
@@ -33,22 +37,6 @@ const TeacherCodeReviewPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        setTests([
-          {
-            id: 5,
-            labWorkVariantId: 1,
-            input: "1, 2",
-            output: "3",
-            open: false,
-          },
-          {
-            id: 7,
-            labWorkVariantId: 1,
-            input: "1, 2",
-            output: "3",
-            open: true,
-          },
-        ]);
         const teamAppointments =
           await teamAppointmentApiService.getTeamAppointmentsByDisciplineAndGroup(
             Number(disciplineId),
@@ -63,6 +51,10 @@ const TeacherCodeReviewPage = () => {
         }
         setTeamAppointment(teamAppointment);
         //rework
+        const testsResponse =
+          await labWorkVariantTestApiService.getLabWorkVariantTestsByLabWorkVariant(
+            teamAppointment.labWorkVariant.id
+          );
         const labWorkResponse = await labWorkApiService.getLabWork(
           teamAppointment.labWorkVariant.labWorkId
         );
@@ -87,6 +79,7 @@ const TeacherCodeReviewPage = () => {
           ],
           codeThreads: [],
         };
+        setTests(testsResponse);
         setCodeReview(codeReviewTemporary);
       } catch (error) {
         showErrorAlert(error.error);
