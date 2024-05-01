@@ -1,0 +1,67 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.code-container {
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: $dark-mode-background-secondary-color;
+
+  &.dark-mode {
+    .code-line {
+      .open-thread-button {
+        filter: invert(100%);
+      }
+    }
+  }
+
+  .code-line {
+    color: $dark-mode-text-color;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .line-number {
+      margin: 0px 15px 0px 0px;
+      user-select: none;
+    }
+
+    .code-text {
+      &.highlighted {
+        border-radius: 5px;
+        background: rgb(2, 128, 145);
+      }
+    }
+
+    .code-message-input {
+      margin: 0px 0px 0px 30px;
+      
+    }
+
+    .threads {
+      margin: 0px 0px 0px 30px;
+
+      .thread {
+        background: rgb(66, 145, 2, 0.2);
+        padding: 5px;
+        margin: 2px;
+        border-radius: 5px;
+
+        .from {
+          font-weight: bold;
+          font-style: italic;
+        }
+      }
+    }
+
+    .open-thread-button {
+      @include buttonWithImage();
+      user-select: none;
+      margin: 0px 0px 0px 5px;
+      vertical-align: middle;
+    }
+  }
+}

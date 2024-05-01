@@ -1,0 +1,54 @@
+.code-container {
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #2e2e2e;
+}
+.code-container.dark-mode .code-line .open-thread-button {
+  filter: invert(100%);
+}
+.code-container .code-line {
+  color: #f1f1f1;
+}
+.code-container .code-line:hover {
+  cursor: pointer;
+}
+.code-container .code-line .line-number {
+  margin: 0px 15px 0px 0px;
+  user-select: none;
+}
+.code-container .code-line .code-text.highlighted {
+  border-radius: 5px;
+  background: rgb(2, 128, 145);
+}
+.code-container .code-line .code-message-input {
+  margin: 0px 0px 0px 30px;
+}
+.code-container .code-line .threads {
+  margin: 0px 0px 0px 30px;
+}
+.code-container .code-line .threads .thread {
+  background: rgba(66, 145, 2, 0.2);
+  padding: 5px;
+  margin: 2px;
+  border-radius: 5px;
+}
+.code-container .code-line .threads .thread .from {
+  font-weight: bold;
+  font-style: italic;
+}
+.code-container .code-line .open-thread-button {
+  background-color: transparent;
+  border: none;
+  margin: 0px;
+  user-select: none;
+  margin: 0px 0px 0px 5px;
+  vertical-align: middle;
+}
+.code-container .code-line .open-thread-button:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=code-review-code.css.map */

@@ -4,13 +4,7 @@ import { UiContext, UiContextType } from "../../../contexts/UiContext.tsx";
 import { CodeReview } from "../../../models/domain/CodeReview.ts";
 import { Role } from "../../../models/domain/Role.ts";
 import "../../../styles/teacher-code-review-page.css";
-import ReactCodeMirror from "@uiw/react-codemirror";
-import { dracula } from "@uiw/codemirror-theme-dracula";
-import { java } from "@codemirror/lang-java";
 import { TeamAppointment } from "../../../models/domain/TeamAppointment.ts";
-import { TeamAppointmentStatus } from "../../../models/domain/TeamAppointmentStatus.ts";
-import { Language } from "../../../models/domain/Language.ts";
-import { CType } from "../../../models/domain/Type.ts";
 import PageWithTabs from "../../PageWithTabs.tsx";
 import Loader from "../../Loader.tsx";
 import { LabWorkVariantTest } from "../../../models/domain/LabWorkVariantTest.ts";
@@ -19,6 +13,7 @@ import GradeForm from "../../forms/GradeForm.tsx";
 import { ApiContext, ApiContextType } from "../../../contexts/ApiContext.tsx";
 import { LabWork } from "../../../models/domain/LabWork.ts";
 import { CodeReviewMessageDTO } from "../../../models/DTO/CodeReviewMessageDTO.ts";
+import CodeReviewCode from "../../CodeReviewCode.tsx";
 
 const TeacherCodeReviewPage = () => {
   const { disciplineId, groupId, teamAppointmentId, codeReviewId } =
@@ -139,7 +134,7 @@ const TeacherCodeReviewPage = () => {
   }
 
   return (
-    <div className={`code-review-page ${theme}`}>
+    <div className={`teacher-code-review-page ${theme}`}>
       <div className="left-container">
         <PageWithTabs titles={["Чат", "Задание"]}>
           <div className="info-container">
@@ -220,14 +215,12 @@ const TeacherCodeReviewPage = () => {
         </PageWithTabs>
       </div>
       <div className="right-container">
-        <ReactCodeMirror
-          value={codeReview?.code}
-          editable={false}
-          theme={dracula}
-          minHeight="400px"
-          minWidth="600px"
-          extensions={[java()]}
-        />
+        <div className="code-container">
+          <CodeReviewCode
+            code={codeReview!.code}
+            codeThreads={codeReview!.codeThreads}
+          />
+        </div>
         <div className="buttons-container">
           <GradeForm
             students={teamAppointment!.team.students}

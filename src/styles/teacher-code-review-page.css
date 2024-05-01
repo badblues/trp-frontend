@@ -1,30 +1,30 @@
-.code-review-page {
+.teacher-code-review-page {
   color: #181818;
   display: flex;
   justify-content: space-around;
   font-family: "Montserrat", sans-serif;
 }
-.code-review-page.dark-mode {
+.teacher-code-review-page.dark-mode {
   color: #f1f1f1;
 }
-.code-review-page.dark-mode .left-container .info-container .chat-container {
+.teacher-code-review-page.dark-mode .left-container .info-container .chat-container {
   background-color: #2e2e2e;
 }
-.code-review-page.dark-mode .left-container .info-container .chat-container .chat-messages .message {
+.teacher-code-review-page.dark-mode .left-container .info-container .chat-container .chat-messages .message {
   background-color: #212121;
 }
-.code-review-page .left-container {
+.teacher-code-review-page .left-container {
   width: 40%;
   flex-shrink: 1;
 }
-.code-review-page .left-container .info-container {
+.teacher-code-review-page .left-container .info-container {
   display: flex;
   margin: 20px;
 }
-.code-review-page .left-container .info-container .team-container {
+.teacher-code-review-page .left-container .info-container .team-container {
   margin: 20px;
 }
-.code-review-page .left-container .info-container .chat-container {
+.teacher-code-review-page .left-container .info-container .chat-container {
   width: 400px;
   height: 400px;
   background-color: #b4b4b4;
@@ -34,12 +34,12 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.code-review-page .left-container .info-container .chat-container .chat-messages {
+.teacher-code-review-page .left-container .info-container .chat-container .chat-messages {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
-.code-review-page .left-container .info-container .chat-container .chat-messages .message {
+.teacher-code-review-page .left-container .info-container .chat-container .chat-messages .message {
   font-family: "Montserrat", sans-serif;
   background-color: #fbfbfb;
   border-radius: 5px;
@@ -47,26 +47,26 @@
   max-width: 80%;
   margin: 10px 10px 0px 0px;
 }
-.code-review-page .left-container .info-container .chat-container .chat-messages .message.left {
+.teacher-code-review-page .left-container .info-container .chat-container .chat-messages .message.left {
   align-self: flex-start;
 }
-.code-review-page .left-container .info-container .chat-container .chat-messages .message.right {
+.teacher-code-review-page .left-container .info-container .chat-container .chat-messages .message.right {
   align-self: flex-end;
   text-align: end;
 }
-.code-review-page .left-container .info-container .chat-container .send-message-container {
+.teacher-code-review-page .left-container .info-container .chat-container .send-message-container {
   justify-self: flex-end;
   display: flex;
   align-items: center;
 }
-.code-review-page .left-container .info-container .chat-container .send-message-container .message-input {
+.teacher-code-review-page .left-container .info-container .chat-container .send-message-container .message-input {
   padding: 5px;
   resize: none;
   width: 100%;
   height: 100px;
   border-radius: 5px;
 }
-.code-review-page .left-container .info-container .chat-container .send-message-container .send-message-button {
+.teacher-code-review-page .left-container .info-container .chat-container .send-message-container .send-message-button {
   height: fit-content;
   min-width: 100px;
   width: fit-content;
@@ -80,21 +80,25 @@
   padding: 10px;
   margin: 0px;
 }
-.code-review-page .left-container .info-container .chat-container .send-message-container .send-message-button:hover {
+.teacher-code-review-page .left-container .info-container .chat-container .send-message-container .send-message-button:hover {
   cursor: pointer;
 }
-.code-review-page .right-container {
+.teacher-code-review-page .right-container {
   width: 50%;
   margin: 20px;
   display: flex;
   flex-direction: row;
 }
-.code-review-page .right-container .buttons-container {
+.teacher-code-review-page .right-container .code-container {
+  width: 70%;
+  height: fit-content;
+}
+.teacher-code-review-page .right-container .buttons-container {
   display: flex;
   flex-direction: column;
   margin: 10px;
 }
-.code-review-page .right-container .buttons-container .reject-button {
+.teacher-code-review-page .right-container .buttons-container .reject-button {
   height: fit-content;
   min-width: 100px;
   width: fit-content;
@@ -108,7 +112,7 @@
   padding: 10px;
   margin: 20px 0px 0px 0px;
 }
-.code-review-page .right-container .buttons-container .reject-button:hover {
+.teacher-code-review-page .right-container .buttons-container .reject-button:hover {
   cursor: pointer;
 }
 

@@ -1,7 +1,7 @@
 @import "./variables.scss";
 @import "./mixins.scss";
 
-.code-review-page {
+.student-code-review-page {
   color: $text-color;
   display: flex;
   justify-content: space-around;
@@ -89,6 +89,7 @@
 
   .code-container {
     width: 40%;
+    height: fit-content;
     margin: 20px;
   }
 }

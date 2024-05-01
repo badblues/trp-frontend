@@ -1,7 +1,7 @@
 @import "./variables.scss";
 @import "./mixins.scss";
 
-.code-review-page {
+.teacher-code-review-page {
   color: $text-color;
   display: flex;
   justify-content: space-around;
@@ -97,6 +97,11 @@
     margin: 20px;
     display: flex;
     flex-direction: row;
+
+    .code-container {
+      width: 70%;
+      height: fit-content;
+    }
 
     .buttons-container {
       display: flex;

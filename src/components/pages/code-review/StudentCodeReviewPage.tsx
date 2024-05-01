@@ -15,6 +15,7 @@ import { LabWorkVariantTest } from "../../../models/domain/LabWorkVariantTest.ts
 import StudentTestList from "../../item-containers/StudentTestList.tsx";
 import { CodeReviewMessageDTO } from "../../../models/DTO/CodeReviewMessageDTO.ts";
 import { LabWork } from "../../../models/domain/LabWork.ts";
+import CodeReviewCode from "../../CodeReviewCode.tsx";
 
 const StudentCodeReviewPage = () => {
   const { disciplineId, teamAppointmentId, codeReviewId } = useParams();
@@ -127,7 +128,7 @@ const StudentCodeReviewPage = () => {
   }
 
   return (
-    <div className={`code-review-page ${theme}`}>
+    <div className={`student-code-review-page ${theme}`}>
       <div className="left-container">
         <PageWithTabs titles={["Чат", "Задание"]}>
           <div className="info-container">
@@ -137,7 +138,7 @@ const StudentCodeReviewPage = () => {
               </h3>
               {teamAppointment!.team.students.map((student) => (
                 <p className="student-name">
-                  {teamAppointment!.team.leaderId === student.id
+                  {teamAppointment!.team.leaderStudentId === student.id
                     ? "Лидер: "
                     : ""}
                   {student.fullName}
@@ -207,14 +208,10 @@ const StudentCodeReviewPage = () => {
         </PageWithTabs>
       </div>
       <div className="code-container">
-        <ReactCodeMirror
-          value={codeReview?.code}
-          editable={false}
-          theme={dracula}
-          minHeight="400px"
-          minWidth="600px"
-          extensions={[java()]}
-        />
+        <CodeReviewCode
+          code={codeReview!.code}
+          codeThreads={codeReview!.codeThreads}
+        />{" "}
       </div>
     </div>
   );
