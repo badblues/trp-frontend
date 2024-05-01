@@ -73,7 +73,7 @@
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.SENT_TO_REWORK {
   background-color: rgba(255, 0, 0, 0.85);
 }
-.team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.SENT_TO_CODE_REVIEW, .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.WAITING_FOR_GRADE {
+.team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.SENT_TO_CODE_REVIEW, .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.CODE_REVIEW, .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.WAITING_FOR_GRADE {
   background-color: rgba(255, 166, 0, 0.85);
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title:hover {

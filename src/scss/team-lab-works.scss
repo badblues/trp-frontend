@@ -13,7 +13,6 @@
       .team-name {
         background-color: $dark-mode-background-color;
       }
-
     }
   }
 
@@ -91,6 +90,7 @@
               }
 
               &.SENT_TO_CODE_REVIEW,
+              &.CODE_REVIEW,
               &.WAITING_FOR_GRADE {
                 background-color: $status-color-code-review;
               }

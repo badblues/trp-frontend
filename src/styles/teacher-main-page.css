@@ -1,0 +1,9 @@
+.main-page-container {
+  display: flex;
+  flex-direction: row;
+}
+.main-page-container .main-page-item {
+  margin: 10px;
+}
+
+/*# sourceMappingURL=teacher-main-page.css.map */

@@ -1,0 +1,42 @@
+@import "./variables.scss";
+
+.variants-for-review-container {
+  color: $text-color;
+  font-family: $main-font;
+
+  &.dark-mode {
+    color: $dark-mode-text-color;
+
+    .variant {
+      background-color: $dark-mode-background-secondary-color;
+    }
+  }
+
+  .variant {
+    background-color: $background-secondary-color;
+    border: solid;
+    padding: 10px;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $dark-mode-text-color;
+      cursor: pointer;
+    }
+
+    .status {
+      width: fit-content;
+      color: black;
+      padding: 2px;
+      border-radius: 5px;
+
+      &.SENT_TO_CODE_REVIEW,
+      &.CODE_REVIEW,
+      &.WAITING_FOR_GRADE {
+        background-color: $status-color-code-review;
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+.variants-for-review-container {
+  color: #181818;
+  font-family: "Montserrat", sans-serif;
+}
+.variants-for-review-container.dark-mode {
+  color: #f1f1f1;
+}
+.variants-for-review-container.dark-mode .variant {
+  background-color: #2e2e2e;
+}
+.variants-for-review-container .variant {
+  background-color: #b4b4b4;
+  border: solid;
+  padding: 10px;
+  border-color: black;
+  border-width: 1px;
+  border-radius: 5px;
+}
+.variants-for-review-container .variant:hover {
+  background-color: #ff3c3c;
+  color: #f1f1f1;
+  cursor: pointer;
+}
+.variants-for-review-container .variant .status {
+  width: fit-content;
+  color: black;
+  padding: 2px;
+  border-radius: 5px;
+}
+.variants-for-review-container .variant .status.SENT_TO_CODE_REVIEW, .variants-for-review-container .variant .status.CODE_REVIEW, .variants-for-review-container .variant .status.WAITING_FOR_GRADE {
+  background-color: rgba(255, 166, 0, 0.85);
+}
+
+/*# sourceMappingURL=variants-for-review.css.map */
