@@ -16,6 +16,7 @@ import StudentTestList from "../../item-containers/StudentTestList.tsx";
 import { CodeReviewMessageDTO } from "../../../models/DTO/CodeReviewMessageDTO.ts";
 import { LabWork } from "../../../models/domain/LabWork.ts";
 import CodeReviewCode from "../../CodeReviewCode.tsx";
+import { TeamAppointmentStatus } from "../../../models/domain/TeamAppointmentStatus.ts";
 
 const StudentCodeReviewPage = () => {
   const { disciplineId, teamAppointmentId, codeReviewId } = useParams();
@@ -62,24 +63,7 @@ const StudentCodeReviewPage = () => {
         );
         setLabWork(labWorkResponse);
         setTests(testsResponse);
-        //TEMPORARY
-        const codeReviewTemporary: CodeReview = {
-          id: 5,
-          code: "int add(int a, int b)\n {return a + b;}",
-          messages: [
-            {
-              message: "Ублюдошные, мертворожденные интерфейсы",
-              user: {
-                fullName: "Преподаватель преподавателев",
-                id: 5,
-                username: "",
-                role: Role.Teacher,
-              },
-            },
-          ],
-          codeThreads: [],
-        };
-        setCodeReview(codeReviewTemporary);
+        setCodeReview(codeReviewResponse);
         setTeamAppointment(teamAppointment);
       } catch (error) {
         console.log(error, "EROEROEJOR");
@@ -139,7 +123,7 @@ const StudentCodeReviewPage = () => {
               {teamAppointment!.team.students.map((student) => (
                 <p className="student-name">
                   {teamAppointment!.team.leaderStudentId === student.id
-                    ? "Лидер: "
+                    ? "ЛИДЕР: "
                     : ""}
                   {student.fullName}
                 </p>
@@ -209,6 +193,10 @@ const StudentCodeReviewPage = () => {
       </div>
       <div className="code-container">
         <CodeReviewCode
+          canSendMessages={
+            teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
+            teamAppointment!.status === TeamAppointmentStatus.SentToCodeReview
+          }
           code={codeReview!.code}
           codeThreads={codeReview!.codeThreads}
         />{" "}

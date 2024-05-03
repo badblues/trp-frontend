@@ -14,6 +14,8 @@ import { ApiContext, ApiContextType } from "../../../contexts/ApiContext.tsx";
 import { LabWork } from "../../../models/domain/LabWork.ts";
 import { CodeReviewMessageDTO } from "../../../models/DTO/CodeReviewMessageDTO.ts";
 import CodeReviewCode from "../../CodeReviewCode.tsx";
+import { TeamAppointmentStatus } from "../../../models/domain/TeamAppointmentStatus.ts";
+import { RatingDTO } from "../../../models/DTO/RatingDTO.ts";
 
 const TeacherCodeReviewPage = () => {
   const { disciplineId, groupId, teamAppointmentId, codeReviewId } =
@@ -49,6 +51,7 @@ const TeacherCodeReviewPage = () => {
           navigate("/not-found");
           return;
         }
+        console.log(teamAppointment);
         setTeamAppointment(teamAppointment);
         //rework
         const testsResponse =
@@ -62,25 +65,8 @@ const TeacherCodeReviewPage = () => {
           Number(codeReviewId)
         );
         setLabWork(labWorkResponse);
-        //TEMPORARY
-        const codeReviewTemporary: CodeReview = {
-          id: 5,
-          code: "int add(int a, int b)\n {return a + b;}",
-          messages: [
-            {
-              message: "Ублюдошные, мертворожденные интерфейсы",
-              user: {
-                fullName: "Преподаватель преподавателев",
-                id: 5,
-                username: "",
-                role: Role.Teacher,
-              },
-            },
-          ],
-          codeThreads: [],
-        };
         setTests(testsResponse);
-        setCodeReview(codeReviewTemporary);
+        setCodeReview(codeReviewResponse);
       } catch (error) {
         showErrorAlert(error.error);
         if (error.status === 404) navigate("/not-found");
@@ -118,6 +104,24 @@ const TeacherCodeReviewPage = () => {
     }
   };
 
+  const reject = async () => {
+    try {
+      await codeReviewApiService.close(Number(codeReviewId));
+    } catch (error) {
+      showErrorAlert(error.error);
+    }
+  };
+
+  const approve = async (ratings: RatingDTO, onDone: () => void) => {
+    try {
+      await codeReviewApiService.approve(Number(codeReviewId));
+      await teamAppointmentApiService.rate(Number(teamAppointmentId), ratings);
+      onDone();
+    } catch (error) {
+      showErrorAlert(error.error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="loader-container">
@@ -138,7 +142,7 @@ const TeacherCodeReviewPage = () => {
               {teamAppointment?.team.students.map((student) => (
                 <p className="student-name">
                   {teamAppointment.team.leaderStudentId === student.id
-                    ? "Лидер: "
+                    ? "ЛИДЕР: "
                     : ""}
                   {student.fullName}
                 </p>
@@ -158,20 +162,24 @@ const TeacherCodeReviewPage = () => {
                   </p>
                 ))}
               </div>
-              <div className="send-message-container">
-                <textarea
-                  className="message-input"
-                  value={messageText}
-                  onChange={onMessageTextChange}
-                />
-                <button
-                  className="send-message-button"
-                  disabled={messageSending}
-                  onClick={sendMessage}
-                >
-                  {messageSending ? <Loader /> : "Отправить"}
-                </button>
-              </div>
+              {teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
+              teamAppointment!.status ===
+                TeamAppointmentStatus.SentToCodeReview ? (
+                <div className="send-message-container">
+                  <textarea
+                    className="message-input"
+                    value={messageText}
+                    onChange={onMessageTextChange}
+                  />
+                  <button
+                    className="send-message-button"
+                    disabled={messageSending}
+                    onClick={sendMessage}
+                  >
+                    {messageSending ? <Loader /> : "Отправить"}
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
           <div className="lab-work-variant-information">
@@ -210,18 +218,28 @@ const TeacherCodeReviewPage = () => {
       <div className="right-container">
         <div className="code-container">
           <CodeReviewCode
+            canSendMessages={
+              teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
+              teamAppointment!.status === TeamAppointmentStatus.SentToCodeReview
+            }
             code={codeReview!.code}
             codeThreads={codeReview!.codeThreads}
           />
         </div>
-        <div className="buttons-container">
-          <GradeForm
-            students={teamAppointment!.team.students}
-            onFormSubmit={() => {}}
-            maxGrade={labWork!.maxRating}
-          />
-          <button className="reject-button">На доработку</button>
-        </div>
+        {teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
+        teamAppointment!.status === TeamAppointmentStatus.WaitingForGrade ||
+        teamAppointment!.status === TeamAppointmentStatus.SentToCodeReview ? (
+          <div className="buttons-container">
+            <GradeForm
+              students={teamAppointment!.team.students}
+              onFormSubmit={approve}
+              maxGrade={labWork!.maxRating}
+            />
+            <button className="reject-button" onClick={reject}>
+              На доработку
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

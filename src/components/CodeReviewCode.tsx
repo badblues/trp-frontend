@@ -11,11 +11,16 @@ import "highlight.js/styles/felipec.css";
 hljs.registerLanguage("c", c);
 
 interface Props {
+  canSendMessages: boolean;
   code: string;
   codeThreads: CodeThread[];
 }
 
-const CodeReviewCode: React.FC<Props> = ({ code, codeThreads }) => {
+const CodeReviewCode: React.FC<Props> = ({
+  code,
+  codeThreads,
+  canSendMessages,
+}) => {
   const { theme } = useContext(UiContext) as UiContextType;
   const [openThreads, setOpenThreads] = useState<number[]>([]);
   const [openInput, setOpenInput] = useState<number>();
@@ -79,9 +84,6 @@ const CodeReviewCode: React.FC<Props> = ({ code, codeThreads }) => {
       endLineNumber: 3,
     },
   ];
-  //TEMPORARY
-  code =
-    "int add(int a, int b) {\n   printf('asdfasdf')\n   printf('asdfasdf')\n   printf('asdfasdf')\n   return a + b;\n}";
   const codeSplit = code.split("\n");
 
   const highlightedCode = codeSplit.map(
@@ -129,7 +131,7 @@ const CodeReviewCode: React.FC<Props> = ({ code, codeThreads }) => {
                 />
               </button>
             ) : null}
-            {openInput === index + 1 ? (
+            {openInput === index + 1 && canSendMessages ? (
               <div className="code-message-input">
                 <div>
                   <span>С </span>

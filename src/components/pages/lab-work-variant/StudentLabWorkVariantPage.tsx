@@ -51,7 +51,6 @@ const StudentLabWorkVariantPage = () => {
           navigate("/not-found");
           return;
         }
-        console.log(teamAppointmentResponse);
         const testsResponse =
           await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
             Number(labWorkVariantId)
@@ -64,6 +63,7 @@ const StudentLabWorkVariantPage = () => {
         setCode(solution.code);
       } catch (error) {
         showErrorAlert(error.error);
+        console.log(error);
       }
     })().then(() => {
       setLoading(false);
@@ -193,6 +193,7 @@ const StudentLabWorkVariantPage = () => {
         </div>
         <div className="control-panel">
           {teamAppointment?.status === TeamAppointmentStatus.New ||
+          teamAppointment?.status === TeamAppointmentStatus.SentToRework ||
           teamAppointment?.status === TeamAppointmentStatus.InProgress ||
           teamAppointment?.status === TeamAppointmentStatus.Tested ? (
             <button className="control-button" onClick={saveCode}>
@@ -200,6 +201,7 @@ const StudentLabWorkVariantPage = () => {
             </button>
           ) : null}
           {teamAppointment?.status === TeamAppointmentStatus.New ||
+          teamAppointment?.status === TeamAppointmentStatus.SentToRework ||
           teamAppointment?.status === TeamAppointmentStatus.InProgress ||
           teamAppointment?.status === TeamAppointmentStatus.Tested ? (
             <button

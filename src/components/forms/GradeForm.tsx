@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import { UiContext, UiContextType } from "../../contexts/UiContext.tsx";
 import Loader from "../Loader.tsx";
 import "../../styles/grade-form.css";
-import { GradeDTO } from "../../models/DTO/GradeDTO.ts";
 import { Student } from "../../models/domain/Student.ts";
+import { RatingDTO } from "../../models/DTO/RatingDTO.ts";
 
 interface Props {
   students: Student[];
   maxGrade: number;
-  onFormSubmit: (gradeDTO: GradeDTO[], onDone: () => void) => void;
+  onFormSubmit: (rating: RatingDTO, onDone: () => void) => void;
 }
 
 const GradeForm: React.FC<Props> = ({ students, onFormSubmit, maxGrade }) => {
@@ -20,21 +20,21 @@ const GradeForm: React.FC<Props> = ({ students, onFormSubmit, maxGrade }) => {
   const [sameGrade, setSameGrade] = useState<boolean>(true);
 
   const onSubmit = (data: any) => {
-    let gradeDTOs: GradeDTO[];
+    const rating: RatingDTO = { ratings: [] };
+
     if (sameGrade) {
-      gradeDTOs = students.map((s) => ({
+      rating.ratings = students.map((s) => ({
         studentId: s.id,
-        grade: data.grade,
+        grade: Number(data.grade),
       }));
     } else {
-      gradeDTOs = students.map((s, index) => ({
+      rating.ratings = students.map((s, index) => ({
         studentId: s.id,
-        grade: data.grade[index],
+        grade: Number(data.grade[index]),
       }));
     }
     setLoading(true);
-    console.log(gradeDTOs);
-    onFormSubmit(gradeDTOs, () => {
+    onFormSubmit(rating, () => {
       setLoading(false);
     });
   };
