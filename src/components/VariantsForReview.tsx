@@ -35,6 +35,7 @@ const VariantsForReview: React.FC<Props> = ({ variants, onVariantClick }) => {
 
   return (
     <div className={`variants-for-review-container ${theme}`}>
+      <h2 className="heading">Готовы к проверке:</h2>
       {filteredVariants.map((v) => (
         <div className="variant" onClick={() => onVariantClick(v)}>
           <h3>{v.discipline.name}</h3>

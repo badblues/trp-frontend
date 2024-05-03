@@ -8,6 +8,9 @@
 .variants-for-review-container.dark-mode .variant {
   background-color: #2e2e2e;
 }
+.variants-for-review-container .heading {
+  margin: 5px;
+}
 .variants-for-review-container .variant {
   background-color: #b4b4b4;
   border: solid;
