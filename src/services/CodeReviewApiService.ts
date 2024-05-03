@@ -28,6 +28,26 @@ export class CodeReviewApiService {
       throw error.response.data;
     }
   }
+
+  async approve(codeReviewId: number): Promise<void> {
+    let url = this.apiUrl + `/${codeReviewId}/approve`;
+    try {
+      const response = await http.put(url);
+      return response.data.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+
+  async close(codeReviewId: number): Promise<void> {
+    let url = this.apiUrl + `/${codeReviewId}/close`;
+    try {
+      const response = await http.put(url);
+      return response.data.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
 }
 
 export default CodeReviewApiService;
