@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   height: fit-content;
-  padding-top: 20px;
-  padding-bottom: 20px;
   font-family: "Montserrat", sans-serif;
 }
 .item-list.dark-mode .caption {
@@ -19,7 +17,7 @@
   background-color: #ff3c3c;
 }
 .item-list .caption {
-  margin: 0px 0px 10px 5px;
+  margin: 5px;
 }
 .item-list .item, .item-list .item-with-border {
   padding: 2px;
