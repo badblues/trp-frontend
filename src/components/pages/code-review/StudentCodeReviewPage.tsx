@@ -131,7 +131,7 @@ const StudentCodeReviewPage = () => {
             </div>
             <div className="chat-container">
               <div className="chat-messages">
-                {codeReview!.messages.map((taskMessage) => (
+                {codeReview?.messages?.map((taskMessage) => (
                   <p
                     className={`message ${
                       taskMessage.user.role === Role.Student ? "right" : "left"

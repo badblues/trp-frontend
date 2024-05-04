@@ -1,45 +1,81 @@
-.code-container {
+.code-review-code-container {
   display: flex;
   flex-direction: column;
   font-size: large;
+  width: 100%;
   padding: 5px;
   border-radius: 5px;
   background-color: #2e2e2e;
 }
-.code-container.dark-mode .code-line .open-thread-button {
+.code-review-code-container.dark-mode .code-line .open-thread-button {
   filter: invert(100%);
 }
-.code-container .code-line {
+.code-review-code-container .code-line {
   color: #f1f1f1;
 }
-.code-container .code-line:hover {
+.code-review-code-container .code-line:hover {
   cursor: pointer;
 }
-.code-container .code-line .line-number {
+.code-review-code-container .code-line .line-number {
   margin: 0px 15px 0px 0px;
   user-select: none;
 }
-.code-container .code-line .code-text.highlighted {
+.code-review-code-container .code-line .code-text.highlighted {
   border-radius: 5px;
   background: rgb(2, 128, 145);
 }
-.code-container .code-line .code-message-input {
+.code-review-code-container .code-line .code-message-input {
   margin: 0px 0px 0px 30px;
 }
-.code-container .code-line .threads {
+.code-review-code-container .code-line .code-message-input .line-input-container .line-input {
+  min-height: 40px;
+  border-radius: 7px;
+  border: 1px solid #000;
+  padding: 10px;
+}
+.code-review-code-container .code-line .code-message-input .text-input-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.code-review-code-container .code-line .code-message-input .text-input-container .text-input {
+  padding: 5px;
+  resize: none;
+  width: 100%;
+  height: 100px;
+  border-radius: 5px;
+}
+.code-review-code-container .code-line .code-message-input .text-input-container .send-button {
+  height: fit-content;
+  min-width: 100px;
+  width: fit-content;
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 0px;
+}
+.code-review-code-container .code-line .code-message-input .text-input-container .send-button:hover {
+  cursor: pointer;
+}
+.code-review-code-container .code-line .threads {
   margin: 0px 0px 0px 30px;
 }
-.code-container .code-line .threads .thread {
+.code-review-code-container .code-line .threads .thread {
   background: rgba(66, 145, 2, 0.2);
   padding: 5px;
   margin: 2px;
   border-radius: 5px;
 }
-.code-container .code-line .threads .thread .from {
+.code-review-code-container .code-line .threads .thread .from {
   font-weight: bold;
   font-style: italic;
 }
-.code-container .code-line .open-thread-button {
+.code-review-code-container .code-line .open-thread-button {
   background-color: transparent;
   border: none;
   margin: 0px;
@@ -47,7 +83,7 @@
   margin: 0px 0px 0px 5px;
   vertical-align: middle;
 }
-.code-container .code-line .open-thread-button:hover {
+.code-review-code-container .code-line .open-thread-button:hover {
   cursor: pointer;
 }
 

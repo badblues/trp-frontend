@@ -26,64 +26,8 @@ const CodeReviewCode: React.FC<Props> = ({
   const [openInput, setOpenInput] = useState<number>();
   const [highLightLightFrom, setHighLightFrom] = useState<number>(-1);
   const [highLightLightTo, setHighLightTo] = useState<number>(-1);
+  const [codeMessage, setCodeMessage] = useState<string>("");
 
-  //TEMPORARY
-  codeThreads = [
-    {
-      messages: [
-        {
-          message: "ты дебил",
-          user: {
-            id: 1,
-            fullName: "teacher",
-            username: "user",
-            role: Role.Teacher,
-          },
-        },
-        {
-          message: "сам дебил",
-          user: {
-            id: 1,
-            fullName: "student",
-            username: "user",
-            role: Role.Student,
-          },
-        },
-      ],
-      beginLineNumber: 1,
-      endLineNumber: 1,
-    },
-    {
-      messages: [
-        {
-          message: "3 строка хуета",
-          user: {
-            id: 1,
-            fullName: "teacher",
-            username: "user",
-            role: Role.Teacher,
-          },
-        },
-      ],
-      beginLineNumber: 3,
-      endLineNumber: 3,
-    },
-    {
-      messages: [
-        {
-          message: "коммент к 2-3 строке",
-          user: {
-            id: 1,
-            fullName: "teacher",
-            username: "user",
-            role: Role.Teacher,
-          },
-        },
-      ],
-      beginLineNumber: 2,
-      endLineNumber: 3,
-    },
-  ];
   const codeSplit = code.split("\n");
 
   const highlightedCode = codeSplit.map(
@@ -99,9 +43,13 @@ const CodeReviewCode: React.FC<Props> = ({
     else setOpenThreads([lineNumber, ...openThreads]);
   };
 
+  const onCodeMessageTextChange = (event): void => {
+    setCodeMessage(event.target.value);
+  };
+
   return (
     <pre>
-      <code className={`code-container ${theme}`}>
+      <code className={`code-review-code-container ${theme}`}>
         {highlightedCode.map((line, index) => (
           <div className="code-line">
             <span className="line-number">{index + 1}</span>
@@ -118,7 +66,7 @@ const CodeReviewCode: React.FC<Props> = ({
               key={line}
               dangerouslySetInnerHTML={{ __html: line }}
             />
-            {codeThreads.some((cT) => cT.endLineNumber === index + 1) ? (
+            {codeThreads?.some((cT) => cT.endLineNumber === index + 1) ? (
               <button
                 className="open-thread-button"
                 onClick={() => clickOpenThreadButton(index + 1)}
@@ -133,9 +81,10 @@ const CodeReviewCode: React.FC<Props> = ({
             ) : null}
             {openInput === index + 1 && canSendMessages ? (
               <div className="code-message-input">
-                <div>
+                <div className="line-input-container">
                   <span>С </span>
                   <input
+                    className="line-input"
                     type="number"
                     min={1}
                     max={index + 1}
@@ -143,9 +92,13 @@ const CodeReviewCode: React.FC<Props> = ({
                   />
                   <span> по {index + 1} </span>
                 </div>
-                <div>
-                  <input type="text" />
-                  <button>Отправить</button>
+                <div className="text-input-container">
+                  <textarea
+                    value={codeMessage}
+                    onChange={onCodeMessageTextChange}
+                    className="text-input"
+                  />
+                  <button className="send-button">Отправить</button>
                 </div>
               </div>
             ) : null}

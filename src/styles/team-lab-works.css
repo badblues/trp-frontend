@@ -65,16 +65,19 @@
   border-radius: 5px;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.NEW, .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.IN_PROGRESS {
-  background-color: rgba(197, 255, 255, 0.85);
+  background-color: #8ACDD7;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.TESTED {
-  background-color: rgba(255, 255, 0, 0.85);
+  background-color: #FFD6A5;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.SENT_TO_REWORK {
-  background-color: rgba(255, 0, 0, 0.85);
+  background-color: #FF9B9B;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.SENT_TO_CODE_REVIEW, .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.CODE_REVIEW, .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.WAITING_FOR_GRADE {
-  background-color: rgba(255, 166, 0, 0.85);
+  background-color: #F9B572;
+}
+.team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title .status.RATED {
+  background-color: #CBFFA9;
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title:hover {
   cursor: pointer;

@@ -35,6 +35,7 @@ const TeacherCodeReviewPage = () => {
   const [messageText, setMessageText] = useState<string>("");
   const [labWork, setLabWork] = useState<LabWork>();
   const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
+  const [reboot, setReboot] = useState<boolean>();
 
   useEffect(() => {
     (async () => {
@@ -75,7 +76,7 @@ const TeacherCodeReviewPage = () => {
       setLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reboot]);
 
   const onMessageTextChange = (event): void => {
     setMessageText(event.target.value);
@@ -96,9 +97,7 @@ const TeacherCodeReviewPage = () => {
         setCodeReview(codeReviewResponse);
         setMessageSending(false);
         setMessageText("");
-        console.log("asdfhjkas");
       } catch (error) {
-        console.log(error);
         showErrorAlert(error.error);
       }
     }
@@ -107,6 +106,7 @@ const TeacherCodeReviewPage = () => {
   const reject = async () => {
     try {
       await codeReviewApiService.close(Number(codeReviewId));
+      setReboot(!reboot);
     } catch (error) {
       showErrorAlert(error.error);
     }
@@ -116,6 +116,7 @@ const TeacherCodeReviewPage = () => {
     try {
       await codeReviewApiService.approve(Number(codeReviewId));
       await teamAppointmentApiService.rate(Number(teamAppointmentId), ratings);
+      setReboot(!reboot);
       onDone();
     } catch (error) {
       showErrorAlert(error.error);
@@ -150,7 +151,7 @@ const TeacherCodeReviewPage = () => {
             </div>
             <div className="chat-container">
               <div className="chat-messages">
-                {codeReview?.messages.map((taskMessage) => (
+                {codeReview?.messages?.map((taskMessage) => (
                   <p
                     className={`message ${
                       taskMessage.user.role === Role.Student ? "left" : "right"

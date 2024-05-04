@@ -60,16 +60,16 @@
   border-radius: 5px;
 }
 .lab-work-list .lab-work .variant .variant-title .status.NEW, .lab-work-list .lab-work .variant .variant-title .status.IN_PROGRESS {
-  background-color: rgba(197, 255, 255, 0.85);
+  background-color: #8ACDD7;
 }
 .lab-work-list .lab-work .variant .variant-title .status.TESTED {
-  background-color: rgba(255, 255, 0, 0.85);
+  background-color: #FFD6A5;
 }
 .lab-work-list .lab-work .variant .variant-title .status.SENT_TO_REWORK {
-  background-color: rgba(255, 0, 0, 0.85);
+  background-color: #FF9B9B;
 }
-.lab-work-list .lab-work .variant .variant-title .status.SENT_TO_CODE_REVIEW, .lab-work-list .lab-work .variant .variant-title .status.WAITING_FOR_GRADE {
-  background-color: rgba(255, 166, 0, 0.85);
+.lab-work-list .lab-work .variant .variant-title .status.SENT_TO_CODE_REVIEW, .lab-work-list .lab-work .variant .variant-title .status.CODE_REVIEW, .lab-work-list .lab-work .variant .variant-title .status.WAITING_FOR_GRADE {
+  background-color: #F9B572;
 }
 .lab-work-list .lab-work .variant .variant-title:hover {
   cursor: pointer;

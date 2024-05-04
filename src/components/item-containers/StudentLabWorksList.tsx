@@ -52,7 +52,7 @@ const StudentLabWorksList: React.FC<Props> = ({
     [TeamAppointmentStatus.Tested]: "Протестирована",
     [TeamAppointmentStatus.SentToCodeReview]: "Отправлена",
     [TeamAppointmentStatus.CodeReview]: "На проверке",
-    [TeamAppointmentStatus.WaitingForGrade]: "На проверке",
+    [TeamAppointmentStatus.WaitingForGrade]: "На оценке",
     [TeamAppointmentStatus.SentToRework]: "Возвращена",
     [TeamAppointmentStatus.Graded]: "Выполнена",
   };

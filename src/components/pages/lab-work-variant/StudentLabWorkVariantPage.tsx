@@ -28,6 +28,7 @@ const StudentLabWorkVariantPage = () => {
     labWorkVariantApiService,
     teamAppointmentApiService,
     labWorkVariantTestApiService,
+    codeReviewApiService,
   } = useContext(ApiContext) as ApiContextType;
   const navigate = useNavigate();
   const [code, setCode] = useState<string>("");
@@ -51,6 +52,15 @@ const StudentLabWorkVariantPage = () => {
           navigate("/not-found");
           return;
         }
+        //TODO: rework
+        if (
+          teamAppointmentResponse.status ===
+            TeamAppointmentStatus.SentToRework &&
+          teamAppointmentResponse.codeReviewIds.length
+        )
+          await codeReviewApiService.getCodeReview(
+            teamAppointmentResponse.codeReviewIds[0]
+          );
         const testsResponse =
           await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
             Number(labWorkVariantId)
@@ -119,7 +129,10 @@ const StudentLabWorkVariantPage = () => {
   const sendToReview = async () => {
     try {
       await teamAppointmentApiService.sendToCodeReview(teamAppointment!.id);
-    } catch {}
+      setOutputText("");
+    } catch (error) {
+      showErrorAlert(error.error);
+    }
   };
 
   if (loading) {

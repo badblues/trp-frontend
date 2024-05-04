@@ -23,7 +23,7 @@ const DraggableStudent: React.FC<DraggableStudentProps> = ({ student }) => {
 
   return (
     <div ref={drag} className={`item ${isDragging ? "dragged" : ""}`}>
-      <p>{student.fullName} {student.id}</p>
+      <p>{student.fullName}</p>
     </div>
   );
 };

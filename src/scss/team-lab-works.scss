@@ -94,6 +94,10 @@
               &.WAITING_FOR_GRADE {
                 background-color: $status-color-code-review;
               }
+
+              &.RATED {
+                background-color: $status-color-done;
+              }
             }
 
             &:hover {
