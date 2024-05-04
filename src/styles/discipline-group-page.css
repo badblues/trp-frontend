@@ -41,5 +41,11 @@
   padding: 5px;
   border-radius: 10px;
 }
+.discipline-group-page .info-container .status-text.status-not-appointed {
+  color: grey;
+}
+.discipline-group-page .info-container .status-text.status-appointed {
+  color: black;
+}
 
 /*# sourceMappingURL=discipline-group-page.css.map */
