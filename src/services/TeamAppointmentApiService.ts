@@ -15,6 +15,9 @@ export class TeamAppointmentApiService {
     let url = this.disciplinesUrl + `/${disciplineId}/team-appointments`;
     try {
       const response = await http.get(url);
+      (response.data.data as TeamAppointment[]).forEach((tA) =>
+        tA.codeReviewIds.sort((a, b) => b - a)
+      );
       return response.data.data;
     } catch (error) {
       throw error.response.data;
@@ -28,6 +31,9 @@ export class TeamAppointmentApiService {
     let url = this.apiUrl + `?disciplineId=${disciplineId}&groupId=${groupId}`;
     try {
       const response = await http.get(url);
+      (response.data.data as TeamAppointment[]).forEach((tA) =>
+        tA.codeReviewIds.sort((a, b) => b - a)
+      );
       return response.data.data;
     } catch (error) {
       throw error.response.data;
