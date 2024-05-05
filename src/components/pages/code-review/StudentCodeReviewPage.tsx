@@ -4,9 +4,6 @@ import { UiContext, UiContextType } from "../../../contexts/UiContext.tsx";
 import { CodeReview } from "../../../models/domain/CodeReview.ts";
 import { Role } from "../../../models/domain/Role.ts";
 import "../../../styles/student-code-review-page.css";
-import ReactCodeMirror from "@uiw/react-codemirror";
-import { dracula } from "@uiw/codemirror-theme-dracula";
-import { java } from "@codemirror/lang-java";
 import { TeamAppointment } from "../../../models/domain/TeamAppointment.ts";
 import PageWithTabs from "../../PageWithTabs.tsx";
 import Loader from "../../Loader.tsx";
@@ -36,6 +33,7 @@ const StudentCodeReviewPage = () => {
   const [messageSending, setMessageSending] = useState<boolean>(false);
   const [labWork, setLabWork] = useState<LabWork>();
   const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
+  const [active, setActive] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -50,6 +48,15 @@ const StudentCodeReviewPage = () => {
         if (teamAppointment === undefined) {
           navigate("/not-found");
           return;
+        }
+
+        if (
+          teamAppointment.codeReviewIds.length &&
+          teamAppointment.codeReviewIds[0] === Number(codeReviewId)
+        ) {
+          setActive(true);
+        } else {
+          setActive(false);
         }
         const codeReviewResponse = await codeReviewApiService.getCodeReview(
           Number(codeReviewId)
@@ -75,7 +82,7 @@ const StudentCodeReviewPage = () => {
       setLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [codeReviewId]);
 
   const onMessageTextChange = (event): void => {
     setMessageText(event.target.value);
@@ -115,12 +122,19 @@ const StudentCodeReviewPage = () => {
   return (
     <div className={`student-code-review-page ${theme}`}>
       <div className="left-container">
-        <PageWithTabs titles={["Чат", "Задание"]}>
+        <PageWithTabs titles={["Чат", "Задание", "Код ревью"]}>
           <div className="info-container">
             <div className="team-container">
-              <p className={`status ${teamAppointment!.status}`}>
-                {StatusToTextMap[teamAppointment!.status]}
-              </p>
+              {active &&
+              (teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
+                teamAppointment!.status ===
+                  TeamAppointmentStatus.WaitingForGrade ||
+                teamAppointment!.status ===
+                  TeamAppointmentStatus.SentToCodeReview) ? (
+                <p className={`status ${teamAppointment!.status}`}>
+                  {StatusToTextMap[teamAppointment!.status]}
+                </p>
+              ) : null}
               <h3 className="team-title">
                 Бригада {teamAppointment?.team.id}:
               </h3>
@@ -146,20 +160,27 @@ const StudentCodeReviewPage = () => {
                   </p>
                 ))}
               </div>
-              <div className="send-message-container">
-                <textarea
-                  className="message-input"
-                  value={messageText}
-                  onChange={onMessageTextChange}
-                />
-                <button
-                  className="send-message-button"
-                  disabled={messageSending}
-                  onClick={sendMessage}
-                >
-                  {messageSending ? <Loader /> : "Отправить"}
-                </button>
-              </div>
+              {active &&
+              (teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
+                teamAppointment!.status ===
+                  TeamAppointmentStatus.WaitingForGrade ||
+                teamAppointment!.status ===
+                  TeamAppointmentStatus.SentToCodeReview) ? (
+                <div className="send-message-container">
+                  <textarea
+                    className="message-input"
+                    value={messageText}
+                    onChange={onMessageTextChange}
+                  />
+                  <button
+                    className="send-message-button"
+                    disabled={messageSending}
+                    onClick={sendMessage}
+                  >
+                    {messageSending ? <Loader /> : "Отправить"}
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
           <div className="lab-work-variant-information">
@@ -193,13 +214,31 @@ const StudentCodeReviewPage = () => {
               </>
             ) : null}
           </div>
+          <div className="lab-work-variant-information">
+            {teamAppointment?.codeReviewIds?.map((cR) => (
+              <h4
+                className="code-review-link"
+                onClick={() =>
+                  navigate(
+                    `/disciplines/${disciplineId}/team-appointments/${teamAppointment.id}/code-review/${cR}`
+                  )
+                }
+              >
+                Код Ревью {cR}
+              </h4>
+            ))}
+          </div>
         </PageWithTabs>
       </div>
       <div className="code-container">
         <CodeReviewCode
           canSendMessages={
-            teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
-            teamAppointment!.status === TeamAppointmentStatus.SentToCodeReview
+            active &&
+            (teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
+              teamAppointment!.status ===
+                TeamAppointmentStatus.WaitingForGrade ||
+              teamAppointment!.status ===
+                TeamAppointmentStatus.SentToCodeReview)
           }
           code={codeReview!.code}
           codeThreads={codeReview!.codeThreads}

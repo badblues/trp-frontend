@@ -1,4 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UiContext, UiContextType } from "../../../contexts/UiContext.tsx";
 import { CodeReview } from "../../../models/domain/CodeReview.ts";
@@ -37,6 +42,7 @@ const TeacherCodeReviewPage = () => {
   const [labWork, setLabWork] = useState<LabWork>();
   const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
   const [reboot, setReboot] = useState<boolean>();
+  const [active, setActive] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -53,7 +59,14 @@ const TeacherCodeReviewPage = () => {
           navigate("/not-found");
           return;
         }
-        console.log(teamAppointment);
+        if (
+          teamAppointment.codeReviewIds.length &&
+          teamAppointment.codeReviewIds[0] === Number(codeReviewId)
+        ) {
+          setActive(true);
+        } else {
+          setActive(false);
+        }
         setTeamAppointment(teamAppointment);
         //rework
         const testsResponse =
@@ -77,7 +90,7 @@ const TeacherCodeReviewPage = () => {
       setLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reboot]);
+  }, [reboot, codeReviewId]);
 
   const onMessageTextChange = (event): void => {
     setMessageText(event.target.value);
@@ -135,12 +148,19 @@ const TeacherCodeReviewPage = () => {
   return (
     <div className={`teacher-code-review-page ${theme}`}>
       <div className="left-container">
-        <PageWithTabs titles={["Чат", "Задание"]}>
+        <PageWithTabs titles={["Чат", "Задание", "Код ревью"]}>
           <div className="info-container">
             <div className="team-container">
-              <p className={`status ${teamAppointment!.status}`}>
-                {StatusToTextMap[teamAppointment!.status]}
-              </p>
+              {active &&
+              (teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
+                teamAppointment!.status ===
+                  TeamAppointmentStatus.WaitingForGrade ||
+                teamAppointment!.status ===
+                  TeamAppointmentStatus.SentToCodeReview) ? (
+                <p className={`status ${teamAppointment!.status}`}>
+                  {StatusToTextMap[teamAppointment!.status]}
+                </p>
+              ) : null}
               <h3 className="team-title">
                 Бригада {teamAppointment?.team.id}:
               </h3>
@@ -167,9 +187,12 @@ const TeacherCodeReviewPage = () => {
                   </p>
                 ))}
               </div>
-              {teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
-              teamAppointment!.status ===
-                TeamAppointmentStatus.SentToCodeReview ? (
+              {active &&
+              (teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
+                teamAppointment!.status ===
+                  TeamAppointmentStatus.WaitingForGrade ||
+                teamAppointment!.status ===
+                  TeamAppointmentStatus.SentToCodeReview) ? (
                 <div className="send-message-container">
                   <textarea
                     className="message-input"
@@ -218,22 +241,42 @@ const TeacherCodeReviewPage = () => {
               </>
             ) : null}
           </div>
+          <div className="lab-work-variant-information">
+            {teamAppointment?.codeReviewIds?.map((cR) => (
+              <h4
+                className="code-review-link"
+                onClick={() =>
+                  navigate(
+                    `/disciplines/${disciplineId}/groups/${groupId}/team-appointments/${teamAppointment.id}/code-review/${cR}`
+                  )
+                }
+              >
+                Код Ревью {cR}
+              </h4>
+            ))}
+          </div>
         </PageWithTabs>
       </div>
       <div className="right-container">
         <div className="code-container">
           <CodeReviewCode
             canSendMessages={
-              teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
-              teamAppointment!.status === TeamAppointmentStatus.SentToCodeReview
+              active &&
+              (teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
+                teamAppointment!.status ===
+                  TeamAppointmentStatus.WaitingForGrade ||
+                teamAppointment!.status ===
+                  TeamAppointmentStatus.SentToCodeReview)
             }
             code={codeReview!.code}
             codeThreads={codeReview!.codeThreads}
           />
         </div>
-        {teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
-        teamAppointment!.status === TeamAppointmentStatus.WaitingForGrade ||
-        teamAppointment!.status === TeamAppointmentStatus.SentToCodeReview ? (
+        {active &&
+        (teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
+          teamAppointment!.status === TeamAppointmentStatus.WaitingForGrade ||
+          teamAppointment!.status ===
+            TeamAppointmentStatus.SentToCodeReview) ? (
           <div className="buttons-container">
             <GradeForm
               students={teamAppointment!.team.students}
