@@ -147,12 +147,7 @@ const TeacherCodeReviewPage = () => {
         <PageWithTabs titles={["Чат", "Задание", "Код ревью"]}>
           <div className="info-container">
             <div className="team-container">
-              {active &&
-              (teamAppointment!.status === TeamAppointmentStatus.CodeReview ||
-                teamAppointment!.status ===
-                  TeamAppointmentStatus.WaitingForGrade ||
-                teamAppointment!.status ===
-                  TeamAppointmentStatus.SentToCodeReview) ? (
+              {active ? (
                 <p className={`status ${teamAppointment!.status}`}>
                   {StatusToTextMap[teamAppointment!.status]}
                 </p>
