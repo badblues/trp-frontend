@@ -129,19 +129,13 @@ const TeacherDisciplineGroupPage = () => {
   };
 
   const handleVariantClick = (appointment: TeamAppointment) => {
-    if (
-      appointment.status === TeamAppointmentStatus.SentToCodeReview ||
-      appointment.status === TeamAppointmentStatus.CodeReview ||
-      appointment.status === TeamAppointmentStatus.WaitingForGrade ||
-      appointment.status === TeamAppointmentStatus.Graded ||
-      appointment.status === TeamAppointmentStatus.Tested
-    )
+    if (appointment.codeReviewIds.length)
       navigate(
         `/disciplines/${discipline!.id}/groups/${group!.id}/team-appointments/${
           appointment.id
         }/code-review/${appointment.codeReviewIds[0]}`
       );
-    else showErrorAlert("Задание не готово к проверке");
+    else showErrorAlert("Нет код ревью к просмотру");
   };
 
   if (loading) {
