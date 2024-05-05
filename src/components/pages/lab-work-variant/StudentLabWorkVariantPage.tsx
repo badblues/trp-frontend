@@ -17,6 +17,7 @@ import {
 } from "../../../contexts/UserContext.tsx";
 import PageWithTabs from "../../PageWithTabs.tsx";
 import { TestResult } from "../../../models/domain/TestResult.ts";
+import CodeReviewList from "../../item-containers/CodeReviewList.tsx";
 
 const StudentLabWorkVariantPage = () => {
   const { disciplineId, labWorkVariantId } = useParams();
@@ -147,7 +148,7 @@ const StudentLabWorkVariantPage = () => {
   return (
     <div className={`lab-work-variant-page ${theme}`}>
       <div className="left-container">
-        <PageWithTabs titles={["Задание", "КодРевью"]}>
+        <PageWithTabs titles={["Задание", "Код ревью"]}>
           <div className="lab-work-variant-information">
             <h1>{teamAppointment!.labWorkVariant.title}</h1>
             <h2>Язык: {teamAppointment!.labWorkVariant.language}</h2>
@@ -178,19 +179,17 @@ const StudentLabWorkVariantPage = () => {
               </>
             ) : null}
           </div>
-          <div className="lab-work-variant-information">
-            {teamAppointment?.codeReviewIds?.map((cR) => (
-              <h4
-                className="code-review-link"
-                onClick={() =>
-                  navigate(
-                    `/disciplines/${disciplineId}/team-appointments/${teamAppointment.id}/code-review/${cR}`
-                  )
-                }
-              >
-                Код Ревью {cR}
-              </h4>
-            ))}
+          <div>
+            <CodeReviewList
+              codeReviewIds={teamAppointment!.codeReviewIds}
+              onCodeReviewSelect={(codeReviewId) =>
+                navigate(
+                  `/disciplines/${disciplineId}/team-appointments/${
+                    teamAppointment!.id
+                  }/code-review/${codeReviewId}`
+                )
+              }
+            />
           </div>
         </PageWithTabs>
       </div>

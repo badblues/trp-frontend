@@ -1,9 +1,4 @@
-import React, {
-  DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UiContext, UiContextType } from "../../../contexts/UiContext.tsx";
 import { CodeReview } from "../../../models/domain/CodeReview.ts";
@@ -22,6 +17,7 @@ import CodeReviewCode from "../../CodeReviewCode.tsx";
 import { TeamAppointmentStatus } from "../../../models/domain/TeamAppointmentStatus.ts";
 import { RatingDTO } from "../../../models/DTO/RatingDTO.ts";
 import { StatusToTextMap } from "../../../models/domain/StatusToTextMap.ts";
+import CodeReviewList from "../../item-containers/CodeReviewList.tsx";
 
 const TeacherCodeReviewPage = () => {
   const { disciplineId, groupId, teamAppointmentId, codeReviewId } =
@@ -241,19 +237,17 @@ const TeacherCodeReviewPage = () => {
               </>
             ) : null}
           </div>
-          <div className="lab-work-variant-information">
-            {teamAppointment?.codeReviewIds?.map((cR) => (
-              <h4
-                className="code-review-link"
-                onClick={() =>
-                  navigate(
-                    `/disciplines/${disciplineId}/groups/${groupId}/team-appointments/${teamAppointment.id}/code-review/${cR}`
-                  )
-                }
-              >
-                Код Ревью {cR}
-              </h4>
-            ))}
+          <div>
+            <CodeReviewList
+              codeReviewIds={teamAppointment!.codeReviewIds}
+              onCodeReviewSelect={(codeReviewId) =>
+                navigate(
+                  `/disciplines/${disciplineId}/groups/${groupId}/team-appointments/${
+                    teamAppointment!.id
+                  }/code-review/${codeReviewId}`
+                )
+              }
+            />
           </div>
         </PageWithTabs>
       </div>

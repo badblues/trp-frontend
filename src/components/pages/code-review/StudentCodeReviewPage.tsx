@@ -15,6 +15,7 @@ import { LabWork } from "../../../models/domain/LabWork.ts";
 import CodeReviewCode from "../../CodeReviewCode.tsx";
 import { TeamAppointmentStatus } from "../../../models/domain/TeamAppointmentStatus.ts";
 import { StatusToTextMap } from "../../../models/domain/StatusToTextMap.ts";
+import CodeReviewList from "../../item-containers/CodeReviewList.tsx";
 
 const StudentCodeReviewPage = () => {
   const { disciplineId, teamAppointmentId, codeReviewId } = useParams();
@@ -214,19 +215,17 @@ const StudentCodeReviewPage = () => {
               </>
             ) : null}
           </div>
-          <div className="lab-work-variant-information">
-            {teamAppointment?.codeReviewIds?.map((cR) => (
-              <h4
-                className="code-review-link"
-                onClick={() =>
-                  navigate(
-                    `/disciplines/${disciplineId}/team-appointments/${teamAppointment.id}/code-review/${cR}`
-                  )
-                }
-              >
-                Код Ревью {cR}
-              </h4>
-            ))}
+          <div>
+            <CodeReviewList
+              codeReviewIds={teamAppointment!.codeReviewIds}
+              onCodeReviewSelect={(codeReviewId) =>
+                navigate(
+                  `/disciplines/${disciplineId}/team-appointments/${
+                    teamAppointment!.id
+                  }/code-review/${codeReviewId}`
+                )
+              }
+            />
           </div>
         </PageWithTabs>
       </div>
