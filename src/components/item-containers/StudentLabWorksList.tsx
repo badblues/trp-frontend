@@ -21,7 +21,9 @@ const StudentLabWorksList: React.FC<Props> = ({
   onLabWorkVariantSelect,
 }) => {
   const { theme } = useContext(UiContext) as UiContextType;
-  const [openLabWorks, setOpenLabWorks] = useState<Set<LabWork>>(new Set());
+  const [openLabWorks, setOpenLabWorks] = useState<Set<LabWork>>(
+    new Set(labWorks)
+  );
 
   labWorks.sort((a: LabWork, b: LabWork) => {
     const nameA = a.title.toLowerCase();
@@ -36,8 +38,6 @@ const StudentLabWorksList: React.FC<Props> = ({
   });
 
   const onLabWorkSelect = (labWork: LabWork): void => {
-    console.log(labWork);
-    console.log(openLabWorks);
     if (openLabWorks.has(labWork)) {
       openLabWorks.delete(labWork);
     } else {
