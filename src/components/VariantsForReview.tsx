@@ -4,6 +4,7 @@ import { Discipline } from "../models/domain/Discipline";
 import { Group } from "../models/domain/Group";
 import { TeamAppointmentStatus } from "../models/domain/TeamAppointmentStatus.ts";
 import { UiContext, UiContextType } from "../contexts/UiContext.tsx";
+import { StatusToTextMap } from "../models/domain/StatusToTextMap.ts";
 import "../styles/variants-for-review.css";
 
 export interface VariantForReview {
@@ -16,12 +17,6 @@ interface Props {
   variants: VariantForReview[];
   onVariantClick: (variant: VariantForReview) => void;
 }
-
-const statusToTextMap = {
-  [TeamAppointmentStatus.SentToCodeReview]: "Отправлена",
-  [TeamAppointmentStatus.CodeReview]: "На проверке",
-  [TeamAppointmentStatus.WaitingForGrade]: "На проверке",
-};
 
 const VariantsForReview: React.FC<Props> = ({ variants, onVariantClick }) => {
   const { theme } = useContext(UiContext) as UiContextType;
@@ -45,7 +40,7 @@ const VariantsForReview: React.FC<Props> = ({ variants, onVariantClick }) => {
             <p>{s.fullName}</p>
           ))}
           <p className={`status ${v.teamAppointment.status}`}>
-            {statusToTextMap[v.teamAppointment.status]}
+            {StatusToTextMap[v.teamAppointment.status]}
           </p>
         </div>
       ))}

@@ -27,4 +27,25 @@
   height: 600px;
 }
 
+.status {
+  color: black;
+  padding: 2px;
+  border-radius: 5px;
+}
+.status.NEW, .status.IN_PROGRESS {
+  background-color: #8ACDD7;
+}
+.status.TESTED {
+  background-color: #FFD6A5;
+}
+.status.SENT_TO_REWORK {
+  background-color: #FF9B9B;
+}
+.status.SENT_TO_CODE_REVIEW, .status.CODE_REVIEW, .status.WAITING_FOR_GRADE {
+  background-color: #F9B572;
+}
+.status.RATED {
+  background-color: #CBFFA9;
+}
+
 /*# sourceMappingURL=app.css.map */

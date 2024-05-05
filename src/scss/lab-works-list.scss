@@ -70,32 +70,7 @@
 
       .variant-title {
         white-space: nowrap;
-
-        .status {
-          color: black;
-          padding: 2px;
-          border-radius: 5px;
-
-          &.NEW,
-          &.IN_PROGRESS {
-            background-color: $status-color-in-progress;
-          }
-
-          &.TESTED {
-            background-color: $status-color-tested;
-          }
-
-          &.SENT_TO_REWORK {
-            background-color: $status-color-rework;
-          }
-
-          &.SENT_TO_CODE_REVIEW,
-          &.CODE_REVIEW,
-          &.WAITING_FOR_GRADE {
-            background-color: $status-color-code-review;
-          }
-        }
-
+        
         &:hover {
           cursor: pointer;
           color: red;

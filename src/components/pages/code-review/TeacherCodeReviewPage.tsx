@@ -16,6 +16,7 @@ import { CodeReviewMessageDTO } from "../../../models/DTO/CodeReviewMessageDTO.t
 import CodeReviewCode from "../../CodeReviewCode.tsx";
 import { TeamAppointmentStatus } from "../../../models/domain/TeamAppointmentStatus.ts";
 import { RatingDTO } from "../../../models/DTO/RatingDTO.ts";
+import { StatusToTextMap } from "../../../models/domain/StatusToTextMap.ts";
 
 const TeacherCodeReviewPage = () => {
   const { disciplineId, groupId, teamAppointmentId, codeReviewId } =
@@ -137,6 +138,9 @@ const TeacherCodeReviewPage = () => {
         <PageWithTabs titles={["Чат", "Задание"]}>
           <div className="info-container">
             <div className="team-container">
+              <p className={`status ${teamAppointment!.status}`}>
+                {StatusToTextMap[teamAppointment!.status]}
+              </p>
               <h3 className="team-title">
                 Бригада {teamAppointment?.team.id}:
               </h3>
