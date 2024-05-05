@@ -10,14 +10,6 @@
   border-radius: 5px;
   background-color: $dark-mode-background-secondary-color;
 
-  &.dark-mode {
-    .code-line {
-      .open-thread-button {
-        filter: invert(100%);
-      }
-    }
-  }
-
   .code-line {
     color: $dark-mode-text-color;
 
@@ -85,6 +77,7 @@
 
     .open-thread-button {
       @include buttonWithImage();
+      filter: invert(100%);
       user-select: none;
       margin: 0px 0px 0px 5px;
       vertical-align: middle;

@@ -7,9 +7,6 @@
   border-radius: 5px;
   background-color: #2e2e2e;
 }
-.code-review-code-container.dark-mode .code-line .open-thread-button {
-  filter: invert(100%);
-}
 .code-review-code-container .code-line {
   color: #f1f1f1;
 }
@@ -79,6 +76,7 @@
   background-color: transparent;
   border: none;
   margin: 0px;
+  filter: invert(100%);
   user-select: none;
   margin: 0px 0px 0px 5px;
   vertical-align: middle;

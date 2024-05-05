@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { CodeThread } from "../models/domain/CodeThread";
 import { Role } from "../models/domain/Role.ts";
 import "../../src/styles/code-review-code.css";
-import plusImg from "../images/plus.png";
+import rightArrowImg from "../images/right-arrow.png";
+import downArrowImg from "../images/down-arrow.png";
 import { UiContext, UiContextType } from "../contexts/UiContext.tsx";
 import hljs from "highlight.js/lib/core";
 import c from "highlight.js/lib/languages/c";
@@ -73,7 +74,11 @@ const CodeReviewCode: React.FC<Props> = ({
               >
                 <img
                   className="icon"
-                  src={plusImg}
+                  src={
+                    openThreads.some((oT) => oT === index + 1)
+                      ? downArrowImg
+                      : rightArrowImg
+                  }
                   alt="Add variant"
                   width="13"
                 />
