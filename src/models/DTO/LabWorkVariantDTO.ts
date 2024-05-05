@@ -8,7 +8,7 @@ export interface LabWorkVariantDTO {
   description: string;
   language: Language;
   functionName: string;
-  returnType: CType;
-  arguments: Argument[];
+  returnType: CType | undefined;
+  arguments: Argument[] | undefined;
   testable: boolean;
 }

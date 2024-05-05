@@ -43,8 +43,18 @@ export default class LabWorkVariantApiService {
     }
   }
 
-  async createLabWorkVariant(task: LabWorkVariantDTO): Promise<LabWorkVariant> {
-    let url = this.apiUrl;
+  async createLabWorkVariantTestable(task: LabWorkVariantDTO): Promise<LabWorkVariant> {
+    let url = this.apiUrl + "/create-testable";
+    try {
+      const response = await http.post(url, task);
+      return response.data.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+
+  async createLabWorkVariantNonTestable(task: LabWorkVariantDTO): Promise<LabWorkVariant> {
+    let url = this.apiUrl + "/create-non-testable";
     try {
       const response = await http.post(url, task);
       return response.data.data;

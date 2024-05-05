@@ -42,11 +42,19 @@ const CreateLabWorkVariantPage = () => {
     onDone: () => void
   ) => {
     try {
-      await labWorkVariantApiService
-        .createLabWorkVariant(labWorkVariantDTO)
-        .then((response) =>
-          showSuccessAlert(`Задание ${response.title} создано`)
-        );
+      if (labWorkVariantDTO.testable) {
+        await labWorkVariantApiService
+          .createLabWorkVariantTestable(labWorkVariantDTO)
+          .then((response) =>
+            showSuccessAlert(`Задание ${response.title} создано`)
+          );
+      } else {
+        await labWorkVariantApiService
+          .createLabWorkVariantNonTestable(labWorkVariantDTO)
+          .then((response) =>
+            showSuccessAlert(`Задание ${response.title} создано`)
+          );
+      }
     } catch (error) {
       showErrorAlert(error.error);
     } finally {

@@ -65,7 +65,7 @@ const LabWorkVariantForm: React.FC<Props> = ({
             defaultValue={edit ? labWorkVariant?.language : ""}
             {...register("language")}
           >
-            <option value={"C"}>C</option>
+            <option value={"c"}>c</option>
           </select>
           <p className="form-text">{errors.language?.message as string}</p>
         </div>

@@ -1,3 +1,3 @@
 export enum Language {
-  C = "C",
+  C = "c",
 }
