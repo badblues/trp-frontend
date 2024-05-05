@@ -87,7 +87,7 @@ export default class LabWorkVariantApiService {
   }
 
   async executeSolution(labWorkVariantId: number): Promise<TestResult> {
-    let url = this.apiUrl + `/${labWorkVariantId}/solution/execute`;
+    let url = this.apiUrl + `/${labWorkVariantId}/solution/new-execute`;
     try {
       const response = await http.post(url);
       return response.data.data;

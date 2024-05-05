@@ -1,4 +1,4 @@
-const domainUrl = "http://87.103.245.211:8080";
+const domainUrl = "http://192.168.0.12:8080";
 
 const urls = {
   disciplinesUrl: domainUrl + "/api/v2/disciplines",
