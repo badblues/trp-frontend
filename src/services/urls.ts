@@ -1,4 +1,4 @@
-const domainUrl = "http://192.168.0.12:8080";
+const domainUrl = `http://${process.env.REACT_APP_SERVER_IP}:8080`;
 
 const urls = {
   disciplinesUrl: domainUrl + "/api/v2/disciplines",
