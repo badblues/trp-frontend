@@ -123,7 +123,8 @@ const TeacherCodeReviewPage = () => {
 
   const approve = async (ratings: RatingDTO, onDone: () => void) => {
     try {
-      await codeReviewApiService.approve(Number(codeReviewId));
+      if (teamAppointment?.status !== TeamAppointmentStatus.WaitingForGrade)
+        await codeReviewApiService.approve(Number(codeReviewId));
       await teamAppointmentApiService.rate(Number(teamAppointmentId), ratings);
       setReboot(!reboot);
       onDone();
