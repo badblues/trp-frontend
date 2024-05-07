@@ -29,11 +29,10 @@ const Navbar = () => {
           const student = await studentApiService.getStudent(user.id);
           setGroup(student.group);
         }
+        setLoading(false);
       } catch (error) {
         showErrorAlert(error.error);
       }
-    })().then(() => {
-      setLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
@@ -78,9 +77,7 @@ const Navbar = () => {
             {loggedIn ? (
               <div className="mini-profile">
                 <p className="username">{user?.fullName}</p>
-                {user?.role === Role.Student ? (
-                  <p>{group?.name}</p>
-                ) : null}
+                {user?.role === Role.Student ? <p>{group?.name}</p> : null}
               </div>
             ) : null}
             {loggedIn ? (

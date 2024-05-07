@@ -78,13 +78,12 @@ const TeacherCodeReviewPage = () => {
         setLabWork(labWorkResponse);
         setTests(testsResponse);
         setCodeReview(codeReviewResponse);
+        setLoading(false);
       } catch (error) {
         showErrorAlert(error.error);
         if (error.status === 404) navigate("/not-found");
       }
-    })().then(() => {
-      setLoading(false);
-    });
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reboot, codeReviewId]);
 

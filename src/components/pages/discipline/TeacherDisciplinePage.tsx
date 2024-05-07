@@ -42,12 +42,11 @@ const TeacherDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
           await labWorkApiService.getLabWorksByDiscipline(discipline.id);
         setAppointments(teacherAppointments);
         setLabWorks(labWorksResponse);
+        setLoading(false);
       } catch (error) {
         showErrorAlert(error.error);
       }
-    })().then(() => {
-      setLoading(false);
-    });
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

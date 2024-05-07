@@ -38,12 +38,11 @@ const AdminDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
             discipline.id
           );
         setAppointments(teacherApointments);
+        setLoading(false);
       } catch (error) {
         showErrorAlert(error.error);
       }
-    })().then(() => {
-      setLoading(false);
-    });
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

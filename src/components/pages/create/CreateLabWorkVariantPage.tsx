@@ -27,13 +27,12 @@ const CreateLabWorkVariantPage = () => {
           Number(labWorkId)
         );
         setLabWork(labWorkResponse);
+        setLoading(false);
       } catch (error) {
         showErrorAlert(error.error);
         if (error.status === 404) navigate("/not-found");
       }
-    })().then(() => {
-      setLoading(false);
-    });
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

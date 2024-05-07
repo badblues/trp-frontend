@@ -72,13 +72,11 @@ const StudentLabWorkVariantPage = () => {
         setTests(testsResponse);
         setTeamAppointment(teamAppointmentResponse);
         setCode(solution.code);
+        setLoading(false);
       } catch (error) {
         showErrorAlert(error.error);
-        console.log(error);
       }
-    })().then(() => {
-      setLoading(false);
-    });
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [outputText]);
 
@@ -143,7 +141,6 @@ const StudentLabWorkVariantPage = () => {
       </div>
     );
   }
-  console.log(teamAppointment);
 
   return (
     <div className={`lab-work-variant-page ${theme}`}>

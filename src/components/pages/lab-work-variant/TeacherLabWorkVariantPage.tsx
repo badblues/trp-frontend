@@ -43,12 +43,11 @@ const TeacherLabWorkVariantPage = () => {
           );
         setLabWorkVariant(labWorkVariantResponse);
         setTests(testsResponse);
+        setLoading(false);
       } catch (error) {
         showErrorAlert(error.error);
       }
-    })().then(() => {
-      setLoading(false);
-    });
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

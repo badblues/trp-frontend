@@ -74,14 +74,13 @@ const StudentCodeReviewPage = () => {
         setTests(testsResponse);
         setCodeReview(codeReviewResponse);
         setTeamAppointment(teamAppointment);
+        setLoading(false);
       } catch (error) {
         console.log(error, "EROEROEJOR");
         showErrorAlert(error.error);
         if (error.status === 404) navigate("/not-found");
       }
-    })().then(() => {
-      setLoading(false);
-    });
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [codeReviewId]);
 

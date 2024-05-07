@@ -37,12 +37,11 @@ const TeacherPage = () => {
           );
         setTeacher(teacherResponse);
         setAppointments(teacherAppointmentsResponse);
+        setLoading(false);
       } catch (error) {
         showErrorAlert(error.error);
       }
-    })().then(() => {
-      setLoading(false);
-    });
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

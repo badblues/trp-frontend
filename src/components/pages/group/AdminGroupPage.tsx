@@ -42,12 +42,11 @@ const AdminGroupPage = () => {
         setGroup(groupResponse);
         setAppointments(teacherAppointmentsResponse);
         setStudents(studentsResponse);
+        setLoading(false);
       } catch (error) {
         showErrorAlert(error.error);
       }
-    })().then(() => {
-      setLoading(false);
-    });
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -49,12 +49,11 @@ const StudentDisciplinePage: React.FC<Props> = ({ defaultDiscipline }) => {
         setTeamAppointments(teamAppointmentsResponse);
         setLabWorks(labWorksResponse);
         setTeachers(teachers);
+        setLoading(false);
       } catch (error) {
         showErrorAlert(error.error);
       }
-    })().then(() => {
-      setLoading(false);
-    });
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
