@@ -64,7 +64,7 @@ export default class LabWorkVariantApiService {
   }
 
   async getSolution(labWorkVariantId: number): Promise<Solution> {
-    let url = this.apiUrl + `/${labWorkVariantId}/solution`;
+    let url = this.apiUrl + `/${labWorkVariantId}/new-solution`;
     try {
       const response = await http.get(url);
       return response.data.data;
