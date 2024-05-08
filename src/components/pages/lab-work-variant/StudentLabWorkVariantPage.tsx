@@ -36,6 +36,7 @@ const StudentLabWorkVariantPage = () => {
   const [outputText, setOutputText] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
+  const [hasTests, setHasTests] = useState<boolean>(false);
   const [teamAppointment, setTeamAppointment] = useState<TeamAppointment>();
   const [isTesting, setIsTesting] = useState<boolean>(false);
 
@@ -53,6 +54,16 @@ const StudentLabWorkVariantPage = () => {
           navigate("/not-found");
           return;
         }
+        if (teamAppointmentResponse.labWorkVariant.testable) {
+          setHasTests(true);
+          const testsResponse =
+            await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
+              Number(labWorkVariantId)
+            );
+          setTests(testsResponse);
+        } else {
+          setHasTests(false);
+        }
         //TODO: rework
         if (
           teamAppointmentResponse.status ===
@@ -62,14 +73,9 @@ const StudentLabWorkVariantPage = () => {
           await codeReviewApiService.getCodeReview(
             teamAppointmentResponse.codeReviewIds[0]
           );
-        const testsResponse =
-          await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
-            Number(labWorkVariantId)
-          );
         const solution = await labWorkVariantApiService.getSolution(
           Number(labWorkVariantId)
         );
-        setTests(testsResponse);
         setTeamAppointment(teamAppointmentResponse);
         setCode(solution.code);
         setLoading(false);
@@ -171,8 +177,12 @@ const StudentLabWorkVariantPage = () => {
                   )}
                   )
                 </h2>
-                <h2>Примеры тестов:</h2>
-                <StudentTestList tests={tests} />
+                {hasTests ? (
+                  <>
+                    <h2>Примеры тестов:</h2>
+                    <StudentTestList tests={tests} />
+                  </>
+                ) : null}
               </>
             ) : null}
           </div>
@@ -221,8 +231,9 @@ const StudentLabWorkVariantPage = () => {
               {isTesting ? <Loader /> : "ЗАПУСТИТЬ"}
             </button>
           ) : null}
-          {teamAppointment?.status === TeamAppointmentStatus.Tested &&
-          user?.id === teamAppointment.team.leaderStudentId ? (
+          {(teamAppointment?.status === TeamAppointmentStatus.Tested ||
+            !hasTests) &&
+          user?.id === teamAppointment?.team.leaderStudentId ? (
             <button className="send-to-review-button" onClick={sendToReview}>
               НА ПРОВЕРКУ
             </button>

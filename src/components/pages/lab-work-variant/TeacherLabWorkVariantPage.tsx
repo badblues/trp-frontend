@@ -26,6 +26,7 @@ const TeacherLabWorkVariantPage = () => {
   const { user } = useContext(UserContext) as UserContextType;
   const [labWorkVariant, setLabWorkVariant] = useState<LabWorkVariant>();
   const [tests, setTests] = useState<LabWorkVariantTest[]>([]);
+  const [hasTests, setHasTests] = useState<boolean>(false);
   const [updating, setUpdating] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [isOpenConfirmPopup, setIsOpenConfirmPopup] = useState<boolean>(false);
@@ -37,12 +38,17 @@ const TeacherLabWorkVariantPage = () => {
           await labWorkVariantApiService.getLabWorkVariant(
             Number(labWorkVariantId)
           );
-        const testsResponse =
-          await labWorkVariantTestApiService.getLabWorkVariantTestsByLabWorkVariant(
-            labWorkVariantResponse.id
-          );
+        if (labWorkVariantResponse.testable) {
+          setHasTests(true);
+          const testsResponse =
+            await labWorkVariantTestApiService.getLabWorkVariantTestsByLabWorkVariant(
+              labWorkVariantResponse.id
+            );
+          setTests(testsResponse);
+        } else {
+          setHasTests(false);
+        }
         setLabWorkVariant(labWorkVariantResponse);
-        setTests(testsResponse);
         setLoading(false);
       } catch (error) {
         showErrorAlert(error.error);
@@ -174,16 +180,20 @@ const TeacherLabWorkVariantPage = () => {
               )
             </h2>
 
-            <h2>Тесты:</h2>
-            <Tests
-              tests={tests}
-              labWorkVariant={labWorkVariant!}
-              onAddTest={addTest}
-              onUpdateTest={updateTest}
-              onDeleteTest={deleteTest}
-              inputRegex={labWorkVariant!.inputRegex}
-              outputRegex={labWorkVariant!.outputRegex}
-            />
+            {hasTests ? (
+              <>
+                <h2>Тесты:</h2>
+                <Tests
+                  tests={tests}
+                  labWorkVariant={labWorkVariant!}
+                  onAddTest={addTest}
+                  onUpdateTest={updateTest}
+                  onDeleteTest={deleteTest}
+                  inputRegex={labWorkVariant!.inputRegex}
+                  outputRegex={labWorkVariant!.outputRegex}
+                />
+              </>
+            ) : null}
           </>
         ) : null}
       </div>
