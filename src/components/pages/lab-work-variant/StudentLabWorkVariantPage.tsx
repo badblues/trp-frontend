@@ -135,9 +135,12 @@ const StudentLabWorkVariantPage = () => {
       }
       setIsTesting(false);
     } catch (error) {
+      //TODO REWORK
+      if (error.data) {
+        const testResult = error.data as TestResult;
+        setOutputText(`${testResult.errorMessage}`);
+      }
       showErrorAlert(error.error);
-      const testResult = error.data as TestResult;
-      setOutputText(`${testResult.errorMessage}`);
       setIsTesting(false);
     }
   };
