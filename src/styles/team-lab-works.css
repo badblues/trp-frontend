@@ -61,6 +61,10 @@
 }
 .team-lab-works-container .team-container .lab-works-container .variants-container .variant .variant-title:hover {
   cursor: pointer;
+  color: red;
+}
+.team-lab-works-container .team-container .lab-works-container .variants-container .variant .grade {
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=team-lab-works.css.map */

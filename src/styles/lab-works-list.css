@@ -58,5 +58,8 @@
   cursor: pointer;
   color: red;
 }
+.lab-work-list .lab-work .variant .grade {
+  font-weight: bold;
+}
 
 /*# sourceMappingURL=lab-works-list.css.map */

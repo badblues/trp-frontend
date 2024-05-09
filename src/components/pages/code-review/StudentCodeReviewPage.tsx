@@ -153,10 +153,27 @@ const StudentCodeReviewPage = () => {
               </h3>
               {teamAppointment!.team.students.map((student) => (
                 <p className="student-name">
+                  {student.fullName}{" "}
+                  {active &&
+                  teamAppointment!.status === TeamAppointmentStatus.Graded &&
+                  teamAppointment!.ratings.length ? (
+                    <span>
+                      {" - "}
+                      {
+                        <span className="grade">
+                          {
+                            teamAppointment?.ratings.find(
+                              (r) => r.studentId === student.id
+                            )?.grade
+                          }
+                        </span>
+                      }
+                      /{teamAppointment?.ratings[0].maxRating}
+                    </span>
+                  ) : null}
                   {teamAppointment!.team.leaderStudentId === student.id
-                    ? "ЛИДЕР: "
+                    ? " (ЛИДЕР)"
                     : ""}
-                  {student.fullName}
                 </p>
               ))}
             </div>

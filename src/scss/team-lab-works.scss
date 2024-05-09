@@ -73,7 +73,12 @@
           .variant-title {
             &:hover {
               cursor: pointer;
+              color: red;
             }
+          }
+
+          .grade {
+            font-weight: bold;
           }
         }
       }

@@ -58,6 +58,19 @@ const TeamLabWorks: React.FC<Props> = ({
                               className={`status ${appointment.status}`}
                             >{`${StatusToTextMap[appointment.status]}`}</span>
                           </p>
+                          {appointment.ratings?.length
+                            ? appointment.ratings.map((rating) => (
+                                <p>
+                                  {
+                                    team.students.find(
+                                      (s) => s.id === rating.studentId
+                                    )?.fullName
+                                  }
+                                  {" - "}
+                                  <span className="grade">{rating.grade}</span>/{rating.maxRating}
+                                </p>
+                              ))
+                            : null}
                         </div>
                       </div>
                     </>

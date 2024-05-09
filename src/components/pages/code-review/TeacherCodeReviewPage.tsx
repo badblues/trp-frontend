@@ -174,12 +174,29 @@ const TeacherCodeReviewPage = () => {
               <h3 className="team-title">
                 Бригада {teamAppointment?.team.id}:
               </h3>
-              {teamAppointment?.team.students.map((student) => (
+              {teamAppointment!.team.students.map((student) => (
                 <p className="student-name">
-                  {teamAppointment.team.leaderStudentId === student.id
-                    ? "ЛИДЕР: "
+                  {student.fullName}{" "}
+                  {active &&
+                  teamAppointment!.status === TeamAppointmentStatus.Graded &&
+                  teamAppointment!.ratings.length ? (
+                    <span>
+                      {" - "}
+                      {
+                        <span className="grade">
+                          {
+                            teamAppointment?.ratings.find(
+                              (r) => r.studentId === student.id
+                            )?.grade
+                          }
+                        </span>
+                      }
+                      /{teamAppointment?.ratings[0].maxRating}
+                    </span>
+                  ) : null}
+                  {teamAppointment!.team.leaderStudentId === student.id
+                    ? " (ЛИДЕР)"
                     : ""}
-                  {student.fullName}
                 </p>
               ))}
             </div>

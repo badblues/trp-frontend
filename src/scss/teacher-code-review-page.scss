@@ -31,12 +31,22 @@
 
     .info-container {
       display: flex;
+      flex-direction: column;
       margin: 20px;
 
       .team-container {
         margin: 20px;
-      }
 
+        .status {
+          width: fit-content;
+        }
+
+        .student-name {
+          .grade {
+            font-weight: bold;
+          }
+        }
+      }
       .chat-container {
         width: 400px;
         height: 400px;

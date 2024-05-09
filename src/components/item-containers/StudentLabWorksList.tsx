@@ -6,8 +6,8 @@ import downArrow from "../../images/down-arrow.png";
 import "../../styles/lab-works-list.css";
 import { LabWorkVariant } from "../../models/domain/LabWorkVariant.ts";
 import { TeamAppointment } from "../../models/domain/TeamAppointment.ts";
-import { TeamAppointmentStatus } from "../../models/domain/TeamAppointmentStatus.ts";
 import { StatusToTextMap } from "../../models/domain/StatusToTextMap.ts";
+import { UserContext, UserContextType } from "../../contexts/UserContext.tsx";
 
 interface Props {
   labWorks: LabWork[];
@@ -20,6 +20,7 @@ const StudentLabWorksList: React.FC<Props> = ({
   teamAppointments,
   onLabWorkVariantSelect,
 }) => {
+  const { user } = useContext(UserContext) as UserContextType;
   const { theme } = useContext(UiContext) as UiContextType;
   const [openLabWorks, setOpenLabWorks] = useState<Set<LabWork>>(
     new Set(labWorks)
@@ -98,6 +99,29 @@ const StudentLabWorksList: React.FC<Props> = ({
                             )!.status
                           ]
                         }`}
+                        {"  "}
+                        {/* TODO REWORK */}
+                        <span className="grade">
+                          {teamAppointments.find(
+                            (tA) => tA.labWorkVariant.labWorkId === labWork.id
+                          )!.ratings?.length
+                            ? teamAppointments
+                                .find(
+                                  (tA) =>
+                                    tA.labWorkVariant.labWorkId === labWork.id
+                                )!
+                                .ratings.find((r) => r.studentId === user?.id)
+                                ?.grade +
+                              "/" +
+                              teamAppointments
+                                .find(
+                                  (tA) =>
+                                    tA.labWorkVariant.labWorkId === labWork.id
+                                )!
+                                .ratings.find((r) => r.studentId === user?.id)
+                                ?.maxRating
+                            : null}
+                        </span>
                       </span>
                     </p>
                   </div>

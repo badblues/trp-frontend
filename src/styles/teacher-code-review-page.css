@@ -19,10 +19,17 @@
 }
 .teacher-code-review-page .left-container .info-container {
   display: flex;
+  flex-direction: column;
   margin: 20px;
 }
 .teacher-code-review-page .left-container .info-container .team-container {
   margin: 20px;
+}
+.teacher-code-review-page .left-container .info-container .team-container .status {
+  width: fit-content;
+}
+.teacher-code-review-page .left-container .info-container .team-container .student-name .grade {
+  font-weight: bold;
 }
 .teacher-code-review-page .left-container .info-container .chat-container {
   width: 400px;
