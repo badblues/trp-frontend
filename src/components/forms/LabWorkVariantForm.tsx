@@ -27,9 +27,7 @@ const LabWorkVariantForm: React.FC<Props> = ({
   labWork,
 }) => {
   const { register, handleSubmit, formState, watch } = useForm();
-  //TODO TEMPORARY
-  // const testable = watch("testable");
-  const testable = true;
+  const testable = watch("testable");
   const { errors } = formState;
   const { theme } = useContext(UiContext) as UiContextType;
   const [loading, setLoading] = useState<boolean>(false);
