@@ -16,7 +16,7 @@
   background-color: #2e2e2e;
 }
 .lab-work-variant-page .left-container {
-  width: 40%;
+  width: 30%;
   min-width: none;
 }
 .lab-work-variant-page .left-container .lab-work-variant-information {
@@ -29,6 +29,7 @@
 }
 .lab-work-variant-page .lab-work-variant-ide {
   display: flex;
+  width: 50%;
 }
 .lab-work-variant-page .lab-work-variant-ide .editor-and-output {
   display: flex;

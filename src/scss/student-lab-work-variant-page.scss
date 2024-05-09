@@ -25,7 +25,7 @@
   }
 
   .left-container {
-    width: 40%;
+    width: 30%;
     min-width: none;
 
     .lab-work-variant-information {
@@ -40,8 +40,10 @@
       }
     }
   }
+
   .lab-work-variant-ide {
     display: flex;
+    width: 50%;
 
     .editor-and-output {
       display: flex;

@@ -108,20 +108,31 @@ const StudentLabWorkVariantPage = () => {
   const executeSolution = async () => {
     try {
       setIsTesting(true);
-      const testResult = await labWorkVariantApiService.executeSolution(
-        teamAppointment!.labWorkVariant.id
-      );
-      const testSuccess = testResult.totalTests === testResult.testPassed;
-      setOutputText(
-        `\nПройдено ${testResult.testPassed}/${testResult.totalTests} тестов` +
-          `${
-            testSuccess
-              ? "\nУспешно"
-              : `\nИдентификаторы проваленных тестов: ${testResult.failedTestIds.map(
-                  (id) => id.toString()
-                )}`
-          }`
-      );
+      if (teamAppointment?.labWorkVariant.testable) {
+        const testResult = await labWorkVariantApiService.testSolution(
+          teamAppointment!.labWorkVariant.id
+        );
+        const testSuccess = testResult.totalTests === testResult.testPassed;
+        setOutputText(
+          `\nПройдено ${testResult.testPassed}/${testResult.totalTests} тестов` +
+            `${
+              testSuccess
+                ? "\nУспешно"
+                : `\nИдентификаторы проваленных тестов: ${testResult.failedTestIds.map(
+                    (id) => id.toString()
+                  )}`
+            }`
+        );
+      } else {
+        const executeResult = await labWorkVariantApiService.executeSolution(
+          teamAppointment!.labWorkVariant.id
+        );
+        if (executeResult.errorStatus === 0) {
+          setOutputText(executeResult.executeInfo.stdout);
+        } else {
+          setOutputText(executeResult.executeInfo.stderr);
+        }
+      }
       setIsTesting(false);
     } catch (error) {
       showErrorAlert(error.error);
@@ -208,7 +219,7 @@ const StudentLabWorkVariantPage = () => {
             value={outputText}
             disabled={true}
             className="output"
-          ></textarea>
+          />
         </div>
         <div className="control-panel">
           {teamAppointment?.status === TeamAppointmentStatus.New ||

@@ -24,7 +24,6 @@ const CodeEditor = ({ solutionCode, onCodeChange }) => {
         onChange={handleChange}
         theme={dracula}
         height="400px"
-        width="600px"
         extensions={[java()]}
       />
     </div>

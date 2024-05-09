@@ -5,6 +5,7 @@ import { TestResult } from "../models/domain/TestResult";
 import { Solution } from "../models/domain/Solution";
 import { SolutionDTO } from "../models/DTO/SolutionDTO";
 import urls from "./urls.ts";
+import { ExecuteResult } from "../models/domain/ExecuteResult.ts";
 
 export default class LabWorkVariantApiService {
   apiUrl = urls.labWorkVariantsUrl;
@@ -43,7 +44,9 @@ export default class LabWorkVariantApiService {
     }
   }
 
-  async createLabWorkVariantTestable(task: LabWorkVariantDTO): Promise<LabWorkVariant> {
+  async createLabWorkVariantTestable(
+    task: LabWorkVariantDTO
+  ): Promise<LabWorkVariant> {
     let url = this.apiUrl + "/create-testable";
     try {
       const response = await http.post(url, task);
@@ -53,7 +56,9 @@ export default class LabWorkVariantApiService {
     }
   }
 
-  async createLabWorkVariantNonTestable(task: LabWorkVariantDTO): Promise<LabWorkVariant> {
+  async createLabWorkVariantNonTestable(
+    task: LabWorkVariantDTO
+  ): Promise<LabWorkVariant> {
     let url = this.apiUrl + "/create-non-testable";
     try {
       const response = await http.post(url, task);
@@ -86,7 +91,17 @@ export default class LabWorkVariantApiService {
     }
   }
 
-  async executeSolution(labWorkVariantId: number): Promise<TestResult> {
+  async testSolution(labWorkVariantId: number): Promise<TestResult> {
+    let url = this.apiUrl + `/${labWorkVariantId}/solution/new-execute`;
+    try {
+      const response = await http.post(url);
+      return response.data.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+
+  async executeSolution(labWorkVariantId: number): Promise<ExecuteResult> {
     let url = this.apiUrl + `/${labWorkVariantId}/solution/new-execute`;
     try {
       const response = await http.post(url);
