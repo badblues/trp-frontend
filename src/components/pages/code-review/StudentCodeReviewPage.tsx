@@ -101,6 +101,9 @@ const StudentCodeReviewPage = () => {
           Number(codeReviewId),
           messageText
         );
+        codeReviewResponse.taskMessages.sort(
+          (m1, m2) => Date.parse(m1.createdAt) - Date.parse(m2.createdAt)
+        );
         setCodeReview(codeReviewResponse);
         setMessageSending(false);
         setMessageText("");

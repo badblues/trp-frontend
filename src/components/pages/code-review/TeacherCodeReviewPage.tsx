@@ -75,6 +75,11 @@ const TeacherCodeReviewPage = () => {
         const codeReviewResponse = await codeReviewApiService.getCodeReview(
           Number(codeReviewId)
         );
+
+        codeReviewResponse.taskMessages.sort(
+          (m1, m2) => Date.parse(m1.createdAt) - Date.parse(m2.createdAt)
+        );
+        
         setLabWork(labWorkResponse);
         setTests(testsResponse);
         setCodeReview(codeReviewResponse);
@@ -98,6 +103,9 @@ const TeacherCodeReviewPage = () => {
         const codeReviewResponse = await codeReviewApiService.sendMessage(
           Number(codeReviewId),
           messageText
+        );
+        codeReviewResponse.taskMessages.sort(
+          (m1, m2) => Date.parse(m1.createdAt) - Date.parse(m2.createdAt)
         );
         setCodeReview(codeReviewResponse);
         setMessageSending(false);
