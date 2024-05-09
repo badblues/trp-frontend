@@ -27,7 +27,9 @@ const LabWorkVariantForm: React.FC<Props> = ({
   labWork,
 }) => {
   const { register, handleSubmit, formState, watch } = useForm();
-  const testable = watch("testable");
+  //TODO TEMPORARY
+  // const testable = watch("testable");
+  const testable = true;
   const { errors } = formState;
   const { theme } = useContext(UiContext) as UiContextType;
   const [loading, setLoading] = useState<boolean>(false);
@@ -105,7 +107,7 @@ const LabWorkVariantForm: React.FC<Props> = ({
           <p className="form-text">{errors.description?.message as string}</p>
         </div>
 
-        <div className="form-input-container">
+        {/* <div className="form-input-container">
           <div>
             <label className="form-label" htmlFor="description">
               Тестируемая:
@@ -118,7 +120,7 @@ const LabWorkVariantForm: React.FC<Props> = ({
               {...register("testable")}
             />
           </div>
-        </div>
+        </div> */}
 
         {testable ? (
           <>
