@@ -12,12 +12,12 @@ import StudentTestList from "../../item-containers/StudentTestList.tsx";
 import GradeForm from "../../forms/GradeForm.tsx";
 import { ApiContext, ApiContextType } from "../../../contexts/ApiContext.tsx";
 import { LabWork } from "../../../models/domain/LabWork.ts";
-import { CodeReviewMessageDTO } from "../../../models/DTO/CodeReviewMessageDTO.ts";
 import CodeReviewCode from "../../CodeReviewCode.tsx";
 import { TeamAppointmentStatus } from "../../../models/domain/TeamAppointmentStatus.ts";
 import { RatingDTO } from "../../../models/DTO/RatingDTO.ts";
 import { StatusToTextMap } from "../../../models/domain/StatusToTextMap.ts";
 import CodeReviewList from "../../item-containers/CodeReviewList.tsx";
+import { CodeMessageDTO } from "../../../models/DTO/CodeMessageDTO.ts";
 
 const TeacherCodeReviewPage = () => {
   const { disciplineId, groupId, teamAppointmentId, codeReviewId } =
@@ -94,14 +94,10 @@ const TeacherCodeReviewPage = () => {
   const sendMessage = async (): Promise<void> => {
     if (messageText && messageText.length) {
       try {
-        const messageDTO: CodeReviewMessageDTO = {
-          taskMessages: [{ message: messageText }],
-          codeMessages: [],
-        };
         setMessageSending(true);
         const codeReviewResponse = await codeReviewApiService.sendMessage(
           Number(codeReviewId),
-          messageDTO
+          messageText
         );
         setCodeReview(codeReviewResponse);
         setMessageSending(false);
@@ -109,6 +105,22 @@ const TeacherCodeReviewPage = () => {
       } catch (error) {
         showErrorAlert(error.error);
       }
+    }
+  };
+
+  const sendCodeMessage = async (
+    message: CodeMessageDTO,
+    onDone: () => void
+  ): Promise<void> => {
+    try {
+      const codeReviewResponse = await codeReviewApiService.sendCodeMessage(
+        Number(codeReviewId),
+        message
+      );
+      setCodeReview(codeReviewResponse);
+      onDone();
+    } catch (error) {
+      showErrorAlert(error.error);
     }
   };
 
@@ -166,13 +178,15 @@ const TeacherCodeReviewPage = () => {
             </div>
             <div className="chat-container">
               <div className="chat-messages">
-                {codeReview?.messages?.map((taskMessage) => (
+                {codeReview?.taskMessages?.map((taskMessage) => (
                   <p
                     className={`message ${
-                      taskMessage.user.role === Role.Student ? "left" : "right"
+                      taskMessage.author.role === Role.Student
+                        ? "left"
+                        : "right"
                     }`}
                   >
-                    {taskMessage.user.fullName}
+                    {taskMessage.author.fullName}
                     <br />
                     {taskMessage.message}
                   </p>
@@ -259,6 +273,7 @@ const TeacherCodeReviewPage = () => {
             }
             code={codeReview!.code}
             codeThreads={codeReview!.codeThreads}
+            onSendMessage={sendCodeMessage}
           />
         </div>
         {active &&

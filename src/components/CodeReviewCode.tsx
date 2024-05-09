@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { CodeThread } from "../models/domain/CodeThread";
-import { Role } from "../models/domain/Role.ts";
 import "../../src/styles/code-review-code.css";
 import rightArrowImg from "../images/right-arrow.png";
 import downArrowImg from "../images/down-arrow.png";
@@ -8,6 +7,7 @@ import { UiContext, UiContextType } from "../contexts/UiContext.tsx";
 import hljs from "highlight.js/lib/core";
 import c from "highlight.js/lib/languages/c";
 import "highlight.js/styles/felipec.css";
+import { CodeMessageDTO } from "../models/DTO/CodeMessageDTO.ts";
 
 hljs.registerLanguage("c", c);
 
@@ -15,19 +15,29 @@ interface Props {
   canSendMessages: boolean;
   code: string;
   codeThreads: CodeThread[];
+  onSendMessage: (message: CodeMessageDTO, onDone: () => void) => void;
 }
 
 const CodeReviewCode: React.FC<Props> = ({
   code,
   codeThreads,
   canSendMessages,
+  onSendMessage,
 }) => {
   const { theme } = useContext(UiContext) as UiContextType;
   const [openThreads, setOpenThreads] = useState<number[]>([]);
-  const [openInput, setOpenInput] = useState<number>();
+  const [openInput, setOpenInput] = useState<number>(-1);
   const [highLightLightFrom, setHighLightFrom] = useState<number>(-1);
   const [highLightLightTo, setHighLightTo] = useState<number>(-1);
   const [codeMessage, setCodeMessage] = useState<string>("");
+  const [beginLineNumber, setBeginLineNumber] = useState<number>(-1);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  codeThreads.forEach((cT) =>
+    cT.messages.sort(
+      (m1, m2) => Date.parse(m1.createdAt) - Date.parse(m2.createdAt)
+    )
+  );
 
   const codeSplit = code.split("\n");
 
@@ -48,6 +58,30 @@ const CodeReviewCode: React.FC<Props> = ({
     setCodeMessage(event.target.value);
   };
 
+  const onBeginLineNumberChange = (event): void => {
+    const val = event.target.value;
+    if (val >= 1 && val <= openInput) setBeginLineNumber(val);
+  };
+
+  const sendMessage = (endLine: number) => {
+    const message: CodeMessageDTO = {
+      note: codeMessage,
+      endLineNumber: endLine,
+      beginLineNumber: beginLineNumber,
+    };
+    setLoading(true);
+    onSendMessage(message, () => {
+      setLoading(false);
+    });
+  };
+
+  const onChangeOpenInput = (line: number) => {
+    if (openInput != line) {
+      setOpenInput(line);
+      setBeginLineNumber(line);
+    } else setOpenInput(-1);
+  };
+
   return (
     <pre>
       <code className={`code-review-code-container ${theme}`}>
@@ -60,10 +94,7 @@ const CodeReviewCode: React.FC<Props> = ({
                   ? "highlighted"
                   : ""
               }`}
-              onClick={() => {
-                if (openInput != index + 1) setOpenInput(index + 1);
-                else setOpenInput(-1);
-              }}
+              onClick={() => onChangeOpenInput(index + 1)}
               key={line}
               dangerouslySetInnerHTML={{ __html: line }}
             />
@@ -91,9 +122,8 @@ const CodeReviewCode: React.FC<Props> = ({
                   <input
                     className="line-input"
                     type="number"
-                    min={1}
-                    max={index + 1}
-                    defaultValue={index + 1}
+                    value={beginLineNumber}
+                    onChange={onBeginLineNumberChange}
                   />
                   <span> по {index + 1} </span>
                 </div>
@@ -103,7 +133,13 @@ const CodeReviewCode: React.FC<Props> = ({
                     onChange={onCodeMessageTextChange}
                     className="text-input"
                   />
-                  <button className="send-button">Отправить</button>
+                  <button
+                    className="send-button"
+                    onClick={() => sendMessage(index + 1)}
+                    disabled={loading}
+                  >
+                    Отправить
+                  </button>
                 </div>
               </div>
             ) : null}
@@ -125,8 +161,7 @@ const CodeReviewCode: React.FC<Props> = ({
                           }}
                         >
                           <p className="from">
-                            {threadMessage.user.fullName}[
-                            {codeThread.beginLineNumber}-
+                            [{codeThread.beginLineNumber}-
                             {codeThread.endLineNumber}
                             ]:
                           </p>

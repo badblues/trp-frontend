@@ -16,6 +16,7 @@ import CodeReviewCode from "../../CodeReviewCode.tsx";
 import { TeamAppointmentStatus } from "../../../models/domain/TeamAppointmentStatus.ts";
 import { StatusToTextMap } from "../../../models/domain/StatusToTextMap.ts";
 import CodeReviewList from "../../item-containers/CodeReviewList.tsx";
+import { CodeMessageDTO } from "../../../models/DTO/CodeMessageDTO.ts";
 
 const StudentCodeReviewPage = () => {
   const { disciplineId, teamAppointmentId, codeReviewId } = useParams();
@@ -63,6 +64,10 @@ const StudentCodeReviewPage = () => {
           Number(codeReviewId)
         );
 
+        codeReviewResponse.taskMessages.sort(
+          (m1, m2) => Date.parse(m1.createdAt) - Date.parse(m2.createdAt)
+        );
+
         const testsResponse =
           await labWorkVariantTestApiService.getOpenLabWorkVariantTestsByLabWorkVariant(
             teamAppointment.labWorkVariant.id
@@ -91,23 +96,33 @@ const StudentCodeReviewPage = () => {
   const sendMessage = async (): Promise<void> => {
     if (messageText && messageText.length) {
       try {
-        const messageDTO: CodeReviewMessageDTO = {
-          taskMessages: [{ message: messageText }],
-          codeMessages: [],
-        };
         setMessageSending(true);
         const codeReviewResponse = await codeReviewApiService.sendMessage(
           Number(codeReviewId),
-          messageDTO
+          messageText
         );
         setCodeReview(codeReviewResponse);
         setMessageSending(false);
         setMessageText("");
-        console.log("asdfhjkas");
       } catch (error) {
-        console.log(error);
         showErrorAlert(error.error);
       }
+    }
+  };
+
+  const sendCodeMessage = async (
+    message: CodeMessageDTO,
+    onDone: () => void
+  ): Promise<void> => {
+    try {
+      const codeReviewResponse = await codeReviewApiService.sendCodeMessage(
+        Number(codeReviewId),
+        message
+      );
+      setCodeReview(codeReviewResponse);
+      onDone();
+    } catch (error) {
+      showErrorAlert(error.error);
     }
   };
 
@@ -144,13 +159,15 @@ const StudentCodeReviewPage = () => {
             </div>
             <div className="chat-container">
               <div className="chat-messages">
-                {codeReview?.messages?.map((taskMessage) => (
+                {codeReview?.taskMessages?.map((taskMessage) => (
                   <p
                     className={`message ${
-                      taskMessage.user.role === Role.Student ? "right" : "left"
+                      taskMessage.author.role === Role.Student
+                        ? "right"
+                        : "left"
                     }`}
                   >
-                    <p>{taskMessage.user.fullName}</p>
+                    <p>{taskMessage.author.fullName}</p>
                     {taskMessage.message}
                   </p>
                 ))}
@@ -235,7 +252,8 @@ const StudentCodeReviewPage = () => {
           }
           code={codeReview!.code}
           codeThreads={codeReview!.codeThreads}
-        />{" "}
+          onSendMessage={sendCodeMessage}
+        />
       </div>
     </div>
   );

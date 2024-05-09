@@ -1,5 +1,5 @@
 export interface CodeMessageDTO {
-  message: string;
+  note: string;
   beginLineNumber: number;
   endLineNumber: number;
 }
