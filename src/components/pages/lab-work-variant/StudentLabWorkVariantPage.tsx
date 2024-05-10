@@ -118,8 +118,22 @@ const StudentLabWorkVariantPage = () => {
             `${
               testSuccess
                 ? "\nУспешно"
-                : `\nИдентификаторы проваленных тестов: ${testResult.failedTestIds.map(
+                : `\nИдентификаторы проваленных тестов: [${testResult.failedTestIds.map(
                     (id) => id.toString()
+                  )}]${testResult.testsInfo.map(
+                    (testInfo) =>
+                      `\nТест ${testInfo.id}\nВход: ${testInfo.input}\nВыход: ${
+                        testInfo.output
+                      }\nОжидаемый выход: ${testInfo.expected}${
+                        testInfo.stdout?.length
+                          ? "\nSTDOUT:\n" + testInfo.stdout
+                          : ""
+                      }
+                    ${
+                      testInfo.stderr?.length
+                        ? "\nSTDERR:\n" + testInfo.stderr
+                        : ""
+                    }`
                   )}`
             }`
         );
